@@ -1,19 +1,23 @@
 {
-  "rules": {
-    "no-undef": 2, //disallow use of undeclared variables
-    "no-unused-vars": 2, //disallow declaration of variables that are not used in the code
-    "comma-dangle": [2,"always"], //disallow or enforce trailing commas
-    "no-cond-assign": [2,"except-parens"], //disallow assignment in conditional expressions
-    "no-console": 1, //disallow use of console in the node environment
-    "no-debugger": 2, //disallow use of debugger
-    "no-dupe-args": 2, //disallow duplicate arguments in functions
-    "no-dupe-keys": 2, //disallow duplicate keys when creating object literals
-    "no-duplicate-case": 2, //disallow a duplicate case label
-    "no-extra-semi": 2, //disallow unnecessary semicolons
-    "no-invalid-regexp": 2, //no-invalid-regexp
-    "valid-typeof": 2, //ensure that the results of typeof are compared against a valid string
-    "jsx-quotes": [1, "prefer-double"], //specify whether double or single quotes should be used in JSX attributes
-    "indent": [1, 4], //specify tab or space width for your code
-    "quotes": [2,"single"] // specify whether backticks, double or single quotes should be used
-  }
+    "rules": {
+
+        // Strict rules  (will generate errors)
+        "no-undef": 2, //disallow use of undeclared variables
+        "no-unused-vars": 2, //disallow declaration of variables that are not used in the code
+        "comma-dangle": [2,"always"], //disallow or enforce trailing commas
+        "no-cond-assign": [2,"except-parens"], //disallow assignment in conditional expressions
+        "no-debugger": 2, //disallow use of debugger
+        "no-dupe-args": 2, //disallow duplicate arguments in functions
+        "no-dupe-keys": 2, //disallow duplicate keys when creating object literals
+        "no-duplicate-case": 2, //disallow a duplicate case label
+        "no-extra-semi": 2, //disallow unnecessary semicolons
+        "no-invalid-regexp": 2, //no-invalid-regexp
+        "valid-typeof": 2, //ensure that the results of typeof are compared against a valid string
+
+        // Recommendations (will generate warnings)
+        "no-console": 1, //disallow use of console in the node environment
+        "jsx-quotes": [1, "prefer-double"], //specify whether double or single quotes should be used in JSX attributes
+        "indent": [1, 4], //specify tab or space width for your code
+        "quotes": [1,"single"] // specify whether backticks, double or single quotes should be used
+    }
 }
