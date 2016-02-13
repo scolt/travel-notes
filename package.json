@@ -12,9 +12,30 @@
   },
   "keywords": [
     "Training",
-    "Reac.js"
+    "React.js"
   ],
   "author": "EPAM",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/emp2016/emp#readme"
+  "homepage": "https://bitbucket.org/emp2016/emp#readme",
+  "dependencies": {
+    "es5-shim": "4.5.2",
+    "es6-shim": "0.34.4",
+    "react": "0.14.7",
+    "react-dom": "0.14.7"
+  },
+  "devDependencies": {
+    "babel-core": "6.5.2",
+    "babel-loader": "6.2.2",
+    "babel-preset-es2015": "6.5.0",
+    "babel-preset-react": "6.5.0",
+    "jasmine-core": "2.4.1",
+    "karma": "0.13.21",
+    "karma-es6-shim": "0.2.3",
+    "karma-jasmine": "0.3.7",
+    "karma-phantomjs-launcher": "1.0.0",
+    "karma-webpack": "1.7.0",
+    "phantomjs-prebuilt": "2.1.4",
+    "webpack": "1.12.13",
+    "webpack-dev-server": "1.14.1"
+  }
 }
