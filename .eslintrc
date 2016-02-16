@@ -4,7 +4,7 @@
         // Strict rules  (will generate errors)
         "no-undef": 2, //disallow use of undeclared variables
         "no-unused-vars": 2, //disallow declaration of variables that are not used in the code
-        "comma-dangle": [2,"always"], //disallow or enforce trailing commas
+        "comma-dangle": [2,"never"], //disallow or enforce trailing commas
         "no-cond-assign": [2,"except-parens"], //disallow assignment in conditional expressions
         "no-debugger": 2, //disallow use of debugger
         "no-dupe-args": 2, //disallow duplicate arguments in functions
