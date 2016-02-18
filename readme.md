@@ -4,7 +4,9 @@ Steps to start:
 
 1.1.Install git and nodejs(verion 5.* required). If npm version lower than 3.*, run npm i -g npm.
 
-1.2.Install babel using command:
+1.2.You can install required packages using "npm i" command, if you have cloned repository before. When package.json file is changed, 
+you also must run "npm i". Also you can install packages manually.
+Install babel using command:
 npm i -g babel-cli
 or
 npm i babel-core
@@ -18,7 +20,8 @@ npm i -g webpack-dev-server
 
 1.3.Clone project repository(git clone git@bitbucket.org:emp2016/emp.git). If it is necessary, create a public SSH key
 (howto: https://confluence.atlassian.com/bitbucket/add-an-ssh-key-to-an-account-302811853.html,
-https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key ).
+https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key ). After that run npm i, if you haven't required packages or 
+if package.json file changed.
 
 1.4.Go to the branch "trunk". To get the latest changes, use git fetch and git rebase origin/trunk.
 Now you should have current version of project. To run it, write webpack-dev-server in command line. Open this link
