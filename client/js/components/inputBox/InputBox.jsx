@@ -20,21 +20,18 @@ let InputBox = React.createClass({
     },
 
     handleBlur(e) {
-        console.log('blur handled');
         let inputValue = ReactDOM.findDOMNode(this).querySelector('.inputBox').value;
-        console.dir(inputValue);
         this.setState(function(previousState, currentProps){
             return {
-                isValid: inputValue.length > 0,
+                isValid: inputValue.match(/.$/),
                 isTouch: true,
-                isDirty: inputValue.length === 0
+                isDirty: !inputValue.match(/.$/)
             }
         });
-        console.log(this.state);
     },
 
     componentDidMount() {
-        window.addEventListener('blur', this.handleBlur);
+        ReactDOM.findDOMNode(this).querySelector('.inputBox').addEventListener('blur', this.handleBlur);
         this.setState(function(previousState, currentProps){
             return {
                 isValid: false,
@@ -46,7 +43,7 @@ let InputBox = React.createClass({
     },
 
     componentWillUnmount() {
-        window.removeEventListener('blur', this.handleBlur);
+        ReactDOM.findDOMNode(this).removeEventListener('blur', this.handleBlur);
     },
 
     render() {
