@@ -1,10 +1,7 @@
 'use strict';
 
 let React = require('react');
-let ReactDOM = require('react-dom');
-let Component = require('components/' + location.hash.slice(1) + '.jsx');
+let {render} = require('react-dom');
+let Router = require('Router');
 
-ReactDOM.render(
-    <Component/>,
-    document.getElementById('app')
-);
+render(<Router/>, document.getElementById('app'));
