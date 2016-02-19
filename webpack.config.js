@@ -42,6 +42,10 @@ const config = {
         extensions: ['', '.js', '.jsx', '.styl']
     },
 
+    eslint: {
+        configFile: '.eslintrc.js'
+    },
+
     module: {
         preLoaders: [
             {

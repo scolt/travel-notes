@@ -26,7 +26,7 @@ let InputBox = React.createClass({
                 isValid: inputValue.match(/.$/),
                 isTouch: true,
                 isDirty: !inputValue.match(/.$/)
-            }
+            };
         });
     },
 
@@ -37,7 +37,7 @@ let InputBox = React.createClass({
                 isValid: false,
                 isTouch: false,
                 isDirty: false
-            }
+            };
         });
         console.log('component mounted');
     },
