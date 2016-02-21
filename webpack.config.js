@@ -3,6 +3,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+let NODE_ENV = process.env.NODE_ENV || 'development';
+let isDev = NODE_ENV === 'development';
 
 const devServerConfig = {
     host: process.env.IP || 'localhost',
@@ -27,8 +29,10 @@ const config = {
         publicPath: '/'
     },
 
-    devtool: 'eval',
-    watch: true,
+    debug: isDev,
+    cache: isDev,
+    devtool: isDev ? 'eval-source-map' : null,
+    watch: isDev,
 
     resolve: {
         root: [
@@ -52,7 +56,7 @@ const config = {
                 exclude: /node_modules/,
                 loader: 'babel'
             },
-            
+
             {
                 test: /\.styl$/,
                 exclude: /node_modules/,
@@ -60,7 +64,7 @@ const config = {
             }
         ]
     },
-    
+
     plugins: [
         new ExtractTextPlugin('styles.css')
     ],
