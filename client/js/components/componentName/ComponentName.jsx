@@ -3,6 +3,8 @@
 let React = require('react');
 let {PropTypes: propTypes} = React;
 
+require('./ComponentName.styl');
+
 let ComponentName = React.createClass({
     propTypes: {
         className: React.PropTypes.string,
