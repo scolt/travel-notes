@@ -1,12 +1,22 @@
 'use strict';
 
-let path = require('path');
-let webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = {
+const devServerConfig = {
+    host: process.env.IP || 'localhost',
+    port: process.env.PORT || 8080,
+    contentBase: path.resolve(__dirname, 'public'),
+    getUrl: function () {
+        return `webpack-dev-server/client?http://${process.env.IP}:${process.env.PORT}/`;
+    }
+}
+
+const config = {
     entry: {
         app: [
-            'webpack-dev-server/client?http://localhost:8080/',
+            devServerConfig.getUrl(),
             path.resolve(__dirname, 'client/js/app.jsx')
         ]
     },
@@ -25,7 +35,7 @@ module.exports = {
             path.resolve(__dirname, 'client/js'),
             path.resolve(__dirname, 'node_modules')
         ],
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.js', '.jsx', '.styl']
     },
 
     module: {
@@ -41,13 +51,21 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel'
+            },
+            
+            {
+                test: /\.styl$/,
+                exclude: /node_modules/,
+                loader: ExtractTextPlugin.extract('style', 'css!stylus')
             }
         ]
     },
+    
+    plugins: [
+        new ExtractTextPlugin('styles.css')
+    ],
 
-    devServer: {
-        host: process.env.IP || 'localhost',
-        port: process.env.PORT || 8080,
-        contentBase: path.resolve(__dirname, 'public')
-    }
+    devServer: devServerConfig
 };
+
+module.exports = config;

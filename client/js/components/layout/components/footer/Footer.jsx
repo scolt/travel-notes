@@ -1,6 +1,7 @@
 'use strict';
 
 let React = require('react');
+require('./Footer.styl');
 
 let Footer = React.createClass({
     render() {
