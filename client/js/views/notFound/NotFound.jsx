@@ -7,8 +7,10 @@ let NotFound = React.createClass({
     render() {
         return (
             <div>
-                <strong>404</strong>
-                <Link to="/main">Main</Link>
+                <h1>404 error</h1>
+                <h2>page not found</h2>
+                <p>We are sorry but the page you are looking for does not exist<br />
+                    You could return to the <Link to="/main">homepage</Link></p>
             </div>
         );
     }
