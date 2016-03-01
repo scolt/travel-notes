@@ -13,6 +13,7 @@ let Menu = React.createClass({
                     <li><Link to="/note">Note</Link></li>
                     <li><Link to="/gallery">Gallery</Link></li>
                     <li><Link to="/about">About</Link></li>
+                    <li><Link to="/map">Map</Link></li>
                 </ul>
             </div>
         );
