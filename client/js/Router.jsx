@@ -8,8 +8,9 @@ let Main = require('views/main/Main');
 let Note = require('views/note/Note');
 let Gallery = require('views/gallery/Gallery');
 let About = require('views/about/About');
-let NotFound = require('views/notFound/NotFound');
 let Map = require('views/map/Map');
+let LandingPage = require('views/landingPage/LandingPage');
+let NotFound = require('views/notFound/NotFound');
 
 let Router = React.createClass({
     render() {
@@ -22,6 +23,7 @@ let Router = React.createClass({
                     <Route path="/about" component={About}/>
                     <Route path="/map" component={Map}/>
                 </Route>
+				<Route path="/landingPage" component={LandingPage}/>
                 <Route path="*" component={NotFound}/>
             </ReactRouter>
         );
