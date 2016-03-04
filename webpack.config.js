@@ -11,7 +11,7 @@ const devServerConfig = {
     port: process.env.PORT || 8080,
     contentBase: path.resolve(__dirname, 'public'),
     getUrl: function () {
-        return `webpack-dev-server/client?http://${process.env.IP}:${process.env.PORT}/`;
+        return `webpack-dev-server/client?http://${this.host}:${this.port}/`;
     }
 };
 
@@ -66,23 +66,23 @@ const config = {
                 loader: ExtractTextPlugin.extract('style', 'css!stylus')
             },
             {
-                test: /\.(png|jpg)$/, 
+                test: /\.(png|jpg)$/,
                 loader: 'url?name=assets/[path][name].[ext]&limit=8192' // inline base64 URLs for <=8k images, direct URLs for the rest
             },
-            { 
-                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, 
-                loader: 'file' 
+            {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'file'
             },
-            { 
-                test: /\.(woff|woff2)$/, 
+            {
+                test: /\.(woff|woff2)$/,
                 loader: 'url?prefix=font/&limit=5000'
             },
-            { 
-                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, 
+            {
+                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'url?limit=10000&mimetype=application/octet-stream'
             },
-            { 
-                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, 
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'url?limit=10000&mimetype=image/svg+xml'
             }
         ]
