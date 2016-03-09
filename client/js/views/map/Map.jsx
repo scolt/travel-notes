@@ -1,10 +1,23 @@
 'use strict';
 
+let isGoogleapisLoaded = false;
+let $script = require('scriptjs');
+
 let React = require('react');
 let Map = require('components/map/Map');
 
 let MapPage = React.createClass({
+    componentWillMount() {
+        if (!isGoogleapisLoaded) {
+            $script('//maps.googleapis.com/maps/api/js', () => {
+                isGoogleapisLoaded = true;
+                this.forceUpdate();
+            });
+        }
+    },
+    
     render() {
+        if (!isGoogleapisLoaded) return null;
         function marker() {
             this.marker = {
                 position: {

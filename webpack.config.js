@@ -11,16 +11,15 @@ const devServerConfig = {
     port: process.env.PORT || 8080,
     contentBase: path.resolve(__dirname, 'public'),
     getUrl: function () {
-        return `webpack-dev-server/client?http://${this.host}:${this.port}/`;
+        return `webpack-dev-server/client?https://${this.host}:${this.port}/`;
     }
 };
 
 const config = {
     entry: {
-        app: [
-            devServerConfig.getUrl(),
-            path.resolve(__dirname, 'client/js/app.jsx')
-        ]
+        app:
+            (isDev ? [devServerConfig.getUrl()] : [])
+            .concat([path.resolve(__dirname, 'client/js/app.jsx')])
     },
 
     output: {
