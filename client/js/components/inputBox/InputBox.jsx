@@ -39,7 +39,6 @@ let InputBox = React.createClass({
                 isDirty: false
             };
         });
-        console.log('component mounted');
     },
 
     componentWillUnmount() {

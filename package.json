@@ -22,6 +22,7 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/emp2016/emp#readme",
   "dependencies": {
+    "body-parser": "1.15.0",
     "compression": "1.6.1",
     "es5-shim": "4.5.2",
     "es6-shim": "0.34.4",
@@ -34,7 +35,9 @@
     "react-router": "2.0.0",
     "react-tap-event-plugin": "0.2.2",
     "redux": "3.3.1",
-    "scriptjs": "2.5.8"
+    "redux-thunk": "2.0.1",
+    "scriptjs": "2.5.8",
+    "superagent": "1.8.0"
   },
   "devDependencies": {
     "babel-core": "6.5.2",

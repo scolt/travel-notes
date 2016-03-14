@@ -9,7 +9,7 @@ let About = React.createClass({
     ],
 
     componentDidMount() {
-        this.store.dispatch({type: 'dec'});
+        this.store.dispatch(dispatch => setTimeout(() => dispatch({type: 'dec'}), 5000));
     },
 
     render() {

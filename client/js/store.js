@@ -1,14 +1,19 @@
 'use strict';
 
-let {createStore, combineReducers} = require('redux');
+let {createStore, combineReducers, applyMiddleware} = require('redux');
+let thunkMiddleware = require('redux-thunk').default;
 let counter = require('reducers/counter');
 let menu = require('reducers/menu');
 
-let store = createStore(
+let table = require('reducers/table');
+
+const store = createStore(
     combineReducers({
         counter,
-        menu
-    })
+        menu,
+        table
+    }),
+    applyMiddleware(thunkMiddleware)
 );
 
 module.exports = store;
