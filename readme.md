@@ -73,7 +73,7 @@ If you using cloud9 just run:
 
 4.4 Add ssh key:
 
-    heroku add:keys
+    heroku keys:add
 
 4.5 Add heroku repository to remote repositories:
 
