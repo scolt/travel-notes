@@ -12,6 +12,7 @@ let Map = require('views/map/Map');
 let LandingPage = require('views/landingPage/LandingPage');
 let NotFound = require('views/notFound/NotFound');
 
+let Table = require('views/table/Table');
 let Example = require('views/example/Example');
 
 let Router = React.createClass({
@@ -27,6 +28,7 @@ let Router = React.createClass({
                     <Route path="/map" component={Map}/>
                     <Route path="/404" component={NotFound}/>
                 </Route>
+                <Route path="/table" component={Table}/>
                 <Route path="/example" component={Example}/>
                 <Redirect from="/" to="/main"/>
                 <Redirect from="*" to="/404"/>

@@ -29,9 +29,9 @@ let DeveloperBox = React.createClass({
                         <div className="additional-developer-info">
                             {Object.keys(this.props.contacts).map((contact, i)=>{
                                 switch (contact) {
-                                    case "skype": return <a key={i} href={'skype:' + this.props.contacts[contact]} className="fa fa-skype"></a>;
-                                    case "github": return <a key={i} target="_blank" href={'http://github.com/' +  this.props.contacts[contact]} className="fa fa-github"></a>;
-                                    case "bitbucket": return <a key={i} target="_blank" href={'https://bitbucket.org/' + this.props.contacts[contact]} className="fa fa-bitbucket"></a>;
+                                case 'skype': return <a key={i} href={'skype:' + this.props.contacts[contact]} className="fa fa-skype"></a>;
+                                case 'github': return <a key={i} target="_blank" href={'http://github.com/' +  this.props.contacts[contact]} className="fa fa-github"></a>;
+                                case 'bitbucket': return <a key={i} target="_blank" href={'https://bitbucket.org/' + this.props.contacts[contact]} className="fa fa-bitbucket"></a>;
                                 }
                                 return <a href="" className="fa fa-skype">{contact}</a>;
                             })}
