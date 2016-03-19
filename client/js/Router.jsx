@@ -1,7 +1,7 @@
 'use strict';
 
 let React = require('react');
-let {Router: ReactRouter, Route, Redirect, hashHistory} = require('react-router');
+let {Router: ReactRouter, Route, Redirect, useRouterHistory} = require('react-router');
 
 let Layout = require('components/layout/Layout');
 let Main = require('views/main/Main');
@@ -15,10 +15,13 @@ let NotFound = require('views/notFound/NotFound');
 let Table = require('views/table/Table');
 let Example = require('views/example/Example');
 
+import { createHashHistory } from 'history';
+const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
+
 let Router = React.createClass({
     render() {
         return (
-            <ReactRouter history={hashHistory}>
+            <ReactRouter history={appHistory}>
                 <Route component={Layout}>
                     <Route path="/landingPage" component={LandingPage}/>
                     <Route path="/main" component={Main}/>
