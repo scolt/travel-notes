@@ -65,20 +65,16 @@ const config = {
                 loader: ExtractTextPlugin.extract('style', 'css!stylus')
             },
             {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+            },
+            {
+                test: /\.(otf|eot|svg|ttf|woff)\??/,
+                loader: 'url-loader?limit=8192'
+            },
+            {
                 test: /\.(png|jpg)$/,
                 loader: 'url?name=assets/[path][name].[ext]&limit=8192' // inline base64 URLs for <=8k images, direct URLs for the rest
-            },
-            {
-                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file'
-            },
-            {
-                test: /\.(woff|woff2)$/,
-                loader: 'url?prefix=font/&limit=5000'
-            },
-            {
-                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/octet-stream'
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,

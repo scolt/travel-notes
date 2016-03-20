@@ -2,8 +2,9 @@
 
 require('react-tap-event-plugin')();
 
-let React = require('react');
-let {render} = require('react-dom');
-let Router = require('Router');
+import React from 'react';
+import Router from 'Router';
+import {render} from 'react-dom';
+import '../styl/global.styl';
 
 render(<Router/>, document.getElementById('app'));
