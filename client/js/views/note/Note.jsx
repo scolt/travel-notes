@@ -7,7 +7,7 @@ let Card = require('material-ui/lib/card/card');
 let CardTitle = require('material-ui/lib/card/card-title');
 let CardText = require('material-ui/lib/card/card-text');
 let Map = require('components/map/Map');
-import styles from './note.styl';
+import './note.styl';
 
 let Note = React.createClass({
     componentWillMount() {
