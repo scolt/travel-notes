@@ -2,6 +2,10 @@
 
 let React = require('react');
 let {Router: ReactRouter, Route, Redirect, useRouterHistory} = require('react-router');
+<<<<<<< HEAD
+=======
+let {createHashHistory} = require('history');
+>>>>>>> Deleted ?k-* from URL  #17 fixes
 
 let Layout = require('components/layout/Layout');
 let Main = require('views/main/Main');
@@ -15,9 +19,13 @@ let NotFound = require('views/notFound/NotFound');
 let Table = require('views/table/Table');
 let Example = require('views/example/Example');
 
+<<<<<<< HEAD
 import { createHashHistory } from 'history';
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
 
+=======
+const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
+>>>>>>> Deleted ?k-* from URL  #17 fixes
 let Router = React.createClass({
     render() {
         return (
