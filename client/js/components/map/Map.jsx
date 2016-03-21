@@ -14,7 +14,8 @@ import styles from './map.styl';
 
 let Map = React.createClass({
     propTypes: {
-        markers: propTypes.array
+        markers: propTypes.array,
+        center: propTypes.object
     },
 
     handleMarkerClick(marker) {
@@ -53,7 +54,7 @@ let Map = React.createClass({
                 googleMapElement={
                   <GoogleMap
                     defaultZoom={7}
-                    defaultCenter={{lat: 25.0112183, lng: 121.620675700003}}
+                    defaultCenter={this.props.center || {lat: 25.0112183, lng: 121.620675700003}}
                     onClick={this.handleMapClick}>
                     <MarkerClusterer>
                     {this.props.markers.map((marker, index) => {
