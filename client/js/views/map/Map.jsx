@@ -15,7 +15,7 @@ let MapPage = React.createClass({
             });
         }
     },
-    
+
     render() {
         if (!isGoogleapisLoaded) return null;
         function marker() {
@@ -49,7 +49,7 @@ let MapPage = React.createClass({
             markers.push(m);
         }
 
-        return <div>Note <Map markers={markers}/></div>;
+        return <div className="row"><Map markers={markers}/></div>;
     }
 });
 
