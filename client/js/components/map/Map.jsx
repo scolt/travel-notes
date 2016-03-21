@@ -55,8 +55,8 @@ let Map = React.createClass({
             content =
                 <CardMedia
                     overlay={ info }
-                    overlayContentStyle={{background: 'rgba(255,255,255,0.85);'}}
-                    mediaStyle={{overflow: 'hidden', 'max-height': '450px'}}
+                    overlayContentStyle={{background: 'rgba(255,255,255,0.85)'}}
+                    mediaStyle={{overflow: 'hidden', maxHeight: '450px'}}
                 >
                     <img src={marker.window.photo}/>
                 </CardMedia>;
