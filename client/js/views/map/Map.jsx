@@ -12,7 +12,7 @@ let MapPage = React.createClass({
     componentWillMount() {
         this.store = store;
         this.unsubscribe = store.subscribe(this.handleStoreChange);
-        store.dispatch(getMarkers());
+        store.dispatch(getMarkers(this.props.params.userId));
     },
 
     componentWillUnmount() {
