@@ -15,6 +15,9 @@ const devServerConfig = {
     }
 };
 
+let plugins = [new ExtractTextPlugin('styles.css')];
+if (!isDev) plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
+
 const config = {
     entry: {
         app:
@@ -83,10 +86,7 @@ const config = {
         ]
     },
 
-    plugins: [
-        new ExtractTextPlugin('styles.css')
-    ],
-
+    plugins: plugins,
     devServer: devServerConfig
 };
 
