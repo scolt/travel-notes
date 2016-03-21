@@ -32,11 +32,11 @@ let Layout = React.createClass({
         if (!this.state.menu) return null;
         return (
             <div>
-                <Menu count={this.state.counter} menu={this.state.menu}/>
+                <div className="header"><Menu count={this.state.counter} menu={this.state.menu}/></div>
                 <div className="col-xs-12">
                     {this.props.children}
                 </div>
-                <Footer/>
+                <div className="footer"><Footer/></div>
             </div>
         );
     }

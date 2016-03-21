@@ -6,12 +6,14 @@ let counter = require('reducers/counter');
 let menu = require('reducers/menu');
 
 let table = require('reducers/table');
+let markers = require('reducers/markers');
 
 const store = createStore(
     combineReducers({
         counter,
         menu,
-        table
+        table,
+        markers
     }),
     applyMiddleware(thunkMiddleware)
 );
