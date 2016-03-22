@@ -9,7 +9,7 @@ const menu = [
     {
         name: 'note',
         title: 'Note',
-        hash: '#/note/test'
+        hash: '#/note'
     },
     {
         name: 'gallery',

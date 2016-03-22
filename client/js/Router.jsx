@@ -25,7 +25,7 @@ let Router = React.createClass({
                 <Route component={Layout}>
                     <Route path="/landingPage" component={LandingPage}/>
                     <Route path="/main" component={Main}/>
-                    <Route path="/note/:noteAlias" component={Note}/>
+                    <Route path="/note(/:id)" component={Note}/>
                     <Route path="/gallery" component={Gallery}/>
                     <Route path="/about" component={About}/>
                     <Route path="/map" component={Map}/>
