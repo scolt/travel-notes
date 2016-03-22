@@ -2,7 +2,7 @@
 
 let models = {
     notes: require('./models/notes'),
-    users: require('./models/users')
+    users: require('./models/User')
 };
 
 // method all
