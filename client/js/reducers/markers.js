@@ -2,7 +2,7 @@
 
 const markersModel = require('models/markers');
 
-function table(state = markersModel, action) {
+function markers(state = markersModel, action) {
     if (action.type === 'startFetchingMarkers') {
         state.isFetching = true;
         return state;
@@ -15,4 +15,4 @@ function table(state = markersModel, action) {
     return state;
 }
 
-module.exports = table;
+module.exports = markers;

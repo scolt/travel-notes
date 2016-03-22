@@ -1,8 +1,7 @@
 'use strict';
 
 const markers = {
-    isFetching: false,
-    rows: []
+    isFetching: false
 };
 
 module.exports = markers;

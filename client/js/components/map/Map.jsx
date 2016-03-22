@@ -79,7 +79,7 @@ let Map = React.createClass({
                 pathname={"/maps/api/js"}
                 query={{libraries: 'geometry,drawing,places'}}
                 loadingElement={
-                    <Icon name="spinner" spin/>
+                    <div className="spinner"><Icon name="spinner" spin/></div>
                 }
                 containerElement={
                     <div className={'map ' + this.props.type}></div>

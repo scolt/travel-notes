@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Map from 'components/map/Map';
-import storeMixin from 'mixins/storeMixin';
 import store from 'store';
 import getMarkers from 'actions/getMarkers';
 import Icon from 'react-fa';
@@ -38,8 +37,7 @@ let MapPage = React.createClass({
 
         return (
             <div className="row">
-                {mapInfo.isFetching ? <div className="spinner"><Icon name="spinner" spin/></div> : null}
-                {!mapInfo.isFetching ? <Map markers={markers} type="fullscreen"/> : null}
+                {mapInfo.isFetching ? <div className="spinner"><Icon name="spinner" spin/></div> : <Map markers={markers} type="fullscreen"/>}
             </div>
         );
     }
