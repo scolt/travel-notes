@@ -11,7 +11,7 @@ let MapPage = React.createClass({
     componentWillMount() {
         this.store = store;
         this.unsubscribe = store.subscribe(this.handleStoreChange);
-        store.dispatch(getMarkers(this.props.params.userId));
+        store.dispatch(getMarkers());
     },
 
     componentWillUnmount() {
@@ -23,7 +23,7 @@ let MapPage = React.createClass({
         this.setState(state);
     },
 
-    processMarkers(markers) {
+    processMarkers(markers = []) {
         return markers.map(item => {
             item.window = item;
             item.window.link = `#/note/${item.id}`;

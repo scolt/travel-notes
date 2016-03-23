@@ -28,7 +28,7 @@ let Router = React.createClass({
                     <Route path="/note(/:id)" component={Note}/>
                     <Route path="/gallery" component={Gallery}/>
                     <Route path="/about" component={About}/>
-                    <Route path="/map(/:userId)" component={Map}/>
+                    <Route path="/map" component={Map}/>
                     <Route path="/404" component={NotFound}/>
                 </Route>
                 <Route path="/table" component={Table}/>
