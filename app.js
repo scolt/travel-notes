@@ -17,7 +17,7 @@ app
     .use ( express.static(__dirname + '/public'))
     .all ( '/restApi/:model.:ext/:action/:id?', restApi)
     .get ( '*', (req, res) => res.redirect('index.html#/404'))
-    .all ( '*', (req, res) => res.status(200).json({err: 'Service not exists'}))
+    .all ( '*', (req, res, next) => next(new Error('Service not exists')))
     .use ( (err, req, res, next) => res.status(200).json({err: err.message}));
 
 server.listen(port, () => {console.log(`${new Date()} Listening at ${port}`);});

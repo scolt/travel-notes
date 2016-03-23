@@ -1,7 +1,5 @@
 'use strict';
 
-let isGoogleapisLoaded = false;
-let $script = require('scriptjs');
 let React = require('react');
 let Card = require('material-ui/lib/card/card');
 let CardTitle = require('material-ui/lib/card/card-title');
@@ -10,17 +8,7 @@ let Map = require('components/map/Map');
 import './note.styl';
 
 let Note = React.createClass({
-    componentWillMount() {
-        if (!isGoogleapisLoaded) {
-            $script('//maps.googleapis.com/maps/api/js', () => {
-                isGoogleapisLoaded = true;
-                this.forceUpdate();
-            });
-        }
-    },
-
     render() {
-        if (!isGoogleapisLoaded) return null;
         var noteTitlePic = 'http://www.cornerstone-group.com/wp-content/uploads/2013/05/EMEA-athens.jpg';
         var noteText = 'Athens is the capital and largest city of Greece. Athens dominates the Attica region and ' +
             'is one of the worlds oldest cities, with its recorded history spanning around 3,400 years, and the ' +
@@ -34,17 +22,7 @@ let Note = React.createClass({
                 lat: coordinates.lat,
                 lng: coordinates.lng
             },
-            title: 'Athens',
-            window: {
-                title: 'Athens',
-                subtitle: 'Greece',
-                descr: 'Athens dominates the Attica region and is one of the worlds oldest cities, with its ' +
-                'recorded history spanning around 3,400 years, and the earliest human presence started somewhere ' +
-                'between the 11th and 7th millennium BC',
-                link: '#/note'
-
-            },
-            defaultAnimation: 2
+            title: 'Athens'
         };
         var markers = [];
 

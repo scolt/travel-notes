@@ -1,55 +1,45 @@
 'use strict';
 
-let isGoogleapisLoaded = false;
-let $script = require('scriptjs');
-
-let React = require('react');
-let Map = require('components/map/Map');
+import React from 'react';
+import Map from 'components/map/Map';
+import store from 'store';
+import getMarkers from 'actions/getMarkers';
+import Icon from 'react-fa';
 
 let MapPage = React.createClass({
+
     componentWillMount() {
-        if (!isGoogleapisLoaded) {
-            $script('//maps.googleapis.com/maps/api/js', () => {
-                isGoogleapisLoaded = true;
-                this.forceUpdate();
-            });
-        }
+        this.store = store;
+        this.unsubscribe = store.subscribe(this.handleStoreChange);
+        store.dispatch(getMarkers());
+    },
+
+    componentWillUnmount() {
+        this.unsubscribe();
+    },
+
+    handleStoreChange() {
+        let state = this.store.getState();
+        this.setState(state);
+    },
+
+    processMarkers(markers = []) {
+        return markers.map(item => {
+            item.window = item;
+            item.window.link = `#/note/${item.id}`;
+            return item;
+        });
     },
 
     render() {
-        if (!isGoogleapisLoaded) return null;
-        function marker() {
-            this.marker = {
-                position: {
-                    lat: 25,
-                    lng: 121
-                },
-                title: 'Athens',
-                window: {
-                    title: 'Athens',
-                    subtitle: 'The cradle of the European civilization',
-                    descr: 'Athens is the capital and largest city of Greece. Athens dominates the Attica region and is one of the worlds oldest cities, with its recorded history spanning around 3,400 years, and the earliest human presence started somewhere between the 11th and 7th millennium BC.',
-                    link: '#/note/italy_venezia_999'
+        let mapInfo = this.state.markers;
+        let markers = this.processMarkers(mapInfo.rows);
 
-                },
-                defaultAnimation: 2
-            };
-        }
-        var markers = [];
-
-
-        for (let i = 0; i < 10; i++) {
-
-            var m = new marker().marker;
-            m.position = {
-                lat: 37.9908164 + i * Math.random() + Math.random(),
-                lng: 23.6682993 + i * Math.random()
-            };
-
-            markers.push(m);
-        }
-
-        return <div className="row"><Map markers={markers} center={markers[0].position}/></div>;
+        return (
+            <div className="row">
+                {mapInfo.isFetching ? <div className="spinner"><Icon name="spinner" spin/></div> : <Map markers={markers} type="fullscreen"/>}
+            </div>
+        );
     }
 });
 
