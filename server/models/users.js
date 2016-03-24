@@ -73,7 +73,7 @@ let UsersActions = {
                     res.status('500');
                     res.json({code: err.code.toString()});
                 } else {
-                    var token = jwt.sign(user, config.secret, {expiresIn: 60 * 5});
+                    var token = jwt.sign(user.toObject(), config.secret, {expiresIn: 60 * 5});
                     res.json({token: token});
                 }
             });
