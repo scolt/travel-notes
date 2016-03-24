@@ -1,0 +1,17 @@
+'use strict';
+
+let request = require('superagent');
+
+let getNote = function getNote() {
+    return dispatch => {
+        dispatch({type: 'startFetchingNote'});
+
+        return request
+                .post('/restApi/notes.json/read')
+                .send()
+                .set('Accept', 'application/json')
+                .end((err, res) => dispatch({type: 'endFetchingNote', err, res}));
+    };
+};
+
+module.exports = getNote;

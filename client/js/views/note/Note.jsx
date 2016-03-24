@@ -5,11 +5,30 @@ let Card = require('material-ui/lib/card/card');
 let CardTitle = require('material-ui/lib/card/card-title');
 let CardText = require('material-ui/lib/card/card-text');
 let Map = require('components/map/Map');
+import store from 'store';
+import getNote from 'actions/getNote';
 import './note.styl';
 
 let Note = React.createClass({
+    componentWillMount() {
+        this.store = store;
+        this.unsubscribe = store.subscribe(this.handleStoreChange);
+        store.dispatch(getNote());
+    },
+
+    componentWillUnmount() {
+        this.unsubscribe();
+    },
+
+    handleStoreChange() {
+        let state = this.store.getState();
+        this.setState(state);
+    },
+
     render() {
-        var noteTitlePic = 'http://www.cornerstone-group.com/wp-content/uploads/2013/05/EMEA-athens.jpg';
+        let noteId = this.props.params.id;
+        let notes = getNote;
+        let noteTitlePic = 'http://www.cornerstone-group.com/wp-content/uploads/2013/05/EMEA-athens.jpg';
         var noteText = 'Athens is the capital and largest city of Greece. Athens dominates the Attica region and ' +
             'is one of the worlds oldest cities, with its recorded history spanning around 3,400 years, and the ' +
             'earliest human presence started somewhere between the 11th and 7th millennium BC';
@@ -28,22 +47,37 @@ let Note = React.createClass({
 
         markers.push(noteMarker);
 
-        return (
-            <Card>
-                <CardTitle title="Trip to Athens" subtitle="The cradle of the European civilization" />
-                <CardText>
-                    <div className="row">
-                        <div className="note-photo col-xs-12 col-md-6">
-                            <img src={noteTitlePic} />
+        if (noteId) {
+            return (
+                <Card>
+                    <CardTitle title="Trip to Athens" subtitle="The cradle of the European civilization" />
+                    <CardText>
+                        <div className="row">
+                            <div className="note-photo col-xs-12 col-md-6">
+                                <img src={noteTitlePic} />
+                            </div>
+                            <div className="note-map col-xs-12 col-md-6">
+                                <Map markers={markers} center={coordinates}/>
+                            </div>
                         </div>
-                        <div className="note-map col-xs-12 col-md-6">
-                            <Map markers={markers} center={coordinates}/>
+                        <div>{noteText}</div>
+                        <div>{notes}</div>
+                    </CardText>
+                </Card>
+            );
+        } else {
+            return (
+                <Card>
+                    <CardTitle title="Add new travel note" subtitle="all colours of your trip" />
+                    <CardText>
+                        <div className="row">
+                            Here will be note form
                         </div>
-                    </div>
-                    <div>{noteText}</div>
-                </CardText>
-            </Card>
-        );
+                        <div>{noteText}</div>
+                    </CardText>
+                </Card>
+            );
+        }
     }
 });
 
