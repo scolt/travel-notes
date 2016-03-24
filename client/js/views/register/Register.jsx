@@ -8,7 +8,7 @@ import registerUser from 'actions/registerUser';
 import store from 'store';
 import Icon from 'react-fa';
 import SweetAlert from 'sweetalert-react';
-import 'sweetalert-react/node_modules/sweetalert/dist/sweetalert.css';
+import 'sweetalert/dist/sweetalert.css';
 
 let formMixin = makeFormMixin([
     'username',
