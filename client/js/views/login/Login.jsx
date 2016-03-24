@@ -4,7 +4,7 @@ import React from 'react';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 import makeFormMixin from 'services/formMakerMixin';
-import {registerUser} from 'actions/users';
+import {loginUser} from 'actions/users';
 import store from 'store';
 import Icon from 'react-fa';
 import SweetAlert from 'sweetalert-react';
@@ -15,7 +15,6 @@ import CardText from 'material-ui/lib/card/card-text';
 import 'sweetalert/dist/sweetalert.css';
 
 let formMixin = makeFormMixin([
-    'username',
     'email',
     'password'
 ]);
@@ -35,25 +34,24 @@ let RegisterView = React.createClass({
         this.setState(this.state);
     },
 
-    register() {
-        store.dispatch(registerUser(this.state));
+    login() {
+        store.dispatch(loginUser(this.state));
     },
     render() {
-        let register = store.getState().register;
+        let login = store.getState().login;
         let form =
             <div className="col-md-6" style={{margin: '50px auto'}}>
                 <Card>
-                    <CardTitle title="Register" subtitle="Creating a new user" />
+                    <CardTitle title="Login" subtitle="Enter your email and password" />
                     <CardText>
-                        <TextField hintText="Username" value={this.state.username} onChange={this.handleUsernameChange}/><br/>
                         <TextField hintText="Email" value={this.state.email} onChange={this.handleEmailChange}/><br/>
                         <TextField hintText="Password" type="password" value={this.state.password} onChange={this.handlePasswordChange}/><br/>
                     </CardText>
                     <CardActions>
                         <RaisedButton
-                            label="Register"
+                            label="Login"
                             primary={true}
-                            onTouchTap={this.register}
+                            onTouchTap={this.login}
                         />
                     </CardActions>
                 </Card>
@@ -61,20 +59,20 @@ let RegisterView = React.createClass({
             </div>;
         return (
             <div>
-                {register.isFetching ? <div className="spinner"><Icon name="spinner" spin/></div> : form }
+                {login.isFetching ? <div className="spinner"><Icon name="spinner" spin/></div> : form }
                 <SweetAlert
-                    show={register.success}
+                    show={login.success}
                     title="Demo"
                     text="SweetAlert in React"
                     type="success"
-                    onConfirm={() => {register.success = false; this.setState(this.state);}}
+                    onConfirm={() => {login.success = false; this.setState(this.state);}}
                 />
                 <SweetAlert
-                    show={!!register.error}
+                    show={!!login.error}
                     title="Demo"
-                    text={register.error}
+                    text={login.error}
                     type="error"
-                    onConfirm={() => {register.error = ''; this.setState(this.state);}}
+                    onConfirm={() => {login.error = ''; this.setState(this.state);}}
                 />
             </div>
         );

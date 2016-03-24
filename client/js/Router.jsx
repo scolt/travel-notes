@@ -12,6 +12,7 @@ let Map = require('views/map/Map');
 let LandingPage = require('views/landingPage/LandingPage');
 let NotFound = require('views/notFound/NotFound');
 let Register = require('views/register/Register');
+let Login = require('views/login/Login');
 
 import { createHashHistory } from 'history';
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
@@ -29,6 +30,7 @@ let Router = React.createClass({
                     <Route path="/map" component={Map}/>
                     <Route path="/404" component={NotFound}/>
                     <Route path="/register" component={Register}/>
+                    <Route path="/login" component={Login}/>
                 </Route>
                 <Redirect from="/" to="/main"/>
                 <Redirect from="*" to="/404"/>

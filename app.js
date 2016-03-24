@@ -41,7 +41,7 @@ app.use ( express.static(__dirname + '/public'));
 
 /*example of defeated route*/
 let defeatedRoutes = [
-    '/restApi/user.json/me'
+    '/restApi/users.json/me'
 ];
 for (var i = 0; i < defeatedRoutes.length; i++) {
     app.use(defeatedRoutes[i], expressJwt({secret: config.secret}));

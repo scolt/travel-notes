@@ -1,5 +1,6 @@
 'use strict';
 
+let request = require('superagent');
 require('react-tap-event-plugin')();
 
 import React from 'react';

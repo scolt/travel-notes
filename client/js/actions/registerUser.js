@@ -9,6 +9,7 @@ let registerUser = function registerUser(page) {
         return request
             .post('/restApi/users.json/register')
             .send(page)
+            .set('')
             .set('Accept', 'application/json')
             .end((err, res) => dispatch({type: 'endFetchingRegister', err, res, page}));
     };

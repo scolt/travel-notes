@@ -43,7 +43,7 @@ let User = mongoose.model('users', UserSchema);
 let jwt = require('jsonwebtoken');
 let UsersActions = {
     login(req, res, next) {
-        User.findOne({email: req.body.username}, function (err, user) {
+        User.findOne({email: req.body.email}, function (err, user) {
             if (err) {
                 res.status(500);
                 res.send('Unexpected error');
@@ -59,7 +59,7 @@ let UsersActions = {
                 res.send('Incorrect login or password');
                 return;
             }
-            var token = jwt.sign(user, config.secret, {expiresIn: 60 * 5});
+            var token = jwt.sign(user.toObject(), config.secret, {expiresIn: 60 * 5});
             res.json({token: token});
         });
     },
@@ -82,14 +82,10 @@ let UsersActions = {
         }
     },
 
-    logout(req, res) {
-        req.logOut();
-        res.send(200);
-    },
-
     me(req, res, next) {
-        delete req.user.password;
-        res.send(req.user);
+        let user = req.user;
+        delete user.password;
+        res.send(user);
     }
 };
 
