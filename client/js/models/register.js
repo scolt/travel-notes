@@ -3,7 +3,7 @@
 const register = {
     isFetching: false,
     success: false,
-    error: false
+    error: ''
 };
 
 module.exports = register;

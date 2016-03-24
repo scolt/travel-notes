@@ -7,7 +7,7 @@ let registerUser = function registerUser(page) {
         dispatch({type: 'startFetchingRegister'});
 
         return request
-            .post('/auth/register')
+            .post('/restApi/users.json/register')
             .send(page)
             .set('Accept', 'application/json')
             .end((err, res) => dispatch({type: 'endFetchingRegister', err, res, page}));

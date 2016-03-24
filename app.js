@@ -12,8 +12,6 @@ let restApi = require('./server/restApi');
 let expressJwt = require('express-jwt');
 let mongoose = require('mongoose');
 
-var auth = require('./server/modules/auth/router/auth');
-
 /*For access to methods from another domains */
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
@@ -42,12 +40,17 @@ app.set ( 'view engine', 'jade');
 app.use ( express.static(__dirname + '/public'));
 
 /*example of defeated route*/
-app.use('/api', expressJwt({secret: config.secret}));
-app.use('/auth', auth);
+let defeatedRoutes = [
+    '/restApi/user.json/me'
+];
+for (var i = 0; i < defeatedRoutes.length; i++) {
+    app.use(defeatedRoutes[i], expressJwt({secret: config.secret}));
+}
+
 
 app.all ( '/restApi/:model.:ext/:action/:id?', restApi);
 app.get ( '*', (req, res) => res.redirect('index.html#/404'));
-app.all ( '*', (req, res) => res.status(200).json({err: 'Service not exists'}));
+app.all ( '*', (req, res) => res.status(505).json({err: 'Service not exists'}));
 app.use ( (err, req, res, next) => res.status(200).json({err: err.message}));
 
 

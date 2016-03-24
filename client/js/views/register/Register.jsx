@@ -56,6 +56,13 @@ let RegisterView = React.createClass({
                     type="success"
                     onConfirm={() => {register.success = false; this.setState(this.state);}}
                 />
+                <SweetAlert
+                    show={!!register.error}
+                    title="Demo"
+                    text={register.error}
+                    type="error"
+                    onConfirm={() => {register.error = ''; this.setState(this.state);}}
+                />
             </div>
         );
     }

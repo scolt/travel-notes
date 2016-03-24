@@ -1,12 +1,11 @@
 'use strict';
 
-var mongoose = require('mongoose');
-
-var crypto = require('crypto');
-var config = require('../config');
-
-var Schema = mongoose.Schema;
-var UserSchema = new Schema({
+/* Declare DB model for User entity */
+let mongoose = require('mongoose');
+let crypto = require('crypto');
+let config = require('../config');
+let Schema = mongoose.Schema;
+let UserSchema = new Schema({
     email: {type: String, unique: true},
     password: String,
     username: String,
@@ -38,6 +37,60 @@ UserSchema.methods.validPassword = function(password) {
     return encrypt(password) == this.password;
 };
 
-var User = mongoose.model('users', UserSchema);
+let User = mongoose.model('users', UserSchema);
 
-module.exports = User;
+/* Adding actions for user */
+let jwt = require('jsonwebtoken');
+let UsersActions = {
+    login(req, res, next) {
+        User.findOne({email: req.body.username}, function (err, user) {
+            if (err) {
+                res.status(500);
+                res.send('Unexpected error');
+                return;
+            }
+            if (!user) {
+                res.status(401);
+                res.send('Incorrect login or password');
+                return;
+            }
+            if (!user.validPassword(req.body.password)) {
+                res.status(401);
+                res.send('Incorrect login or password');
+                return;
+            }
+            var token = jwt.sign(user, config.secret, {expiresIn: 60 * 5});
+            res.json({token: token});
+        });
+    },
+
+    register(req, res, next) {
+        try {
+            User({email: req.body.email,
+                password: req.body.password,
+                username: req.body.username}).save(function (err, user) {
+                if (err) {
+                    res.status('500');
+                    res.json({code: err.code.toString()});
+                } else {
+                    var token = jwt.sign(user, config.secret, {expiresIn: 60 * 5});
+                    res.json({token: token});
+                }
+            });
+        } catch(e) {
+            console.log(e.toString);
+        }
+    },
+
+    logout(req, res) {
+        req.logOut();
+        res.send(200);
+    },
+
+    me(req, res, next) {
+        delete req.user.password;
+        res.send(req.user);
+    }
+};
+
+module.exports = UsersActions;
