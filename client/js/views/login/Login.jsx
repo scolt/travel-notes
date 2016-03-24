@@ -19,7 +19,7 @@ let formMixin = makeFormMixin([
     'password'
 ]);
 
-let RegisterView = React.createClass({
+let loginView = React.createClass({
     mixins: [formMixin],
 
     componentWillMount() {
@@ -79,4 +79,4 @@ let RegisterView = React.createClass({
     }
 });
 
-module.exports = RegisterView;
+module.exports = loginView;
