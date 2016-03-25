@@ -14,7 +14,7 @@ let Menu = React.createClass({
     render() {
         return (
             <AppBar
-                title={`TravelNote ${this.props.count || ''}`}
+                title={`TravelNote`}
                 iconElementLeft={
                     <IconMenu
                         iconButtonElement={

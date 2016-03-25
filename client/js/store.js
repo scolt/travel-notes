@@ -2,18 +2,16 @@
 
 let {createStore, combineReducers, applyMiddleware} = require('redux');
 let thunkMiddleware = require('redux-thunk').default;
-let counter = require('reducers/counter');
-let menu = require('reducers/menu');
 
-let table = require('reducers/table');
-let markers = require('reducers/markers');
+let net = require('reducers/net');
+let menu = require('reducers/menu');
+let notes = require('reducers/notes');
 
 const store = createStore(
     combineReducers({
-        counter,
+        net,
         menu,
-        table,
-        markers
+        notes
     }),
     applyMiddleware(thunkMiddleware)
 );
