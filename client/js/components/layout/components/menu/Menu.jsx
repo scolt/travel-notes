@@ -58,6 +58,7 @@ let Menu = React.createClass({
             <div className="col-md-12">
                 <RaisedButton
                     label="Login"
+                    primary={true}
                     style={{width: '100%'}}
                     linkButton={true}
                     href="/#/login"

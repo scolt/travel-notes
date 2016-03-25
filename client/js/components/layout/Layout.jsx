@@ -18,10 +18,6 @@ let Layout = React.createClass({
         storeMixin
     ],
 
-    me() {
-        store.dispatch(pingUser(this.state));
-    },
-
     render() {
         return (
             <div>
