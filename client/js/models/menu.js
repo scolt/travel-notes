@@ -4,32 +4,38 @@ const menu = [
     {
         name: 'main',
         title: 'Main',
-        hash: '#/main'
+        hash: '#/main',
+        icon: 'home'
     },
     {
         name: 'note',
         title: 'Note',
-        hash: '#/note'
+        hash: '#/note',
+        icon: 'bookmark-o'
     },
     {
         name: 'gallery',
         title: 'Gallery',
-        hash: '#/gallery'
+        hash: '#/gallery',
+        icon: 'camera-retro'
     },
     {
         name: 'about',
         title: 'About',
-        hash: '#/about'
+        hash: '#/about',
+        icon: 'info-circle'
     },
     {
         name: 'landingPage',
         title: 'Landing Page',
-        hash: '#/landingPage'
+        hash: '#/landingPage',
+        icon: 'globe'
     },
     {
         name: 'map',
         title: 'Map',
-        hash: '#/map'
+        hash: '#/map',
+        icon: 'map-marker'
     }
 ];
 

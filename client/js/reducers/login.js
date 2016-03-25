@@ -17,9 +17,14 @@ function login(state = loginModel, action) {
                 case '11000': state.error = 'This email already used'; break;
                 default: state.error = 'Unexpected server error';
                 }
+            } else {
+                state.error = action.res.text;
             }
+            break;
+        case 401: state.error = 'hmhm';
         }
-        window.sessionStorage.token = action.res.body.token;
+
+        window.sessionStorage.token = action.res.body && action.res.body.token;
         return state;
     }
     return state;

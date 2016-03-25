@@ -8,6 +8,7 @@ let storeMixin = require('mixins/storeMixin');
 
 import 'flexboxgrid/dist/flexboxgrid.min.css';
 import RaisedButton from 'material-ui/lib/raised-button';
+import AppBar from 'material-ui/lib/app-bar';
 
 let store = require('store');
 import {pingUser, logoutUser} from 'actions/users';
@@ -21,25 +22,11 @@ let Layout = React.createClass({
         store.dispatch(pingUser(this.state));
     },
 
-    logout() {
-        store.dispatch(logoutUser(this.state));
-    },
-
     render() {
         return (
             <div>
                 <div className="header">
                     <Menu count={this.state.counter} menu={this.state.menu}/>
-                    <RaisedButton
-                        label="Check User status"
-                        primary={true}
-                        onTouchTap={this.me}
-                    />
-                    <RaisedButton
-                        label="Logout"
-                        primary={true}
-                        onTouchTap={this.logout}
-                    />
                 </div>
                 <div className="col-xs-12">
                     {this.props.children}
