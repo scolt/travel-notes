@@ -39,7 +39,7 @@ let Layout = React.createClass({
         return (
             <div>
                 <div className="header">
-                    <Menu count={this.state.counter} menu={this.state.menu}/>
+                    <Menu menu={this.state.menu}/>
                 </div>
                 <div className="col-xs-12">
                     {this.props.children}

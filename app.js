@@ -37,7 +37,7 @@ for (var i = 0; i < defeatedRoutes.length; i++) {
 
 app
     .all ( '/restApi/:model.:ext/:action/:id?', restApi)
-    .get ( '*', (req, res) => res.redirect('index.html#/404'))
+    .get ( '*.html', (req, res) => res.redirect('index.html#/404'))
     .all ( '*', (req, res) => res.status(505).json({err: 'Service not exists'}))
     .use ( (err, req, res, next) => res.status(200).json({err: err.message}));
 

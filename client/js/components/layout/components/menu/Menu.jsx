@@ -93,7 +93,7 @@ let Menu = React.createClass({
 
         return (
             <AppBar
-                title={`TravelNote ${this.props.count || ''}`}
+                title={`TravelNote`}
                 onLeftIconButtonTouchTap={() => store.dispatch(setMenuStatus(true))}
                 iconElementRight={
                     <IconButton
