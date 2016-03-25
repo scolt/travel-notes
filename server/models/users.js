@@ -10,8 +10,11 @@ let UserSchema = new Schema({
     password: String,
     username: String,
     text: String,
-    role: String
+    role: String,
+    avatar: String
 });
+
+let cloudinary = require('cloudinary');
 
 function encrypt(text){
     var cipher = crypto.createCipher(config.algorithm, config.password);
@@ -44,6 +47,7 @@ let jwt = require('jsonwebtoken');
 let UsersActions = {
     login(req, res, next) {
         User.findOne({email: req.body.email}, function (err, user) {
+            console.log(user);
             if (err) {
                 res.status(500);
                 res.send('Unexpected error');
@@ -59,27 +63,43 @@ let UsersActions = {
                 res.send('Incorrect login or password');
                 return;
             }
-            var token = jwt.sign(user.toObject(), config.secret, {expiresIn: 60 * 5});
-            res.json({token: token});
+
+            var data = user.toObject();
+            data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
+            delete data.password;
+            res.json(data);
         });
     },
 
     register(req, res, next) {
-        try {
-            User({email: req.body.email,
-                password: req.body.password,
-                username: req.body.username}).save(function (err, user) {
-                if (err) {
-                    res.status('500');
+        var cloudinaryConfig = {
+            width: 200,
+            height: 200,
+            crop: 'fill'
+        };
+
+        var user = req.body;
+
+        cloudinary.uploader.upload(
+            req.files.file.path,
+            function(result) {
+                try {
+                    User({email: user.email,
+                        password: user.password,
+                        username: user.username,
+                        avatar: result.secure_url}).save(function (err, user) {
+                        if (err) {
+                            res.status('500');
+                            res.json({code: err.code.toString()});
+                        } else {
+                            var token = jwt.sign(user.toObject(), config.secret, {expiresIn: 60 * 5});
+                            res.json({token: token});
+                        }
+                    });
+                } catch(e) {
                     res.json({code: err.code.toString()});
-                } else {
-                    var token = jwt.sign(user.toObject(), config.secret, {expiresIn: 60 * 5});
-                    res.json({token: token});
                 }
-            });
-        } catch(e) {
-            console.log(e.toString);
-        }
+            }, cloudinaryConfig);
     },
 
     me(req, res, next) {

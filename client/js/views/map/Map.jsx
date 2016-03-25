@@ -16,7 +16,7 @@ let MapPage = React.createClass({
     render() {
         return (
             <div className="row">
-                {this.state.net.isFetching ? <div className="spinner"><Icon name="spinner" spin/></div> : <Map markers={this.state.notes} type="fullscreen"/>}
+                {mapInfo.isFetching ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : <Map markers={markers} type="fullscreen"/>}
             </div>
         );
     }
