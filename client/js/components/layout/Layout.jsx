@@ -12,11 +12,28 @@ import AppBar from 'material-ui/lib/app-bar';
 
 let store = require('store');
 import {pingUser, logoutUser} from 'actions/users';
+import Snackbar from 'material-ui/lib/snackbar';
 
 let Layout = React.createClass({
-    mixins: [
-        storeMixin
-    ],
+    getInitialState() {
+        return {};
+    },
+
+    componentWillMount() {
+        this.store = store;
+        this.unsubscribe = store.subscribe(this.handleStoreChange);
+        this.setState(store.getState());
+        store.dispatch(pingUser());
+    },
+
+    componentWillUnmount() {
+        this.unsubscribe();
+    },
+
+    handleStoreChange() {
+        let state = this.store.getState();
+        this.setState(state);
+    },
 
     render() {
         return (
@@ -27,6 +44,12 @@ let Layout = React.createClass({
                 <div className="col-xs-12">
                     {this.props.children}
                 </div>
+                <Snackbar
+                    open={this.state.login.success}
+                    message="You are successful logged in."
+                    autoHideDuration={2000}
+                    onRequestClose={() => {this.state.login.success = false; this.setState(this.state); location.hash = "#/";}}
+                />
                 <div className="footer"><Footer/></div>
             </div>
         );

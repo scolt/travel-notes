@@ -3,10 +3,11 @@
 const userModel = require('models/user');
 
 function user(state = userModel, action) {
-    if (action.type === 'endFetchingLogin') {
+    let successfulTypes = ['endFetchingPing', 'endFetchingLogin', 'endFetchingRegister'];
+    if (successfulTypes.indexOf(action.type) > -1) {
         if (action.res.statusCode === 200) {
-            state.email = 'xvint@bk.ru';
-            state.avatar = 'https://avatars0.githubusercontent.com/u/7373601';
+            state.email = action.res.body.email;
+            state.avatar = action.res.body.avatar;
         }
         return state;
     }

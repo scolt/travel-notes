@@ -3,9 +3,13 @@
 function makeFormMixin(fields){
     var mixin = {
         getInitialState: function(){
-            var state = {};
-            fields.forEach(function(field){
+            var state = {
+                errors: {}
+            };
+            fields.forEach(function(item){
+                var field = item.name;
                 state[field] = this.props[field] || '';
+                state.errors[field] = false;
             }, this);
             return state;
         },
@@ -15,10 +19,50 @@ function makeFormMixin(fields){
                 data[field] = this.state[field];
             }, this);
             return data;
+        },
+        validateForm: function () {
+            var hasErrors = false;
+            for (var i = 0; i < fields.length; i++) {
+                let name = fields[i].name;
+                this.state.errors[name] = false;
+                for (var j = 0; j < fields[i].rules.length; j++) {
+                    let rule = fields[i].rules[j];
+                    if (rule === 'required') {
+                        let isError = this.state[name].length === 0;
+                        if (isError) {
+                            hasErrors = true;
+                            this.state.errors[name] = 'This is required field';
+                            break;
+                        }
+                    }
+
+                    if (rule.rule) {
+                        let isError = !rule.rule.test(this.state[name]);
+                        if (isError) {
+                            hasErrors = true;
+                            this.state.errors[name] = rule.message;
+                            break;
+                        }
+                    }
+
+                    if (rule instanceof RegExp) {
+                        let isError = !rule.test(this.state[name]);
+                        if (isError) {
+                            hasErrors = true;
+                            this.state.errors[name] = 'Invalid value. Please check it.';
+                            break;
+                        }
+                    }
+                }
+            }
+            return hasErrors;
         }
     };
 
-    fields.forEach(function(field){
+    mixin.validatorsRules = [];
+
+    fields.forEach(function(item){
+        var field = item.name;
         var method = camelJoin(['handle', field, 'change']);
         mixin[method] = function(event){
             var update = {};

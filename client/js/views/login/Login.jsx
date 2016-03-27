@@ -15,8 +15,14 @@ import CardText from 'material-ui/lib/card/card-text';
 import 'sweetalert/dist/sweetalert.css';
 
 let formMixin = makeFormMixin([
-    'email',
-    'password'
+    {
+        name: 'email',
+        rules: ['required']
+    },
+    {
+        name: 'password',
+        rules: ['required']
+    }
 ]);
 
 let loginView = React.createClass({
@@ -35,7 +41,12 @@ let loginView = React.createClass({
     },
 
     login() {
-        store.dispatch(loginUser(this.state));
+        let invalidForm = this.validateForm();
+        if (invalidForm) {
+            this.setState(this.state);
+        } else {
+            store.dispatch(loginUser(this.state));
+        }
     },
     render() {
         let login = store.getState().login;
@@ -44,8 +55,16 @@ let loginView = React.createClass({
                 <Card>
                     <CardTitle title="Login" subtitle="Enter your email and password" />
                     <CardText>
-                        <TextField hintText="Email" value={this.state.email} onChange={this.handleEmailChange}/><br/>
-                        <TextField hintText="Password" type="password" value={this.state.password} onChange={this.handlePasswordChange}/><br/>
+                        <TextField hintText="Email"
+                                   name="email"
+                                   value={this.state.email}
+                                   onChange={this.handleEmailChange}
+                                   errorText={this.state.errors.email}/><br/>
+                        <TextField hintText="Password" type="password"
+                                   name="password"
+                                   value={this.state.password}
+                                   onChange={this.handlePasswordChange}
+                                   errorText={this.state.errors.password}/><br/>
                     </CardText>
                     <CardActions>
                         <RaisedButton
@@ -60,13 +79,6 @@ let loginView = React.createClass({
         return (
             <div>
                 {login.isFetching ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : form }
-                <SweetAlert
-                    show={login.success}
-                    title="Demo"
-                    text="SweetAlert in React"
-                    type="success"
-                    onConfirm={() => {login.success = false; this.setState(this.state);}}
-                />
                 <SweetAlert
                     show={!!login.error}
                     title="Demo"

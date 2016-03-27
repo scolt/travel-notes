@@ -11,10 +11,21 @@ let UserSchema = new Schema({
     username: String,
     text: String,
     role: String,
-    avatar: String
+    avatar: String,
+    salt: String
 });
 
 let cloudinary = require('cloudinary');
+
+function generateSalt() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 5; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
 
 function encrypt(text){
     var cipher = crypto.createCipher(config.algorithm, config.password);
@@ -31,13 +42,14 @@ function decrypt(text){
 }
 
 UserSchema.pre('save', function(next) {
-    this.password = encrypt(this.password);
+    this.salt = generateSalt();
+    this.password = encrypt(this.password + this.salt);
     this.role = 'user';
     next();
 });
 
 UserSchema.methods.validPassword = function(password) {
-    return encrypt(password) == this.password;
+    return encrypt(password  + this.salt) == this.password;
 };
 
 let User = mongoose.model('users', UserSchema);
@@ -47,7 +59,6 @@ let jwt = require('jsonwebtoken');
 let UsersActions = {
     login(req, res, next) {
         User.findOne({email: req.body.email}, function (err, user) {
-            console.log(user);
             if (err) {
                 res.status(500);
                 res.send('Unexpected error');
@@ -67,6 +78,7 @@ let UsersActions = {
             var data = user.toObject();
             data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
             delete data.password;
+            delete data.salt;
             res.json(data);
         });
     },
@@ -92,8 +104,11 @@ let UsersActions = {
                             res.status('500');
                             res.json({code: err.code.toString()});
                         } else {
-                            var token = jwt.sign(user.toObject(), config.secret, {expiresIn: 60 * 5});
-                            res.json({token: token});
+                            var data = user.toObject();
+                            data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
+                            delete data.password;
+                            delete data.salt;
+                            res.json(data);
                         }
                     });
                 } catch(e) {
@@ -105,6 +120,7 @@ let UsersActions = {
     me(req, res, next) {
         let user = req.user;
         delete user.password;
+        delete user.salt;
         res.send(user);
     }
 };

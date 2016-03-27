@@ -25,6 +25,7 @@ export function loginUser(page) {
 }
 
 export function pingUser(page) {
+    if (!window.sessionStorage.token) return {type: 'emptyAction'};
     return dispatch => {
         dispatch({type: 'startFetchingPing'});
         return request
