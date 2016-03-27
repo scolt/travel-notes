@@ -90,31 +90,39 @@ let UsersActions = {
             crop: 'fill'
         };
 
-        var user = req.body;
-
-        cloudinary.uploader.upload(
-            req.files.file.path,
-            function(result) {
-                try {
-                    User({email: user.email,
-                        password: user.password,
-                        username: user.username,
-                        avatar: result.secure_url}).save(function (err, user) {
-                        if (err) {
-                            res.status('500');
-                            res.json({code: err.code.toString()});
-                        } else {
-                            var data = user.toObject();
-                            data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
-                            delete data.password;
-                            delete data.salt;
-                            res.json(data);
-                        }
-                    });
-                } catch(e) {
+        function saveUser(avatarUrl) {
+            User({email: user.email,
+                password: user.password,
+                username: user.username,
+                avatar: avatarUrl}).save(function (err, user) {
+                if (err) {
+                    res.status('500');
                     res.json({code: err.code.toString()});
+                } else {
+                    var data = user.toObject();
+                    data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
+                    delete data.password;
+                    delete data.salt;
+                    res.json(data);
                 }
-            }, cloudinaryConfig);
+            });
+        }
+
+        var user = req.body;
+        if (req.files.file && req.files.file.path) {
+            cloudinary.uploader.upload(
+                req.files.file.path,
+                function(result) {
+                    try {
+                        saveUser(result.secure_url);
+                    } catch(e) {
+                        res.json({code: err.code.toString()});
+                    }
+                }, cloudinaryConfig);
+        } else {
+            saveUser('');
+        }
+
     },
 
     me(req, res, next) {
