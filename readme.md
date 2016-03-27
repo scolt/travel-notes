@@ -79,9 +79,9 @@ If you using cloud9 just run:
 
     git remote add heroku https://git.heroku.com/travelnote.git
 
-4.6 Set `NODE_ENV=poduction` and `NPM_CONFIG_PRODUCTION=false` using web interface or by running:
+4.6 Set `NODE_ENV=production` and `NPM_CONFIG_PRODUCTION=false` using web interface or by running:
 
-    heroku config:set NODE_ENV=poduction
+    heroku config:set NODE_ENV=production
 
     heroku config:set NPM_CONFIG_PRODUCTION=false
 
