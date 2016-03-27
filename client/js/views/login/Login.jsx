@@ -78,7 +78,7 @@ let loginView = React.createClass({
             </div>;
         return (
             <div>
-                {login.isFetching || login.success ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : form }
+                {login.isFetching || login.showSuccessLoginSnackbar ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : form }
                 <SweetAlert
                     show={!!login.error}
                     title="Demo"
