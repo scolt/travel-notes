@@ -10,7 +10,7 @@ function login(state = loginModel, action) {
     if (action.type === 'endFetchingLogin') {
         state.isFetching = false;
         switch (action.res.statusCode) {
-        case 200: state.success = true; break;
+        case 200: state.showSuccessLoginSnackbar = true; break;
         case 500:
             if (action.res.body.code) {
                 switch (action.res.body.code) {

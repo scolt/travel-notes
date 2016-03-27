@@ -45,7 +45,7 @@ let Layout = React.createClass({
                     {this.props.children}
                 </div>
                 <Snackbar
-                    open={this.state.login.success}
+                    open={this.state.login.showSuccessLoginSnackbar}
                     message="You are successful logged in."
                     autoHideDuration={2000}
                     onRequestClose={() => {this.state.login.success = false; this.setState(this.state); location.hash = '#';}}

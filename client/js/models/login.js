@@ -2,7 +2,7 @@
 
 const login = {
     isFetching: false,
-    success: false,
+    showSuccessLoginSnackbar: false,
     error: ''
 };
 

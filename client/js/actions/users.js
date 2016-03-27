@@ -38,10 +38,8 @@ export function pingUser(page) {
 }
 
 export function logoutUser() {
-    return dispatch => {
-        window.sessionStorage.token = null;
-        dispatch({type: 'loggedOutEnd'});
-    };
+    window.sessionStorage.token = null;
+    return {type: 'loggedOutEnd'};
 }
 
 

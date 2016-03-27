@@ -17,16 +17,6 @@ let UserSchema = new Schema({
 
 let cloudinary = require('cloudinary');
 
-function generateSalt() {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for( var i=0; i < 5; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-}
-
 function encrypt(text){
     var cipher = crypto.createCipher(config.algorithm, config.password);
     var crypted = cipher.update(text,'utf8','hex');
@@ -42,7 +32,7 @@ function decrypt(text){
 }
 
 UserSchema.pre('save', function(next) {
-    this.salt = generateSalt();
+    this.salt = crypto.randomBytes(256).toString('hex');
     this.password = encrypt(this.password + this.salt);
     this.role = 'user';
     next();
