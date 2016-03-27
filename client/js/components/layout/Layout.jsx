@@ -48,7 +48,7 @@ let Layout = React.createClass({
                     open={this.state.login.success}
                     message="You are successful logged in."
                     autoHideDuration={2000}
-                    onRequestClose={() => {this.state.login.success = false; this.setState(this.state); location.hash = "#/";}}
+                    onRequestClose={() => {this.state.login.success = false; this.setState(this.state); location.hash = '#';}}
                 />
                 <div className="footer"><Footer/></div>
             </div>

@@ -81,7 +81,7 @@ let RegisterView = React.createClass({
     render() {
         let register = store.getState().register;
         let inputStyle = {
-            width: "100%"
+            width: '100%'
         };
         let form =
             <div className="col-md-6" style={{margin: '50px auto'}}>
