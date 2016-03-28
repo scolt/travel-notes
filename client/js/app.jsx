@@ -1,5 +1,4 @@
 'use strict';
-
 require('react-tap-event-plugin')();
 
 import React from 'react';
