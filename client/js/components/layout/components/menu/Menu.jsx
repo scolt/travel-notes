@@ -11,6 +11,7 @@ let store = require('store');
 import LeftNav from 'material-ui/lib/left-nav';
 import RaisedButton from 'material-ui/lib/raised-button';
 import {logoutUser} from 'actions/users';
+import {setMenuStatus} from 'actions/menu';
 import Paper from 'material-ui/lib/paper';
 import Icon from 'react-fa';
 import './Menu.styl';
@@ -37,17 +38,8 @@ let Menu = React.createClass({
         this.setState(state);
     },
 
-    switchLeftNav() {
-        this.state.open = !this.state.open;
-        this.setState(this.state);
-    },
-
     logout() {
         store.dispatch(logoutUser(this.state));
-    },
-
-    handleClose() {
-        this.setState({open: false});
     },
 
     render() {
@@ -62,7 +54,7 @@ let Menu = React.createClass({
                     style={{width: '100%'}}
                     linkButton={true}
                     href="/#/login"
-                    onTouchTap={this.handleClose}
+                    onTouchTap={() => store.dispatch(setMenuStatus(false))}
                 />
                 <br/><br/>
                 <RaisedButton
@@ -71,7 +63,7 @@ let Menu = React.createClass({
                     style={{width: '100%'}}
                     linkButton={true}
                     href="/#/register"
-                    onTouchTap={this.handleClose}
+                    onTouchTap={() => store.dispatch(setMenuStatus(false))}
                 />
             </div>;
         if (user.email) {
@@ -88,7 +80,7 @@ let Menu = React.createClass({
                         label="Logout"
                         primary={true}
                         style={{width: '100%'}}
-                        onTouchTap={() => {this.logout(); this.handleClose();}}
+                        onTouchTap={() => {this.logout(); store.dispatch(setMenuStatus(false));}}
                     />
                 </div>;
         }
@@ -97,7 +89,7 @@ let Menu = React.createClass({
         return (
             <AppBar
                 title={`TravelNote ${this.props.count || ''}`}
-                onLeftIconButtonTouchTap={this.switchLeftNav}
+                onLeftIconButtonTouchTap={() => store.dispatch(setMenuStatus(true))}
                 iconElementRight={
                     <IconButton
                         tooltip="Home"
@@ -105,16 +97,16 @@ let Menu = React.createClass({
                         <ActionHome />
                     </IconButton>
                 }>
-                <LeftNav open={this.state.open}
-                         onRequestChange={open => this.setState({open})}
+                <LeftNav open={this.state.menu.open}
+                         onRequestChange={open => store.dispatch(setMenuStatus(open))}
                          docked={false}>
                     {userBlock}
-                    {this.props.menu.map((menuItem, key) => (
+                    {this.props.menu.items.map((menuItem, key) => (
                         <MenuItem
                             key={key}
                             primaryText={menuItem.title}
                             leftIcon={<Icon name={menuItem.icon} />}
-                            onTouchTap={() => {location.hash = menuItem.hash; this.handleClose();}}
+                            onTouchTap={() => {location.hash = menuItem.hash; store.dispatch(setMenuStatus(false));}}
                         />
                     ))}
                     {actionsBlock}
