@@ -42,6 +42,11 @@ let Menu = React.createClass({
         store.dispatch(logoutUser(this.state));
     },
 
+    openMenuItem(hash) {
+        location.hash = hash;
+        store.dispatch(setMenuStatus(false));
+    },
+
     render() {
         let user = store.getState().user;
 
@@ -106,7 +111,7 @@ let Menu = React.createClass({
                             key={key}
                             primaryText={menuItem.title}
                             leftIcon={<Icon name={menuItem.icon} />}
-                            onTouchTap={() => {location.hash = menuItem.hash; store.dispatch(setMenuStatus(false));}}
+                            onTouchTap={this.openMenuItem.bind(this, menuItem.hash)}
                         />
                     ))}
                     {actionsBlock}
