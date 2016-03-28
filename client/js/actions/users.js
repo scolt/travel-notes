@@ -42,4 +42,10 @@ export function logoutUser() {
     return {type: 'loggedOutEnd'};
 }
 
+export function setSuccesLoginFlag(flag) {
+    return {
+        type: flag ? 'showSuccessLoginSnackbar' : 'hideSuccessLoginSnackbar'
+    };
+}
+
 

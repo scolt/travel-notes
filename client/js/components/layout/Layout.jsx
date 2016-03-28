@@ -11,7 +11,7 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import AppBar from 'material-ui/lib/app-bar';
 
 let store = require('store');
-import {pingUser, logoutUser} from 'actions/users';
+import {pingUser, logoutUser, setSuccesLoginFlag} from 'actions/users';
 import Snackbar from 'material-ui/lib/snackbar';
 
 let Layout = React.createClass({
@@ -48,7 +48,7 @@ let Layout = React.createClass({
                     open={this.state.login.showSuccessLoginSnackbar}
                     message="You are successful logged in."
                     autoHideDuration={2000}
-                    onRequestClose={() => {this.state.login.showSuccessLoginSnackbar = false; this.setState(this.state); location.hash = '#';}}
+                    onRequestClose={() => {store.dispatch(setSuccesLoginFlag(false)); location.hash = '#';}}
                 />
                 <div className="footer"><Footer/></div>
             </div>

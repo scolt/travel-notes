@@ -27,6 +27,10 @@ function login(state = loginModel, action) {
         window.sessionStorage.token = action.res.body && action.res.body.token;
         return state;
     }
+    if (action.type === 'hideSuccessLoginSnackbar') {
+        state.showSuccessLoginSnackbar = false;
+        return state;
+    }
     return state;
 }
 
