@@ -41,7 +41,4 @@ app
     .all ( '*', (req, res) => res.status(505).json({err: 'Service not exists'}))
     .use ( (err, req, res, next) => res.status(200).json({err: err.message}));
 
-
-
-
 server.listen(port, () => {console.log(`${new Date()} Listening at ${port}`);});
