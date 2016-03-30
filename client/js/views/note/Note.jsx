@@ -13,7 +13,7 @@ let Note = React.createClass({
     componentWillMount() {
         this.store = store;
         this.unsubscribe = store.subscribe(this.handleStoreChange);
-        store.dispatch(getNote());
+        store.dispatch(getNote(this.props.params.id));
     },
 
     componentWillUnmount() {
@@ -25,59 +25,32 @@ let Note = React.createClass({
         this.setState(state);
     },
 
+    processNote(note = []) {
+        return note.map(item => {
+            return item;
+        });
+    },
+
     render() {
-        let noteId = this.props.params.id;
-        let notes = getNote;
-        let noteTitlePic = 'http://www.cornerstone-group.com/wp-content/uploads/2013/05/EMEA-athens.jpg';
-        var noteText = 'Athens is the capital and largest city of Greece. Athens dominates the Attica region and ' +
-            'is one of the worlds oldest cities, with its recorded history spanning around 3,400 years, and the ' +
-            'earliest human presence started somewhere between the 11th and 7th millennium BC';
-        var coordinates = {
-            lat: 37.9908164,
-            lng: 23.6682993
-        };
-        var noteMarker = {
-            position: {
-                lat: coordinates.lat,
-                lng: coordinates.lng
-            },
-            title: 'Athens'
-        };
-        var markers = [];
+        let noteInfo = this.state.note;
+        let note = this.processNote(noteInfo.data);
 
-        markers.push(noteMarker);
-
-        if (noteId) {
-            return (
-                <Card>
-                    <CardTitle title="Trip to Athens" subtitle="The cradle of the European civilization" />
-                    <CardText>
-                        <div className="row">
-                            <div className="note-photo col-xs-12 col-md-6">
-                                <img src={noteTitlePic} />
-                            </div>
-                            <div className="note-map col-xs-12 col-md-6">
-                                <Map markers={markers} center={coordinates}/>
-                            </div>
+        return (
+            <Card>
+                <CardTitle title={noteInfo.isFetching ? '' : note[0].title} subtitle={noteInfo.isFetching ? '' : note[0].subtitle} />
+                <CardText>
+                    <div className="row" >
+                        <div className="note-photo col-xs-12 col-md-6">
+                            <img src={noteInfo.isFetching ? '' : note[0].photo} />
                         </div>
-                        <div>{noteText}</div>
-                        <div>{notes}</div>
-                    </CardText>
-                </Card>
-            );
-        } else {
-            return (
-                <Card>
-                    <CardTitle title="Add new travel note" subtitle="all colours of your trip" />
-                    <CardText>
-                        <div className="row">
-                            Here will be note form
+                        <div className="note-map col-xs-12 col-md-6">
+                            {noteInfo.isFetching ? '' :  <Map markers={[{position: note[0].position, title: note[0].title}]} center={note[0].position}/>}
                         </div>
-                        <div>{noteText}</div>
-                    </CardText>
-                </Card>
-            );
-        }
+                    </div>
+                    <div>{noteInfo.isFetching ? '' : note[0].descr}</div>
+                </CardText>
+            </Card>
+        );
     }
 });
 

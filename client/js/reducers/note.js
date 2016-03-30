@@ -9,7 +9,7 @@ function note(state = noteModel, action) {
     }
     if (action.type === 'endFetchingNote') {
         state.isFetching = false;
-        state.rows = [...action.res.body];
+        state.data = [...action.res.body];
         return state;
     }
     return state;
