@@ -1,6 +1,6 @@
 'use strict';
 
-const snackbarModel = require('models/snackbar');
+const snackbarModel = require('models/snack');
 
 function snackbar(state = snackbarModel, action) {
     if (action.type === 'endFetchingUsersLogin') {
