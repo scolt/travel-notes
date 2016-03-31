@@ -13,7 +13,9 @@ let Profile = React.createClass({
         return {
             name: 'notes',
             params: {
-                userId: this.props.params.username
+                data: {
+                    userId: this.props.params.username
+                }
             }
         };
     },
