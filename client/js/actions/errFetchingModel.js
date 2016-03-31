@@ -1,9 +1,10 @@
 'use strict';
 
-function errFetchingModel(Model, err) {
+function errFetchingModel(Model, err, res) {
     return {
         type: `errFetching${Model}`,
-        err
+        err,
+        data: res.body
     };
 }
 

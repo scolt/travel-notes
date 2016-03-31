@@ -2,38 +2,15 @@
 
 import request from 'superagent';
 
-export function registerUser(page) {
+export function updateUser(page) {
     return dispatch => {
-        dispatch({type: 'startFetchingRegister'});
+        dispatch({type: 'startUpdatingUser'});
         return request
-            .post('/restApi/users.json/register')
+            .post('/restApi/users.json/update')
             .send(page)
-            .set('Accept', 'application/json')
-            .end((err, res) => dispatch({type: 'endFetchingRegister', err, res, page}));
-    };
-}
-
-export function loginUser(page) {
-    return dispatch => {
-        dispatch({type: 'startFetchingLogin'});
-        return request
-            .post('/restApi/users.json/login')
-            .send(page)
-            .set('Accept', 'application/json')
-            .end((err, res) => dispatch({type: 'endFetchingLogin', err, res, page}));
-    };
-}
-
-export function pingUser(page) {
-    if (!window.sessionStorage.token) return {type: 'emptyAction'};
-    return dispatch => {
-        dispatch({type: 'startFetchingPing'});
-        return request
-            .post('/restApi/users.json/me')
-            .send()
             .set('Authorization', 'Bearer ' + window.sessionStorage.token)
             .set('Accept', 'application/json')
-            .end((err, res) => dispatch({type: 'endFetchingPing', err, res, page}));
+            .end((err, res) => dispatch({type: 'endUpdatingUser', err, res, page}));
     };
 }
 

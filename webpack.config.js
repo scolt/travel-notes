@@ -9,7 +9,7 @@ let remoteServer = process.env.remoteServer || 'http://travelnote.herokuapp.com'
 
 const devServerConfig = {
     host: process.env.IP || 'localhost',
-    port: process.env.PORT || 8080,
+    port: process.env.PORT || 1337,
     contentBase: path.resolve(__dirname, 'public'),
     getUrl: function () {
         return `webpack-dev-server/client?https://${this.host}:${this.port}/`;
@@ -30,7 +30,7 @@ if (!isDev) plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
 const config = {
     entry: {
         app:
-            (isDev ? [devServerConfig.getUrl()] : [])
+            []
             .concat([path.resolve(__dirname, 'client/js/app.jsx')])
     },
 

@@ -10,6 +10,9 @@ let register = require('reducers/register');
 let login = require('reducers/login');
 let user = require('reducers/user');
 let note = require('reducers/note');
+let profile = require('reducers/profile');
+let snackbar = require('reducers/snackbar');
+let sweetalert = require('reducers/sweetalert');
 
 const store = createStore(
     combineReducers({
@@ -19,7 +22,10 @@ const store = createStore(
         register,
         login,
         user,
-        note
+        note,
+        profile,
+        snackbar,
+        sweetalert
     }),
     applyMiddleware(thunkMiddleware)
 );

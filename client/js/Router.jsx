@@ -13,6 +13,7 @@ let LandingPage = require('views/landingPage/LandingPage');
 let NotFound = require('views/notFound/NotFound');
 let Register = require('views/register/Register');
 let Login = require('views/login/Login');
+let Profile = require('views/profile/Profile');
 
 import { createHashHistory } from 'history';
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
@@ -31,6 +32,7 @@ let Router = React.createClass({
                     <Route path="/404" component={NotFound}/>
                     <Route path="/register" component={Register}/>
                     <Route path="/login" component={Login}/>
+                    <Route path="/profile(/:username)" component={Profile}/>
                 </Route>
                 <Redirect from="/" to="/main"/>
                 <Redirect from="*" to="/404"/>

@@ -17,12 +17,6 @@ import Icon from 'react-fa';
 import './Menu.styl';
 
 let Menu = React.createClass({
-    getInitialState() {
-        return {
-            open: false
-        };
-    },
-
     componentWillMount() {
         this.store = store;
         this.unsubscribe = store.subscribe(this.handleStoreChange);
@@ -44,6 +38,12 @@ let Menu = React.createClass({
 
     openMenuItem(hash) {
         location.hash = hash;
+        store.dispatch(setMenuStatus(false));
+    },
+
+    openProfile() {
+        let user = store.getState().user;
+        location.hash = '#/profile/' + user.username;
         store.dispatch(setMenuStatus(false));
     },
 
@@ -74,7 +74,10 @@ let Menu = React.createClass({
         if (user.email) {
             userBlock =
                 <div>
-                    <Paper className="image-developer" zDepth={1} circle={true}>
+                    <Paper className="image-developer"
+                           zDepth={1}
+                           circle={true}
+                           onTouchTap={this.openProfile}>
                         <img className="img-rounded" src={user.avatar}/>
                     </Paper>
                     <p className="user-name">{user.email}</p>

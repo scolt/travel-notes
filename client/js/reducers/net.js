@@ -21,6 +21,12 @@ function net(state = netModel, action) {
         let isFetching = false;
         return {...state, isFetching};
     }
+
+    if (action.type === 'clearNetErr') {
+        let err = '';
+        return {...state, err};
+    }
+
     return state;
 }
 

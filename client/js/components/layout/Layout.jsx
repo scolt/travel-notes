@@ -9,21 +9,22 @@ let storeMixin = require('mixins/storeMixin');
 import 'flexboxgrid/dist/flexboxgrid.min.css';
 import RaisedButton from 'material-ui/lib/raised-button';
 import AppBar from 'material-ui/lib/app-bar';
-
-let store = require('store');
-import {pingUser, logoutUser, setSuccesLoginFlag} from 'actions/users';
+import store from 'store';
+import {logoutUser} from 'actions/users';
 import Snackbar from 'material-ui/lib/snackbar';
+import SweetAlert from 'sweetalert-react';
+import 'sweetalert/dist/sweetalert.css';
+import Icon from 'react-fa';
+import fetchModel from 'actions/fetchModel';
 
 let Layout = React.createClass({
-    getInitialState() {
-        return {};
-    },
-
     componentWillMount() {
         this.store = store;
         this.unsubscribe = store.subscribe(this.handleStoreChange);
         this.setState(store.getState());
-        store.dispatch(pingUser());
+        store.dispatch(fetchModel('users', {
+            action: 'ping'
+        }));
     },
 
     componentWillUnmount() {
@@ -37,18 +38,26 @@ let Layout = React.createClass({
 
     render() {
         return (
+
             <div>
                 <div className="header">
                     <Menu menu={this.state.menu}/>
                 </div>
                 <div className="col-xs-12">
-                    {this.props.children}
+                    {this.state.user.isFetching ? null : this.props.children}
                 </div>
                 <Snackbar
-                    open={this.state.login.showSuccessLoginSnackbar}
-                    message="You are successful logged in."
+                    open={this.state.snackbar.open || false}
+                    message={this.state.snackbar.message || ''}
                     autoHideDuration={2000}
-                    onRequestClose={() => {store.dispatch(setSuccesLoginFlag(false)); location.hash = '#';}}
+                    onRequestClose={() => {store.dispatch({type: 'snackbarClose'});}}
+                />
+                <SweetAlert
+                    show={this.state.sweetalert.open || false}
+                    title={this.state.sweetalert.title || ''}
+                    text={this.state.sweetalert.message || ''}
+                    type={this.state.sweetalert.type || 'info'}
+                    onConfirm={() => {store.dispatch({type: 'alertClose'});}}
                 />
                 <div className="footer"><Footer/></div>
             </div>

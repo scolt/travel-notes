@@ -7,14 +7,13 @@ import makeFormMixin from 'services/formMakerMixin';
 import {registerUser} from 'actions/users';
 import store from 'store';
 import Icon from 'react-fa';
-import SweetAlert from 'sweetalert-react';
 import Card from 'material-ui/lib/card/card';
 import CardActions from 'material-ui/lib/card/card-actions';
 import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 import Dropzone from 'react-dropzone';
-import 'sweetalert/dist/sweetalert.css';
 import './Register.styl';
+import fetchModel from 'actions/fetchModel';
 
 let formMixin = makeFormMixin([
     {
@@ -44,7 +43,7 @@ let RegisterView = React.createClass({
         this.unSubscribe = store.subscribe(this.onChangeStore);
     },
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         this.unSubscribe();
     },
 
@@ -62,7 +61,10 @@ let RegisterView = React.createClass({
             data.append('email', this.state.email);
             data.append('username', this.state.username);
             data.append('password', this.state.password);
-            store.dispatch(registerUser(data));
+            store.dispatch(fetchModel('users', {
+                action: 'register',
+                data: data
+            }));
         }
     },
 
@@ -133,20 +135,6 @@ let RegisterView = React.createClass({
         return (
             <div>
                 {register.isFetching ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : form }
-                <SweetAlert
-                    show={register.success}
-                    title="Register"
-                    text="You are successful registered and logged in. Press OK for redirect to home page."
-                    type="success"
-                    onConfirm={this.success}
-                />
-                <SweetAlert
-                    show={!!register.error}
-                    title="Error"
-                    text={register.error}
-                    type="error"
-                    onConfirm={() => {register.error = ''; this.setState(this.state);}}
-                />
             </div>
         );
     }

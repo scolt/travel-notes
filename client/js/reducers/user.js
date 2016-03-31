@@ -3,13 +3,20 @@
 const userModel = require('models/user');
 
 function user(state = userModel, action) {
-    let successfulTypes = ['endFetchingPing', 'endFetchingLogin', 'endFetchingRegister'];
+    let successfulTypes = ['endFetchingUsersPing', 'endFetchingUsersLogin', 'endFetchingUsersRegister', 'endFetchingUsersUpdate'];
+
     if (successfulTypes.indexOf(action.type) > -1) {
-        if (action.res.statusCode === 200) {
-            state.email = action.res.body.email;
-            state.avatar = action.res.body.avatar;
+        if (action.statusCode === 200) {
+            state.email = action.data.email;
+            state.avatar = action.data.avatar;
+            state.username = action.data.username;
         }
+        state.isFetching = false;
         return state;
+    }
+
+    if (action.type === 'errFetchingUsersPing') {
+        state.isFetching = false;
     }
 
     if (action.type === 'loggedOutEnd') {

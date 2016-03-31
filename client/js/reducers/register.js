@@ -1,26 +1,19 @@
 'use strict';
 
-const registerModel = require('models/register');
-
-function register(state = registerModel, action) {
-    if (action.type === 'startFetchingRegister') {
+function register(state = {}, action) {
+    if (action.type === 'startFetchingUsersRegister') {
         state.isFetching = true;
         return state;
     }
-    if (action.type === 'endFetchingRegister') {
+
+    if (action.type === 'endFetchingUsersRegister') {
         state.isFetching = false;
-        switch (action.res.statusCode) {
-        case 200: state.success = true; break;
-        case 500:
-            if (action.res.body.code) {
-                switch (action.res.body.code) {
-                case '11000': state.error = 'This email already used'; break;
-                default: state.error = 'Unexpected server error';
-                }
-            }
-        }
-        window.sessionStorage.token = action.res.body.token;
+        window.sessionStorage.token = action.data.token;
         return state;
+    }
+
+    if (action.type === 'errFetchingUsersRegister') {
+        state.isFetching = false;
     }
     return state;
 }
