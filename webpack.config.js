@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 let NODE_ENV = process.env.NODE_ENV || 'development';
 let isDev = NODE_ENV === 'development';
+let remoteServer = process.env.remoteServer || 'http://travelnote.herokuapp.com';
 
 const devServerConfig = {
     host: process.env.IP || 'localhost',
@@ -12,6 +13,14 @@ const devServerConfig = {
     contentBase: path.resolve(__dirname, 'public'),
     getUrl: function () {
         return `webpack-dev-server/client?https://${this.host}:${this.port}/`;
+    },
+
+    proxy: {
+        '/restApi/*': {
+            target: remoteServer,
+            secure: false,
+            changeOrigin: true
+        }
     }
 };
 
