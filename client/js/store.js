@@ -9,6 +9,7 @@ let notes = require('reducers/notes');
 let register = require('reducers/register');
 let login = require('reducers/login');
 let user = require('reducers/user');
+let note = require('reducers/note');
 
 const store = createStore(
     combineReducers({
@@ -17,7 +18,8 @@ const store = createStore(
         notes,
         register,
         login,
-        user
+        user,
+        note
     }),
     applyMiddleware(thunkMiddleware)
 );
