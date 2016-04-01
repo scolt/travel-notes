@@ -6,16 +6,18 @@ let startFetchingModel = require('actions/startFetchingModel');
 let endFetchingModel = require('actions/endFetchingModel');
 let errFetchingModel = require('actions/errFetchingModel');
 
-function fetchModel(model) {
+function fetchModel(model, params) {
     return dispatch => {
-        let Model = `${model.charAt(0).toUpperCase()}${model.slice(1)}`;
+        let action = params && params.action ? params.action : 'read';
+        let Model = `${model.charAt(0).toUpperCase()}${model.slice(1)}${action.charAt(0).toUpperCase()}${action.slice(1)}`;
         dispatch(startFetchingModel(Model));
 
         return request
-            .post(`/restApi/${model}.json/read`)
-            .send()
+            .post(`/restApi/${model}.json/${action}`)
+            .send(params ? params.data : null)
+            .set('Authorization', 'Bearer ' + window.sessionStorage.token)
             .set('Accept', 'application/json')
-            .end((err, res) => dispatch(err ? errFetchingModel(Model, err) : endFetchingModel(Model, res.body)));
+            .end((err, res) => dispatch(err ? errFetchingModel(Model, err, res) : endFetchingModel(Model, res)));
     };
 }
 

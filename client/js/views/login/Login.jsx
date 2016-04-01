@@ -7,12 +7,11 @@ import makeFormMixin from 'services/formMakerMixin';
 import {loginUser} from 'actions/users';
 import store from 'store';
 import Icon from 'react-fa';
-import SweetAlert from 'sweetalert-react';
 import Card from 'material-ui/lib/card/card';
 import CardActions from 'material-ui/lib/card/card-actions';
 import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
-import 'sweetalert/dist/sweetalert.css';
+import fetchModel from 'actions/fetchModel';
 
 let formMixin = makeFormMixin([
     {
@@ -32,7 +31,7 @@ let loginView = React.createClass({
         this.unSubscribe = store.subscribe(this.onChangeStore);
     },
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         this.unSubscribe();
     },
 
@@ -45,11 +44,14 @@ let loginView = React.createClass({
         if (invalidForm) {
             this.setState(this.state);
         } else {
-            store.dispatch(loginUser(this.state));
+            store.dispatch(fetchModel('users', {
+                action: 'login',
+                data: this.state
+            }));
         }
     },
     render() {
-        let login = store.getState().login;
+        let {net} = store.getState();
         let form =
             <div className="col-md-6" style={{margin: '50px auto'}}>
                 <Card>
@@ -78,14 +80,7 @@ let loginView = React.createClass({
             </div>;
         return (
             <div>
-                {login.isFetching || login.showSuccessLoginSnackbar ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : form }
-                <SweetAlert
-                    show={!!login.error}
-                    title="Demo"
-                    text={login.error}
-                    type="error"
-                    onConfirm={() => {login.error = ''; this.setState(this.state);}}
-                />
+                {net.isFetching ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : form }
             </div>
         );
     }

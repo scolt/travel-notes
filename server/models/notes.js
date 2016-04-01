@@ -1,67 +1,44 @@
 'use strict';
 
-let MongoClient = require('mongodb').MongoClient;
-let ObjectId = require('mongodb').ObjectID;
-let conString = require('../config').conString;
+/* Declare DB model for Note entity */
+let mongoose = require('mongoose');
+let crypto = require('crypto');
+let config = require('../config');
+let Schema = mongoose.Schema;
+let NoteSchema = new Schema({
+    userId: String,
+    photo: String,
+    descr: String,
+    title: String,
+    subtitle: String,
+    position: {
+        lat: Number,
+        lng: Number
+    }
+});
+
+let Note = mongoose.model('notes', NoteSchema);
 
 let notes = {
-    create(req, res, next) {
-        MongoClient.connect(conString, (err, db) => {
-            if (err) return next(err);
-            db.collection('notes').insertOne(req.body.note, (err, result) => {
-                db.close();
-                if (err) return next(err);
-                res.status(200).json(result);
-            });
-        });
-    },
-
     read(req, res, next) {
-        MongoClient.connect(conString, (err, db) => {
-            if (err) return next(err);
-            let id = req.params.id;
-            let result = [];
-            let query = Object.assign({}, req.body.query);
-            if (id) query._id = ObjectId(id);
-            db.collection('notes').find(query).each((err, doc) => {
-                if (err) return db.close(), next(err);
-                if (doc !== null) return result.push(doc);
-                db.close();
-                res.status(200).json(result);
-            });
-        });
+        Note.find(req.body, function (err, notes) {
+            if (err) {
+                res.status(500);
+                res.send('Unexpected error');
+                return;
+            }
+            if (!notes) {
+                res.json([]);
+            } else {
+                res.json(notes);
+            }
+        })
     },
 
-    update(req, res, next) {
-        MongoClient.connect(conString, (err, db) => {
-            if (err) return next(err);
-            let id = req.params.id;
-            if (!id) return next(new Error('Cannot delete record without id'));
-            db.collection('notes').deleteOne({_id: ObjectId(id)}, (err, result) => {
-                db.close();
-                if (err) return next(err);
-                res.status(200).json(result);
-            });
-        });
-    },
 
-    del(req, res, next) {
-        MongoClient.connect(conString, (err, db) => {
-            if (err) return next(err);
-            let id = req.params.id;
-            if (!id) return next(new Error('Cannot delete record without id'));
-            db.collection('notes').updateOne({_id: ObjectId(id)}, {note: req.body.note}, (err, result) => {
-                db.close();
-                if (err) return next(err);
-                res.status(200).json(result);
-            });
-        });
-    },
 
     populate(req, res, next) {
-        MongoClient.connect(conString, (err, db) => {
-            if (err) return next(err);
-            db.collection('notes').insertMany([
+        res.json([
                 {
                     id: '1',
                     photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Wien_-_Stephansdom_%281%29.JPG/800px-Wien_-_Stephansdom_%281%29.JPG',
@@ -206,23 +183,7 @@ let notes = {
                         lng: 27.053889
                     }
                 }
-            ], (err, result) => {
-                db.close();
-                if (err) return next(err);
-                res.status(200).json(result);
-            });
-        });
-    },
-
-    drop(req, res, next) {
-        MongoClient.connect(conString, (err, db) => {
-            if (err) return next(err);
-            db.collection('notes').deleteMany({}, (err, result) => {
-                db.close();
-                if (err) return next(err);
-                res.status(200).json(result);
-            });
-        });
+            ]);
     }
 };
 

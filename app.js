@@ -25,17 +25,8 @@ app
     .use ( multipart() )
     .set ( 'views', `${__dirname}/server/views`)
     .set ( 'view engine', 'jade')
-    .use ( express.static(__dirname + '/public'));
-
-/*example of defeated route*/
-let defeatedRoutes = [
-    '/restApi/users.json/me'
-];
-for (var i = 0; i < defeatedRoutes.length; i++) {
-    app.use(defeatedRoutes[i], expressJwt({secret: config.secret}));
-}
-
-app
+    .use ( express.static(__dirname + '/public'))
+    .use ( '/restApi', expressJwt({secret: config.secret, credentialsRequired: false}))
     .all ( '/restApi/:model.:ext/:action/:id?', restApi)
     .get ( '*.html', (req, res) => res.redirect('index.html#/404'))
     .all ( '*', (req, res) => res.status(505).json({err: 'Service not exists'}))

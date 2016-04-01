@@ -7,7 +7,9 @@ import Icon from 'react-fa';
 import storeMixin from 'mixins/storeMixin';
 
 let MapPage = React.createClass({
-    fetchModel: 'notes',
+    fetchModel: {
+        name: 'notes'
+    },
 
     mixins: [
         storeMixin

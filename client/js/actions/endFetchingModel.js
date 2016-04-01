@@ -3,7 +3,8 @@
 function endFetchingModel(Model, data) {
     return {
         type: `endFetching${Model}`,
-        data
+        data: data.body,
+        statusCode: data.statusCode
     };
 }
 

@@ -12,9 +12,15 @@ let storeMixin = {
     componentWillMount() {
         this.store = store;
         this.unsubscribe = store.subscribe(this.handleStoreChange);
-        this.fetchModel ?
-            this.request = this.store.dispatch(fetchModel(this.fetchModel)) :
+        if (this.fetchModel) {
+            let fetch = this.fetchModel;
+            if (typeof fetch === 'function') {
+                fetch = this.fetchModel();
+            }
+            this.store.dispatch(fetchModel(fetch.name, fetch.params));
+        } else {
             this.setState(store.getState());
+        }
     },
 
     componentWillUnmount() {

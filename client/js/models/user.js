@@ -2,7 +2,8 @@
 
 const user = {
     email: false,
-    avatar: ''
+    avatar: '',
+    isFetching: true
 };
 
 module.exports = user;

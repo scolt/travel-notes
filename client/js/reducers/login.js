@@ -1,36 +1,17 @@
 'use strict';
+import store from 'store';
 
-const loginModel = require('models/login');
-
-function login(state = loginModel, action) {
-    if (action.type === 'startFetchingLogin') {
-        state.isFetching = true;
+function login(state = {}, action) {
+    if (action.type === 'startFetchingUsersLogin') {
         return state;
     }
-    if (action.type === 'endFetchingLogin') {
-        state.isFetching = false;
-        switch (action.res.statusCode) {
-        case 200: state.showSuccessLoginSnackbar = true; break;
-        case 500:
-            if (action.res.body.code) {
-                switch (action.res.body.code) {
-                case '11000': state.error = 'This email already used'; break;
-                default: state.error = 'Unexpected server error';
-                }
-            } else {
-                state.error = action.res.text;
-            }
-            break;
-        case 401: state.error = 'hmhm';
-        }
 
-        window.sessionStorage.token = action.res.body && action.res.body.token;
+    if (action.type === 'endFetchingUsersLogin') {
+        window.sessionStorage.token = action.data && action.data.token;
+        location.href = '/#';
         return state;
     }
-    if (action.type === 'hideSuccessLoginSnackbar') {
-        state.showSuccessLoginSnackbar = false;
-        return state;
-    }
+
     return state;
 }
 
