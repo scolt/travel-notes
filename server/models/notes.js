@@ -21,7 +21,6 @@ let Note = mongoose.model('notes', NoteSchema);
 
 let notes = {
     read(req, res, next) {
-        req.body.id = req.body.id || req.params.id;
         Note.find(req.body, function (err, notes) {
             if (err) {
                 res.status(500);
