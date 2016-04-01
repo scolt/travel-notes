@@ -6,7 +6,8 @@ function profile(state = {}, action) {
     }
 
     if (action.type === 'setEnableProfileMode') {
-        state.enableEditMode = action.value;
+        let enableEditMode = action.value;
+        return {...state, enableEditMode};
     }
 
     return state;

@@ -3,9 +3,13 @@
 const menuModel = require('models/menu');
 
 function menu(state = menuModel, action) {
-    switch (action.type) {
-    case 'openLeftNavMenu': state.open = true; break;
-    case 'closeLeftNavMenu': state.open = false; break;
+
+    if (action.type === 'openLeftNavMenu') {
+        let open = true;
+        return {...state, open};
+    } else if (action.type === 'closeLeftNavMenu') {
+        let open = false;
+        return {...state, open};
     }
     return state;
 }

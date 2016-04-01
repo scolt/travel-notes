@@ -4,18 +4,21 @@ const snackbarModel = require('models/snack');
 
 function snackbar(state = snackbarModel, action) {
     if (action.type === 'endFetchingUsersLogin') {
-        state.open = true;
-        state.message = 'You are successful logged in';
+        let open = true;
+        let message = 'You are successful logged in';
+        return {...state, open, message};
     }
 
     if (action.type === 'endFetchingUsersUpdate') {
-        state.open = true;
-        state.message = 'User details successful updated';
+        let open = true;
+        let message = 'User details successful updated';
+        return {...state, open, message};
     }
 
     if (action.type === 'snackbarClose') {
-        state.open = false;
-        state.message = '';
+        let open = false;
+        let message = '';
+        return {...state, open, message};
     }
     return state;
 }

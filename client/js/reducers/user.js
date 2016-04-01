@@ -6,24 +6,28 @@ function user(state = userModel, action) {
     let successfulTypes = ['endFetchingUsersPing', 'endFetchingUsersLogin', 'endFetchingUsersRegister', 'endFetchingUsersUpdate'];
 
     if (successfulTypes.indexOf(action.type) > -1) {
+        let isFetching = false;
+        let user = {};
         if (action.statusCode === 200) {
-            state.email = action.data.email;
-            state.avatar = action.data.avatar;
-            state.username = action.data.username;
+            user.email = action.data.email;
+            user.avatar = action.data.avatar;
+            user.username = action.data.username;
         }
-        state.isFetching = false;
-        return state;
+        return {...state, ...user, isFetching};
     }
 
     if (action.type === 'errFetchingUsersPing') {
-        state.isFetching = false;
+        let isFetching = false;
+        return {...state, isFetching};
     }
 
     if (action.type === 'loggedOutEnd') {
-        state.email = false;
-        state.avatar = '';
-        return state;
+        let user = {};
+        user.email = false;
+        user.avatar = '';
+        return {...state, ...user};
     }
+
     return state;
 }
 

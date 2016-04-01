@@ -2,18 +2,19 @@
 
 function register(state = {}, action) {
     if (action.type === 'startFetchingUsersRegister') {
-        state.isFetching = true;
-        return state;
+        let isFetching = true;
+        return {...state, isFetching};
     }
 
     if (action.type === 'endFetchingUsersRegister') {
-        state.isFetching = false;
+        let isFetching = false;
         window.sessionStorage.token = action.data.token;
-        return state;
+        return {...state, isFetching};
     }
 
     if (action.type === 'errFetchingUsersRegister') {
-        state.isFetching = false;
+        let isFetching = false;
+        return {...state, isFetching};
     }
     return state;
 }

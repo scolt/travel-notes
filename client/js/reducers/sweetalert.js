@@ -4,40 +4,46 @@ const sweetalertModel = require('models/sweetalert');
 
 function sweetalert(state = sweetalertModel, action) {
     if (action.type === 'errFetchingUsersLogin') {
-        state.open = true;
-        state.title = action.err.message;
-        state.message = 'Unexpected error, please try again';
+        let open = true;
+        let title = action.err.message;
+        let message = 'Unexpected error, please try again';
+
+        let type = 'error';
         if (action.err.status == 401) {
-            state.message = 'Username or password is invalid';
+            message = 'Username or password is invalid';
         }
-        state.type = 'error';
+        return {...state, open, title, message, type};
     }
 
     if (action.type === 'errFetchingUsersRegister') {
-        state.open = true;
-        state.title = action.err.message;
-        state.message = 'Unexpected error, please try again';
-        state.type = 'error';
-        if (action.data && action.data.code === '11000') {
-            state.title = 'This email exists';
-            state.message = 'This email already registered in the application.';
+        let open = true;
+        let title = action.err.message;
+        let message = 'Unexpected error, please try again';
+        let type = 'error';
+        if (action.err.status == 401) {
+            title = 'This email exists';
+            message = 'This email already registered in the application.';
         }
+        return {...state, open, title, message, type};
     }
 
     if (action.type === 'endFetchingUsersRegister') {
-        state.open = true;
-        state.title = 'Registered!';
-        state.message = 'You are successful registered and logged in application.';
-        state.type = 'success';
-        state.redirectTo = '/#/home';
+        let open = true;
+        let title = 'Registered!';
+        let message = 'You are successful registered and logged in application.';
+        let type = 'success';
+        let redirectTo = '/#/home';
+        return {...state, open, title, message, type, redirectTo};
     }
 
     if (action.type === 'alertClose') {
-        state.open = false;
+        let open = false;
+        let redirectTo = null;
+
         if (state.redirectTo) {
             window.location.hash = state.redirectTo;
         }
-        state.redirectTo = null;
+        return {...state, open, redirectTo};
     }
 
     return state;
