@@ -2,7 +2,7 @@
 
 function profile(state = {}, action) {
     if (action.type === 'endFetchingUsersRead' || action.type === 'endFetchingUsersUpdate') {
-        return state = {...action.data};
+        return {...action.data};
     }
 
     if (action.type === 'setEnableProfileMode') {
