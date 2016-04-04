@@ -1,7 +1,7 @@
 'use strict';
 
 const net = {
-    isFetching: false,
+    isProcessing: false,
     err: null
 };
 

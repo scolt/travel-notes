@@ -12,7 +12,7 @@ const devServerConfig = {
     port: process.env.PORT || 8080,
     contentBase: path.resolve(__dirname, 'public'),
     getUrl: function () {
-        return `webpack-dev-server/client?https://${this.host}:${this.port}/`;
+        return `webpack-dev-server/client?http://${this.host}:${this.port}/`;
     },
 
     proxy: {

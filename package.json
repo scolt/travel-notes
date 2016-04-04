@@ -8,7 +8,7 @@
     "node": "node app",
     "webpack": "webpack",
     "test": "eslint -c .eslintrc.js --ext .js --ext .jsx client/js && karma start --single-run",
-    "postinstall": "webpack --progress --colors"
+    "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then webpack --progress --colors ; fi"
   },
   "repository": {
     "type": "git",
