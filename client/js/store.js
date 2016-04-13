@@ -9,6 +9,7 @@ let notes = require('reducers/notes');
 let register = require('reducers/register');
 let login = require('reducers/login');
 let user = require('reducers/user');
+let tags = require('reducers/tags');
 let note = require('reducers/note');
 let profile = require('reducers/profile');
 let snackbar = require('reducers/snackbar');
@@ -22,6 +23,7 @@ const store = createStore(
         register,
         login,
         user,
+        tags,
         note,
         profile,
         snackbar,

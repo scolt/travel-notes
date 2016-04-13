@@ -3,23 +3,24 @@
 const netModel = require('models/net');
 
 function net(state = netModel, action) {
-    if (action.type.indexOf('startFetching') === 0) {
-        let isFetching = true;
+    if (action.type === 'startProcessing') {
+        let isProcessing = true;
         let err = null;
-        return {...state, isFetching, err};
+        return {...state, isProcessing, err};
     }
-    if (action.type.indexOf('endFetching') === 0) {
-        let isFetching = false;
-        return {...state, isFetching};
+    if (action.type === 'endProcessing') {
+        let isProcessing = false;
+        let err  = action.data.err;
+        return {...state, isProcessing, err};
     }
-    if (action.type.indexOf('errFetching') === 0) {
-        let isFetching = false;
+    if (action.type === 'errProcessing') {
+        let isProcessing = false;
         let err = action.err;
-        return {...state, isFetching, err};
+        return {...state, isProcessing, err};
     }
     if (action.type === 'abortRequest') {
-        let isFetching = false;
-        return {...state, isFetching};
+        let isProcessing = false;
+        return {...state, isProcessing};
     }
 
     if (action.type === 'clearNetErr') {

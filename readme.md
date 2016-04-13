@@ -92,3 +92,137 @@ If you using cloud9 just run:
 or
 
     git push heroku be/#15_add_integration_with_heroku:master
+
+5. Documentation
+------------------------
+
+5.1 Create (/restApi/notes.json/create)
+
+    Default field isDel should be set to false
+
+    payload: {
+        data: Object
+    }
+
+    Returned data:
+
+        error: object with error string
+        success: {
+            id: String
+        }
+
+5.2 Read (/restApi/notes.json/read)
+
+    payload: {
+        id: String,
+        page: Number,
+        limit: Number,
+        filters: Object // like {userId: String},
+        order: Object // like {fieldName: {index: 1, direction: 'ASC'} }
+    }
+
+    Returned data:
+
+        error: object with error string
+        success: {
+            total: Number,
+            page: Number,
+            pages: Number,
+            limit: Number,
+            result: Array
+        }
+
+5.3 Update (/restApi/notes.json/read(/:id))
+
+    payload: {
+        id: String,
+        data: Object
+    }
+
+    Returned data:
+
+        error: object with error string
+        success: {
+            id: String
+        }
+
+5.4 Delete (/restApi/notes.json/delete(/:id))
+
+    Should set flag isDel to true
+
+    payload: {
+        id: String
+    }
+
+    Returned data:
+
+        error: object with error string
+        success: {
+            id: String
+        }
+
+6. Data schemes
+
+6.1 Notes
+
+    Note {
+        text: String, // full text of note
+        title: String,
+        userId: String,
+        subtitle: String,
+        lng: Number,
+        lat: Number,
+        isDel: Boolean,
+        isDraft: Boolean,
+        updated: Date,
+        created: Date
+    }
+
+    Rates {
+        userId: String,
+        noteId: String,
+        rate: Number
+    }
+
+    Notes2Images {
+        imageId: String,
+        noteId: String
+    }
+
+6.2 Users
+
+    Users {
+        imageId: String,
+        email: String,
+        username: String,
+        firstName: String,
+        lastName: String,
+        text: String,
+        isAdmin: boolean,
+        isModerator: boolean,
+        isDel: boolean,
+        isBan: boolean
+    }
+
+6.3 Comments
+
+    Comments {
+        userId: String,
+        noteId: String,
+        text: String,
+        updated: Date,
+        created: Date,
+        parentId: String,
+        isDel: boolean
+    }
+
+6.4 Images
+
+    Images {
+        preview: String,
+        image: String,
+        isDel: boolean,
+        alt: String
+        lng: Number,
+        lat: Number,
+    }

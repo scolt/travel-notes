@@ -2,7 +2,8 @@
 
 let models = {
     notes: require('./models/notes'),
-    users: require('./models/users')
+    users: require('./models/users'),
+    tags: require('./models/tags')
 };
 
 // method all

@@ -1,7 +1,6 @@
 'use strict';
 
 let store = require('store');
-let fetchModel = require('actions/fetchModel');
 let abortRequest = require('actions/abortRequest');
 
 let storeMixin = {
@@ -12,15 +11,7 @@ let storeMixin = {
     componentWillMount() {
         this.store = store;
         this.unsubscribe = store.subscribe(this.handleStoreChange);
-        if (this.fetchModel) {
-            let fetch = this.fetchModel;
-            if (typeof fetch === 'function') {
-                fetch = this.fetchModel();
-            }
-            this.store.dispatch(fetchModel(fetch.name, fetch.params));
-        } else {
-            this.setState(store.getState());
-        }
+        this.setState(store.getState(), this.afterComponentWillMount && this.afterComponentWillMount());
     },
 
     componentWillUnmount() {
