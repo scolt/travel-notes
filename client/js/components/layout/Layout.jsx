@@ -15,16 +15,22 @@ import Snackbar from 'material-ui/lib/snackbar';
 import SweetAlert from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import Icon from 'react-fa';
-import fetchModel from 'actions/fetchModel';
+import restApi from 'actions/restApi';
+
+let readAction = () => (
+    restApi({
+        model: 'users',
+        action: 'ping',
+        reducer: 'user'
+    })
+);
 
 let Layout = React.createClass({
     componentWillMount() {
         this.store = store;
         this.unsubscribe = store.subscribe(this.handleStoreChange);
         this.setState(store.getState());
-        store.dispatch(fetchModel('users', {
-            action: 'ping'
-        }));
+        store.dispatch(readAction());
     },
 
     componentWillUnmount() {
@@ -44,7 +50,7 @@ let Layout = React.createClass({
                     <Menu menu={this.state.menu}/>
                 </div>
                 <div className="col-xs-12">
-                    {this.state.user.isFetching ? null : this.props.children}
+                    {this.props.children}
                 </div>
                 <Snackbar
                     open={this.state.snackbar.open || false}

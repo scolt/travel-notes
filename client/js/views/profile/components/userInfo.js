@@ -13,7 +13,7 @@ import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import Icon from 'react-fa';
 import './../profile.styl';
 
-import fetchModel from 'actions/fetchModel';
+import fetchModel from 'actions/restApi';
 
 let formMixin = makeFormMixin([
     {

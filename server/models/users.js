@@ -6,12 +6,17 @@ let crypto = require('crypto');
 let config = require('../config');
 let Schema = mongoose.Schema;
 let UserSchema = new Schema({
+    imageId: String,
+    firstName: String,
+    lastName: String,
+    isAdmin: Boolean,
+    isModerator: Boolean,
+    isDel: Boolean,
+    isBan: Boolean,
     email: {type: String, unique: true},
     password: String,
     username: {type: String, unique: true},
     text: String,
-    role: String,
-    avatar: String,
     salt: String
 });
 
@@ -22,13 +27,6 @@ function encrypt(text){
     var crypted = cipher.update(text,'utf8','hex');
     crypted += cipher.final('hex');
     return crypted;
-}
-
-function decrypt(text){
-    var decipher = crypto.createDecipher(config.algorithm, config.password);
-    var dec = decipher.update(text,'hex','utf8');
-    dec += decipher.final('utf8');
-    return dec;
 }
 
 UserSchema.pre('save', function(next) {
@@ -164,7 +162,6 @@ let UsersActions = {
         } else {
             res.status(401).end('Not authorized');
         }
-
     },
 
     ping(req, res, next) {

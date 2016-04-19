@@ -11,7 +11,7 @@ import Card from 'material-ui/lib/card/card';
 import CardActions from 'material-ui/lib/card/card-actions';
 import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
-import fetchModel from 'actions/fetchModel';
+import fetchModel from 'actions/restApi';
 
 let formMixin = makeFormMixin([
     {
