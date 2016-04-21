@@ -15,37 +15,16 @@ import Dropzone from 'react-dropzone';
 import './Register.styl';
 import restApi from 'actions/restApi';
 
-//let formMixin = makeFormMixin([
-//    {
-//        name: 'username',
-//        rules: ['required', /^[A-z0-9]+$/]
-//    },
-//    {
-//        name: 'email',
-//        rules: ['required', {
-//            rule: /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i,
-//            message: 'Email is incorrect please check that @ and domain are provided.'
-//        }]
-//    },
-//    {
-//        name: 'password',
-//        rules: ['required', {
-//            rule: /^[a-z0-9]+$/,
-//            message: 'Password should contains only letter and numbers'
-//        }]
-//    }
-//]);
-
 let RegisterView = React.createClass({
     mixins: [
         storeMixin
     ],
 
     register() {
-        this.store.dispatch({type: 'registerButtonClick'});
+        this.store.dispatch({type: 'registerButtonSubmitClick'});
         this.request = this.store.dispatch(restApi({
             model: 'users',
-            action: 'register',
+            action: 'create',
             reducer: 'register'
         }));
     },
@@ -66,13 +45,7 @@ let RegisterView = React.createClass({
         this.store.dispatch({type: 'changeRegisterEditFormField', name, value});
     },
 
-    onBlurEditFormField(e) {
-        let {name, value} = e.target;
-        this.store.dispatch({type: 'blurRegisterEditFormField', name, value});
-    },
-
     render() {
-        let register = store.getState().register;
         let editForm = store.getState().register.editForm;
         let inputStyle = {
             width: '100%'
@@ -85,9 +58,8 @@ let RegisterView = React.createClass({
                     <CardText className="row">
                         <div className="col-xs-12">
                             {editForm.fields.map((field, i) => {
-
                                 if (field.type === 'file') {
-                                    return (<div className="register-drop-zone">
+                                    return (<div className="register-drop-zone" key={i}>
                                         <Dropzone onDrop={this.onDrop}
                                                   className="drop-zone"
                                                   activeClassName="active"
@@ -103,16 +75,15 @@ let RegisterView = React.createClass({
                                             name={field.name}
                                             style={inputStyle}
                                             disabled={field.readOnly}
+                                            type={field.type}
                                             hintText={field.hintText}
                                             errorText={field.errorText}
                                             defaultValue={field.defaultValue}
-                                            onChange={this.onChangeEditFormField}
-                                            onBlur={this.onBlurEditFormField}/><br/></div>);
+                                            onChange={this.onChangeEditFormField}/><br/></div>);
                                 }
                             })
                             }
                         </div>
-
                     </CardText>
                     <CardActions>
                         {editForm.buttons.map((button, i) =>
@@ -120,15 +91,17 @@ let RegisterView = React.createClass({
                                 key={i}
                                 name={button.name}
                                 label={button.label}
+                                disabled={!editForm.isValid}
                                 primary={true}
                                 onTouchTap={this.register.bind(this, button.name)}/>
                         )}
                     </CardActions>
                 </Card>
             </div>;
+
         return (
             <div>
-                {register.isFetching ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : form }
+                {form}
             </div>
         );
     }

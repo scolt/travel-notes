@@ -20,6 +20,15 @@ let UserSchema = new Schema({
     salt: String
 });
 
+let ImageSchema = new Schema({
+    preview: String,
+    image: String,
+    isDel: Boolean,
+    alt: String,
+    lng: Number,
+    lat: Number
+});
+
 let cloudinary = require('cloudinary');
 
 function encrypt(text){
@@ -41,6 +50,7 @@ UserSchema.methods.validPassword = function(password) {
 };
 
 let User = mongoose.model('users', UserSchema);
+let Image = mongoose.model('image', ImageSchema);
 
 /* Adding actions for user */
 let jwt = require('jsonwebtoken');
@@ -96,32 +106,43 @@ let UsersActions = {
         });
     },
 
-    register(req, res, next) {
+    create(req, res, next) {
         var cloudinaryConfig = {
             width: 200,
             height: 200,
             crop: 'fill'
         };
 
+        var user = req.body;
+
         function saveUser(avatarUrl) {
-            User({email: user.email,
-                password: user.password,
-                username: user.username,
-                avatar: avatarUrl}).save(function (err, user) {
+            Image({
+                image: avatarUrl
+            }).save(function (err, image) {
                 if (err) {
                     res.status('500');
                     res.json({code: err.code.toString()});
                 } else {
-                    var data = user.toObject();
-                    data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
-                    delete data.password;
-                    delete data.salt;
-                    res.json(data);
+                    var dataImage = image.toObject();
+                    user.imageId = dataImage['_id'];
+                    User(user).save(function (err, user) {
+                        if (err) {
+                            res.status('500');
+                            res.json({code: err.code.toString()});
+                        } else {
+                            var data = user.toObject();
+                            data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
+                            data.avatar = dataImage.image;
+                            delete data.password;
+                            delete data.salt;
+                            res.json(data);
+                        }
+                    });
                 }
             });
+
         }
 
-        var user = req.body;
         if (req.files.file && req.files.file.path) {
             cloudinary.uploader.upload(
                 req.files.file.path,
