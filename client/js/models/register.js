@@ -20,7 +20,7 @@ const register = {
                 isValid: false,
                 isDirty: false,
                 isTouch: false,
-                validate: /^\w{1,10}$/,
+                validate: /^\w{1,50}$/,
                 validationMessage: 'Enter valid value!',
                 errorText: null
             },
@@ -33,7 +33,6 @@ const register = {
                 isValid: false,
                 isDirty: false,
                 isTouch: false,
-                validate: /^\w{1,10}$/,
                 validationMessage: 'Enter valid value!',
                 errorText: null
             },
@@ -46,7 +45,7 @@ const register = {
                 isValid: false,
                 isDirty: false,
                 isTouch: false,
-                validate: /^\w{1,10}$/,
+                validate: /.+@.+\..+/i,
                 validationMessage: 'Enter valid value!',
                 errorText: null
             },
@@ -59,7 +58,7 @@ const register = {
                 isValid: false,
                 isDirty: false,
                 isTouch: false,
-                validate: /^\w{1,10}$/,
+                validate: /^\w{1,20}$/,
                 validationMessage: 'Enter valid value!',
                 errorText: null
             },
@@ -72,7 +71,7 @@ const register = {
                 isValid: false,
                 isDirty: false,
                 isTouch: false,
-                validate: /^\w{1,10}$/,
+                validate: /^\w{1,20}$/,
                 validationMessage: 'Enter valid value!',
                 errorText: null
             },{

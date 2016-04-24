@@ -16,7 +16,7 @@ function register(state = registerModel, action) {
         let error = false;
 
         editForm.fields = editForm.fields.map(function (item) {
-            if (item.validate && (item.isDirty || item.isTouch)) {
+            if (item.validate) {
                 item.isValid = item.validate.test(item.value);
                 if (!item.isValid) error = true;
                 item.errorText = !item.isValid && (item.isDirty || item.isTouch) ? item.validationMessage : null;

@@ -14,10 +14,6 @@ export function updateUser(page) {
     };
 }
 
-export function logoutUser() {
-    window.sessionStorage.token = null;
-    return {type: 'loggedOutEnd'};
-}
 
 export function setSuccesLoginFlag(flag) {
     return {

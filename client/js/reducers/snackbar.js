@@ -3,7 +3,7 @@
 const snackbarModel = require('models/snack');
 
 function snackbar(state = snackbarModel, action) {
-    if (action.type === 'endFetchingUsersLogin') {
+    if (action.type === 'endProcessing' && action.data.reducer === 'login') {
         let open = true;
         let message = 'You are successful logged in';
         return {...state, open, message};

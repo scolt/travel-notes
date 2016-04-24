@@ -10,10 +10,10 @@ function restApi({model, ext = 'json', action, id = '', reducer} = {}) {
     return (dispatch, getState) => {
         dispatch(startProcessing({model, ext, action, id, reducer}));
         let payload = getState()[reducer].payload;
-        if (payload === 'invalid') return;
         return request
             .post(`/restApi/${model}.${ext}/${action}/${id}`)
             .set('Accept', 'application/json')
+            .set('Authorization', 'Bearer ' + window.sessionStorage.token)
             .send(payload)
             .end((err, res) => dispatch(err ?
                 errProcessing(err) :

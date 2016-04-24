@@ -7,6 +7,21 @@ function user(state = userModel, action) {
         return {...action.data.body};
     }
 
+    if (action.type === 'endProcessing' && action.data.reducer === 'login') {
+        return {...action.data.body};
+    }
+
+    if (action.type === 'endProcessing' &&
+        action.data.reducer === 'user' &&
+        action.data.action === 'ping') {
+        return {...action.data.body};
+    }
+
+    if (action.type === 'logout') {
+        window.sessionStorage.token = null;
+        return {...userModel};
+    }
+
     return state;
 }
 

@@ -74,10 +74,17 @@ let UsersActions = {
             }
 
             var data = user.toObject();
-            data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
             delete data.password;
             delete data.salt;
-            res.json(data);
+            data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
+            Image.findOne({
+                '_id': data.imageId
+            }, function (err, image) {
+                if (image) {
+                    data.avatar = image.image;
+                }
+                res.json(data);
+            });
         });
     },
 
@@ -131,7 +138,7 @@ let UsersActions = {
                             res.json({code: err.code.toString()});
                         } else {
                             var data = user.toObject();
-                            data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
+                            data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 60 * 24});
                             data.avatar = dataImage.image;
                             delete data.password;
                             delete data.salt;
@@ -188,9 +195,17 @@ let UsersActions = {
     ping(req, res, next) {
         if (req.user) {
             let user = req.user;
+
             delete user.password;
             delete user.salt;
-            res.send(user);
+            Image.findOne({
+                '_id': req.user.imageId
+            }, function (err, image) {
+                if (image) {
+                    user.avatar = image.image;
+                }
+                res.send(user);
+            });
         } else {
             res.status(401).end('Not authorized');
         }
