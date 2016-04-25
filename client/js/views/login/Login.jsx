@@ -6,74 +6,66 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import makeFormMixin from 'services/formMakerMixin';
 import {loginUser} from 'actions/users';
 import store from 'store';
+import storeMixin from 'mixins/storeMixin';
 import Icon from 'react-fa';
 import Card from 'material-ui/lib/card/card';
 import CardActions from 'material-ui/lib/card/card-actions';
 import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
-import fetchModel from 'actions/fetchModel';
-
-let formMixin = makeFormMixin([
-    {
-        name: 'email',
-        rules: ['required']
-    },
-    {
-        name: 'password',
-        rules: ['required']
-    }
-]);
+import restApi from 'actions/restApi';
 
 let loginView = React.createClass({
-    mixins: [formMixin],
-
-    componentWillMount() {
-        this.unSubscribe = store.subscribe(this.onChangeStore);
-    },
-
-    componentWillUnmount() {
-        this.unSubscribe();
-    },
-
-    onChangeStore() {
-        this.setState(this.state);
-    },
+    mixins: [storeMixin],
 
     login() {
-        let invalidForm = this.validateForm();
-        if (invalidForm) {
-            this.setState(this.state);
-        } else {
-            store.dispatch(fetchModel('users', {
-                action: 'login',
-                data: this.state
-            }));
-        }
+        this.store.dispatch({type: 'loginButtonSubmitClick'});
+        this.request = this.store.dispatch(restApi({
+            model: 'users',
+            action: 'login',
+            reducer: 'login'
+        }));
     },
+
+    onChangeEditFormField(e) {
+        let {name, value} = e.target;
+        this.store.dispatch({type: 'changeLoginEditFormField', name, value});
+    },
+
     render() {
         let {net} = store.getState();
+        let {editForm} = store.getState().login;
+        let inputStyle = {
+            width: '100%'
+        };
         let form =
             <div className="col-md-6" style={{margin: '50px auto'}}>
                 <Card>
                     <CardTitle title="Login" subtitle="Enter your email and password" />
                     <CardText>
-                        <TextField hintText="Email"
-                                   name="email"
-                                   value={this.state.email}
-                                   onChange={this.handleEmailChange}
-                                   errorText={this.state.errors.email}/><br/>
-                        <TextField hintText="Password" type="password"
-                                   name="password"
-                                   value={this.state.password}
-                                   onChange={this.handlePasswordChange}
-                                   errorText={this.state.errors.password}/><br/>
+                        {editForm.fields.map((field, i) => {
+                            return (<div key={i}>
+                                <TextField
+                                    name={field.name}
+                                    style={inputStyle}
+                                    disabled={field.readOnly}
+                                    type={field.type}
+                                    hintText={field.hintText}
+                                    errorText={field.errorText}
+                                    defaultValue={field.defaultValue}
+                                    onChange={this.onChangeEditFormField}/><br/></div>);
+                        })
+                        }
                     </CardText>
                     <CardActions>
-                        <RaisedButton
-                            label="Login"
-                            primary={true}
-                            onTouchTap={this.login}
-                        />
+                        {editForm.buttons.map((button, i) =>
+                            <RaisedButton
+                                key={i}
+                                name={button.name}
+                                label={button.label}
+                                disabled={!editForm.isValid}
+                                primary={true}
+                                onTouchTap={this.login.bind(this, button.name)}/>
+                        )}
                     </CardActions>
                 </Card>
 

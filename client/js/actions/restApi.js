@@ -6,13 +6,14 @@ let startProcessing = require('actions/startProcessing');
 let endProcessing = require('actions/endProcessing');
 let errProcessing = require('actions/errProcessing');
 
-function restApi({model, ext = 'json', action, id = '', reducer} = {}) {
+function restApi({model, ext = 'json', action, id = '', reducer, params} = {}) {
     return (dispatch, getState) => {
-        dispatch(startProcessing({model, ext, action, id, reducer}));
+        dispatch(startProcessing({model, ext, action, id, reducer, params}));
         let payload = getState()[reducer].payload;
         return request
             .post(`/restApi/${model}.${ext}/${action}/${id}`)
             .set('Accept', 'application/json')
+            .set('Authorization', 'Bearer ' + window.sessionStorage.token)
             .send(payload)
             .end((err, res) => dispatch(err ?
                 errProcessing(err) :

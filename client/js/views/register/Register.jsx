@@ -3,7 +3,7 @@
 import React from 'react';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
-import makeFormMixin from 'services/formMakerMixin';
+import storeMixin from 'mixins/storeMixin';
 import {registerUser} from 'actions/users';
 import store from 'store';
 import Icon from 'react-fa';
@@ -13,64 +13,24 @@ import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 import Dropzone from 'react-dropzone';
 import './Register.styl';
-import fetchModel from 'actions/fetchModel';
-
-let formMixin = makeFormMixin([
-    {
-        name: 'username',
-        rules: ['required', /^[A-z0-9]+$/]
-    },
-    {
-        name: 'email',
-        rules: ['required', {
-            rule: /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i,
-            message: 'Email is incorrect please check that @ and domain are provided.'
-        }]
-    },
-    {
-        name: 'password',
-        rules: ['required', {
-            rule: /^[a-z0-9]+$/,
-            message: 'Password should contains only letter and numbers'
-        }]
-    }
-]);
+import restApi from 'actions/restApi';
 
 let RegisterView = React.createClass({
-    mixins: [formMixin],
-
-    componentWillMount() {
-        this.unSubscribe = store.subscribe(this.onChangeStore);
-    },
-
-    componentWillUnmount() {
-        this.unSubscribe();
-    },
-
-    onChangeStore() {
-        this.setState(this.state);
-    },
+    mixins: [
+        storeMixin
+    ],
 
     register() {
-        let invalidForm = this.validateForm();
-        if (invalidForm) {
-            this.setState(this.state);
-        } else {
-            var data = new FormData();
-            data.append('file', this.state.file);
-            data.append('email', this.state.email);
-            data.append('username', this.state.username);
-            data.append('password', this.state.password);
-            store.dispatch(fetchModel('users', {
-                action: 'register',
-                data: data
-            }));
-        }
+        this.store.dispatch({type: 'registerButtonSubmitClick'});
+        this.request = this.store.dispatch(restApi({
+            model: 'users',
+            action: 'create',
+            reducer: 'register'
+        }));
     },
 
     onDrop(files) {
-        this.state.file = files[0];
-        this.setState(this.state);
+        this.store.dispatch({type: 'changeRegisterEditFormField', name: 'file', value: files[0]});
     },
 
     success() {
@@ -80,61 +40,68 @@ let RegisterView = React.createClass({
         location.hash = '#/';
     },
 
+    onChangeEditFormField(e) {
+        let {name, value} = e.target;
+        this.store.dispatch({type: 'changeRegisterEditFormField', name, value});
+    },
+
     render() {
-        let register = store.getState().register;
+        let editForm = store.getState().register.editForm;
         let inputStyle = {
             width: '100%'
         };
+
         let form =
             <div className="col-md-6" style={{margin: '50px auto'}}>
                 <Card>
-                    <CardTitle title="Register" subtitle="Creating a new user" />
+                    <CardTitle title="Register" subtitle="Creating a new user"/>
                     <CardText className="row">
-                        <div className="col-md-6 col-sm-8 col-xs-12">
-                            <TextField hintText="Username"
-                                       name="username"
-                                       style={inputStyle}
-                                       value={this.state.username}
-                                       onChange={this.handleUsernameChange}
-                                       errorText={this.state.errors.username}/><br/>
-                            <TextField hintText="Email"
-                                       name="email"
-                                       style={inputStyle}
-                                       value={this.state.email}
-                                       onChange={this.handleEmailChange}
-                                       errorText={this.state.errors.email}/><br/>
-                            <TextField hintText="Password" type="password"
-                                       name="password"
-                                       style={inputStyle}
-                                       value={this.state.password}
-                                       onChange={this.handlePasswordChange}
-                                       errorText={this.state.errors.password}/><br/>
+                        <div className="col-xs-12">
+                            {editForm.fields.map((field, i) => {
+                                if (field.type === 'file') {
+                                    return (<div className="register-drop-zone" key={i}>
+                                        <Dropzone onDrop={this.onDrop}
+                                                  className="drop-zone"
+                                                  activeClassName="active"
+                                                  accept="image/*">
+                                            <strong>Avatar:</strong>
+                                            <div>Try dropping some files here, or click to select files to upload.</div>
+                                            {field.value ? <img src={field.value.preview}/> : null}
+                                        </Dropzone>
+                                    </div>);
+                                } else {
+                                    return (<div key={i}>
+                                        <TextField
+                                            name={field.name}
+                                            style={inputStyle}
+                                            disabled={field.readOnly}
+                                            type={field.type}
+                                            hintText={field.hintText}
+                                            errorText={field.errorText}
+                                            defaultValue={field.defaultValue}
+                                            onChange={this.onChangeEditFormField}/><br/></div>);
+                                }
+                            })
+                            }
                         </div>
-                        <div className="col-md-6 col-sm-4 col-xs-12 register-drop-zone">
-                            <Dropzone onDrop={this.onDrop}
-                                      className="drop-zone"
-                                      activeClassName="active"
-                                      accept="image/*">
-                                <strong>Avatar:</strong>
-                                <div>Try dropping some files here, or click to select files to upload.</div>
-                                {this.state.file ? <img src={this.state.file.preview} /> : null}
-                            </Dropzone>
-
-                        </div>
-
                     </CardText>
                     <CardActions>
-                        <RaisedButton
-                            label="Register"
-                            primary={true}
-                            onTouchTap={this.register}
-                        />
+                        {editForm.buttons.map((button, i) =>
+                            <RaisedButton
+                                key={i}
+                                name={button.name}
+                                label={button.label}
+                                disabled={!editForm.isValid}
+                                primary={true}
+                                onTouchTap={this.register.bind(this, button.name)}/>
+                        )}
                     </CardActions>
                 </Card>
             </div>;
+
         return (
             <div>
-                {register.isFetching ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : form }
+                {form}
             </div>
         );
     }

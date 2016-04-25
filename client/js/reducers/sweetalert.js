@@ -27,7 +27,7 @@ function sweetalert(state = sweetalertModel, action) {
         return {...state, open, title, message, type};
     }
 
-    if (action.type === 'endFetchingUsersRegister') {
+    if (action.type === 'endProcessing' && action.data.reducer === 'register') {
         let open = true;
         let title = 'Registered!';
         let message = 'You are successful registered and logged in application.';

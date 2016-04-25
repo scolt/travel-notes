@@ -10,7 +10,7 @@ let editableField = React.createClass({
             <div className="inputBoxWrapper">
                 {this.props.editMode ?
                 <TextField hintText={this.props.hintText}
-                           name={this.props.hintText}
+                           name={this.props.name}
                            floatingLabelText={this.props.hintText}
                            value={this.props.value}
                            onChange={this.props.onChange}

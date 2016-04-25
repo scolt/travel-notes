@@ -1,15 +1,8 @@
-const profile = {
-    row: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        username: '',
-        avatar: ''
-    },
+const register = {
+    payload: {},
 
     editForm: {
         isValid: false,
-        enableEditMode: false,
 
         props: {
             title: 'Add/Edit tag',
@@ -68,11 +61,36 @@ const profile = {
                 validate: /^\w{1,20}$/,
                 validationMessage: 'Enter valid value!',
                 errorText: null
+            },
+            {
+                name: 'password',
+                label: 'Password',
+                hintText: 'Password',
+                type: 'password',
+                value: '',
+                isValid: false,
+                isDirty: false,
+                isTouch: false,
+                validate: /^\w{1,20}$/,
+                validationMessage: 'Enter valid value!',
+                errorText: null
+            },{
+                type: 'file',
+                name: 'file',
+                label: 'Avatar',
+                dropzoneText: 'Try dropping some files here, or click to select files to upload.',
+                value: ''
+            }
+        ],
+
+        buttons: [
+            {
+                name: 'register',
+                label: 'Register',
+                disabled: true
             }
         ]
-    },
-
-    editMode: false
+    }
 };
 
-module.exports = profile;
+module.exports = register;

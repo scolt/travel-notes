@@ -12,80 +12,49 @@ import Paper from 'material-ui/lib/paper';
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import Icon from 'react-fa';
 import './../profile.styl';
+import restApi from 'actions/restApi';
 
-import fetchModel from 'actions/fetchModel';
-
-let formMixin = makeFormMixin([
-    {
-        name: 'username',
-        rules: ['required', /^[A-z0-9]+$/]
-    },
-    {
-        name: 'email',
-        rules: ['required', {
-            rule: /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i,
-            message: 'Email is incorrect please check that @ and domain are provided.'
-        }]
-    }
-]);
 
 let MapPage = React.createClass({
     mixins: [
-        storeMixin,
-        formMixin
+        storeMixin
     ],
 
-    fetchModel: function () {
-        return {
-            name: 'users',
+    afterComponentWillMount() {
+        this.request = this.store.dispatch(restApi({
+            model: 'users',
+            action: 'read',
+            reducer: 'profile',
             params: {
-                data: {
-                    userId: this.props.user
-                }
+                userId: this.props.user
             }
-        };
+        }));
+    },
+
+    onChangeEditFormField(e) {
+        let {name, value} = e.target;
+        this.store.dispatch({type: 'changeProfileEditFormField', name, value});
     },
 
     enableEditMode: function () {
-        let defaultState = this.getInitValue();
         store.dispatch({type: 'setEnableProfileMode', value: true});
-        this.setState(defaultState);
     },
 
-    disableEditMode: function () {
-        let defaultState = this.getInitValue();
-        store.dispatch({type: 'setEnableProfileMode', value: false});
-        this.setState(defaultState);
-    },
-
-    getInitValue: function () {
-        let defaultState = {};
-        let user = store.getState().profile;
-        Object.keys(user).forEach(function(key, index) {
-            defaultState[key] = user[key];
-        }, this);
-        return defaultState;
+    cancelEditMode: function () {
+        store.dispatch({type: 'cancelEditMode'});
     },
 
     saveFields: function () {
-        let invalidForm = this.validateForm();
-        if (invalidForm) {
-            this.setState(this.state);
-        } else {
-            let user = store.getState().profile;
-            var data = new FormData();
-            data.append('_id', user['_id']);
-            data.append('email', this.state.email);
-            data.append('username', this.state.username);
-            store.dispatch(fetchModel('users', {
-                action: 'update',
-                data: data
-            }));
-        }
+        store.dispatch(restApi({
+            model: 'users',
+            action: 'update',
+            reducer: 'profile'
+        }));
     },
 
     render() {
-        let user = store.getState().profile;
+        let user = store.getState().profile.row;
+        let editForm = store.getState().profile.editForm;
         let editBlock = null;
 
         if (user.owner) {
@@ -96,17 +65,18 @@ let MapPage = React.createClass({
             let actionButtons =
                 <div>
                     <FloatingActionButton mini={true} secondary={true} style={{marginRight: '10px'}}
+                                          disabled={!editForm.isValid}
                                           onTouchTap={this.saveFields}>
                         <Icon name="floppy-o"/>
                     </FloatingActionButton>
-                    <FloatingActionButton mini={true} primary={true} onTouchTap={this.disableEditMode}>
+                    <FloatingActionButton mini={true} primary={true} onTouchTap={this.cancelEditMode}>
                         <Icon name="times"/>
                     </FloatingActionButton>
                 </div>;
 
             editBlock =
                 <div className="user-profile-edit">
-                    {user.enableEditMode ? actionButtons : editButton}
+                    {editForm.enableEditMode ? actionButtons : editButton}
                 </div>;
         }
 
@@ -129,26 +99,26 @@ let MapPage = React.createClass({
                         </Paper>
                     </div>
                     <div className="col-md-6">
-                        <Editable editMode={user.enableEditMode}
-                                  value={this.state.username || user.username}
-                                  hintText="Username"
-                                  name="username"
-                                  onChange={this.handleUsernameChange}
-                                  errorText={this.state.errors.username}
-                        />
-                        <Editable editMode={user.enableEditMode}
-                                  value={this.state.email || user.email}
-                                  hintText="Email"
-                                  name="email"
-                                  onChange={this.handleEmailChange}
-                                  errorText={this.state.errors.email}
-                        />
+                        {editForm.fields.map((field, i) => {
+                                return (<div key={i}>
+                                    <Editable
+                                        editMode={editForm.enableEditMode}
+                                        name={field.name}
+                                        value={field.value}
+                                        disabled={field.readOnly}
+                                        type={field.type}
+                                        hintText={field.hintText}
+                                        errorText={field.errorText}
+                                        defaultValue={field.defaultValue}
+                                        onChange={this.onChangeEditFormField}/><br/></div>);
+                        })
+                        }
                     </div>
                 </CardText>
             </Card>;
         return (
             <div>
-                {user.isFetching ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : profile}
+                {profile}
             </div>
         );
     }

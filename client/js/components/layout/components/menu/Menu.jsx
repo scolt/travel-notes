@@ -33,7 +33,7 @@ let Menu = React.createClass({
     },
 
     logout() {
-        store.dispatch(logoutUser(this.state));
+        store.dispatch({type: 'logout'});
     },
 
     openMenuItem(hash) {
