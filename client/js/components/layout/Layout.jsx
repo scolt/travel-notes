@@ -17,7 +17,7 @@ import 'sweetalert/dist/sweetalert.css';
 import Icon from 'react-fa';
 import restApi from 'actions/restApi';
 
-let readAction = () => (
+let pingServer = () => (
     restApi({
         model: 'users',
         action: 'ping',
@@ -30,7 +30,7 @@ let Layout = React.createClass({
         this.store = store;
         this.unsubscribe = store.subscribe(this.handleStoreChange);
         this.setState(store.getState());
-        store.dispatch(readAction());
+        store.dispatch(pingServer());
     },
 
     componentWillUnmount() {
