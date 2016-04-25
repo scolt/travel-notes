@@ -6,19 +6,10 @@ import Map from 'components/map/Map';
 import UserNotes from './components/userNotes';
 import UserInfo from './components/userInfo';
 import Icon from 'react-fa';
+import restApi from 'actions/restApi';
 
 
 let Profile = React.createClass({
-    fetchModel: function () {
-        return {
-            name: 'notes',
-            params: {
-                data: {
-                    userId: this.props.params.username
-                }
-            }
-        };
-    },
 
     mixins: [
         storeMixin
@@ -27,16 +18,10 @@ let Profile = React.createClass({
     render() {
         return (
             <div className="container">
-                <div className="row"  style={{marginTop: '25px'}}>
-                    <div className="col-md-6">
+                <div className="row"  style={{margin: '25px 0'}}>
+                    <div className="col-md-12">
                         <UserInfo user={this.props.params.username} />
                     </div>
-                    <div className="col-md-6">
-                        {this.state.net.isFetching ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : <UserNotes notes={this.state.notes}/>}
-                    </div>
-                </div>
-                <div className="row" style={{position: 'relative', height: '600', width: '100%', margin: '0'}}>
-                    {this.state.net.isFetching ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : <Map markers={this.state.notes} type="fullscreen"/>}
                 </div>
             </div>
         );

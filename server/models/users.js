@@ -77,14 +77,18 @@ let UsersActions = {
             delete data.password;
             delete data.salt;
             data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
-            Image.findOne({
-                '_id': data.imageId
-            }, function (err, image) {
-                if (image) {
-                    data.avatar = image.image;
-                }
+            if (data.imageId) {
+                Image.findOne({
+                    '_id': data.imageId
+                }, function (err, image) {
+                    if (image) {
+                        data.avatar = image.image;
+                    }
+                    res.json(data);
+                });
+            } else {
                 res.json(data);
-            });
+            }
         });
     },
 
@@ -108,7 +112,18 @@ let UsersActions = {
                     data.owner = true;
                 }
 
-                res.json(data);
+                if (data.imageId) {
+                    Image.findOne({
+                        '_id': data.imageId
+                    }, function (err, image) {
+                        if (image) {
+                            data.avatar = image.image;
+                        }
+                        res.json(data);
+                    });
+                } else {
+                    res.json(data);
+                }
             }
         });
     },
@@ -170,9 +185,7 @@ let UsersActions = {
         if (req.user && req.body['_id'] === req.user['_id']) {
             User.update({
                 _id: req.body['_id']
-            }, {
-                email: req.body.email
-            }, {}, function (err, doc) {
+            }, req.body, {}, function (err, doc) {
                 if (!err && doc) {
                     User.findOne({
                         _id: req.body['_id']
@@ -181,7 +194,18 @@ let UsersActions = {
                         data.owner = true;
                         delete data.password;
                         delete data.salt;
-                        res.json(data);
+                        if (data.imageId) {
+                            Image.findOne({
+                                '_id': data.imageId
+                            }, function (err, image) {
+                                if (image) {
+                                    data.avatar = image.image;
+                                }
+                                res.json(data);
+                            });
+                        } else {
+                            res.json(data);
+                        }
                     })
                 } else {
                     res.status(500);
@@ -198,14 +222,18 @@ let UsersActions = {
 
             delete user.password;
             delete user.salt;
-            Image.findOne({
-                '_id': req.user.imageId
-            }, function (err, image) {
-                if (image) {
-                    user.avatar = image.image;
-                }
-                res.send(user);
-            });
+            if (data.imageId) {
+                Image.findOne({
+                    '_id': data.imageId
+                }, function (err, image) {
+                    if (image) {
+                        data.avatar = image.image;
+                    }
+                    res.json(data);
+                });
+            } else {
+                res.json(data);
+            }
         } else {
             res.status(401).end('Not authorized');
         }
