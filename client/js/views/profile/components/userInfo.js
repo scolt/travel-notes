@@ -100,17 +100,17 @@ let MapPage = React.createClass({
                     </div>
                     <div className="col-md-6">
                         {editForm.fields.map((field, i) => {
-                                return (<div key={i}>
-                                    <Editable
-                                        editMode={editForm.enableEditMode}
-                                        name={field.name}
-                                        value={field.value}
-                                        disabled={field.readOnly}
-                                        type={field.type}
-                                        hintText={field.hintText}
-                                        errorText={field.errorText}
-                                        defaultValue={field.defaultValue}
-                                        onChange={this.onChangeEditFormField}/><br/></div>);
+                            return (<div key={i}>
+                                <Editable
+                                    editMode={editForm.enableEditMode}
+                                    name={field.name}
+                                    value={field.value}
+                                    disabled={field.readOnly}
+                                    type={field.type}
+                                    hintText={field.hintText}
+                                    errorText={field.errorText}
+                                    defaultValue={field.defaultValue}
+                                    onChange={this.onChangeEditFormField}/><br/></div>);
                         })
                         }
                     </div>
