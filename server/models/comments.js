@@ -1,6 +1,6 @@
 'use strict';
 
-let conString = require('../config').pgUrl;
+let conString = require('../config').db.pg;
 let dateFormat = require('../config').dateFormat;
 let pg = require('pg');
 let async = require('async');

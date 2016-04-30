@@ -1,8 +1,8 @@
 'use strict';
 
-let MongoClient = require('mongodb').MongoClient;
-let ObjectId = require('mongodb').ObjectID;
-let conString = require('../config').conString;
+const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectID;
+const conString = require('../config').db.mongo;
 
 let tags = {
     create(req, res, next) {
