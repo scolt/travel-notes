@@ -1,32 +1,30 @@
 'use strict';
 
-let config = require('./server/config');
-let express = require('express');
-let app = express();
-let compression = require('compression');
-let bodyParser = require('body-parser');
-let cookieParser = require('cookie-parser');
-let session = require('express-session');
-let RedisStore = require('connect-redis')(session);
-let expressSession = session({
-    store: new RedisStore({url: config.redisUrl}),
+const config = require('./server/config');
+const express = require('express');
+const app = express();
+const compression = require('compression');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+const expressSession = session({
+    store: new RedisStore({url: config.db.redis}),
     secret: config.secret,
     cookie: { maxAge: config.maxAge },
     resave: false,
     saveUninitialized: true
 });
-let multipart = require('connect-multiparty');
-let http = require('http');
-let server = http.createServer(app);
-let port = config.port;
-let restApi = require('./server/restApi');
-let expressJwt = require('express-jwt');
-let mongoose = require('mongoose');
-let cors = require('cors');
+const multipart = require('connect-multiparty');
+const http = require('http');
+const server = http.createServer(app);
+const port = config.port;
+const restApi = require('./server/restApi');
+const expressJwt = require('express-jwt');
+const cors = require('cors');
 
-let cloudinary = require('cloudinary');
-cloudinary.config(config.cloudinaryConfig);
-mongoose.connect(config.conString);
+require('mongoose').connect(config.db.mongo);
+require('cloudinary').config(config.cloudinaryConfig);
 
 app
     .use ( cors() )
@@ -46,6 +44,9 @@ app
         res.redirect('index.html#/404');
     })
     .all ( '*', (req, res, next) => next(new Error('Service not exists')))
-    .use ( (err, req, res, next) => res.status(200).json({err: err.message}));
+    .use ( (err, req, res, next) => {
+        console.log(err);
+        res.status(200).json({err: err.message})
+    });
 
 server.listen(port, () => {console.log(`${new Date()} Listening at ${port}`);});
