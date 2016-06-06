@@ -48,6 +48,7 @@ const config = {
     resolve: {
         root: [
             path.resolve(__dirname, 'client/js'),
+            path.resolve(__dirname, 'client/assets'),
             path.resolve(__dirname, 'node_modules')
         ],
         extensions: ['', '.js', '.jsx', '.styl']
@@ -85,8 +86,8 @@ const config = {
                 loader: 'url-loader?limit=8192'
             },
             {
-                test: /\.(png|jpg)$/,
-                loader: 'url?name=assets/[path][name].[ext]&limit=8192' // inline base64 URLs for <=8k images, direct URLs for the rest
+                test: /\.(png|jpg)\??/,
+                loader: 'file?name=[path][name].[ext]' // inline base64 URLs for <=8k images, direct URLs for the rest
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,

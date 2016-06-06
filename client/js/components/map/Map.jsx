@@ -14,6 +14,11 @@ import CardText from 'material-ui/lib/card/card-text';
 import MarkerClusterer from  'react-google-maps/lib/addons/MarkerClusterer';
 import Icon from 'react-fa';
 import './map.styl';
+import 'm1.png';
+import 'm2.png';
+import 'm3.png';
+import 'm4.png';
+import 'm5.png';
 
 let Map = React.createClass({
     propTypes: {
@@ -43,12 +48,12 @@ let Map = React.createClass({
         let content = null;
         let info =
             <div>
-                <CardTitle title={marker.window.title} subtitle={marker.window.subtitle} />
+                <CardTitle title={marker.window.title} subtitle={marker.window.subtitle}/>
                 <CardText>
                     {marker.window.descr}
                 </CardText>
                 <CardActions>
-                    {marker.window.link ? <a href={marker.window.link}><RaisedButton label="Open" /></a> : null}
+                    {marker.window.link ? <a href={marker.window.link}><RaisedButton label="Open"/></a> : null}
                 </CardActions>
             </div>;
         if (marker.window.photo) {
@@ -73,6 +78,33 @@ let Map = React.createClass({
     },
 
     render() {
+        var styles = [{
+                height: 53,
+                url: '/client/assets/m1.png',
+                width: 53
+            },
+            {
+                height: 56,
+                url: '/client/assets//m2.png',
+                width: 56
+            },
+            {
+                height: 66,
+                url: '/client/assets//m3.png',
+                width: 66
+            },
+            {
+                height: 78,
+                url: '/client/assets//m4.png',
+                width: 78
+            },
+            {
+                height: 90,
+                url: '/m5.png',
+                width: 90
+            }];
+
+
         return (
             <MapLoader
                 hostname={"maps.googleapis.com"}
@@ -89,7 +121,9 @@ let Map = React.createClass({
                         defaultZoom={3}
                         defaultCenter={this.props.center || {lat: 48.2, lng: 16.366667}}
                         onClick={this.handleMapClick}>
-                        <MarkerClusterer>
+                        <MarkerClusterer
+                            styles={styles}
+                        >
                             {this.props.markers.map((marker, index) => {
                                 const ref = `marker_${index}`;
                                 return (

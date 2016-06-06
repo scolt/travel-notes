@@ -14,6 +14,7 @@ let note = require('reducers/note');
 let profile = require('reducers/profile');
 let snackbar = require('reducers/snackbar');
 let sweetalert = require('reducers/sweetalert');
+let map = require('reducers/map');
 
 const store = createStore(
     combineReducers({
@@ -27,7 +28,8 @@ const store = createStore(
         note,
         profile,
         snackbar,
-        sweetalert
+        sweetalert,
+        map
     }),
     applyMiddleware(thunkMiddleware)
 );
