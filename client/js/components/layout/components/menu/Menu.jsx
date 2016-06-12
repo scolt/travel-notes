@@ -6,7 +6,8 @@ let AppBar = require('material-ui/lib/app-bar');
 let IconButton = require('material-ui/lib/icon-button');
 let MenuItem = require('material-ui/lib/menus/menu-item');
 let ActionHome = require('material-ui/lib/svg-icons/action/home');
-let store = require('store');
+
+import storeMixin from 'mixins/storeMixin';
 
 import LeftNav from 'material-ui/lib/left-nav';
 import RaisedButton from 'material-ui/lib/raised-button';
@@ -17,38 +18,25 @@ import Icon from 'react-fa';
 import './Menu.styl';
 
 let Menu = React.createClass({
-    componentWillMount() {
-        this.store = store;
-        this.unsubscribe = store.subscribe(this.handleStoreChange);
-        this.setState(store.getState());
-    },
-
-    componentWillUnmount() {
-        this.unsubscribe();
-    },
-
-    handleStoreChange() {
-        let state = this.store.getState();
-        this.setState(state);
-    },
+    mixins: [storeMixin],
 
     logout() {
-        store.dispatch({type: 'logout'});
+        this.store.dispatch({type: 'logout'});
     },
 
     openMenuItem(hash) {
         location.hash = hash;
-        store.dispatch(setMenuStatus(false));
+        this.store.dispatch(setMenuStatus(false));
     },
 
     openProfile() {
-        let user = store.getState().user;
+        let user = this.store.getState().user;
         location.hash = '#/profile/' + user.username;
-        store.dispatch(setMenuStatus(false));
+        this.store.dispatch(setMenuStatus(false));
     },
 
     render() {
-        let user = store.getState().user;
+        let user = this.store.getState().user;
 
         let userBlock = null;
         let actionsBlock =
@@ -59,7 +47,7 @@ let Menu = React.createClass({
                     style={{width: '100%'}}
                     linkButton={true}
                     href="/#/login"
-                    onTouchTap={() => store.dispatch(setMenuStatus(false))}
+                    onTouchTap={() => this.store.dispatch(setMenuStatus(false))}
                 />
                 <br/><br/>
                 <RaisedButton
@@ -68,7 +56,7 @@ let Menu = React.createClass({
                     style={{width: '100%'}}
                     linkButton={true}
                     href="/#/register"
-                    onTouchTap={() => store.dispatch(setMenuStatus(false))}
+                    onTouchTap={() => this.store.dispatch(setMenuStatus(false))}
                 />
             </div>;
         if (user.email) {
@@ -88,7 +76,7 @@ let Menu = React.createClass({
                         label="Logout"
                         primary={true}
                         style={{width: '100%'}}
-                        onTouchTap={() => {this.logout(); store.dispatch(setMenuStatus(false));}}
+                        onTouchTap={() => {this.logout(); this.store.dispatch(setMenuStatus(false));}}
                     />
                 </div>;
         }
@@ -97,7 +85,7 @@ let Menu = React.createClass({
         return (
             <AppBar
                 title={`TravelNote`}
-                onLeftIconButtonTouchTap={() => store.dispatch(setMenuStatus(true))}
+                onLeftIconButtonTouchTap={() => this.store.dispatch(setMenuStatus(true))}
                 iconElementRight={
                     <IconButton
                         tooltip="Home"
@@ -106,7 +94,7 @@ let Menu = React.createClass({
                     </IconButton>
                 }>
                 <LeftNav open={this.state.menu.open}
-                         onRequestChange={open => store.dispatch(setMenuStatus(open))}
+                         onRequestChange={open => this.store.dispatch(setMenuStatus(open))}
                          docked={false}>
                     {userBlock}
                     {this.props.menu.items.map((menuItem, key) => (

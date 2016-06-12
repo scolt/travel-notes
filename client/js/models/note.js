@@ -1,7 +1,7 @@
 'use strict';
 
 const note = {
-    isFetching: false
+    isProcessing: false
 };
 
 module.exports = note;

@@ -1,30 +1,28 @@
 'use strict';
 
+import './map.styl';
+
 import React from 'react';
-let {PropTypes: propTypes} = React;
 
 import {GoogleMap, Marker, InfoWindow} from 'react-google-maps';
 import {default as MapLoader} from 'react-google-maps/lib/async/ScriptjsLoader';
-import Card from 'material-ui/lib/card/card';
-import CardActions from 'material-ui/lib/card/card-actions';
-import CardTitle from 'material-ui/lib/card/card-title';
-import CardMedia from 'material-ui/lib/card/card-media';
-import RaisedButton from 'material-ui/lib/raised-button';
-import CardText from 'material-ui/lib/card/card-text';
 import MarkerClusterer from  'react-google-maps/lib/addons/MarkerClusterer';
+
+import {Card, CardActions, CardTitle, CardMedia, RaisedButton, CardText} from 'material-ui';
+
 import Icon from 'react-fa';
-import './map.styl';
-import 'm1.png';
-import 'm2.png';
-import 'm3.png';
-import 'm4.png';
-import 'm5.png';
+
+import m1 from 'm1.png';
+import m2 from 'm2.png';
+import m3 from 'm3.png';
+import m4 from 'm4.png';
+import m5 from 'm5.png';
 
 let Map = React.createClass({
     propTypes: {
-        markers: propTypes.array,
-        center: propTypes.object,
-        type: propTypes.string
+        markers: React.PropTypes.array,
+        center: React.PropTypes.object,
+        type: React.PropTypes.string
     },
 
     getDefaultProps() {
@@ -78,39 +76,40 @@ let Map = React.createClass({
     },
 
     render() {
-        var styles = [{
+        const styles = [
+            {
                 height: 53,
-                url: '/client/assets/m1.png',
+                url: m1,
                 width: 53
             },
             {
                 height: 56,
-                url: '/client/assets//m2.png',
+                url: m2,
                 width: 56
             },
             {
                 height: 66,
-                url: '/client/assets//m3.png',
+                url: m3,
                 width: 66
             },
             {
                 height: 78,
-                url: '/client/assets//m4.png',
+                url: m4,
                 width: 78
             },
             {
                 height: 90,
-                url: '/m5.png',
+                url: m5,
                 width: 90
-            }];
-
+            }
+        ];
 
         return (
             <MapLoader
-                hostname={"maps.googleapis.com"}
-                pathname={"/maps/api/js"}
-                query={{libraries: 'geometry,drawing,places'}}
-                loadingElement={
+                hostname = {"maps.googleapis.com"}
+                pathname = {"/maps/api/js"}
+                query = {{libraries: 'geometry,drawing,places'}}
+                loadingElement = {
                     <div className="spinner"><Icon name="circle-o-notch" spin/></div>
                 }
                 containerElement={
@@ -141,6 +140,5 @@ let Map = React.createClass({
             />);
     }
 });
-
 
 module.exports = Map;

@@ -1,53 +1,45 @@
 'use strict';
 
-let React = require('react');
-let Card = require('material-ui/lib/card/card');
-let CardTitle = require('material-ui/lib/card/card-title');
-let CardText = require('material-ui/lib/card/card-text');
-let Map = require('components/map/Map');
-import store from 'store';
-import getNote from 'actions/getNote';
 import './note.styl';
 
+import React from 'react';
+import {Card, CardTitle, CardText} from 'material-ui';
+
+import Map from 'components/map/Map';
+
+import restApi from 'actions/restApi';
+
+import storeMixin from 'mixins/storeMixin';
+
 let Note = React.createClass({
-    componentWillMount() {
-        this.store = store;
-        this.unsubscribe = store.subscribe(this.handleStoreChange);
-        store.dispatch(getNote(this.props.params.id));
-    },
+    mixins: [storeMixin],
 
-    componentWillUnmount() {
-        this.unsubscribe();
-    },
-
-    handleStoreChange() {
-        let state = this.store.getState();
-        this.setState(state);
-    },
-
-    processNote(note = []) {
-        return note.map(item => {
-            return item;
-        });
+    afterComponentWillMount() {
+        this.request = this.store.dispatch(restApi({
+            model: 'notes',
+            action: 'read',
+            id: this.props.params.id,
+            reducer: 'note'
+        }));
     },
 
     render() {
-        let noteInfo = this.state.note;
-        let note = this.processNote(noteInfo.data);
+        if (this.state.note.isProcessing) return null;
+        const note = this.state.note.note;
 
         return (
             <Card>
-                <CardTitle title={noteInfo.isFetching ? '' : note[0].title} subtitle={noteInfo.isFetching ? '' : note[0].subtitle} />
+                <CardTitle title={note.title} subtitle={note.subtitle} />
                 <CardText>
                     <div className="row" >
                         <div className="note-photo col-xs-12 col-md-6">
-                            <img src={noteInfo.isFetching ? '' : note[0].photo} />
+                            <img src={note.photo} />
                         </div>
                         <div className="note-map col-xs-12 col-md-6">
-                            {noteInfo.isFetching ? '' :  <Map markers={[{position: note[0].position, title: note[0].title}]} center={note[0].position}/>}
+                            <Map markers={[{position: note.position, title: note.title}]} center={note.position}/>
                         </div>
                     </div>
-                    <div>{noteInfo.isFetching ? '' : note[0].descr}</div>
+                    <div>{note.text}</div>
                 </CardText>
             </Card>
         );

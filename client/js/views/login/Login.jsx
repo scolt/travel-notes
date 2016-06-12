@@ -72,7 +72,7 @@ let loginView = React.createClass({
             </div>;
         return (
             <div>
-                {net.isFetching ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : form }
+                {net.isProcessing ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : form }
             </div>
         );
     }
