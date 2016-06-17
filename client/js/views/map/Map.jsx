@@ -1,14 +1,15 @@
 'use strict';
 
 import React from 'react';
-import Map from 'components/map/Map';
 import Icon from 'react-fa';
+
+import Map from 'components/map/Map';
+
 import restApi from 'actions/restApi';
-import store from 'store';
 
 import storeMixin from 'mixins/storeMixin';
 
-let MapPage = React.createClass({
+const MapPage = React.createClass({
     mixins: [storeMixin],
 
     afterComponentWillMount() {
@@ -19,32 +20,10 @@ let MapPage = React.createClass({
         }));
     },
 
-    processMarkers (markers) {
-        return markers.map(function (item) {
-            return {
-                window: {
-                    descr: item.text,
-                    title: item.title,
-                    link: '/#/note/' + item.id,
-                    photo: item.photo
-                },
-                position: {
-                    lng: item.lng,
-                    lat: item.lat
-                }
-            };
-        });
-    },
-
     render() {
-        var result = [];
-        if (this.state.map.row.result) {
-            result = this.processMarkers(this.state.map.row.result);
-        }
-
         return (
             <div className="row">
-                {this.state.net.isFetching ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : <Map markers={result} type="fullscreen"/>}
+                <Map markers={this.state.map.markers} type="fullscreen"/>
             </div>
         );
     }

@@ -1,6 +1,7 @@
 'use strict';
 
 const notes = {
+    isProcessing: false,
     payload: {},
     row: {
         limit: '',
@@ -8,7 +9,8 @@ const notes = {
         pages: '',
         result: [],
         total: ''
-    }
+    },
+    markers: []
 };
 
 module.exports = notes;

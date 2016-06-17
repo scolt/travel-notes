@@ -3,9 +3,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-let NODE_ENV = process.env.NODE_ENV || 'development';
-let isDev = NODE_ENV === 'development';
-let remoteServer = process.env.remoteServer || 'http://travelnote.herokuapp.com';
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const isDev = NODE_ENV === 'development';
+const remoteServer = process.env.remoteServer || 'http://travelnote.herokuapp.com';
 
 const devServerConfig = {
     host: process.env.IP || 'localhost',
@@ -79,19 +79,15 @@ const config = {
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+                loader: ExtractTextPlugin.extract('style', 'css')
             },
             {
-                test: /\.(otf|eot|svg|ttf|woff)\??/,
-                loader: 'url-loader?limit=8192'
-            },
-            {
-                test: /\.(png|jpg)\??/,
-                loader: 'file?name=[path][name].[ext]' // inline base64 URLs for <=8k images, direct URLs for the rest
+                test: /\.(otf|eot|svg|ttf|woff|png|jpg)\??/,
+                loader: 'url?limit=10000&name=[path][name].[ext]'
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=image/svg+xml'
+                loader: 'url?limit=10000&mimetype=image/svg+xml&name=[path][name].[ext]'
             }
         ]
     },
