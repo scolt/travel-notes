@@ -13,7 +13,6 @@ let LandingPage = require('views/landingPage/LandingPage');
 let NotFound = require('views/notFound/NotFound');
 let Register = require('views/register/Register');
 let Login = require('views/login/Login');
-let Tags = require('views/tags/Tags');
 let Profile = require('views/profile/Profile');
 
 import { createHashHistory } from 'history';
@@ -34,7 +33,6 @@ let Router = React.createClass({
                     <Route path="/register" component={Register}/>
                     <Route path="/login" component={Login}/>
                     <Route path="/profile(/:username)" component={Profile}/>
-                    <Route path="/tags" component={Tags}/>
                 </Route>
                 <Redirect from="/" to="/main"/>
                 <Redirect from="*" to="/404"/>

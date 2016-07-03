@@ -1,13 +1,10 @@
 'use strict';
 import React from 'react';
-import store from 'store';
 import storeMixin from 'mixins/storeMixin';
 import Map from 'components/map/Map';
 import UserNotes from './components/userNotes';
 import UserInfo from './components/userInfo';
 import Icon from 'react-fa';
-import restApi from 'actions/restApi';
-
 
 let Profile = React.createClass({
 

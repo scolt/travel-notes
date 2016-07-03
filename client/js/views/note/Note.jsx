@@ -14,18 +14,17 @@ import storeMixin from 'mixins/storeMixin';
 let Note = React.createClass({
     mixins: [storeMixin],
 
-    afterComponentWillMount() {
+    componentWillMount() {
         this.request = this.store.dispatch(restApi({
             model: 'notes',
-            action: 'read',
             id: this.props.params.id,
-            reducer: 'note'
+            type: 'prepareNote'
         }));
     },
 
     render() {
-        if (this.state.note.isProcessing) return null;
-        const note = this.state.note.note;
+        if (this.state.net.isProcessing) return null;
+        const note = this.state.notes.note;
 
         return (
             <Card>

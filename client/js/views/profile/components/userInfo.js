@@ -1,33 +1,26 @@
 'use strict';
 
+import './../profile.styl';
+
 import React from 'react';
-import store from 'store';
+import Icon from 'react-fa';
+import {Card, CardTitle, CardText, Paper, FloatingActionButton} from 'material-ui/lib';
+
 import Editable from 'components/editableField/editableField';
 import storeMixin from 'mixins/storeMixin';
-import Card from 'material-ui/lib/card/card';
-import CardTitle from 'material-ui/lib/card/card-title';
-import CardText from 'material-ui/lib/card/card-text';
-import makeFormMixin from 'services/formMakerMixin';
-import Paper from 'material-ui/lib/paper';
-import FloatingActionButton from 'material-ui/lib/floating-action-button';
-import Icon from 'react-fa';
-import './../profile.styl';
 import restApi from 'actions/restApi';
-
 
 let MapPage = React.createClass({
     mixins: [
         storeMixin
     ],
 
-    afterComponentWillMount() {
+    componentWillMount() {
+        this.store.dispatch({type: 'preparePayloadForUserProfile', id: this.props.user});
         this.request = this.store.dispatch(restApi({
             model: 'users',
-            action: 'read',
-            reducer: 'profile',
-            params: {
-                userId: this.props.user
-            }
+            id: this.props.user,
+            type: 'prepareUser'
         }));
     },
 
@@ -37,24 +30,25 @@ let MapPage = React.createClass({
     },
 
     enableEditMode: function () {
-        store.dispatch({type: 'setEnableProfileMode', value: true});
+        this.store.dispatch({type: 'setEnableProfileMode', value: true});
     },
 
     cancelEditMode: function () {
-        store.dispatch({type: 'cancelEditMode'});
+        this.store.dispatch({type: 'cancelEditMode'});
     },
 
     saveFields: function () {
-        store.dispatch(restApi({
+        this.store.dispatch({type: 'preparePayloadForUserUpdate'});
+        this.store.dispatch(restApi({
             model: 'users',
             action: 'update',
-            reducer: 'profile'
+            type: 'prepareUpdatedUser'
         }));
     },
 
     render() {
-        let user = store.getState().profile.row;
-        let editForm = store.getState().profile.editForm;
+        const {user, editForm} = this.state.users;
+
         let editBlock = null;
 
         if (user.owner) {

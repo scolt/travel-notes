@@ -11,7 +11,6 @@ let storeMixin = {
     componentWillMount() {
         this.store = store;
         this.unsubscribe = store.subscribe(this.handleStoreChange);
-        this.afterComponentWillMount && this.afterComponentWillMount();
     },
 
     componentWillUnmount() {

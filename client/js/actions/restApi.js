@@ -1,24 +1,23 @@
 'use strict';
 
-let request = require('superagent');
+const request = require('superagent');
 
-let startProcessing = require('actions/startProcessing');
-let endProcessing = require('actions/endProcessing');
-let errProcessing = require('actions/errProcessing');
-
-function restApi({model, ext = 'json', action, id = '', reducer, params} = {}) {
+function restApi({model, ext = 'json', action = 'read', id = '', type} = {}) {
     return (dispatch, getState) => {
-        dispatch(startProcessing({model, ext, action, id, reducer, params}));
-        let payload = getState()[reducer].payload;
+        const payload = getState()[model].payload;
+        dispatch({type: 'startProcessing'});
         return request
             .post(`/restApi/${model}.${ext}/${action}/${id}`)
             .set('Accept', 'application/json')
-            .set('Authorization', 'Bearer ' + window.sessionStorage.token)
+            .set('Authorization', `Bearer ${window.sessionStorage.token}`)
             .send(payload)
-            .end((err, res) => dispatch(err ?
-                errProcessing(err) :
-                endProcessing({model, ext, action, id, reducer, body: res.body})
-            ));
+            .end((err, res) => {
+                dispatch({type: 'endProcessing'});
+                dispatch(err ?
+                    {type: 'errProcessing', err} :
+                    {type, data: res.body}
+                );
+            });
     };
 }
 

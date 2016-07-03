@@ -1,57 +1,50 @@
 'use strict';
 
-import React from 'react';
-import TextField from 'material-ui/lib/text-field';
-import RaisedButton from 'material-ui/lib/raised-button';
-import storeMixin from 'mixins/storeMixin';
-import {registerUser} from 'actions/users';
-import store from 'store';
-import Icon from 'react-fa';
-import Card from 'material-ui/lib/card/card';
-import CardActions from 'material-ui/lib/card/card-actions';
-import CardTitle from 'material-ui/lib/card/card-title';
-import CardText from 'material-ui/lib/card/card-text';
-import Dropzone from 'react-dropzone';
 import './Register.styl';
+
+import React from 'react';
+import Icon from 'react-fa';
+import Dropzone from 'react-dropzone';
+import {TextField, RaisedButton, Card, CardActions, CardText, CardTitle} from 'material-ui/lib';
+
+import storeMixin from 'mixins/storeMixin';
+
 import restApi from 'actions/restApi';
 
 let RegisterView = React.createClass({
+    formName: 'registerForm',
+
     mixins: [
         storeMixin
     ],
 
     register() {
-        this.store.dispatch({type: 'registerButtonSubmitClick'});
+        this.store.dispatch({type: 'preparePayloadForUserCreate'});
         this.request = this.store.dispatch(restApi({
             model: 'users',
             action: 'create',
-            reducer: 'register'
+            type: 'createUser'
         }));
     },
 
     onDrop(files) {
-        this.store.dispatch({type: 'changeRegisterEditFormField', name: 'file', value: files[0]});
+        const {formName} = this;
+        this.store.dispatch({type: 'onChangeFormField', name: 'file', value: files[0]}, formName);
     },
 
-    success() {
-        let register = store.getState().register;
-        register.success = '';
-        this.setState(this.state);
-        location.hash = '#/';
-    },
-
-    onChangeEditFormField(e) {
-        let {name, value} = e.target;
-        this.store.dispatch({type: 'changeRegisterEditFormField', name, value});
+    onChange(e) {
+        const {formName} = this;
+        const {name, value} = e.target;
+        this.store.dispatch({type: 'onChangeFormField', name, value, formName});
     },
 
     render() {
-        let editForm = store.getState().register.editForm;
-        let inputStyle = {
+        const editForm = this.state.users.registerForm;
+        const inputStyle = {
             width: '100%'
         };
 
-        let form =
+        const form =
             <div className="col-md-6" style={{margin: '50px auto'}}>
                 <Card>
                     <CardTitle title="Register" subtitle="Creating a new user"/>
@@ -79,7 +72,7 @@ let RegisterView = React.createClass({
                                             hintText={field.hintText}
                                             errorText={field.errorText}
                                             defaultValue={field.defaultValue}
-                                            onChange={this.onChangeEditFormField}/><br/></div>);
+                                            onChange={this.onChange}/><br/></div>);
                                 }
                             })
                             }
@@ -93,7 +86,7 @@ let RegisterView = React.createClass({
                                 label={button.label}
                                 disabled={!editForm.isValid}
                                 primary={true}
-                                onTouchTap={this.register.bind(this, button.name)}/>
+                                onTouchTap={this.register}/>
                         )}
                     </CardActions>
                 </Card>

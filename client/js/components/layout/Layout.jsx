@@ -22,7 +22,7 @@ let Layout = React.createClass({
         this.request = this.store.dispatch(restApi({
             model: 'users',
             action: 'ping',
-            reducer: 'user'
+            type: 'ping'
         }));
     },
 

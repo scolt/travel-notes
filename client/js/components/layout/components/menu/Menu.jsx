@@ -30,13 +30,13 @@ let Menu = React.createClass({
     },
 
     openProfile() {
-        let user = this.store.getState().user;
+        let user = this.state.users.user;
         location.hash = '#/profile/' + user.username;
         this.store.dispatch(setMenuStatus(false));
     },
 
     render() {
-        let user = this.store.getState().user;
+        let user = this.state.users.user;
 
         let userBlock = null;
         let actionsBlock =
