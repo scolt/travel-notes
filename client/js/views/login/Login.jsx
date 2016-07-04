@@ -15,29 +15,32 @@ import CardText from 'material-ui/lib/card/card-text';
 import restApi from 'actions/restApi';
 
 let loginView = React.createClass({
+    formName: 'loginForm',
+
     mixins: [storeMixin],
 
     login() {
-        this.store.dispatch({type: 'loginButtonSubmitClick'});
+        this.store.dispatch({type: 'preparePayloadForUserLogin'});
         this.request = this.store.dispatch(restApi({
             model: 'users',
             action: 'login',
-            reducer: 'login'
+            type: 'login'
         }));
     },
 
-    onChangeEditFormField(e) {
-        let {name, value} = e.target;
-        this.store.dispatch({type: 'changeLoginEditFormField', name, value});
+    onChange(e) {
+        const {formName} = this;
+        const {name, value} = e.target;
+        this.store.dispatch({type: 'onChangeFormField', name, value, formName});
     },
 
     render() {
-        let {net} = store.getState();
-        let {editForm} = store.getState().login;
-        let inputStyle = {
+        const {net} = this.state;
+        const editForm = this.state.users[this.formName];
+        const inputStyle = {
             width: '100%'
         };
-        let form =
+        const form =
             <div className="col-md-6" style={{margin: '50px auto'}}>
                 <Card>
                     <CardTitle title="Login" subtitle="Enter your email and password" />
@@ -52,7 +55,7 @@ let loginView = React.createClass({
                                     hintText={field.hintText}
                                     errorText={field.errorText}
                                     defaultValue={field.defaultValue}
-                                    onChange={this.onChangeEditFormField}/><br/></div>);
+                                    onChange={this.onChange}/><br/></div>);
                         })
                         }
                     </CardText>

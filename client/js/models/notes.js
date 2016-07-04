@@ -3,13 +3,7 @@
 const notes = {
     isProcessing: false,
     payload: {},
-    row: {
-        limit: '',
-        page: '',
-        pages: '',
-        result: [],
-        total: ''
-    },
+    note: {},
     markers: []
 };
 

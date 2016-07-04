@@ -12,18 +12,17 @@ import storeMixin from 'mixins/storeMixin';
 const MapPage = React.createClass({
     mixins: [storeMixin],
 
-    afterComponentWillMount() {
+    componentWillMount() {
         this.request = this.store.dispatch(restApi({
             model: 'notes',
-            action: 'read',
-            reducer: 'map'
+            type: 'prepareMarkers'
         }));
     },
 
     render() {
         return (
             <div className="row">
-                <Map markers={this.state.map.markers} type="fullscreen"/>
+                <Map markers={this.state.notes.markers} type="fullscreen"/>
             </div>
         );
     }

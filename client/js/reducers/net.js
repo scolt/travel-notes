@@ -10,13 +10,11 @@ function net(state = netModel, action) {
     }
     if (action.type === 'endProcessing') {
         let isProcessing = false;
-        let err  = action.data.err;
-        return {...state, isProcessing, err};
+        return {...state, isProcessing};
     }
     if (action.type === 'errProcessing') {
-        let isProcessing = false;
         let err = action.err;
-        return {...state, isProcessing, err};
+        return {...state, err};
     }
     if (action.type === 'abortRequest') {
         let isProcessing = false;

@@ -1,16 +1,8 @@
 'use strict';
 
 import React from 'react';
-import Map from 'components/map/Map';
 import Icon from 'react-fa';
-import Table from 'material-ui/lib/table/table';
-import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
-import TableRow from 'material-ui/lib/table/table-row';
-import TableHeader from 'material-ui/lib/table/table-header';
-import TableRowColumn from 'material-ui/lib/table/table-row-column';
-import TableBody from 'material-ui/lib/table/table-body';
-
-import storeMixin from 'mixins/storeMixin';
+import {Table, TableHeaderColumn, TableRow, TableHeader, TableRowColumn,TableBody} from 'material-ui/lib';
 
 let userNotes = React.createClass({
 
