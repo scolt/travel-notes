@@ -82,8 +82,12 @@ const config = {
                 loader: ExtractTextPlugin.extract('style', 'css')
             },
             {
-                test: /\.(otf|eot|svg|ttf|woff|png|jpg)\??/,
-                loader: 'url?limit=10000&name=[path][name].[ext]'
+                test: /\.(otf|eot|svg|ttf|woff)\??/,
+                loader: 'url-loader?limit=8192'
+            },
+            {
+                test: /\.(png|jpg)\??/,
+                loader: 'file?name=[path][name].[ext]' // inline base64 URLs for <=8k images, direct URLs for the rest
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,

@@ -33,6 +33,16 @@ function notes(state = notesModel, action) {
         )};
     }
 
+    if (action.type === 'getNotes') {
+        return {...state, notes: action.data.result};
+    }
+
+    if (action.type === 'prepareNoteFilterPayload') {
+        let {payload} = state;
+        let {filters} = state.payload;
+        return {...state, payload: {...payload, filters: {...filters, ...action.filters}}};
+    }
+
     return state;
 }
 

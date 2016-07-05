@@ -4,7 +4,8 @@ const notes = {
     isProcessing: false,
     payload: {},
     note: {},
-    markers: []
+    markers: [],
+    notes: []
 };
 
 module.exports = notes;
