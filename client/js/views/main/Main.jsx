@@ -84,9 +84,8 @@ const MainPage = React.createClass({
                         style={styles.gridList}
                     >
                         {this.state.notes.notes.map((tile) => (
-                            <a href={`#/note/${tile._id}`}>
+                            <a href={`#/note/${tile._id}`} key={tile._id}>
                                 <GridTile
-                                    key={tile._id}
                                     title={tile.title}
                                     subtitle={<span>by <b>{tile.userId}</b></span>}
                                     actionPosition="left"
