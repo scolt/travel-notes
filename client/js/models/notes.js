@@ -5,7 +5,11 @@ const notes = {
     payload: {},
     note: {},
     markers: [],
-    notes: []
+    notes: [],
+    filters: {
+        orderBy: '',
+        onlyMy: false
+    }
 };
 
 module.exports = notes;

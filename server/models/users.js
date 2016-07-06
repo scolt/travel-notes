@@ -222,17 +222,17 @@ let UsersActions = {
 
             delete user.password;
             delete user.salt;
-            if (data.imageId) {
+            if (user.imageId) {
                 Image.findOne({
-                    '_id': data.imageId
+                    '_id': user.imageId
                 }, function (err, image) {
                     if (image) {
-                        data.avatar = image.image;
+                        user.avatar = image.image;
                     }
-                    res.json(data);
+                    res.json(user);
                 });
             } else {
-                res.json(data);
+                res.json(user);
             }
         } else {
             res.status(401).end('Not authorized');

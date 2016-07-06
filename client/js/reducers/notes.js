@@ -1,6 +1,7 @@
 'use strict';
 
 const notesModel = require('models/notes');
+import store from 'store';
 
 function notes(state = notesModel, action) {
     if (action.type === 'prepareNote') {
@@ -40,7 +41,31 @@ function notes(state = notesModel, action) {
     if (action.type === 'prepareNoteFilterPayload') {
         let {payload} = state;
         let {filters} = state.payload;
-        return {...state, payload: {...payload, filters: {...filters, ...action.filters}}};
+        let newPreparedServerFilters = {},
+            newClientFilters = {},
+            orderBy = {};
+
+        if (action.updated === 'filters') {
+            if (!action.filters.userId) {
+                newClientFilters.onlyMy = false;
+                delete filters.userId;
+            }
+
+            Object.keys(action.filters).forEach(function (key) {
+                if (key === 'userId') {
+                    newClientFilters.onlyMy = action.currentUserID == action.filters[key];
+                    newPreparedServerFilters[key] = action.filters[key];
+                }
+            });
+        }
+
+        if (action.updated === 'order') {
+            newClientFilters.orderBy = action.orderBy;
+            orderBy[action.orderBy] = 1;
+        }
+
+
+        return {...state, filters: {...state.filters, ...newClientFilters}, payload: {...payload, filters: {...filters, ...newPreparedServerFilters}, order: orderBy}};
     }
 
     return state;
