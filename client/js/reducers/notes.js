@@ -61,7 +61,9 @@ function notes(state = notesModel, action) {
 
         if (action.updated === 'order') {
             newClientFilters.orderBy = action.orderBy;
-            orderBy[action.orderBy] = 1;
+
+            orderBy[action.orderBy] = payload.order && payload.order[action.orderBy] ?
+                                        payload.order[action.orderBy] == 1 ? -1 : 1 : 1;
         }
 
 
