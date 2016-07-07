@@ -142,7 +142,8 @@ const MainPage = React.createClass({
                     {this.state.notes.notes.map((tile) => (
                         <a href={`#/note/${tile._id}`} key={tile._id}
                            cols={1}
-                           rows={1}>
+                           rows={1}
+                           className="flat-block-item">
                             <GridTile
                                 title={tile.title}
                                 subtitle={<span>by <b>{tile.userId}</b></span>}

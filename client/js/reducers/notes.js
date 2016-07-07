@@ -1,7 +1,6 @@
 'use strict';
 
 const notesModel = require('models/notes');
-import store from 'store';
 
 function notes(state = notesModel, action) {
     if (action.type === 'prepareNote') {
@@ -63,7 +62,7 @@ function notes(state = notesModel, action) {
             newClientFilters.orderBy = action.orderBy;
 
             orderBy[action.orderBy] = payload.order && payload.order[action.orderBy] ?
-                                        payload.order[action.orderBy] == 1 ? -1 : 1 : 1;
+                                        payload.order[action.orderBy] === 1 ? -1 : 1 : 1;
         }
 
 
