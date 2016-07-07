@@ -16,7 +16,7 @@ const users = {
 
     loginForm: {
         isValid: false,
-
+        prevState: null,
         fields: [
             {
                 name: 'email',

@@ -10,6 +10,7 @@ function users(state = usersModel, action) {
 
     if (action.type === 'logout') {
         window.sessionStorage.token = null;
+        location.href = '/#';
         return {...usersModel};
     }
 
@@ -26,9 +27,16 @@ function users(state = usersModel, action) {
     }
 
     if (action.type === 'login') {
+        let {loginForm} = state;
         window.sessionStorage.token = action.data.token;
-        location.href = '/#';
-        return {...state, user: {...action.data}};
+        location.href = loginForm.prevState ? loginForm.prevState : '/#';
+        return {...state, user: {...action.data}, loginForm: {...loginForm, prevState: null}};
+    }
+
+    if (action.type === 'loginForAdd') {
+        let {loginForm} = state;
+        location.href = '/#/login';
+        return {...state, loginForm: {...loginForm, prevState: '/#/add'}};
     }
 
     if (action.type === 'preparePayloadForUserProfile') {

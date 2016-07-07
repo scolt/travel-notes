@@ -18,7 +18,7 @@ import restApi from 'actions/restApi';
 let Layout = React.createClass({
     mixins: [storeMixin],
 
-    afterComponentWillMount() {
+    componentWillMount() {
         this.request = this.store.dispatch(restApi({
             model: 'users',
             action: 'ping',

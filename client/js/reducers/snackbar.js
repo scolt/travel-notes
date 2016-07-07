@@ -9,6 +9,12 @@ function snackbar(state = snackbarModel, action) {
         return {...state, open, message};
     }
 
+    if (action.type === 'logout') {
+        let open = true;
+        let message = 'You are successful logged out';
+        return {...state, open, message};
+    }
+
     if (action.type === 'endFetchingUsersUpdate') {
         let open = true;
         let message = 'User details successful updated';
