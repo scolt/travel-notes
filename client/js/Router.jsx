@@ -6,6 +6,7 @@ let {Router: ReactRouter, Route, Redirect, useRouterHistory} = require('react-ro
 let Layout = require('components/layout/Layout');
 let Main = require('views/main/Main');
 let Note = require('views/note/Note');
+let AddNote = require('views/note/add/Add');
 let Gallery = require('views/gallery/Gallery');
 let About = require('views/about/About');
 let Map = require('views/map/Map');
@@ -33,6 +34,7 @@ let Router = React.createClass({
                     <Route path="/register" component={Register}/>
                     <Route path="/login" component={Login}/>
                     <Route path="/profile(/:username)" component={Profile}/>
+                    <Route path="/add" component={AddNote}/>
                 </Route>
                 <Redirect from="/" to="/main"/>
                 <Redirect from="*" to="/404"/>

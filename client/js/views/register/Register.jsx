@@ -29,7 +29,7 @@ let RegisterView = React.createClass({
 
     onDrop(files) {
         const {formName} = this;
-        this.store.dispatch({type: 'onChangeFormField', name: 'file', value: files[0]}, formName);
+        this.store.dispatch({type: 'onChangeFormField', name: 'file', value: files[0], formName});
     },
 
     onChange(e) {

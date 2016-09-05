@@ -2,6 +2,7 @@
 
 const async = require('async');
 const pg = require('pg');
+const cloudinary = require('cloudinary');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
 const config = require('../config');
@@ -183,11 +184,32 @@ function mongoConnect(cb) {
     MongoClient.connect(config.db.mongo, cb);
 };
 
-function mongoCreate(data) {
+function mongoCreate(data, files, user) {
     return (db, cb) => {
-        db
-            .collection('notes')
-            .insert(data || {}, (err, result) => (cb(err, db, {id: result.insertedIds[0]})));
+        function saveNote(image_url) {
+            data.photo = image_url;
+            data.userId = user;
+            db
+                .collection('notes')
+                .insert(data || {}, (err, result) => (cb(err, db, {id: result.insertedIds[0]})));
+        }
+
+        if (files.file && files.file.path) {
+            cloudinary.uploader.upload(
+                files.file.path,
+                function(result) {
+                    try {
+                        saveNote(result.secure_url);
+                    } catch(e) {
+                        cb(e.toString());
+                    }
+                });
+        } else {
+            saveNote('');
+        }
+
+
+
     };
 };
 
@@ -357,7 +379,7 @@ const notes = {
         async.waterfall(
             req.body.db === 'pg' ?
                 [pgConnect, pgCreate(req.body.data)] :
-                [mongoConnect, mongoCreate(req.body.data)],
+                [mongoConnect, mongoCreate(req.body, req.files, req.user.username)],
             req.body.db === 'pg' ? pgDispatchResult(res, next) : mongoDispatchResult(res, next)
         );
     },

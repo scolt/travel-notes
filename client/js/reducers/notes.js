@@ -10,8 +10,8 @@ function notes(state = notesModel, action) {
             text: note.text,
             photo: note.photo,
             position: {
-                lat: note.lat,
-                lng: note.lng
+                lng: parseFloat(note.lng),
+                lat:  parseFloat(note.lat)
             }
         }))[0]};
     }
@@ -26,8 +26,8 @@ function notes(state = notesModel, action) {
                     photo: item.photo
                 },
                 position: {
-                    lng: item.lng,
-                    lat: item.lat
+                    lng: parseFloat(item.lng),
+                    lat:  parseFloat(item.lat)
                 }
             })
         )};
@@ -67,6 +67,51 @@ function notes(state = notesModel, action) {
 
 
         return {...state, filters: {...state.filters, ...newClientFilters}, payload: {...payload, filters: {...filters, ...newPreparedServerFilters}, order: orderBy}};
+    }
+
+    if (action.type === 'prepareNotePayload') {
+        let {noteForm: editForm} = state;
+        editForm = {...editForm, fields: [...editForm.fields]};
+        var data = new FormData();
+        editForm.fields.forEach(function (item) {
+            if (!item.readOnly) {
+                if (item.name === 'position') {
+                    data.append('lat', item.value.lat);
+                    data.append('lng', item.value.lng);
+                } else {
+                    data.append(item.name, item.value);
+                }
+            }
+        });
+        return {...state, payload: data};
+    }
+
+    if (action.type === 'onChangeFormFieldNote') {
+        const {name, value, formName} = action;
+        let editForm = state[formName];
+        if (!editForm) return state;
+        editForm = {...editForm, fields: [...editForm.fields]};
+        const i = editForm.fields.reduce((result, field, i) =>
+            result === null || field.name === name ? i : result, null);
+
+        const field = editForm.fields[i];
+        field.value = value;
+        field.isDirty = true;
+
+        let error = false;
+
+        editForm.fields = editForm.fields.map(function (item) {
+            if (item.validate) {
+                item.isValid = item.validate.test(item.value);
+                if (!item.isValid) error = true;
+                item.errorText = !item.isValid && (item.isDirty || item.isTouch) ? item.validationMessage : null;
+            }
+            return item;
+        });
+
+        editForm.isValid = !error;
+        state[formName] = editForm;
+        return {...state};
     }
 
     return state;
