@@ -22,12 +22,14 @@ let Map = React.createClass({
     propTypes: {
         markers: React.PropTypes.array,
         center: React.PropTypes.object,
-        type: React.PropTypes.string
+        type: React.PropTypes.string,
+        canSetMarker: React.PropTypes.func
     },
 
     getDefaultProps() {
         return {
-            type: 'embedded'
+            type: 'embedded',
+            canSetMarker: () => {}
         };
     },
 
@@ -36,9 +38,14 @@ let Map = React.createClass({
         this.setState(this.props.markers);
     },
 
-    handleCloseclick(marker) {
-        marker.showInfo = false;
-        this.setState(this.props.markers);
+    handleMapClick(markerProvider) {
+        if (this.props.canSetMarker) {
+            let marker = {
+                lat: markerProvider.latLng.lat(),
+                lng: markerProvider.latLng.lng()
+            };
+            this.props.canSetMarker(marker);
+        }
     },
 
     renderInfoWindow(ref, marker) {
