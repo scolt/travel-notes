@@ -74,7 +74,7 @@ let Map = React.createClass({
             content = info;
         }
         return (
-            <InfoWindow key={`${ref}_info_window`} onCloseclick={this.handleCloseclick.bind(this, marker)}>
+            <InfoWindow key={`${ref}_info_window`}>
                 <Card>
                     {content}
                 </Card>

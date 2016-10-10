@@ -45,10 +45,10 @@ function users(state = usersModel, action) {
     }
 
     if (action.type === 'preparePayloadForUserUpdate') {
-        let {editForm, row} = state;
+        let {editForm, user} = state;
         editForm = {...editForm, fields: [...editForm.fields]};
         var data = new FormData();
-        data.append('_id', row['_id']);
+        data.append('_id', user['_id']);
         editForm.fields.forEach(function (item) {
             if (!item.readOnly) {
                 data.append(item.name, item.value);
@@ -58,10 +58,10 @@ function users(state = usersModel, action) {
     }
 
     if (action.type === 'cancelEditMode') {
-        let {editForm, row} = state;
+        let {editForm, user} = state;
         let {fields} = state.editForm;
         for (var i = 0; i < fields.length; i++) {
-            fields[i].value = row[fields[i].name];
+            fields[i].value = user[fields[i].name];
             fields[i].isDirty = false;
             fields[i].isValid = true;
         }

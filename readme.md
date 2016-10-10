@@ -162,6 +162,7 @@ or
         }
 
 6. Data schemes
+------------------------
 
 6.1 Notes
 
@@ -226,3 +227,11 @@ or
         lng: Number,
         lat: Number,
     }
+    
+7. Bug tracking
+------------------------
+Oh, we are ashamed and want to fix it asap! 
+
+But before fixing a bug we need to reproduce and confirm it. 
+
+In order to reproduce bugs we will systematically ask you to provide a minimal reproduce scenario (step by step).

@@ -14,6 +14,7 @@ import mock4 from 'mock4.jpg';
 import mock5 from 'mock5.jpg';
 import mock6 from 'mock6.jpg';
 import add from 'add.png';
+import './main.styl';
 
 const styles = {
     root: {
@@ -71,6 +72,15 @@ const MainPage = React.createClass({
         }));
     },
 
+    deleteSelect(e, id) {
+        e.preventDefault();
+        this.store.dispatch(restApi({
+            model: 'notes',
+            action: 'delete',
+            id: id
+        }));
+    },
+
     orderByChange(e, index, value) {
         this.store.dispatch({type: 'prepareNoteFilterPayload',
             currentUserID: this.state.users.user.username,
@@ -93,9 +103,10 @@ const MainPage = React.createClass({
 
     render() {
         let author = null;
+        const username = this.state.users.user.username;
         const columnsConfig = calculateGrid(this.state.notes.notes.length);
 
-        if (this.state.users.user.username) {
+        if (username) {
             author = <Toggle
                 label="Only My Notes"
                 labelPosition="left"
@@ -151,8 +162,9 @@ const MainPage = React.createClass({
                                 titlePosition="bottom"
                                 className="feed-item"
                             >
+                                {tile.userId === username ? <i onClick={(e) => this.deleteSelect(e, tile._id)}>Delete</i> : null}
                                 <img src={tile.photo ? tile.photo : `/client/assets/mock${getRandomInt(1, 6)}.jpg`}
-                                     style={{height: '100%', width: '100%'}}/>
+                                     style={{height: '100%', width: '100%'}} />
                             </GridTile>
                         </a>
                     ))}

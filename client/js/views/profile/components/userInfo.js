@@ -11,6 +11,7 @@ import storeMixin from 'mixins/storeMixin';
 import restApi from 'actions/restApi';
 
 let MapPage = React.createClass({
+    formName: 'editForm',
     mixins: [
         storeMixin
     ],
@@ -25,8 +26,9 @@ let MapPage = React.createClass({
     },
 
     onChangeEditFormField(e) {
+        const {formName} = this;
         let {name, value} = e.target;
-        this.store.dispatch({type: 'changeProfileEditFormField', name, value});
+        this.store.dispatch({type: 'onChangeFormField', name, value, formName});
     },
 
     enableEditMode: function () {
@@ -42,7 +44,7 @@ let MapPage = React.createClass({
         this.store.dispatch(restApi({
             model: 'users',
             action: 'update',
-            type: 'prepareUpdatedUser'
+            type: 'prepareUser'
         }));
     },
 

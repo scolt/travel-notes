@@ -246,6 +246,7 @@ function mongoGetCount(data, id) {
         };
         const filters = Object.assign({}, data.filters);
         if (id) filters._id = ObjectId(id);
+        filters.isDel = false;
 
         db.collection('notes').find(filters).count((err, total) => {
             pages = Math.ceil(total/limit);
@@ -260,6 +261,7 @@ function mongoRead(data, id) {
     const order = data.order;
     const filters = Object.assign({}, data.filters);
     if (id) filters._id = ObjectId(id);
+    filters.isDel = false;
 
     return (db, result, cb) => {
         const limit = result.limit;
