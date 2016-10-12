@@ -76,6 +76,19 @@ function users(state = usersModel, action) {
         return {...state, editForm: {...editForm, enableEditMode}};
     }
 
+    if (action.type === 'prepareProfile') {
+        let resData = action.data;
+        let {editForm, user} = state;
+        let {fields} = state.editForm;
+        for (var i = 0; i < fields.length; i++) {
+            fields[i].value = resData[fields[i].name];
+        }
+
+        resData.owner = user.username === resData.username;
+
+        return {...state, profile: resData, editForm: {...editForm, fields, enableEditMode: false} };
+    }
+
     if (action.type === 'prepareUser') {
         let resData = action.data;
         let {editForm} = state;

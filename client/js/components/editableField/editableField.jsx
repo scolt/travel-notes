@@ -14,7 +14,7 @@ let editableField = React.createClass({
                            floatingLabelText={this.props.hintText}
                            value={this.props.value}
                            onChange={this.props.onChange}
-                           errorText={this.props.errorText}/> : <div style={{lineHeight: '72px'}}>
+                           errorText={this.props.errorText}/> : <div style={{lineHeight: '40px'}}>
                     <strong>{this.props.hintText} :</strong> {this.props.value}
                 </div>
                 }

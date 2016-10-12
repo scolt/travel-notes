@@ -21,7 +21,7 @@ let MapPage = React.createClass({
         this.request = this.store.dispatch(restApi({
             model: 'users',
             id: this.props.user,
-            type: 'prepareUser'
+            type: 'prepareProfile'
         }));
     },
 
@@ -49,7 +49,7 @@ let MapPage = React.createClass({
     },
 
     render() {
-        const {user, editForm} = this.state.users;
+        const {profile: user, editForm} = this.state.users;
 
         let editBlock = null;
 

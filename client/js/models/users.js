@@ -14,6 +14,14 @@ const users = {
         owner: true
     },
 
+    profile: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        username: '',
+        avatar: ''
+    },
+
     loginForm: {
         isValid: false,
         prevState: null,

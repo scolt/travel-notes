@@ -16,9 +16,14 @@ let Profile = React.createClass({
         return (
             <div className="container">
                 <div className="row"  style={{margin: '25px 0'}}>
-                    <div className="col-md-12">
-                        <UserInfo user={this.props.params.username} />
+                    <div className="col-md-6 col-xs-12">
+                        <UserInfo user={this.props.params.username}  />
                     </div>
+                    <div className="col-md-6 col-xs-12">
+                        <UserNotes user={this.props.params.username} />
+                    </div>
+
+
                 </div>
             </div>
         );

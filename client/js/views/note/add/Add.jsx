@@ -96,6 +96,7 @@ let Note = React.createClass({
                                     style={inputStyle}
                                     disabled={field.readOnly}
                                     type={field.type}
+                                    multiLine={field.type === 'textarea'}
                                     hintText={field.hintText}
                                     errorText={field.errorText}
                                     defaultValue={field.defaultValue}
@@ -104,10 +105,10 @@ let Note = React.createClass({
                     })
                     }</div>
                     <div className="row add-note-details-block">
-                        <div className="col-md-6">
+                        <div className="col-md-6 col-xs-12">
                             {photo}
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 col-xs-12">
                             <Map markers={marker ? [marker] : []} canSetMarker={this.addCoord} />
                         </div>
                     </div>

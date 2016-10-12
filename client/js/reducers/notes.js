@@ -8,6 +8,7 @@ function notes(state = notesModel, action) {
             title: note.title,
             subtitle: note.subtitle,
             text: note.text,
+            author: note.userId,
             photo: note.photo,
             position: {
                 lng: parseFloat(note.lng),

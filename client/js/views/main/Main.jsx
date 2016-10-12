@@ -21,7 +21,7 @@ const styles = {
         width: '100%'
     },
     gridList: {
-        width: '90%',
+        width: '100%',
         margin: '0 auto',
         marginBottom: 24
     },
@@ -32,9 +32,8 @@ const styles = {
         margin: '33px 0 '
     },
     card: {
-        width: '90%',
-        margin: '25px auto',
-        padding: '10px 30px'
+        width: '100%',
+        margin: '0 auto'
     }
 };
 
@@ -105,6 +104,17 @@ const MainPage = React.createClass({
         let author = null;
         const username = this.state.users.user.username;
         const columnsConfig = calculateGrid(this.state.notes.notes.length);
+        let notes = this.state.notes.notes.map((item, index) => {
+            if (columnsConfig.count % 2 === 0 &&
+                index >= columnsConfig.count - 1 &&
+                index < (columnsConfig.count + columnsConfig.count/2 - 1)) {
+                item.col = 2;
+            } else {
+                item.col = 1;
+            }
+
+            return item;
+        });
 
         if (username) {
             author = <Toggle
@@ -124,7 +134,7 @@ const MainPage = React.createClass({
 
         let spinner = <div className="spinner"><Icon name="circle-o-notch" spin/></div>;
 
-        let filters = <Card style={styles.card}>
+        let filters = <div style={styles.card}>
             {author}
             <SelectField
                 value={this.state.notes.filters.orderBy}
@@ -134,7 +144,7 @@ const MainPage = React.createClass({
             >
                 {items}
             </SelectField>
-        </Card>;
+        </div>;
 
         let content = <div className="row">
             <div style={styles.root}>
@@ -150,10 +160,10 @@ const MainPage = React.createClass({
                             <Icon name="plus"/>
                         </div>
                     </GridTile>
-                    {this.state.notes.notes.map((tile) => (
+                    {notes.map((tile, index) => (
                         <a href={`#/note/${tile._id}`} key={tile._id}
-                           cols={1}
-                           rows={1}
+                           cols={tile.col}
+                           rows={tile.col}
                            className="flat-block-item">
                             <GridTile
                                 title={tile.title}
@@ -162,7 +172,7 @@ const MainPage = React.createClass({
                                 titlePosition="bottom"
                                 className="feed-item"
                             >
-                                {tile.userId === username ? <i onClick={(e) => this.deleteSelect(e, tile._id)}>Delete</i> : null}
+                                {tile.userId === username ? <i className="fa fa-trash" onClick={(e) => this.deleteSelect(e, tile._id)}></i> : null}
                                 <img src={tile.photo ? tile.photo : `/client/assets/mock${getRandomInt(1, 6)}.jpg`}
                                      style={{height: '100%', width: '100%'}} />
                             </GridTile>

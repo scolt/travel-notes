@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const isDev = NODE_ENV === 'development';
-const remoteServer = process.env.remoteServer || 'http://travelnote.herokuapp.com';
+const remoteServer = process.env.remoteServer || 'http://localhost:1337';
 
 const devServerConfig = {
     host: process.env.IP || 'localhost',
