@@ -65,7 +65,7 @@ let NoteActions = (function () {
     function saveNote(data, user, image, cb) {
         data.photo = image;
         data.userId = user;
-        Note.save(data, (err, note) => {
+        Note.create(data, (err, note) => {
             cb(err, note);
         })
     }
