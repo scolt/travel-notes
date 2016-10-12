@@ -47,7 +47,8 @@ let Note = React.createClass({
         this.store.dispatch({type: 'prepareNotePayload'});
         this.request = this.store.dispatch(restApi({
             model: 'notes',
-            action: 'create'
+            action: 'create',
+            type: 'createNote'
         }));
     },
 

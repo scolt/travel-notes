@@ -36,6 +36,15 @@ function sweetalert(state = sweetalertModel, action) {
         return {...state, open, title, message, type, redirectTo};
     }
 
+    if (action.type === 'createNote') {
+        let open = true;
+        let title = 'Created!';
+        let message = 'You are successful create a new note.';
+        let type = 'success';
+        let redirectTo = '/#/home';
+        return {...state, open, title, message, type, redirectTo};
+    }
+
     if (action.type === 'alertClose') {
         let open = false;
         let redirectTo = null;
