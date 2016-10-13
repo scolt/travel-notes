@@ -89,6 +89,17 @@ let NoteActions = (function () {
             }
         },
 
+        delete(req, res, next) {
+            const id = req.body.id || req.params.id;
+            if (!id) {
+                dispatch(res, next)('Id not provided')
+            } else {
+                Note.remove({
+                    _id: id
+                }, dispatch(res, next))
+            }
+        },
+
         read(req, res, next) {
             const data = req.body;
             const id = req.body.id || req.params.id;
