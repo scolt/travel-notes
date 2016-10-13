@@ -8,6 +8,7 @@ let menu = require('reducers/menu');
 let notes = require('reducers/notes');
 let snackbar = require('reducers/snackbar');
 let sweetalert = require('reducers/sweetalert');
+let modal = require('reducers/modal');
 let users = require('reducers/users');
 
 const store = createStore(
@@ -17,6 +18,7 @@ const store = createStore(
         notes,
         snackbar,
         sweetalert,
+        modal,
         users
     }),
     applyMiddleware(thunkMiddleware)
