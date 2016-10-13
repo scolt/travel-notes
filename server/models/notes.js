@@ -94,9 +94,9 @@ let NoteActions = (function () {
             if (!id) {
                 dispatch(res, next)('Id not provided')
             } else {
-                Note.remove({
+                Note.update({
                     _id: id
-                }, dispatch(res, next))
+                }, {isDel: true}, dispatch(res, next))
             }
         },
 
