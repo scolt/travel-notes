@@ -87,6 +87,23 @@ function notes(state = notesModel, action) {
         return {...state, payload: data};
     }
 
+    if (action.type === 'endProcessing' && action.data.model === 'notes') {
+        if (action.data.action === 'delete') {
+            let index = 0;
+            let {notes} = state;
+            for (let i = 0; i < notes.length; i++) {
+                if (notes[i]['_id'] === action.data.id) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index > -1) {
+                notes.splice(index, 1);
+            }
+            return {...state, notes};
+        }
+    }
+
     if (action.type === 'onChangeFormFieldNote') {
         const {name, value, formName} = action;
         let editForm = state[formName];
