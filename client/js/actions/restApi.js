@@ -14,7 +14,7 @@ function restApi({model, ext = 'json', action = 'read', id = '', type} = {}) {
             .end((err, res) => {
                 dispatch({type: 'endProcessing', data: {model, ext, action, id, type}});
                 dispatch(err ?
-                    {type: 'errProcessing', err} :
+                    {type: 'errProcessing', err, data: {model, action, type}} :
                     {type, data: res.body}
                 );
             });

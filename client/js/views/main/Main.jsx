@@ -52,6 +52,7 @@ const MainPage = React.createClass({
     mixins: [storeMixin],
 
     componentWillMount() {
+        this.store.dispatch({type: 'restoreNoteFilterPayload'});
         this.request = this.store.dispatch(restApi({
             model: 'notes',
             type: 'getNotes'
@@ -74,6 +75,7 @@ const MainPage = React.createClass({
     deleteSelect(e, id) {
         e.preventDefault();
         this.store.dispatch(restApi({
+            type: 'deleteOneNote',
             model: 'notes',
             action: 'delete',
             id: id
@@ -122,7 +124,7 @@ const MainPage = React.createClass({
                 labelPosition="left"
                 style={styles.checkbox}
                 onToggle={this.authorSelect}
-                toggled={this.state.notes.filters.onlyMy}
+                toggled={!!this.state.notes.filters.onlyMy}
             />;
         }
 
@@ -137,7 +139,7 @@ const MainPage = React.createClass({
         let filters = <div style={styles.card}>
             {author}
             <SelectField
-                value={this.state.notes.filters.orderBy}
+                value={this.state.notes.filters.orderBy.name}
                 onChange={this.orderByChange}
                 floatingLabelText="Order By"
                 className="filter-item"

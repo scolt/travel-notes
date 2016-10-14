@@ -38,6 +38,22 @@ function notes(state = notesModel, action) {
         return {...state, notes: action.data.result};
     }
 
+    if (action.type === 'restoreNoteFilterPayload') {
+        let {filters, payload} = state;
+        let newPreparedServerFilters = {},
+            orderBy = {};
+
+        if (filters.onlyMy) {
+            newPreparedServerFilters['userId'] = filters.onlyMy;
+        }
+
+        if (filters.orderBy) {
+            orderBy[filters.orderBy.name] = filters.orderBy.direction;
+        }
+
+        return {...state, payload: {...payload, filters: {...newPreparedServerFilters}, order: orderBy}};
+    }
+
     if (action.type === 'prepareNoteFilterPayload') {
         let {payload} = state;
         let {filters} = state.payload;
@@ -48,22 +64,29 @@ function notes(state = notesModel, action) {
         if (action.updated === 'filters') {
             if (!action.filters.userId) {
                 newClientFilters.onlyMy = false;
-                delete filters.userId;
+                if (filters) {
+                    delete filters.userId;
+                }
             }
 
             Object.keys(action.filters).forEach(function (key) {
                 if (key === 'userId') {
-                    newClientFilters.onlyMy = action.currentUserID == action.filters[key];
+                    newClientFilters.onlyMy = action.currentUserID == action.filters[key] ? action.currentUserID : false;
                     newPreparedServerFilters[key] = action.filters[key];
                 }
             });
         }
 
         if (action.updated === 'order') {
-            newClientFilters.orderBy = action.orderBy;
+            const direction = payload.order && payload.order[action.orderBy] ?
+                payload.order[action.orderBy] === 1 ? -1 : 1 : 1;
 
-            orderBy[action.orderBy] = payload.order && payload.order[action.orderBy] ?
-                                        payload.order[action.orderBy] === 1 ? -1 : 1 : 1;
+            newClientFilters.orderBy = {
+                name: action.orderBy,
+                direction: direction
+            };
+
+            orderBy[action.orderBy] = direction;
         }
 
 

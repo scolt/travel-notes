@@ -36,7 +36,7 @@ const users = {
                 isDirty: false,
                 isTouch: false,
                 validate: /.+@.+\..+/i,
-                validationMessage: 'Enter valid value!',
+                validationMessage: 'This is required field. Please enter valid email in format "email@domain.com".',
                 errorText: null
             },
             {
@@ -48,8 +48,8 @@ const users = {
                 isValid: false,
                 isDirty: false,
                 isTouch: false,
-                validate: /^\w{1,20}$/,
-                validationMessage: 'Enter valid value!',
+                validate: /^\w{3,20}$/,
+                validationMessage: 'This is required field.',
                 errorText: null
             }
         ],
@@ -147,8 +147,8 @@ const users = {
                 isValid: false,
                 isDirty: false,
                 isTouch: false,
-                validate: /^\w{1,50}$/,
-                validationMessage: 'Enter valid value!',
+                validate: /^[A-Za-z]{1,50}$/,
+                validationMessage: 'This is required field. Allowed only letters.',
                 errorText: null
             },
             {
@@ -173,7 +173,7 @@ const users = {
                 isDirty: false,
                 isTouch: false,
                 validate: /.+@.+\..+/i,
-                validationMessage: 'Enter valid value!',
+                validationMessage: 'This is required field. Please enter valid email in format "email@domain.com".',
                 errorText: null
             },
             {
@@ -185,8 +185,8 @@ const users = {
                 isValid: false,
                 isDirty: false,
                 isTouch: false,
-                validate: /^\w{1,20}$/,
-                validationMessage: 'Enter valid value!',
+                validate: /^[\w-]{4,100}$/,
+                validationMessage: 'This is required field. Username should contains at least 4 chars.  Allowed letters, numbers, -',
                 errorText: null
             },
             {
@@ -198,8 +198,9 @@ const users = {
                 isValid: false,
                 isDirty: false,
                 isTouch: false,
-                validate: /^\w{1,20}$/,
-                validationMessage: 'Enter valid value!',
+                validate: /^[\w@.-_]{4,20}$/,
+                validationMessage: 'This is required field. ' +
+                'Password should contains at least 4 chars and max length is 20. Allowed letters, numbers, @ . - _',
                 errorText: null
             },{
                 type: 'file',
