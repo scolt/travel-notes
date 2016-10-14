@@ -110,6 +110,10 @@ let Note = React.createClass({
                             {photo}
                         </div>
                         <div className="col-md-6 col-xs-12">
+                            <div className="required-text">
+                                <span className="asteriks">*</span>
+                                Coordinates of note is required. Please use map for set it.
+                            </div>
                             <Map markers={marker ? [marker] : []} canSetMarker={this.addCoord} />
                         </div>
                     </div>

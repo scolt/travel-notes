@@ -23,9 +23,10 @@ export let Gallery = React.createClass({
     render() {
         return (
             <div className="row">
-                {this.props.images.map(tile => (
+                {this.props.images.map((tile, index) => (
+                    tile.img ?
                     <div
-                        key={tile.img}
+                        key={index}
                         title={tile.title}
                         className="col-33-custom gallery-item"
                         onClick={() => { this.openImage(tile.img); } }
@@ -33,7 +34,7 @@ export let Gallery = React.createClass({
                     >
 
                         <img src={tile.img} />
-                    </div>
+                    </div> : null
                 ))}
             </div>
         );

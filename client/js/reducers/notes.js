@@ -142,6 +142,16 @@ function notes(state = notesModel, action) {
         let error = false;
 
         editForm.fields = editForm.fields.map(function (item) {
+            if (item.validateObject) {
+                item.isValid = true;
+                item.requiredFields.forEach(key => {
+                    if (!item.value[key]) {
+                        item.isValid = false;
+                        error = true;
+                    }
+                });
+            }
+
             if (item.validate) {
                 item.isValid = item.validate.test(item.value);
                 if (!item.isValid) error = true;

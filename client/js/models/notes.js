@@ -26,7 +26,9 @@ const notes = {
                 type: 'hidden',
                 name: 'position',
                 label: 'lng',
-                value: {}
+                value: {},
+                validateObject: true,
+                requiredFields: ['lat', 'lng']
             },
             {
                 name: 'title',
@@ -36,8 +38,9 @@ const notes = {
                 value: '',
                 isValid: false,
                 isDirty: false,
-                isTouch: false,
-                validationMessage: 'Enter valid value!',
+                validate: /^[\w@.-_]{4,100}$/,
+                validationMessage: 'This is required field. ' +
+                'Password should contains at least 4 chars. Allowed letters, numbers, @ . - _',
                 errorText: null
             },
             {

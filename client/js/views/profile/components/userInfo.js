@@ -91,7 +91,7 @@ let MapPage = React.createClass({
                         <Paper className="image-developer"
                                zDepth={1}
                                circle={true}>
-                            <img className="img-rounded" src={user.avatar}/>
+                            <img className="img-rounded" src={user.avatar || '/client/assets/avatar.jpg'}/>
                         </Paper>
                     </div>
                     <div className="col-md-6">
