@@ -113,6 +113,7 @@ let Map = React.createClass({
 
         return (
             <MapLoader
+                protocol = {"https"}
                 hostname = {"maps.googleapis.com"}
                 pathname = {"/maps/api/js"}
                 query = {{libraries: 'geometry,drawing,places', key: 'AIzaSyDhPscmwqwWDhwQiqR_tAP-rW0z6S1kEog'}}

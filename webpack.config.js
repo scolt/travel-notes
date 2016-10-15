@@ -3,8 +3,14 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const NODE_ENV = process.env.NODE_ENV || 'development';
-const isDev = NODE_ENV === 'development';
+
+
+const definitions = new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+});
+
+const NODE_ENV = JSON.parse(definitions.definitions['process.env.NODE_ENV']);
+const isDev = NODE_ENV == 'development';
 const remoteServer = process.env.remoteServer || 'http://localhost:1337';
 
 const devServerConfig = {
@@ -24,7 +30,7 @@ const devServerConfig = {
     }
 };
 
-let plugins = [new ExtractTextPlugin('styles.css')];
+let plugins = [new ExtractTextPlugin('styles.css'), definitions];
 if (!isDev) plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
 
 const config = {
@@ -36,8 +42,7 @@ const config = {
 
     output: {
         filename: 'app.js',
-        path: path.resolve(__dirname, 'public'),
-        publicPath: '/'
+        path: path.resolve(__dirname, 'public')
     },
 
     debug: isDev,
@@ -83,7 +88,7 @@ const config = {
             },
             {
                 test: /\.(otf|eot|svg|ttf|woff|png|jpg)\??/,
-                loader: 'url?limit=10000&name=[path][name].[ext]'
+                loader: 'url?limit=20000&name=[path][name].[ext]'
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
