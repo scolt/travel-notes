@@ -50,7 +50,7 @@ let LandingPage = React.createClass({
                     <h2>You can store all you travelers in one place</h2>
                     <div className="row main-block">
                         <div className="secondary">
-                            <img src="/client/assets/landing/one.png" alt=""/>
+                            <img src="client/assets/landing/one.png" alt=""/>
                         </div>
                         <div className="primary">
                             <Paper style={paperStyle} zDepth={0}>
@@ -62,7 +62,7 @@ let LandingPage = React.createClass({
                                   <ListItem primaryText="Look photos from places you are going to and post photos from places you've been" leftIcon={<Wallpaper />} />
                                   <ListItem primaryText="See map with your achievements and plan your next steps" leftIcon={<Schedule />} />
                                 </List>
-                                <a href="/#/register">
+                                <a href="#/register">
                                     <RaisedButton label="Start use our app right now!!" secondary={true} style={btnStyle} />
                                 </a>
                             </Paper>
@@ -85,13 +85,13 @@ let LandingPage = React.createClass({
                                     <ListItem primaryText="Use best practice from other peoples" leftIcon={<Schedule />} />
                                     <ListItem primaryText="Just get a fun :)" leftIcon={<Schedule />} />
                                 </List>
-                                <a href="/#/register">
+                                <a href="#/register">
                                     <RaisedButton label="Start use our app right now!!" secondary={true} style={btnStyle} />
                                 </a>
                             </Paper>
                         </div>
                         <div className="secondary">
-                            <img src="/client/assets/landing/read-about.png" alt=""/>
+                            <img src="client/assets/landing/read-about.png" alt=""/>
                         </div>
                     </div>
                 </section>
@@ -100,7 +100,7 @@ let LandingPage = React.createClass({
                     <h2>This is available on any devices</h2>
                     <div className="row main-block">
                         <div className="secondary">
-                            <img src="/client/assets/landing/alldevices.jpg" alt=""/>
+                            <img src="client/assets/landing/alldevices.jpg" alt=""/>
                         </div>
                         <div className="primary">
                             <Paper style={paperStyle} zDepth={0}>
@@ -111,7 +111,7 @@ let LandingPage = React.createClass({
                                     <ListItem primaryText="You can add your own impression from your phone" leftIcon={<ActionGrade />} />
                                     <ListItem primaryText="Support all modern browser" leftIcon={<Wallpaper />} />
                                 </List>
-                                <a href="/#/register">
+                                <a href="#/register">
                                     <RaisedButton label="Start use our app right now!!" secondary={true} style={btnStyle} />
                                 </a>
                             </Paper>
@@ -120,22 +120,6 @@ let LandingPage = React.createClass({
                     </div>
                 </section>
             </div>
-            //<Card>
-            //    <CardTitle title="Welcome to our Landing Page" subtitle="TravelNote" />
-            //    <CardText>
-            //        <Paper style={paperStyle} zDepth={3}>
-            //            <h3 style={{padding: 10}}>We provide to you ability to:</h3>
-            //            <Divider />
-            //            <List>
-            //              <ListItem primaryText="Get fresh news about palces where you are going to" leftIcon={<Contacts />} />
-            //              <ListItem primaryText="Send your own opinion about different cities, towns and places for interest" leftIcon={<ActionGrade />} />
-            //              <ListItem primaryText="Look photos from places you are going to and post photos from places you've been" leftIcon={<Wallpaper />} />
-            //              <ListItem primaryText="Plan your vacation more efficiently" leftIcon={<Schedule />} />
-            //            </List>
-            //            <RaisedButton label="Plan wonderful vacation with us!" secondary={true} style={btnStyle} />
-            //        </Paper>
-            //    </CardText>
-            //</Card>
         );
     }
 });

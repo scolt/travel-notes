@@ -115,7 +115,7 @@ let Map = React.createClass({
             <MapLoader
                 hostname = {"maps.googleapis.com"}
                 pathname = {"/maps/api/js"}
-                query = {{libraries: 'geometry,drawing,places'}}
+                query = {{libraries: 'geometry,drawing,places', key: 'AIzaSyDhPscmwqwWDhwQiqR_tAP-rW0z6S1kEog'}}
                 loadingElement = {
                     <div className="spinner"><Icon name="circle-o-notch" spin/></div>
                 }
