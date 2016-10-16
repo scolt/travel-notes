@@ -118,6 +118,7 @@ const users = {
                 hintText: 'Username',
                 type: 'text',
                 value: '',
+                readOnly: true,
                 isValid: false,
                 isDirty: false,
                 isTouch: false,

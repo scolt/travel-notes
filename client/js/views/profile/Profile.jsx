@@ -22,8 +22,6 @@ let Profile = React.createClass({
                     <div className="col-md-6 col-xs-12">
                         <UserNotes user={this.props.params.username} />
                     </div>
-
-
                 </div>
             </div>
         );

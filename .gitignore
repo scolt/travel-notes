@@ -1,5 +1,14 @@
 .idea
 node_modules
+
 public
 !public/index.html
+!public/config.xml
+
+_native/*
+!_native/www/
+_native/www/*
+!_native/www/res/
+!_native/config.xml
+
 *.log

@@ -227,9 +227,39 @@ or
         lng: Number,
         lat: Number,
     }
+ 
+7. Phonegap configuration
+-------------------------
+
+7.1 Install android SDK
+
+    1. Open https://developer.android.com/studio/index.html and download SDK
+    2. After install run manager and try update all default selected components, also choose version android for build API 23
+    3. Add path for `platform-tools` and `tools` to your global PATH 
+    4. If need add path for `java` to your global PATH
     
-7. Bug tracking
-------------------------
+7.2 Install Phonegap
+    
+    npm i -g phonegap
+    
+7.3 Build android app
+    
+    1. Run webpack for production
+    2. Copy all files from "public" directory to "_native/www"
+    3. Open command tool for directory "_native"
+    4. Run "phonegap build android"
+    5. Build will be available by "_native\platforms\android\build\outputs\apk"
+    
+7.4 Emulation
+    
+    * For emulation we can use default android emulator provided by SDK.
+    * But in other point we can use https://www.genymotion.com/ (need register, free for personal use)
+    
+    Second point use Virtual Box and works fastly.
+    
+    
+8. Bug tracking
+---------------
 Oh, we are ashamed and want to fix it asap! 
 
 But before fixing a bug we need to reproduce and confirm it. 

@@ -11,6 +11,7 @@ let editableField = React.createClass({
                 {this.props.editMode ?
                 <TextField hintText={this.props.hintText}
                            name={this.props.name}
+                           disabled={this.props.disabled}
                            floatingLabelText={this.props.hintText}
                            value={this.props.value}
                            onChange={this.props.onChange}

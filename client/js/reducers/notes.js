@@ -23,7 +23,7 @@ function notes(state = notesModel, action) {
                 window: {
                     descr: item.text,
                     title: item.title,
-                    link: `/#/note/${item._id}`,
+                    link: `#/note/${item._id}`,
                     photo: item.photo
                 },
                 position: {
