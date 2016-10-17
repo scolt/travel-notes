@@ -274,7 +274,6 @@ or
     2. Check that app is working (run electron .)
     3. Run `npm install`
     4. Run `npm run build`
-
     
 9. Bug tracking
 ---------------

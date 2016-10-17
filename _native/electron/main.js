@@ -1,15 +1,10 @@
 const electron = require('electron');
-const app = electron.app;  // Модуль контролирующей жизненный цикл нашего приложения.
-const BrowserWindow = electron.BrowserWindow;  // Модуль создающий браузерное окно.
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
 
-var mainWindow = null;
-app.on('window-all-closed', function() {
-    if (process.platform != 'darwin') {
-        app.quit();
-    }
-});
-
-app.on('ready', function() {
+let mainWindow = null;
+app.on('window-all-closed', () => process.platform !== 'darwin' && app.quit());
+app.on('ready', () => {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
@@ -18,10 +13,6 @@ app.on('ready', function() {
     });
     mainWindow.loadURL('file://' + __dirname + '/www/index.html');
     mainWindow.setMenu(null);
-    //mainWindow.webContents.openDevTools();
     mainWindow.webContents.executeJavaScript(`startApp()`);
-
-    mainWindow.on('closed', function() {
-        mainWindow = null;
-    });
+    mainWindow.on('closed', () => mainWindow = null);
 });

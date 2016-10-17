@@ -1,6 +1,4 @@
-'use strict';
-
-const request = require('superagent');
+import request from 'superagent';
 import config from '../config/config';
 
 function restApi({model, ext = 'json', action = 'read', id = '', type} = {}) {

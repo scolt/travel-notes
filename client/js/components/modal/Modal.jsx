@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import Icon from 'react-fa';
 import storeMixin from 'mixins/storeMixin';
@@ -8,7 +7,7 @@ const customContentStyle = {
     padding: '0 0'
 };
 
-let Modal = React.createClass({
+const Modal = React.createClass({
     mixins: [storeMixin],
 
     closeModal() {
@@ -16,7 +15,7 @@ let Modal = React.createClass({
     },
 
     render() {
-        const modal = this.state.modal;
+        const {modal} = this.state;
 
         return (
             <Dialog
