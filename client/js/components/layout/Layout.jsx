@@ -12,6 +12,7 @@ import {AppBar, RaisedButton, Snackbar} from 'material-ui';
 import Menu from './components/menu/Menu';
 import Footer from './components/footer/Footer';
 
+import 'favicon.png';
 import storeMixin from 'mixins/storeMixin';
 
 import restApi from 'actions/restApi';

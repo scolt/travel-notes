@@ -87,6 +87,10 @@ const config = {
                 loader: ExtractTextPlugin.extract('style', 'css')
             },
             {
+                test: /favicon\.png\??/,
+                loader: 'url?limit=1&name=[path][name].[ext]'
+            },
+            {
                 test: /\.(otf|eot|svg|ttf|woff|png|jpg)\??/,
                 loader: 'url?limit=20000&name=[path][name].[ext]'
             },

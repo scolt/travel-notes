@@ -6,16 +6,9 @@ import Router from 'Router';
 import {render} from 'react-dom';
 import '../styl/global.styl';
 
-window.startApp = function() {
-    render(<Router/>, document.getElementById('app'));
-};
+window.startApp = () => render(<Router/>, document.getElementById('app'));
 
-(function () {
-    let url = document.URL;
-    const isSmart = (url.indexOf("http://") === -1 && url.indexOf("https://") === -1);
-    if(isSmart){
-        document.addEventListener('deviceready', window.startApp, false);
-    } else {
-        window.startApp();
-    }
-})();
+/^(http|https):\/\//.test(document.URL) ?
+    window.startApp() :
+    document.addEventListener('deviceready', window.startApp, false);
+
