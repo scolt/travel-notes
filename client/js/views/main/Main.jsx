@@ -96,7 +96,7 @@ const MainPage = React.createClass({
 
     addItem() {
         if (this.state.users.user.username) {
-            location.href = '/#/add';
+            location.href = '#/add';
         } else {
             this.store.dispatch({type: 'loginForAdd'});
         }

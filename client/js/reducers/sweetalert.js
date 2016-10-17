@@ -35,12 +35,12 @@ function sweetalert(state = sweetalertModel, action) {
         let title = 'Registered!';
         let message = 'You are successful registered and logged in application.';
         let type = 'success';
-        let redirectTo = '/#/home';
+        let redirectTo = '#/home';
         return {...state, open, title, message, type, redirectTo};
     }
 
     if (action.type === 'createNote') {
-        setTimeout(() => window.location.hash = '/#/home');
+        setTimeout(() => window.location.hash = '#/home');
         let open = true;
         let title = 'Created!';
         let message = 'You are successful create a new note.';
