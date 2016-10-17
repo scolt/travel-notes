@@ -1,0 +1,14 @@
+{
+  "name": "travel-note",
+  "productName ": "Travel Note",
+  "version": "1.0.0",
+  "description": "0.0.1",
+  "main": "main.js",
+  "devDependencies": {
+    "electron": "1.4.3"
+  },
+  "scripts": {
+    "build": "electron-packager . Travel-Note"
+  },
+  "license": "ISC"
+}

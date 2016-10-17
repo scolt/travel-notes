@@ -245,10 +245,10 @@ or
 7.3 Build android app
     
     1. Run webpack for production
-    2. Copy all files from "public" directory to "_native/www"
-    3. Open command tool for directory "_native"
+    2. Copy all files from "public" directory to "_native/phonegap/www"
+    3. Open command tool for directory "_native/phonegap"
     4. Run "phonegap build android"
-    5. Build will be available by "_native\platforms\android\build\outputs\apk"
+    5. Build will be available by "_native\phonegap\platforms\android\build\outputs\apk"
     
 7.4 Emulation
     
@@ -257,8 +257,26 @@ or
     
     Second point use Virtual Box and works fastly.
     
+8. Electron build
+-----------------
+
+8.1 Install electron
+
+    npm i -g electron
+
+8.2 Install electron packager tool
+
+    npm i -g electron-packager
     
-8. Bug tracking
+8.3 Prepare before build
+    
+    1. Copy all files from "public" directory to "_native/electron"
+    2. Check that app is working (run electron .)
+    3. Run `npm install`
+    4. Run `npm run build`
+
+    
+9. Bug tracking
 ---------------
 Oh, we are ashamed and want to fix it asap! 
 
