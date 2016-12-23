@@ -8,7 +8,6 @@ let Main = require('views/main/Main');
 let Note = require('views/note/Note');
 let AddNote = require('views/note/add/Add');
 let Gallery = require('views/gallery/Gallery');
-let About = require('views/about/About');
 let Map = require('views/map/Map');
 let LandingPage = require('views/landingPage/LandingPage');
 let NotFound = require('views/notFound/NotFound');
@@ -28,7 +27,6 @@ let Router = React.createClass({
                     <Route path="/main" component={Main}/>
                     <Route path="/note(/:id)" component={Note}/>
                     <Route path="/gallery" component={Gallery}/>
-                    <Route path="/about" component={About}/>
                     <Route path="/map" component={Map}/>
                     <Route path="/404" component={NotFound}/>
                     <Route path="/register" component={Register}/>
