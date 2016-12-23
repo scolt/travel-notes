@@ -16,12 +16,6 @@ const menu = {
             icon: 'camera-retro'
         },
         {
-            name: 'about',
-            title: 'About',
-            hash: '#/about',
-            icon: 'info-circle'
-        },
-        {
             name: 'landingPage',
             title: 'Landing Page',
             hash: '#/landingPage',
