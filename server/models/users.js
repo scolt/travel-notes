@@ -183,6 +183,7 @@ let UsersActions = {
 
     update(req, res, next) {
         if (req.user && req.body['_id'] === req.user['_id']) {
+            delete req.body.username;
             User.update({
                 _id: req.body['_id']
             }, req.body, {}, function (err, doc) {

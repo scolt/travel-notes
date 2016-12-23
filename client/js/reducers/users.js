@@ -10,7 +10,7 @@ function users(state = usersModel, action) {
 
     if (action.type === 'logout') {
         window.sessionStorage.token = null;
-        location.href = '/#';
+        location.href = '#';
         return {...usersModel};
     }
 
@@ -29,14 +29,14 @@ function users(state = usersModel, action) {
     if (action.type === 'login') {
         let {loginForm} = state;
         window.sessionStorage.token = action.data.token;
-        location.href = loginForm.prevState ? loginForm.prevState : '/#';
+        location.href = loginForm.prevState ? loginForm.prevState : '#';
         return {...state, user: {...action.data}, loginForm: {...loginForm, prevState: null}};
     }
 
     if (action.type === 'loginForAdd') {
         let {loginForm} = state;
-        location.href = '/#/login';
-        return {...state, loginForm: {...loginForm, prevState: '/#/add'}};
+        location.href = '#/login';
+        return {...state, loginForm: {...loginForm, prevState: '#/add'}};
     }
 
     if (action.type === 'preparePayloadForUserProfile') {
@@ -45,10 +45,10 @@ function users(state = usersModel, action) {
     }
 
     if (action.type === 'preparePayloadForUserUpdate') {
-        let {editForm, row} = state;
+        let {editForm, user} = state;
         editForm = {...editForm, fields: [...editForm.fields]};
         var data = new FormData();
-        data.append('_id', row['_id']);
+        data.append('_id', user['_id']);
         editForm.fields.forEach(function (item) {
             if (!item.readOnly) {
                 data.append(item.name, item.value);
@@ -58,10 +58,10 @@ function users(state = usersModel, action) {
     }
 
     if (action.type === 'cancelEditMode') {
-        let {editForm, row} = state;
+        let {editForm, user} = state;
         let {fields} = state.editForm;
         for (var i = 0; i < fields.length; i++) {
-            fields[i].value = row[fields[i].name];
+            fields[i].value = user[fields[i].name];
             fields[i].isDirty = false;
             fields[i].isValid = true;
         }
@@ -74,6 +74,19 @@ function users(state = usersModel, action) {
         let enableEditMode = action.value;
         let {editForm} = state;
         return {...state, editForm: {...editForm, enableEditMode}};
+    }
+
+    if (action.type === 'prepareProfile') {
+        let resData = action.data;
+        let {editForm, user} = state;
+        let {fields} = state.editForm;
+        for (var i = 0; i < fields.length; i++) {
+            fields[i].value = resData[fields[i].name];
+        }
+
+        resData.owner = user.username === resData.username;
+
+        return {...state, profile: resData, editForm: {...editForm, fields, enableEditMode: false} };
     }
 
     if (action.type === 'prepareUser') {

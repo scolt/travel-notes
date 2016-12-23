@@ -2,52 +2,32 @@
 
 import React from 'react';
 import {Gallery} from 'components/gallery/Gallery';
+import restApi from 'actions/restApi';
+import storeMixin from 'mixins/storeMixin';
 
+function calculateGrid() {
+    let columnCount = Math.ceil(window.innerWidth / 300);
+    return {
+        count: columnCount
+    };
+}
 
 let GalleryPage = React.createClass({
+    mixins: [storeMixin],
+
+    componentWillMount() {
+        this.request = this.store.dispatch(restApi({
+            model: 'notes',
+            type: 'getNotes'
+        }));
+    },
+
     render() {
-        var tilesData = [
-            {
-                img: 'http://lorempixel.com/300/200/nature/1',
-                title: 'Breakfast',
-                author: 'jill111'
-            },
-            {
-                img: 'http://lorempixel.com/300/200/nature/2',
-                title: 'Tasty burger',
-                author: 'pashminu'
-            },
-            {
-                img: 'http://lorempixel.com/300/200/nature/3',
-                title: 'Camera',
-                author: 'Danson67'
-            },
-            {
-                img: 'http://lorempixel.com/300/200/nature/4',
-                title: 'Morning',
-                author: 'fancycrave1'
-            },
-            {
-                img: 'http://lorempixel.com/300/200/nature/5',
-                title: 'Hats',
-                author: 'Hans'
-            },
-            {
-                img: 'http://lorempixel.com/300/200/nature/6',
-                title: 'Honey',
-                author: 'fancycravel'
-            },
-            {
-                img: 'http://lorempixel.com/300/200/nature/7',
-                title: 'Vegetables',
-                author: 'jill111'
-            },
-            {
-                img: 'http://lorempixel.com/300/200/nature/8',
-                title: 'Water plant',
-                author: 'BkrmadtyaKarki'
-            }
-        ];
+        let tilesData = this.state.notes.notes.map((item, index) => {
+            item.img = item.photo;
+            return item;
+        });
+
         return <div><Gallery images={tilesData}/></div>;
     }
 });

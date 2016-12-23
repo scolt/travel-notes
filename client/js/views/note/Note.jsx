@@ -25,20 +25,25 @@ let Note = React.createClass({
 
     render() {
         const note = this.state.notes.note;
-        let card = <Card>
-            <CardTitle title={note.title} subtitle={note.subtitle} />
-            <CardText>
-                <div className="row" >
-                    <div className="note-photo col-xs-12 col-md-6">
-                        <img src={note.photo} />
-                    </div>
-                    <div className="note-map col-xs-12 col-md-6">
-                        <Map markers={[{position: note.position, title: note.title}]} center={note.position}/>
-                    </div>
+
+        let card = <div className="note-entity">
+            <div className="note-header">
+                <img src={note.photo} />
+                <div className="titles">
+                    <h1>{note.title}</h1>
+                    <p>{note.subtitle}</p>
                 </div>
-                <div>{note.text}</div>
-            </CardText>
-        </Card>;
+            </div>
+            <div className="row">
+                <div className="col-md-6 col-xs-12">
+                    {note.text}
+                    <div className="sign">{note.author}</div>
+                </div>
+                <div className="col-md-6 col-xs-12">
+                    <Map markers={[{position: note.position, title: note.title}]} center={note.position}/>
+                </div>
+            </div>
+        </div>;
 
         return (
             <div>

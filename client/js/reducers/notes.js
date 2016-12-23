@@ -8,6 +8,7 @@ function notes(state = notesModel, action) {
             title: note.title,
             subtitle: note.subtitle,
             text: note.text,
+            author: note.userId,
             photo: note.photo,
             position: {
                 lng: parseFloat(note.lng),
@@ -22,7 +23,7 @@ function notes(state = notesModel, action) {
                 window: {
                     descr: item.text,
                     title: item.title,
-                    link: `/#/note/${item._id}`,
+                    link: `#/note/${item._id}`,
                     photo: item.photo
                 },
                 position: {
@@ -37,6 +38,22 @@ function notes(state = notesModel, action) {
         return {...state, notes: action.data.result};
     }
 
+    if (action.type === 'restoreNoteFilterPayload') {
+        let {filters, payload} = state;
+        let newPreparedServerFilters = {},
+            orderBy = {};
+
+        if (filters.onlyMy) {
+            newPreparedServerFilters['userId'] = filters.onlyMy;
+        }
+
+        if (filters.orderBy) {
+            orderBy[filters.orderBy.name] = filters.orderBy.direction;
+        }
+
+        return {...state, payload: {...payload, filters: {...newPreparedServerFilters}, order: orderBy}};
+    }
+
     if (action.type === 'prepareNoteFilterPayload') {
         let {payload} = state;
         let {filters} = state.payload;
@@ -47,22 +64,29 @@ function notes(state = notesModel, action) {
         if (action.updated === 'filters') {
             if (!action.filters.userId) {
                 newClientFilters.onlyMy = false;
-                delete filters.userId;
+                if (filters) {
+                    delete filters.userId;
+                }
             }
 
             Object.keys(action.filters).forEach(function (key) {
                 if (key === 'userId') {
-                    newClientFilters.onlyMy = action.currentUserID == action.filters[key];
+                    newClientFilters.onlyMy = action.currentUserID == action.filters[key] ? action.currentUserID : false;
                     newPreparedServerFilters[key] = action.filters[key];
                 }
             });
         }
 
         if (action.updated === 'order') {
-            newClientFilters.orderBy = action.orderBy;
+            const direction = payload.order && payload.order[action.orderBy] ?
+                payload.order[action.orderBy] === 1 ? -1 : 1 : 1;
 
-            orderBy[action.orderBy] = payload.order && payload.order[action.orderBy] ?
-                                        payload.order[action.orderBy] === 1 ? -1 : 1 : 1;
+            newClientFilters.orderBy = {
+                name: action.orderBy,
+                direction: direction
+            };
+
+            orderBy[action.orderBy] = direction;
         }
 
 
@@ -86,6 +110,23 @@ function notes(state = notesModel, action) {
         return {...state, payload: data};
     }
 
+    if (action.type === 'endProcessing' && action.data.model === 'notes') {
+        if (action.data.action === 'delete') {
+            let index = 0;
+            let {notes} = state;
+            for (let i = 0; i < notes.length; i++) {
+                if (notes[i]['_id'] === action.data.id) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index > -1) {
+                notes.splice(index, 1);
+            }
+            return {...state, notes};
+        }
+    }
+
     if (action.type === 'onChangeFormFieldNote') {
         const {name, value, formName} = action;
         let editForm = state[formName];
@@ -101,6 +142,16 @@ function notes(state = notesModel, action) {
         let error = false;
 
         editForm.fields = editForm.fields.map(function (item) {
+            if (item.validateObject) {
+                item.isValid = true;
+                item.requiredFields.forEach(key => {
+                    if (!item.value[key]) {
+                        item.isValid = false;
+                        error = true;
+                    }
+                });
+            }
+
             if (item.validate) {
                 item.isValid = item.validate.test(item.value);
                 if (!item.isValid) error = true;

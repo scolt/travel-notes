@@ -1,20 +1,19 @@
-'use strict';
-
-const request = require('superagent');
+import request from 'superagent';
+import config from '../config/config';
 
 function restApi({model, ext = 'json', action = 'read', id = '', type} = {}) {
     return (dispatch, getState) => {
         const payload = getState()[model].payload;
         dispatch({type: 'startProcessing'});
         return request
-            .post(`/restApi/${model}.${ext}/${action}/${id}`)
+            .post(`${config.restURL}restApi/${model}.${ext}/${action}/${id}`)
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${window.sessionStorage.token}`)
             .send(payload)
             .end((err, res) => {
-                dispatch({type: 'endProcessing'});
+                dispatch({type: 'endProcessing', data: {model, ext, action, id, type}});
                 dispatch(err ?
-                    {type: 'errProcessing', err} :
+                    {type: 'errProcessing', err, data: {model, action, type}} :
                     {type, data: res.body}
                 );
             });

@@ -6,11 +6,13 @@ import 'sweetalert/dist/sweetalert.css';
 import React from 'react';
 import Icon from 'react-fa';
 import SweetAlert from 'sweetalert-react';
+import Modal from '../modal/Modal';
 import {AppBar, RaisedButton, Snackbar} from 'material-ui';
 
 import Menu from './components/menu/Menu';
 import Footer from './components/footer/Footer';
 
+import 'favicon.png';
 import storeMixin from 'mixins/storeMixin';
 
 import restApi from 'actions/restApi';
@@ -47,6 +49,10 @@ let Layout = React.createClass({
                     text={this.state.sweetalert.message || ''}
                     type={this.state.sweetalert.type || 'info'}
                     onConfirm={() => {this.store.dispatch({type: 'alertClose'});}}
+                />
+                <Modal
+                    content={this.state.modal.message || ''}
+                    onClose={() => {this.store.dispatch({type: 'modalClose'});}}
                 />
                 <div className="footer"><Footer/></div>
             </div>

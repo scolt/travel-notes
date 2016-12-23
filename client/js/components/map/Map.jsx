@@ -9,7 +9,7 @@ import {default as MapLoader} from 'react-google-maps/lib/async/ScriptjsLoader';
 import MarkerClusterer from  'react-google-maps/lib/addons/MarkerClusterer';
 
 import {Card, CardActions, CardTitle, CardMedia, RaisedButton, CardText} from 'material-ui';
-
+import config from '../../config/config';
 import Icon from 'react-fa';
 
 import m1 from 'm1.png';
@@ -74,7 +74,7 @@ let Map = React.createClass({
             content = info;
         }
         return (
-            <InfoWindow key={`${ref}_info_window`} onCloseclick={this.handleCloseclick.bind(this, marker)}>
+            <InfoWindow key={`${ref}_info_window`}>
                 <Card>
                     {content}
                 </Card>
@@ -113,9 +113,10 @@ let Map = React.createClass({
 
         return (
             <MapLoader
+                protocol = {"https"}
                 hostname = {"maps.googleapis.com"}
                 pathname = {"/maps/api/js"}
-                query = {{libraries: 'geometry,drawing,places'}}
+                query = {{libraries: 'geometry,drawing,places', key: config.googleMapKey}}
                 loadingElement = {
                     <div className="spinner"><Icon name="circle-o-notch" spin/></div>
                 }

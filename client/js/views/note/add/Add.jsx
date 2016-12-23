@@ -47,7 +47,8 @@ let Note = React.createClass({
         this.store.dispatch({type: 'prepareNotePayload'});
         this.request = this.store.dispatch(restApi({
             model: 'notes',
-            action: 'create'
+            action: 'create',
+            type: 'createNote'
         }));
     },
 
@@ -96,6 +97,7 @@ let Note = React.createClass({
                                     style={inputStyle}
                                     disabled={field.readOnly}
                                     type={field.type}
+                                    multiLine={field.type === 'textarea'}
                                     hintText={field.hintText}
                                     errorText={field.errorText}
                                     defaultValue={field.defaultValue}
@@ -104,10 +106,14 @@ let Note = React.createClass({
                     })
                     }</div>
                     <div className="row add-note-details-block">
-                        <div className="col-md-6">
+                        <div className="col-md-6 col-xs-12">
                             {photo}
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 col-xs-12">
+                            <div className="required-text">
+                                <span className="asteriks">*</span>
+                                Coordinates of note is required. Please use map for set it.
+                            </div>
                             <Map markers={marker ? [marker] : []} canSetMarker={this.addCoord} />
                         </div>
                     </div>

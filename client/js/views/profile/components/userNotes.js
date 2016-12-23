@@ -2,34 +2,62 @@
 
 import React from 'react';
 import Icon from 'react-fa';
-import {Table, TableHeaderColumn, TableRow, TableHeader, TableRowColumn,TableBody} from 'material-ui/lib';
+import {Table, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, TableBody,
+    Card, CardTitle, CardText} from 'material-ui/lib';
+
+import storeMixin from 'mixins/storeMixin';
+import restApi from 'actions/restApi';
 
 let userNotes = React.createClass({
+    mixins: [
+        storeMixin
+    ],
+
+    componentWillMount() {
+        let filters = {'userId': this.props.user};
+        this.store.dispatch({type: 'prepareNoteFilterPayload',
+            currentUserID: this.state.users.user.username,
+            filters: filters,
+            updated: 'filters'});
+
+        this.request = this.store.dispatch(restApi({
+            model: 'notes',
+            type: 'getNotes'
+        }));
+    },
 
     render() {
         return (
-            <div className="row">
-                <Table
-                    height="255px"
-                    fixedHeader={true}>
-                    <TableHeader displaySelectAll={false}>
-                        <TableRow>
-                            <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="The Subname">Subname</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody
-                        showRowHover={true}
-                        displayRowCheckbox={false}>
-                        {this.props.notes.map( (row, index) => (
-                            <TableRow key={index} >
-                                <TableRowColumn>{row.title}</TableRowColumn>
-                                <TableRowColumn>{row.subtitle}</TableRowColumn>
+            <Card>
+                <CardTitle
+                    title="User's notes"
+                    className="user-profile-header"
+                    style={{paddingRight: '70px', paddingBottom: 0}}
+                >
+                </CardTitle>
+                <CardText className="row" style={{paddingTop: 0}}>
+                    <Table
+                        height="200px"
+                        fixedHeader={true}>
+                        <TableHeader displaySelectAll={false}>
+                            <TableRow>
+                                <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
+                                <TableHeaderColumn tooltip="The Subname">Subname</TableHeaderColumn>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </div>
+                        </TableHeader>
+                        <TableBody
+                            showRowHover={true}
+                            displayRowCheckbox={false}>
+                            {this.state.notes.notes.map( (row, index) => (
+                                <TableRow key={index} >
+                                    <TableRowColumn>{row.title}</TableRowColumn>
+                                    <TableRowColumn>{row.subtitle}</TableRowColumn>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </CardText>
+            </Card>
         );
     }
 });

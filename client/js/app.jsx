@@ -6,4 +6,9 @@ import Router from 'Router';
 import {render} from 'react-dom';
 import '../styl/global.styl';
 
-render(<Router/>, document.getElementById('app'));
+window.startApp = () => render(<Router/>, document.getElementById('app'));
+
+/^(http|https):\/\//.test(document.URL) ?
+    window.startApp() :
+    document.addEventListener('deviceready', window.startApp, false);
+

@@ -1,15 +1,18 @@
 *
     box-sizing border-box
     -moz-box-sizing border-box
+    font-family Roboto, sans-serif
 
 body
     margin 0
 
 html, body
     height 100%
+    width 100%
 
 #app
     min-height 100%
+    max-width 100%
     padding 64px 0 49px
     position relative
 
@@ -37,6 +40,7 @@ html, body
 .feed-item-add
     transition all ease-out .5s
     cursor pointer
+    border 10px solid #00bcd4;
 
     .feed-item-in
         height 100%
@@ -61,11 +65,18 @@ html, body
 
 
 .flat-block-item
+    padding 1px
+    display block
+    height 100%
+
     img
-        transition: all ease-out .5s;
+        transition: all ease-out .5s
 
     &:hover img{
-        width: 130% !important;
-        height: 130% !important;
-        margin-top: -15%;
+        width 130% !important
+        height 130% !important
+        margin-top -15%
     }
+
+.logo
+    cursor pointer

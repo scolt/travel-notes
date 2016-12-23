@@ -11,6 +11,7 @@ import storeMixin from 'mixins/storeMixin';
 import restApi from 'actions/restApi';
 
 let MapPage = React.createClass({
+    formName: 'editForm',
     mixins: [
         storeMixin
     ],
@@ -20,13 +21,14 @@ let MapPage = React.createClass({
         this.request = this.store.dispatch(restApi({
             model: 'users',
             id: this.props.user,
-            type: 'prepareUser'
+            type: 'prepareProfile'
         }));
     },
 
     onChangeEditFormField(e) {
+        const {formName} = this;
         let {name, value} = e.target;
-        this.store.dispatch({type: 'changeProfileEditFormField', name, value});
+        this.store.dispatch({type: 'onChangeFormField', name, value, formName});
     },
 
     enableEditMode: function () {
@@ -42,12 +44,12 @@ let MapPage = React.createClass({
         this.store.dispatch(restApi({
             model: 'users',
             action: 'update',
-            type: 'prepareUpdatedUser'
+            type: 'prepareUser'
         }));
     },
 
     render() {
-        const {user, editForm} = this.state.users;
+        const {profile: user, editForm} = this.state.users;
 
         let editBlock = null;
 
@@ -89,7 +91,7 @@ let MapPage = React.createClass({
                         <Paper className="image-developer"
                                zDepth={1}
                                circle={true}>
-                            <img className="img-rounded" src={user.avatar}/>
+                            <img className="img-rounded" src={user.avatar || 'client/assets/avatar.jpg'}/>
                         </Paper>
                     </div>
                     <div className="col-md-6">
