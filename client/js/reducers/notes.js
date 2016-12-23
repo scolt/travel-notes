@@ -5,16 +5,33 @@ const notesModel = require('models/notes');
 function notes(state = notesModel, action) {
     if (action.type === 'prepareNote') {
         return {...state, note: action.data.result.map(note => ({
+            id: note['_id'],
             title: note.title,
             subtitle: note.subtitle,
             text: note.text,
             author: note.userId,
-            photo: note.photo,
+            photos: note.photos,
             position: {
                 lng: parseFloat(note.lng),
                 lat:  parseFloat(note.lat)
             }
         }))[0]};
+    }
+
+    if (action.type === 'onAdditionalImageSet') {
+        const {value} = action;
+        const {addImageForm} = state;
+        addImageForm.fields[0].value = value;
+        return {...state};
+    }
+
+    if (action.type === 'preparePayloadForAdditionalImage') {
+        let data = new FormData();
+        let field = state.addImageForm.fields[0];
+        data.append('id', state.note.id);
+        data.append(field.name, field.value);
+        field.value = '';
+        return {...state, payload: data};
     }
 
     if (action.type === 'prepareMarkers') {
@@ -96,7 +113,7 @@ function notes(state = notesModel, action) {
     if (action.type === 'prepareNotePayload') {
         let {noteForm: editForm} = state;
         editForm = {...editForm, fields: [...editForm.fields]};
-        var data = new FormData();
+        let data = new FormData();
         editForm.fields.forEach(function (item) {
             if (!item.readOnly) {
                 if (item.name === 'position') {
@@ -108,23 +125,6 @@ function notes(state = notesModel, action) {
             }
         });
         return {...state, payload: data};
-    }
-
-    if (action.type === 'endProcessing' && action.data.model === 'notes') {
-        if (action.data.action === 'delete') {
-            let index = 0;
-            let {notes} = state;
-            for (let i = 0; i < notes.length; i++) {
-                if (notes[i]['_id'] === action.data.id) {
-                    index = i;
-                    break;
-                }
-            }
-            if (index > -1) {
-                notes.splice(index, 1);
-            }
-            return {...state, notes};
-        }
     }
 
     if (action.type === 'onChangeFormFieldNote') {
@@ -163,6 +163,31 @@ function notes(state = notesModel, action) {
         editForm.isValid = !error;
         state[formName] = editForm;
         return {...state};
+    }
+
+    if (action.type === 'endProcessing' && action.data.model === 'notes') {
+        if (action.data.action === 'delete') {
+            let index = 0;
+            let {notes} = state;
+            for (let i = 0; i < notes.length; i++) {
+                if (notes[i]['_id'] === action.data.id) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index > -1) {
+                notes.splice(index, 1);
+            }
+            return {...state, notes};
+        }
+        if (action.data.type === 'addImage') {
+            const {note} = state;
+            try {
+                note.photos = action.data.data.result[0].photos;
+            } catch(e) {}
+
+            return {...state, note};
+        }
     }
 
     return state;

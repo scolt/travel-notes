@@ -171,6 +171,7 @@ or
         title: String,
         userId: String,
         subtitle: String,
+        photos: String[],
         lng: Number,
         lat: Number,
         isDel: Boolean,

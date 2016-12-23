@@ -6,7 +6,7 @@ let cloudinary = require('cloudinary');
 
 let NoteSchema = new Schema({
     id: Number,
-    photo: String,
+    photos: [],
     text: String,
     title: String,
     userId: String,
@@ -63,7 +63,7 @@ let NoteActions = (function () {
     }
 
     function saveNote(data, user, image, cb) {
-        data.photo = image;
+        data.photo = [image];
         data.userId = user;
         data.isDraft = false;
         data.isDel = false;
@@ -76,9 +76,11 @@ let NoteActions = (function () {
         create(req, res, next) {
             const files = req.files;
             const body = req.body;
-            const user = req.user.username;
+            const user = req.user && req.user.username;
 
-            if (files.file && files.file.path) {
+            if (!user) {
+                dispatch(res, next)('User doesn\'t have permissions for create new note')
+            } else if (files.file && files.file.path) {
                 cloudinary.uploader.upload(
                     files.file.path,
                     function(result) {
@@ -100,6 +102,32 @@ let NoteActions = (function () {
             }
         },
 
+        addImage(req, res, next) {
+            const files = req.files;
+            const id = req.body.id;
+            cloudinary.uploader.upload(
+                files.file.path,
+                (result) => {
+                    Note.update({
+                        "_id": id
+                    }, {
+                        "$push": {"photos" : result.secure_url}
+                    }, (err) => {
+                        if (err) {
+                            dispatch(res, next)(err, null);
+                        } else {
+                            Note.find({"_id": id}).select('photos').exec((err, notes) => {
+                                let data = {
+                                    result: notes
+                                };
+                                dispatch(res, next)(err, data);
+                            })
+                        }
+
+                    })
+            });
+        },
+
         read(req, res, next) {
             const data = req.body;
             const id = req.body.id || req.params.id;
@@ -111,7 +139,7 @@ let NoteActions = (function () {
             if (id) filters._id = id;
 
             count(req.body, id, (err, data) => {
-                var query = Note
+                let query = Note
                     .find(filters)
                     .sort(order)
                     .skip((data.page - 1) * data.limit)

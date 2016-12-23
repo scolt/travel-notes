@@ -10,6 +10,15 @@ const notes = {
         orderBy: '',
         onlyMy: false
     },
+    addImageForm: {
+        fields: [{
+            type: 'file',
+            name: 'file',
+            label: 'Avatar',
+            dropzoneText: 'Try dropping some files here, or click to select files to upload.',
+            value: ''
+        }]
+    },
 
     noteForm: {
         isValid: false,
@@ -40,7 +49,7 @@ const notes = {
                 isDirty: false,
                 validate: /^[\w@.-_]{4,100}$/,
                 validationMessage: 'This is required field. ' +
-                'Password should contains at least 4 chars. Allowed letters, numbers, @ . - _',
+                'Title should contains at least 4 chars. Allowed letters, numbers, @ . - _',
                 errorText: null
             },
             {

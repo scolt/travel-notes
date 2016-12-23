@@ -35,6 +35,7 @@ export let Gallery = React.createClass({
                         <img src={tile.img} />
                     </div> : null
                 ))}
+                {this.props.appendAfter}
             </div>
         );
     }

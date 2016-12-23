@@ -175,7 +175,7 @@ const MainPage = React.createClass({
                                 className="feed-item"
                             >
                                 {tile.userId === username ? <i className="fa fa-trash" onClick={(e) => this.deleteSelect(e, tile._id)}></i> : null}
-                                <img src={tile.photo || `client/assets/mock${getRandomInt(1, 6)}.jpg`}
+                                <img src={tile.photos && tile.photos[0] || `client/assets/mock${getRandomInt(1, 6)}.jpg`}
                                      style={{height: '100%', width: '100%'}} />
                             </GridTile>
                         </a>

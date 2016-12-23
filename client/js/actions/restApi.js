@@ -11,7 +11,7 @@ function restApi({model, ext = 'json', action = 'read', id = '', type} = {}) {
             .set('Authorization', `Bearer ${window.sessionStorage.token}`)
             .send(payload)
             .end((err, res) => {
-                dispatch({type: 'endProcessing', data: {model, ext, action, id, type}});
+                dispatch({type: 'endProcessing', data: {model, ext, action, id, type, data: res.body}});
                 dispatch(err ?
                     {type: 'errProcessing', err, data: {model, action, type}} :
                     {type, data: res.body}

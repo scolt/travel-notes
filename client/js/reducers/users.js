@@ -131,7 +131,7 @@ function users(state = usersModel, action) {
     if (action.type === 'preparePayloadForUserCreate') {
         let {registerForm: editForm} = state;
         editForm = {...editForm, fields: [...editForm.fields]};
-        var data = new FormData();
+        let data = new FormData();
         editForm.fields.forEach(function (item) {
             if (!item.readOnly) {
                 data.append(item.name, item.value);
