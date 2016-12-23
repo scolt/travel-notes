@@ -185,7 +185,7 @@ or
         rate: Number
     }
 
-    Notes2Images {
+    (deprecated) Notes2Images {
         imageId: String,
         noteId: String
     }
@@ -220,6 +220,7 @@ or
 6.4 Images
 
     Images {
+        type: String,
         preview: String,
         image: String,
         isDel: boolean,

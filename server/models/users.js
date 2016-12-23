@@ -32,8 +32,8 @@ let ImageSchema = new Schema({
 let cloudinary = require('cloudinary');
 
 function encrypt(text){
-    var cipher = crypto.createCipher(config.algorithm, config.password);
-    var crypted = cipher.update(text,'utf8','hex');
+    let cipher = crypto.createCipher(config.algorithm, config.password);
+    let crypted = cipher.update(text,'utf8','hex');
     crypted += cipher.final('hex');
     return crypted;
 }
@@ -73,7 +73,7 @@ let UsersActions = {
                 return;
             }
 
-            var data = user.toObject();
+            let data = user.toObject();
             delete data.password;
             delete data.salt;
             data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
@@ -102,9 +102,8 @@ let UsersActions = {
             if (!user) {
                 res.status(404);
                 res.send('This user doesn\'t exist');
-                return;
             } else {
-                var data = user.toObject();
+                let data = user.toObject();
                 delete data.password;
                 delete data.salt;
 
@@ -129,30 +128,31 @@ let UsersActions = {
     },
 
     create(req, res, next) {
-        var cloudinaryConfig = {
+        const cloudinaryConfig = {
             width: 200,
             height: 200,
             crop: 'fill'
         };
 
-        var user = req.body;
+        const user = req.body;
 
         function saveUser(avatarUrl) {
             Image({
-                image: avatarUrl
+                image: avatarUrl,
+                type: 'avatar'
             }).save(function (err, image) {
                 if (err) {
                     res.status('500');
                     res.json({code: err.code.toString()});
                 } else {
-                    var dataImage = image.toObject();
+                    let dataImage = image.toObject();
                     user.imageId = dataImage['_id'];
                     User(user).save(function (err, user) {
                         if (err) {
                             res.status('500');
                             res.json({code: err.code.toString()});
                         } else {
-                            var data = user.toObject();
+                            let data = user.toObject();
                             data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 60 * 24});
                             data.avatar = dataImage.image;
                             delete data.password;
