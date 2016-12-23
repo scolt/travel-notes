@@ -21,7 +21,7 @@ function notes(state = notesModel, action) {
         return {...state, markers: action.data.result.map(item =>
             ({
                 window: {
-                    descr: item.text,
+                    descr: item.text ? item.text.substr(0, 250) + '...' : '',
                     title: item.title,
                     link: `#/note/${item._id}`,
                     photo: item.photo

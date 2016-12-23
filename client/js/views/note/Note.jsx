@@ -3,13 +3,13 @@
 import './note.styl';
 
 import React from 'react';
-import {Card, CardTitle, CardText} from 'material-ui';
+import {Card, CardTitle, CardText, CardMedia} from 'material-ui';
+import {Gallery} from 'components/gallery/Gallery';
 import Icon from 'react-fa';
 
 import Map from 'components/map/Map';
 
 import restApi from 'actions/restApi';
-
 import storeMixin from 'mixins/storeMixin';
 
 let Note = React.createClass({
@@ -25,25 +25,31 @@ let Note = React.createClass({
 
     render() {
         const note = this.state.notes.note;
+        const tilesData = [{
+            img: note.photo
+        }];
 
-        let card = <div className="note-entity">
-            <div className="note-header">
-                <img src={note.photo} />
-                <div className="titles">
-                    <h1>{note.title}</h1>
-                    <p>{note.subtitle}</p>
-                </div>
-            </div>
+        let card =
             <div className="row">
-                <div className="col-md-6 col-xs-12">
-                    {note.text}
-                    <div className="sign">{note.author}</div>
+                <div className="note-background">
+                    <img className="note-background-image"  src={note.photo}/>
+                    <div className="col-sm-8 col-xs-12 note-container">
+                        <Card style={{backgroundColor: 'transparent', boxShadow: 'none'}}>
+                            <CardMedia
+                                overlay={<CardTitle title={note.title} subtitle={note.subtitle} />}
+                            >
+                                <div className="header-image"></div>
+                            </CardMedia>
+                            <CardText style={{background: '#fff'}}>
+                                <Map className="map-in-card" markers={[{position: note.position, title: note.title}]} center={note.position}/>
+                                <div className="note-text">{note.text}</div>
+                                <div className="sign">{note.author}</div>
+                                <Gallery images={tilesData}/>
+                            </CardText>
+                        </Card>
+                    </div>
                 </div>
-                <div className="col-md-6 col-xs-12">
-                    <Map markers={[{position: note.position, title: note.title}]} center={note.position}/>
-                </div>
-            </div>
-        </div>;
+            </div>;
 
         return (
             <div>

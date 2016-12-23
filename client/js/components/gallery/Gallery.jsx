@@ -30,7 +30,6 @@ export let Gallery = React.createClass({
                         title={tile.title}
                         className="col-33-custom gallery-item"
                         onClick={() => { this.openImage(tile.img); } }
-                        actionIcon={<IconButton><Icon name="heart" /></IconButton>}
                     >
 
                         <img src={tile.img} />
