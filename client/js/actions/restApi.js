@@ -6,7 +6,7 @@ function restApi({model, ext = 'json', action = 'read', id = '', type} = {}) {
         const payload = getState()[model].payload;
         dispatch({type: 'startProcessing'});
         return request
-            .post(`${config.restURL}restApi/${model}.${ext}/${action}/${id}`)
+            .post(`${config.restURL}/restApi/${model}.${ext}/${action}/${id}`)
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${window.sessionStorage.token}`)
             .send(payload)

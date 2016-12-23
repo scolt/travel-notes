@@ -2,16 +2,24 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+/* Extra plugins */
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const StringReplacePlugin = require("string-replace-webpack-plugin");
 
 const definitions = new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
 });
 
 const NODE_ENV = JSON.parse(definitions.definitions['process.env.NODE_ENV']);
 const isDev = NODE_ENV == 'development';
-const remoteServer = process.env.remoteServer || 'http://localhost:1337';
+
+const replacements = [
+    {
+        pattern: /\$\$REST_URL_HOST/ig,
+        replacement: () => process.env.remoteServer || 'http://localhost:1337'
+    }
+];
 
 const devServerConfig = {
     host: process.env.IP || 'localhost',
@@ -19,18 +27,14 @@ const devServerConfig = {
     contentBase: path.resolve(__dirname, 'public'),
     getUrl: function () {
         return `webpack-dev-server/client?http://${this.host}:${this.port}/`;
-    },
-
-    proxy: {
-        '/restApi/*': {
-            target: remoteServer,
-            secure: false,
-            changeOrigin: true
-        }
     }
 };
 
-let plugins = [new ExtractTextPlugin('styles.css'), definitions];
+let plugins = [
+    new ExtractTextPlugin('styles.css'),
+    new StringReplacePlugin(),
+    definitions
+];
 if (!isDev) plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
 
 const config = {
@@ -72,6 +76,13 @@ const config = {
             }
         ],
         loaders: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: StringReplacePlugin.replace({
+                    replacements: replacements
+                })
+            },
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
