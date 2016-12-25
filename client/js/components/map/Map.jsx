@@ -103,11 +103,8 @@ let Map = React.createClass({
     },
 
     generateUrl() {
-        let params = {libraries: 'geometry,drawing,places', key: config.googleMapKey};
-        let query = '?';
-        Object.keys(params).forEach((key) => {
-            query += `${key}=${params[key]}&`;
-        });
+        const params = {libraries: 'geometry,drawing,places', key: config.googleMapKey};
+        const query = Object.keys(params).reduce((result, key) => result += `${key}=${params[key]}&`, '?');
         return `https://maps.googleapis.com/maps/api/js${query}`;
     },
 
@@ -150,7 +147,7 @@ let Map = React.createClass({
                     <div className={'map ' + this.props.type}></div>
                 }
                 mapElement={
-                    <div style={{ height: `100%` }} />
+                    <div style={{ height: '100%' }} />
                 }
                 center={this.props.center}
                 markers={this.props.markers}

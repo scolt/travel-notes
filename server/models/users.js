@@ -32,7 +32,7 @@ let ImageSchema = new Schema({
 let cloudinary = require('cloudinary');
 
 function encrypt(text){
-    let cipher = crypto.createCipher(config.algorithm, config.password);
+    const cipher = crypto.createCipher(config.algorithm, config.password);
     let crypted = cipher.update(text,'utf8','hex');
     crypted += cipher.final('hex');
     return crypted;
@@ -73,7 +73,7 @@ let UsersActions = {
                 return;
             }
 
-            let data = user.toObject();
+            const data = user.toObject();
             delete data.password;
             delete data.salt;
             data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
@@ -103,7 +103,7 @@ let UsersActions = {
                 res.status(404);
                 res.send('This user doesn\'t exist');
             } else {
-                let data = user.toObject();
+                const data = user.toObject();
                 delete data.password;
                 delete data.salt;
 

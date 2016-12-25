@@ -111,13 +111,13 @@ let NoteActions = (function () {
                     Note.update({
                         "_id": id
                     }, {
-                        "$push": {"photos" : result.secure_url}
+                        "$push": {photos : result.secure_url}
                     }, (err) => {
                         if (err) {
                             dispatch(res, next)(err, null);
                         } else {
                             Note.find({"_id": id}).select('photos').exec((err, notes) => {
-                                let data = {
+                                const data = {
                                     result: notes
                                 };
                                 dispatch(res, next)(err, data);
@@ -139,7 +139,7 @@ let NoteActions = (function () {
             if (id) filters._id = id;
 
             count(req.body, id, (err, data) => {
-                let query = Note
+                const query = Note
                     .find(filters)
                     .sort(order)
                     .skip((data.page - 1) * data.limit)

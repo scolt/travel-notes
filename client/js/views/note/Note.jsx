@@ -44,12 +44,7 @@ let Note = React.createClass({
         const note = this.state.notes.note;
         const userId = this.state.users.user.username;
         const addImageFormField = this.state.notes.addImageForm.fields[0];
-
-        const tilesData = note.photos && note.photos.map((photo) => {
-            return {
-                img: photo
-            };
-        });
+        const tilesData = note.photos && note.photos.map(photo => ({ img: photo}));
 
         let card =
             <div className="row">

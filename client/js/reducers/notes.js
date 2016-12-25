@@ -26,8 +26,8 @@ function notes(state = notesModel, action) {
     }
 
     if (action.type === 'preparePayloadForAdditionalImage') {
-        let data = new FormData();
-        let field = state.addImageForm.fields[0];
+        const data = new FormData();
+        const field = state.addImageForm.fields[0];
         data.append('id', state.note.id);
         data.append(field.name, field.value);
         field.value = '';
@@ -113,15 +113,14 @@ function notes(state = notesModel, action) {
     if (action.type === 'prepareNotePayload') {
         let {noteForm: editForm} = state;
         editForm = {...editForm, fields: [...editForm.fields]};
-        let data = new FormData();
+        const data = new FormData();
         editForm.fields.forEach(function (item) {
-            if (!item.readOnly) {
-                if (item.name === 'position') {
-                    data.append('lat', item.value.lat);
-                    data.append('lng', item.value.lng);
-                } else {
-                    data.append(item.name, item.value);
-                }
+            if (item.readOnly) return;
+            if (item.name === 'position') {
+                data.append('lat', item.value.lat);
+                data.append('lng', item.value.lng);
+            } else {
+                data.append(item.name, item.value);
             }
         });
         return {...state, payload: data};
@@ -167,14 +166,8 @@ function notes(state = notesModel, action) {
 
     if (action.type === 'endProcessing' && action.data.model === 'notes') {
         if (action.data.action === 'delete') {
-            let index = 0;
             let {notes} = state;
-            for (let i = 0; i < notes.length; i++) {
-                if (notes[i]['_id'] === action.data.id) {
-                    index = i;
-                    break;
-                }
-            }
+            const index = notes.findIndex(note => note['_id'] === action.data.id);
             if (index > -1) {
                 notes.splice(index, 1);
             }
