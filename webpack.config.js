@@ -11,13 +11,12 @@ const definitions = new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
 });
 
-const NODE_ENV = JSON.parse(definitions.definitions['process.env.NODE_ENV']);
-const isDev = NODE_ENV == 'development';
+const isDev = JSON.parse(definitions.definitions['process.env.NODE_ENV']) == 'development';
 
 const replacements = [
     {
         pattern: /\$\$REST_URL_HOST/ig,
-        replacement: () => process.env.remoteServer || 'http://localhost:1337'
+        replacement: () => process.env.remoteServer || (isDev ? 'http://localhost:1337' : '')
     }
 ];
 
