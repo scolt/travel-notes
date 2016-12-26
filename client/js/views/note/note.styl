@@ -11,14 +11,12 @@
     overflow hidden
     margin-bottom 20px
     img
-        position absolute
-        top 0
-        left 0
         width 100%
         min-height 300px
     .titles
-        position relative
-        margin-top 40px
+        position absolute
+        top 40px
+        left 0
         display inline-block
         background rgba(0, 188, 212, 0.78)
         padding 10px 50px 10px 10px
@@ -63,3 +61,64 @@
     .asteriks
         color red
         margin-right 10px
+
+.note-background
+    position relative
+    overflow hidden
+    min-height 100%
+    width 100%
+
+    .header-image
+        height 150px
+        overflow hidden
+
+        img
+            width: 100%;
+
+.note-background-image
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    min-width: 110%;
+    min-height: 110%;
+    z-index: -1;
+
+
+.note-container
+    margin 20px auto
+
+.note-text
+    font-size 16px
+    line-height 1.5
+    margin 15px 0 0
+
+.drop-zone-sq {
+    position: absolute;
+    border: 5px dotted #ccc;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 10px 35px;
+}
+
+
+.gallery-item .drop-zone-sq img {
+    max-width: 100%;
+    position: relative;
+}
+
+.submit-drop {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    background: #00bcd4;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}

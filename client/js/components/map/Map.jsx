@@ -4,8 +4,14 @@ import './map.styl';
 
 import React from 'react';
 
-import {GoogleMap, Marker, InfoWindow} from 'react-google-maps';
-import {default as MapLoader} from 'react-google-maps/lib/async/ScriptjsLoader';
+import {
+    withGoogleMap,
+    GoogleMap,
+    InfoWindow,
+    Marker
+} from 'react-google-maps';
+
+import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
 import MarkerClusterer from  'react-google-maps/lib/addons/MarkerClusterer';
 
 import {Card, CardActions, CardTitle, CardMedia, RaisedButton, CardText} from 'material-ui';
@@ -17,6 +23,49 @@ import m2 from 'm2.png';
 import m3 from 'm3.png';
 import m4 from 'm4.png';
 import m5 from 'm5.png';
+import 'banner.jpg';
+
+const GoogleMapConstructor = withScriptjs(
+    withGoogleMap(
+        props => (
+            <GoogleMap
+                defaultZoom={3}
+                defaultCenter={props.center || {lat: 48.2, lng: 16.366667}}
+                onClick={props.onMapClick}>
+                <MarkerClusterer
+                    styles={props.clusterStyles}
+                >
+                    {props.markers.map((marker, index) => {
+                        const ref = `marker_${index}`;
+                        return (
+                            <Marker
+                                {...marker}
+                                key={ref}
+                                onClick={() => props.onMarkerClick(marker)}>
+                                {marker.showInfo ?
+                                    <InfoWindow key={`${ref}_info_window`} onCloseClick={() => props.onMarkerClose(marker)}>
+                                        <Card>
+                                            <CardMedia
+                                                overlay={<CardTitle title={marker.window.title} subtitle={marker.window.subtitle} />}
+                                            >
+                                                {<img src={marker.window.photo || 'client/assets/banner.jpg'}/>}
+                                            </CardMedia>
+                                            <CardText>
+                                                {marker.window.descr}
+                                            </CardText>
+                                            <CardActions>
+                                                {marker.window.link ? <a href={marker.window.link}><RaisedButton label="Open"/></a> : null}
+                                            </CardActions>
+                                        </Card>
+                                    </InfoWindow> : null}
+                            </Marker>
+                        );
+                    })}
+                </MarkerClusterer>
+            </GoogleMap>
+        )
+    )
+);
 
 let Map = React.createClass({
     propTypes: {
@@ -48,38 +97,15 @@ let Map = React.createClass({
         }
     },
 
-    renderInfoWindow(ref, marker) {
-        if (!marker.window) return null;
-        let content = null;
-        let info =
-            <div>
-                <CardTitle title={marker.window.title} subtitle={marker.window.subtitle}/>
-                <CardText>
-                    {marker.window.descr}
-                </CardText>
-                <CardActions>
-                    {marker.window.link ? <a href={marker.window.link}><RaisedButton label="Open"/></a> : null}
-                </CardActions>
-            </div>;
-        if (marker.window.photo) {
-            content =
-                <CardMedia
-                    overlay={ info }
-                    overlayContentStyle={{background: 'rgba(255,255,255,0.85)'}}
-                    mediaStyle={{overflow: 'hidden', maxHeight: '450px'}}
-                >
-                    <img src={marker.window.photo}/>
-                </CardMedia>;
-        } else {
-            content = info;
-        }
-        return (
-            <InfoWindow key={`${ref}_info_window`}>
-                <Card>
-                    {content}
-                </Card>
-            </InfoWindow>
-        );
+    handleMarkerClose(marker) {
+        marker.showInfo = false;
+        this.setState(this.props.markers);
+    },
+
+    generateUrl() {
+        const params = {libraries: 'geometry,drawing,places', key: config.googleMapKey};
+        const query = Object.keys(params).reduce((result, key) => result += `${key}=${params[key]}&`, '?');
+        return `https://maps.googleapis.com/maps/api/js${query}`;
     },
 
     render() {
@@ -112,39 +138,23 @@ let Map = React.createClass({
         ];
 
         return (
-            <MapLoader
-                protocol = {"https"}
-                hostname = {"maps.googleapis.com"}
-                pathname = {"/maps/api/js"}
-                query = {{libraries: 'geometry,drawing,places', key: config.googleMapKey}}
+            <GoogleMapConstructor
+                googleMapURL={this.generateUrl()}
                 loadingElement = {
                     <div className="spinner"><Icon name="circle-o-notch" spin/></div>
                 }
                 containerElement={
                     <div className={'map ' + this.props.type}></div>
                 }
-                googleMapElement={
-                    <GoogleMap
-                        defaultZoom={3}
-                        defaultCenter={this.props.center || {lat: 48.2, lng: 16.366667}}
-                        onClick={this.handleMapClick}>
-                        <MarkerClusterer
-                            styles={styles}
-                        >
-                            {this.props.markers.map((marker, index) => {
-                                const ref = `marker_${index}`;
-                                return (
-                                    <Marker
-                                        {...marker}
-                                        key={ref}
-                                        onClick={this.handleMarkerClick.bind(this, marker)}>
-                                        {marker.showInfo ? this.renderInfoWindow(ref, marker) : null}
-                                    </Marker>
-                                );
-                            })}
-                        </MarkerClusterer>
-                    </GoogleMap>
+                mapElement={
+                    <div style={{ height: '100%' }} />
                 }
+                center={this.props.center}
+                markers={this.props.markers}
+                clusterStyles={styles}
+                onMarkerClick={this.handleMarkerClick}
+                onMapClick={this.handleMapClick}
+                onMarkerClose={this.handleMarkerClose}
             />);
     }
 });

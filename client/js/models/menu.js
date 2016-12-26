@@ -10,22 +10,10 @@ const menu = {
             icon: 'home'
         },
         {
-            name: 'note',
-            title: 'Note',
-            hash: '#/note',
-            icon: 'bookmark-o'
-        },
-        {
             name: 'gallery',
             title: 'Gallery',
             hash: '#/gallery',
             icon: 'camera-retro'
-        },
-        {
-            name: 'about',
-            title: 'About',
-            hash: '#/about',
-            icon: 'info-circle'
         },
         {
             name: 'landingPage',

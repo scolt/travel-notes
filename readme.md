@@ -171,6 +171,7 @@ or
         title: String,
         userId: String,
         subtitle: String,
+        photos: String[],
         lng: Number,
         lat: Number,
         isDel: Boolean,
@@ -185,7 +186,7 @@ or
         rate: Number
     }
 
-    Notes2Images {
+    (deprecated) Notes2Images {
         imageId: String,
         noteId: String
     }
@@ -220,6 +221,7 @@ or
 6.4 Images
 
     Images {
+        type: String,
         preview: String,
         image: String,
         isDel: boolean,

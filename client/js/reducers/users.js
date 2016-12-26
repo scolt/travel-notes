@@ -17,7 +17,7 @@ function users(state = usersModel, action) {
     if (action.type === 'preparePayloadForUserLogin') {
         let {loginForm: editForm} = state;
         editForm = {...editForm, fields: [...editForm.fields]};
-        var data = new FormData();
+        const data = new FormData();
         editForm.fields.forEach(function (item) {
             if (!item.readOnly) {
                 data.append(item.name, item.value);
@@ -47,7 +47,7 @@ function users(state = usersModel, action) {
     if (action.type === 'preparePayloadForUserUpdate') {
         let {editForm, user} = state;
         editForm = {...editForm, fields: [...editForm.fields]};
-        var data = new FormData();
+        const data = new FormData();
         data.append('_id', user['_id']);
         editForm.fields.forEach(function (item) {
             if (!item.readOnly) {
@@ -71,7 +71,7 @@ function users(state = usersModel, action) {
 
 
     if (action.type === 'setEnableProfileMode') {
-        let enableEditMode = action.value;
+        const enableEditMode = action.value;
         let {editForm} = state;
         return {...state, editForm: {...editForm, enableEditMode}};
     }
@@ -131,7 +131,7 @@ function users(state = usersModel, action) {
     if (action.type === 'preparePayloadForUserCreate') {
         let {registerForm: editForm} = state;
         editForm = {...editForm, fields: [...editForm.fields]};
-        var data = new FormData();
+        const data = new FormData();
         editForm.fields.forEach(function (item) {
             if (!item.readOnly) {
                 data.append(item.name, item.value);
