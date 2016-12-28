@@ -1,15 +1,11 @@
-'use strict';
+import './gallery.styl';
 
 import React from 'react';
 import Icon from 'react-fa';
-import GridList from 'material-ui/lib/grid-list/grid-list';
-import GridTile from 'material-ui/lib/grid-list/grid-tile';
-import IconButton from 'material-ui/lib/icon-button';
+import {GridList, GridTile, IconButton} from 'material-ui';
 import storeMixin from 'mixins/storeMixin';
 
-import './gallery.styl';
-
-export let Gallery = React.createClass({
+export const Gallery = React.createClass({
     mixins: [storeMixin],
 
     openImage(src) {
@@ -29,8 +25,7 @@ export let Gallery = React.createClass({
                         key={index}
                         title={tile.title}
                         className="col-33-custom gallery-item"
-                        onClick={() => { this.openImage(tile.img); } }
-                    >
+                        onClick={() => { this.openImage(tile.img); } }>
 
                         <img src={tile.img} />
                     </div> : null

@@ -1,10 +1,7 @@
-'use strict';
+import React from 'react';
+import {TextField} from 'material-ui';
 
-let React = require('react');
-let {PropTypes: propTypes} = React;
-import TextField from 'material-ui/lib/text-field';
-
-let editableField = React.createClass({
+const editableField = React.createClass({
     render() {
         return (
             <div className="inputBoxWrapper">
@@ -24,4 +21,4 @@ let editableField = React.createClass({
     }
 });
 
-module.exports = editableField;
+export default editableField;

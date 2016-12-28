@@ -1,27 +1,16 @@
-'use strict';
-
-let React = require( 'react');
-
-let Card = require('material-ui/lib/card/card');
-let CardTitle = require('material-ui/lib/card/card-title');
-let CardText = require('material-ui/lib/card/card-text');
-let Paper = require('material-ui/lib/paper');
-let List = require('material-ui/lib/lists/list');
-let ListItem = require('material-ui/lib/lists/list-item');
-let ActionGrade = require('material-ui/lib/svg-icons/action/grade');
-let Contacts = require('material-ui/lib/svg-icons/communication/contacts');
-let Wallpaper = require('material-ui/lib/svg-icons/device/wallpaper');
-let Schedule = require('material-ui/lib/svg-icons/action/schedule');
-let Divider = require('material-ui/lib/divider');
-let RaisedButton = require('material-ui/lib/raised-button');
-
-let storeMixin = require('mixins/storeMixin');
-
 import 'landing/alldevices.jpg';
 import 'landing/read-about.png';
 import 'landing/fav.png';
 import 'landing/one.png';
 import './landing.styl';
+
+import React from 'react';
+import {Card, CardTitle, CardText, Paper, List, ListItem, Divider, RaisedButton} from 'material-ui';
+import ActionGrade from 'material-ui/lib/svg-icons/action/grade';
+import Contacts from 'material-ui/lib/svg-icons/communication/contacts';
+import Wallpaper from 'material-ui/lib/svg-icons/device/wallpaper';
+import Schedule from 'material-ui/lib/svg-icons/action/schedule';
+import storeMixin from 'mixins/storeMixin';
 
 const paperStyle = {
     marginTop: -10,
@@ -33,7 +22,7 @@ const btnStyle = {
     margin: 12
 };
 
-let LandingPage = React.createClass({
+const LandingPage = React.createClass({
     mixins: [
         storeMixin
     ],
@@ -124,4 +113,4 @@ let LandingPage = React.createClass({
     }
 });
 
-module.exports = LandingPage;
+export default LandingPage;

@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 /* Extra plugins */
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const StringReplacePlugin = require("string-replace-webpack-plugin");
+const StringReplacePlugin = require('string-replace-webpack-plugin');
 
 const definitions = new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')

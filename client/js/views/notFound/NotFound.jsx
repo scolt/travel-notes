@@ -1,12 +1,8 @@
-'use strict';
+import React from 'react';
+import {Link} from 'react-router';
+import {Card, CardTitle, CardText} from 'material-ui';
 
-let React = require('react');
-let Card = require('material-ui/lib/card/card');
-let CardTitle = require('material-ui/lib/card/card-title');
-let CardText = require('material-ui/lib/card/card-text');
-let {Link} = require('react-router');
-
-let NotFound = React.createClass({
+const NotFound = React.createClass({
     render() {
         return (
             <Card>
@@ -19,4 +15,4 @@ let NotFound = React.createClass({
     }
 });
 
-module.exports = NotFound;
+export default NotFound;

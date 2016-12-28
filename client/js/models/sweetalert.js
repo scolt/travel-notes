@@ -4,3 +4,5 @@ const sweetalert = {
     title: '',
     type: ''
 };
+
+export default sweetalert;

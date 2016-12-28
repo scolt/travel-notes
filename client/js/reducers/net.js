@@ -1,32 +1,33 @@
-'use strict';
-
-const netModel = require('models/net');
+import {net as netModel} from 'models';
 
 function net(state = netModel, action) {
     if (action.type === 'startProcessing') {
-        let isProcessing = true;
-        let err = null;
+        const isProcessing = true;
+        const err = null;
         return {...state, isProcessing, err};
     }
+
     if (action.type === 'endProcessing') {
-        let isProcessing = false;
+        const isProcessing = false;
         return {...state, isProcessing};
     }
+
     if (action.type === 'errProcessing') {
-        let err = action.err;
+        const err = action.err;
         return {...state, err};
     }
+
     if (action.type === 'abortRequest') {
-        let isProcessing = false;
+        const isProcessing = false;
         return {...state, isProcessing};
     }
 
     if (action.type === 'clearNetErr') {
-        let err = '';
+        const err = '';
         return {...state, err};
     }
 
     return state;
 }
 
-module.exports = net;
+export default net;

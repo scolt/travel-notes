@@ -1,9 +1,7 @@
-'use strict';
+import store from 'store';
+import abortRequest from 'actions/abortRequest';
 
-let store = require('store');
-let abortRequest = require('actions/abortRequest');
-
-let storeMixin = {
+const storeMixin = {
     getInitialState() {
         return store.getState();
     },
@@ -23,4 +21,4 @@ let storeMixin = {
     }
 };
 
-module.exports = storeMixin;
+export default storeMixin;

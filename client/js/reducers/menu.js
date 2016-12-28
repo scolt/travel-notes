@@ -1,17 +1,17 @@
-'use strict';
-
-const menuModel = require('models/menu');
+import {menu as menuModel} from 'models';
 
 function menu(state = menuModel, action) {
-
     if (action.type === 'openLeftNavMenu') {
-        let open = true;
-        return {...state, open};
-    } else if (action.type === 'closeLeftNavMenu') {
-        let open = false;
+        const open = true;
         return {...state, open};
     }
+
+    if (action.type === 'closeLeftNavMenu') {
+        const open = false;
+        return {...state, open};
+    }
+
     return state;
 }
 
-module.exports = menu;
+export default menu;

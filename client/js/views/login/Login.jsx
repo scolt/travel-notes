@@ -1,20 +1,12 @@
-'use strict';
-
 import React from 'react';
-import TextField from 'material-ui/lib/text-field';
-import RaisedButton from 'material-ui/lib/raised-button';
+import Icon from 'react-fa';
+import {TextField, RaisedButton, Card, CardActions, CardTitle, CardText } from 'material-ui';
 import makeFormMixin from 'services/formMakerMixin';
 import {loginUser} from 'actions/users';
-import store from 'store';
 import storeMixin from 'mixins/storeMixin';
-import Icon from 'react-fa';
-import Card from 'material-ui/lib/card/card';
-import CardActions from 'material-ui/lib/card/card-actions';
-import CardTitle from 'material-ui/lib/card/card-title';
-import CardText from 'material-ui/lib/card/card-text';
 import restApi from 'actions/restApi';
 
-let loginView = React.createClass({
+const loginView = React.createClass({
     formName: 'loginForm',
 
     mixins: [storeMixin],
@@ -81,4 +73,4 @@ let loginView = React.createClass({
     }
 });
 
-module.exports = loginView;
+export default loginView;

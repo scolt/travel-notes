@@ -1,15 +1,11 @@
-'use strict';
-
-let React = require('react');
-
-let Card = require('material-ui/lib/card/card');
-let CardText = require('material-ui/lib/card/card-text');
+import React from 'react';
+import {Card, CardText} from 'material-ui';
 
 const style = {
     backgroundColor: 'grey'
 };
 
-let Footer = React.createClass({
+const Footer = React.createClass({
     render() {
         return (
             <Card>
@@ -21,4 +17,4 @@ let Footer = React.createClass({
     }
 });
 
-module.exports = Footer;
+export default Footer;

@@ -1,17 +1,11 @@
-'use strict';
-
-
 import React from 'react';
 import {TextField, RaisedButton, Card, CardTitle, CardText, CardActions} from 'material-ui';
-
 import Map from 'components/map/Map';
-
 import restApi from 'actions/restApi';
 import Dropzone from 'react-dropzone';
-
 import storeMixin from 'mixins/storeMixin';
 
-let Note = React.createClass({
+const Note = React.createClass({
     formName: 'noteForm',
     mixins: [storeMixin],
     currentMarker: '',
@@ -134,4 +128,4 @@ let Note = React.createClass({
     }
 });
 
-module.exports = Note;
+export default Note;

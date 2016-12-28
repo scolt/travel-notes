@@ -1,24 +1,22 @@
-'use strict';
+import React from 'react';
+import {Router as ReactRouter, Route, Redirect, useRouterHistory} from 'react-router';
 
-let React = require('react');
-let {Router: ReactRouter, Route, Redirect, useRouterHistory} = require('react-router');
-
-let Layout = require('components/layout/Layout');
-let Main = require('views/main/Main');
-let Note = require('views/note/Note');
-let AddNote = require('views/note/add/Add');
-let Gallery = require('views/gallery/Gallery');
-let Map = require('views/map/Map');
-let LandingPage = require('views/landingPage/LandingPage');
-let NotFound = require('views/notFound/NotFound');
-let Register = require('views/register/Register');
-let Login = require('views/login/Login');
-let Profile = require('views/profile/Profile');
+import Layout from 'components/layout/Layout';
+import Main from 'views/main/Main';
+import Note from 'views/note/Note';
+import AddNote from 'views/note/add/Add';
+import Gallery from 'views/gallery/Gallery';
+import Map from 'views/map/Map';
+import LandingPage from 'views/landingPage/LandingPage';
+import NotFound from 'views/notFound/NotFound';
+import Register from 'views/register/Register';
+import Login from 'views/login/Login';
+import Profile from 'views/profile/Profile';
 
 import { createHashHistory } from 'history';
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
 
-let Router = React.createClass({
+const Router = React.createClass({
     render() {
         return (
             <ReactRouter history={appHistory}>
@@ -41,4 +39,4 @@ let Router = React.createClass({
     }
 });
 
-module.exports = Router;
+export default Router;

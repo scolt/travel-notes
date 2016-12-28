@@ -1,12 +1,11 @@
-'use strict';
 import React from 'react';
 import storeMixin from 'mixins/storeMixin';
 import Map from 'components/map/Map';
 import UserNotes from './components/userNotes';
 import UserInfo from './components/userInfo';
-import Icon from 'react-fa';
 
-let Profile = React.createClass({
+
+const Profile = React.createClass({
 
     mixins: [
         storeMixin
@@ -28,4 +27,4 @@ let Profile = React.createClass({
     }
 });
 
-module.exports = Profile;
+export default Profile;

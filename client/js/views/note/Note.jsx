@@ -1,20 +1,15 @@
-'use strict';
-
 import './note.styl';
 
 import React from 'react';
-
+import Icon from 'react-fa';
 import {Card, CardTitle, CardText, CardMedia} from 'material-ui';
 import {Gallery} from 'components/gallery/Gallery';
 import Dropzone from 'react-dropzone';
-import Icon from 'react-fa';
-
 import Map from 'components/map/Map';
-
 import restApi from 'actions/restApi';
 import storeMixin from 'mixins/storeMixin';
 
-let Note = React.createClass({
+const Note = React.createClass({
     mixins: [storeMixin],
 
     componentWillMount() {
@@ -91,4 +86,4 @@ let Note = React.createClass({
     }
 });
 
-module.exports = Note;
+export default Note;

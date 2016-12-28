@@ -1,16 +1,13 @@
-'use strict';
-
 import './../profile.styl';
 
 import React from 'react';
 import Icon from 'react-fa';
 import {Card, CardTitle, CardText, Paper, FloatingActionButton} from 'material-ui/lib';
-
 import Editable from 'components/editableField/editableField';
 import storeMixin from 'mixins/storeMixin';
 import restApi from 'actions/restApi';
 
-let MapPage = React.createClass({
+const MapPage = React.createClass({
     formName: 'editForm',
     mixins: [
         storeMixin
@@ -120,4 +117,4 @@ let MapPage = React.createClass({
     }
 });
 
-module.exports = MapPage;
+export default MapPage;

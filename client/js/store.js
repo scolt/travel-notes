@@ -1,15 +1,7 @@
-'use strict';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import thunkMiddleware from 'redux-thunk';
 
-let {createStore, combineReducers, applyMiddleware} = require('redux');
-let thunkMiddleware = require('redux-thunk').default;
-
-let net = require('reducers/net');
-let menu = require('reducers/menu');
-let notes = require('reducers/notes');
-let snackbar = require('reducers/snackbar');
-let sweetalert = require('reducers/sweetalert');
-let modal = require('reducers/modal');
-let users = require('reducers/users');
+import {menu, modal, net, notes, snackbar, sweetalert, users} from 'reducers';
 
 const store = createStore(
     combineReducers({
@@ -24,4 +16,4 @@ const store = createStore(
     applyMiddleware(thunkMiddleware)
 );
 
-module.exports = store;
+export default store;

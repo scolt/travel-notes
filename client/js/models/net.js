@@ -1,8 +1,6 @@
-'use strict';
-
 const net = {
     isProcessing: false,
     err: null
 };
 
-module.exports = net;
+export default net;

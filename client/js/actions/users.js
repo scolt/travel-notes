@@ -1,5 +1,3 @@
-'use strict';
-
 import request from 'superagent';
 
 export function updateUser(page) {
@@ -14,11 +12,8 @@ export function updateUser(page) {
     };
 }
 
-
 export function setSuccesLoginFlag(flag) {
     return {
         type: flag ? 'showSuccessLoginSnackbar' : 'hideSuccessLoginSnackbar'
     };
 }
-
-

@@ -1,5 +1,3 @@
-'use strict';
-
 function abortRequest(request) {
     request && request.abort();
     return {
@@ -7,4 +5,4 @@ function abortRequest(request) {
     };
 }
 
-module.exports = abortRequest;
+export default abortRequest;

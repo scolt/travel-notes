@@ -1,5 +1,3 @@
-'use strict';
-
 const users = {
     editMode: false,
 
@@ -222,4 +220,4 @@ const users = {
     }
 };
 
-module.exports = users;
+export default users;

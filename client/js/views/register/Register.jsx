@@ -1,17 +1,12 @@
-'use strict';
-
 import './Register.styl';
 
 import React from 'react';
-import Icon from 'react-fa';
 import Dropzone from 'react-dropzone';
-import {TextField, RaisedButton, Card, CardActions, CardText, CardTitle} from 'material-ui/lib';
-
+import {TextField, RaisedButton, Card, CardActions, CardText, CardTitle} from 'material-ui';
 import storeMixin from 'mixins/storeMixin';
-
 import restApi from 'actions/restApi';
 
-let RegisterView = React.createClass({
+const RegisterView = React.createClass({
     formName: 'registerForm',
 
     mixins: [
@@ -100,4 +95,4 @@ let RegisterView = React.createClass({
     }
 });
 
-module.exports = RegisterView;
+export default RegisterView;
