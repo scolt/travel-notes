@@ -3,4 +3,3 @@ export function setMenuStatus(open) {
         type: open ? 'openLeftNavMenu' : 'closeLeftNavMenu'
     };
 }
-

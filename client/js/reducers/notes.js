@@ -1,6 +1,4 @@
-'use strict';
-
-const notesModel = require('models/notes');
+import {notes as notesModel} from 'models';
 
 function notes(state = notesModel, action) {
     if (action.type === 'prepareNote') {
@@ -186,4 +184,4 @@ function notes(state = notesModel, action) {
     return state;
 }
 
-module.exports = notes;
+export default notes;

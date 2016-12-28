@@ -20,4 +20,4 @@ function restApi({model, ext = 'json', action = 'read', id = '', type} = {}) {
     };
 }
 
-module.exports = restApi;
+export default restApi;

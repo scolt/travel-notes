@@ -1,5 +1,3 @@
-'use strict';
-
 const menu = {
     open: false,
     items: [
@@ -29,4 +27,5 @@ const menu = {
         }
     ]
 };
-module.exports = menu;
+
+export default menu;

@@ -1,23 +1,17 @@
-'use strict';
-
 import 'flexboxgrid/dist/flexboxgrid.min.css';
 import 'sweetalert/dist/sweetalert.css';
+import 'favicon.png';
 
 import React from 'react';
-import Icon from 'react-fa';
 import SweetAlert from 'sweetalert-react';
 import Modal from '../modal/Modal';
 import {AppBar, RaisedButton, Snackbar} from 'material-ui';
-
 import Menu from './components/menu/Menu';
 import Footer from './components/footer/Footer';
-
-import 'favicon.png';
 import storeMixin from 'mixins/storeMixin';
-
 import restApi from 'actions/restApi';
 
-let Layout = React.createClass({
+const Layout = React.createClass({
     mixins: [storeMixin],
 
     componentWillMount() {
@@ -60,4 +54,4 @@ let Layout = React.createClass({
     }
 });
 
-module.exports = Layout;
+export default Layout;

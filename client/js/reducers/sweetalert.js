@@ -1,6 +1,4 @@
-'use strict';
-
-const sweetalertModel = require('models/sweetalert');
+import {sweetalert as sweetalertModel} from 'models';
 
 function sweetalert(state = sweetalertModel, action) {
     if (action.type === 'errProcessing') {
@@ -61,4 +59,4 @@ function sweetalert(state = sweetalertModel, action) {
     return state;
 }
 
-module.exports = sweetalert;
+export default sweetalert;

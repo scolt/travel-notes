@@ -1,12 +1,7 @@
-'use strict';
-
 import React from 'react';
 import Icon from 'react-fa';
-
 import Map from 'components/map/Map';
-
 import restApi from 'actions/restApi';
-
 import storeMixin from 'mixins/storeMixin';
 
 const MapPage = React.createClass({
@@ -28,4 +23,4 @@ const MapPage = React.createClass({
     }
 });
 
-module.exports = MapPage;
+export default MapPage;

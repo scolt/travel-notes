@@ -1,5 +1,3 @@
-'use strict';
-
 function makeFormMixin(fields){
     var mixin = {
         getInitialState: function(){
@@ -86,4 +84,4 @@ function camelJoin(parts){
     }).join('');
 }
 
-module.exports = makeFormMixin;
+export default makeFormMixin;

@@ -1,5 +1,3 @@
-'use strict';
-
 import './map.styl';
 
 import React from 'react';
@@ -159,4 +157,4 @@ let Map = React.createClass({
     }
 });
 
-module.exports = Map;
+export default Map;

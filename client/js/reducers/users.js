@@ -1,6 +1,4 @@
-'use strict';
-
-const usersModel = require('models/users');
+import {users as usersModel} from 'models';
 
 function users(state = usersModel, action) {
 
@@ -148,4 +146,4 @@ function users(state = usersModel, action) {
     return state;
 }
 
-module.exports = users;
+export default users;

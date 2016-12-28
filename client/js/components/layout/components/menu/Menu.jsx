@@ -1,27 +1,19 @@
-'use strict';
-
-let React = require('react');
-
-let AppBar = require('material-ui/lib/app-bar');
-let MenuItem = require('material-ui/lib/menus/menu-item');
-
-import storeMixin from 'mixins/storeMixin';
-
-import LeftNav from 'material-ui/lib/left-nav';
-import {RaisedButton, FlatButton} from 'material-ui';
-import {logoutUser} from 'actions/users';
-import {setMenuStatus} from 'actions/menu';
-import Paper from 'material-ui/lib/paper';
-import Icon from 'react-fa';
 import './Menu.styl';
 import 'avatar.jpg';
+
+import React from 'react';
+import Icon from 'react-fa';
+import {AppBar, MenuItem, LeftNav, RaisedButton, FlatButton, Paper} from 'material-ui';
+import storeMixin from 'mixins/storeMixin';
+import {logoutUser} from 'actions/users';
+import {setMenuStatus} from 'actions/menu';
 
 const buttonStyle = {
     color: '#fff',
     marginTop: '7px'
 };
 
-let Menu = React.createClass({
+const Menu = React.createClass({
     mixins: [storeMixin],
 
     logout() {
@@ -99,4 +91,4 @@ let Menu = React.createClass({
     }
 });
 
-module.exports = Menu;
+export default Menu;

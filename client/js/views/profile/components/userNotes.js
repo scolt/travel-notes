@@ -1,14 +1,9 @@
-'use strict';
-
 import React from 'react';
-import Icon from 'react-fa';
-import {Table, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, TableBody,
-    Card, CardTitle, CardText} from 'material-ui/lib';
-
+import {Table, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, TableBody, Card, CardTitle, CardText} from 'material-ui';
 import storeMixin from 'mixins/storeMixin';
 import restApi from 'actions/restApi';
 
-let userNotes = React.createClass({
+const userNotes = React.createClass({
     mixins: [
         storeMixin
     ],
@@ -62,4 +57,4 @@ let userNotes = React.createClass({
     }
 });
 
-module.exports = userNotes;
+export default userNotes;

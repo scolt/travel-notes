@@ -4,4 +4,4 @@ const modal = {
     className: ''
 };
 
-module.exports = modal;
+export default modal;

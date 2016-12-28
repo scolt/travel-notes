@@ -1,20 +1,18 @@
-'use strict';
-
-const modalModel = require('models/modal');
+import {modal as modalModel} from 'models';
 
 function modal(state = modalModel, action) {
     if (action.type === 'openModal') {
-        let open = true;
-        let {content, className} = action;
+        const open = true;
+        const {content, className} = action;
         return {...state, open, content, className};
     }
 
     if (action.type === 'modalClose') {
-        let open = false;
+        const open = false;
         return {...state, open};
     }
 
     return state;
 }
 
-module.exports = modal;
+export default modal;

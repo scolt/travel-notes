@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import {Gallery} from 'components/gallery/Gallery';
 import restApi from 'actions/restApi';
@@ -12,7 +10,7 @@ function calculateGrid() {
     };
 }
 
-let GalleryPage = React.createClass({
+const GalleryPage = React.createClass({
     mixins: [storeMixin],
 
     componentWillMount() {
@@ -32,4 +30,4 @@ let GalleryPage = React.createClass({
     }
 });
 
-module.exports = GalleryPage;
+export default GalleryPage;

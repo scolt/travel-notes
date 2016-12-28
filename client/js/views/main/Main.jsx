@@ -1,12 +1,3 @@
-'use strict';
-
-import React from 'react';
-import Icon from 'react-fa';
-import {GridList, GridTile, SelectField, MenuItem, Toggle, Card} from 'material-ui';
-
-import restApi from 'actions/restApi';
-
-import storeMixin from 'mixins/storeMixin';
 import mock1 from 'mock1.jpg';
 import mock2 from 'mock2.jpg';
 import mock3 from 'mock3.jpg';
@@ -15,6 +6,12 @@ import mock5 from 'mock5.jpg';
 import mock6 from 'mock6.jpg';
 import add from 'add.png';
 import './main.styl';
+
+import React from 'react';
+import Icon from 'react-fa';
+import {GridList, GridTile, SelectField, MenuItem, Toggle, Card} from 'material-ui';
+import restApi from 'actions/restApi';
+import storeMixin from 'mixins/storeMixin';
 
 const styles = {
     root: {
@@ -193,4 +190,4 @@ const MainPage = React.createClass({
     }
 });
 
-module.exports = MainPage;
+export default MainPage;

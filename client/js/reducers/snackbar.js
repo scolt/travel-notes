@@ -1,32 +1,31 @@
-'use strict';
-
-const snackbarModel = require('models/snack');
+import {snackbar as snackbarModel} from 'models';
 
 function snackbar(state = snackbarModel, action) {
     if (action.type === 'login') {
-        let open = true;
-        let message = 'You are successful logged in';
+        const open = true;
+        const message = 'You are successful logged in';
         return {...state, open, message};
     }
 
     if (action.type === 'logout') {
-        let open = true;
-        let message = 'You are successful logged out';
+        const open = true;
+        const message = 'You are successful logged out';
         return {...state, open, message};
     }
 
     if (action.type === 'endFetchingUsersUpdate') {
-        let open = true;
-        let message = 'User details successful updated';
+        const open = true;
+        const message = 'User details successful updated';
         return {...state, open, message};
     }
 
     if (action.type === 'snackbarClose') {
-        let open = false;
-        let message = '';
+        const open = false;
+        const message = '';
         return {...state, open, message};
     }
+
     return state;
 }
 
-module.exports = snackbar;
+export default snackbar;
