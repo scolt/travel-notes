@@ -40,7 +40,7 @@ const config = {
     entry: {
         app:
             (isDev ? [devServerConfig.getUrl()] : [])
-            .concat([path.resolve(__dirname, 'client/js/app.jsx')])
+            .concat([path.resolve(__dirname, 'client/app.jsx')])
     },
 
     output: {
@@ -55,7 +55,7 @@ const config = {
 
     resolve: {
         root: [
-            path.resolve(__dirname, 'client/js'),
+            path.resolve(__dirname, 'client'),
             path.resolve(__dirname, 'client/assets'),
             path.resolve(__dirname, 'node_modules')
         ],
@@ -75,6 +75,10 @@ const config = {
             }
         ],
         loaders: [
+            {
+                test: /\.json$/,
+                loader: 'json'
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,

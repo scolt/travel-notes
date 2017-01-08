@@ -27,7 +27,9 @@ require('mongoose').connect(config.db.mongo);
 require('cloudinary').config(config.cloudinaryConfig);
 
 app
-    .use ( cors() )
+    .use ( cors({
+        exposedHeaders: ['tn-user-type']
+    }) )
     .use ( compression() )
     .use ( bodyParser.json() )
     .use ( cookieParser() )
@@ -45,8 +47,8 @@ app
     })
     .all ( '*', (req, res, next) => next(new Error('Service not exists')))
     .use ( (err, req, res, next) => {
-        console.log(err);
-        res.status(200).json({err: err.message})
+        console.log(err, req.url);
+        res.status(200).json({err: err.toString()})
     });
 
 server.listen(port, () => {console.log(`${new Date()} Listening at ${port}`);});

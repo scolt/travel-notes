@@ -5,7 +5,6 @@ let config = require('../config');
 let cloudinary = require('cloudinary');
 
 let NoteSchema = new Schema({
-    id: Number,
     photos: [],
     text: String,
     title: String,
@@ -40,10 +39,7 @@ let NoteActions = (function () {
             result: [],
         };
 
-        Note.count({
-            isDel: false,
-            isDraft: false
-        }, (err, total) => {
+        Note.count(filters, (err, total) => {
             if (err) {
                 cb(err);
             } else {
@@ -63,7 +59,7 @@ let NoteActions = (function () {
     }
 
     function saveNote(data, user, image, cb) {
-        data.photo = [image];
+        data.photos = [image];
         data.userId = user;
         data.isDraft = false;
         data.isDel = false;
@@ -72,7 +68,34 @@ let NoteActions = (function () {
         })
     }
 
+    function clearUnexpectedFields(data) {
+        for (let item in data) {
+            if (data.hasOwnProperty(item))
+            if (NoteSchema.tree[item] === undefined) delete data[item];
+        }
+        return data;
+    }
+
     return {
+        update(req, res, next) {
+            const user = req.user && req.user.username;
+            const id = req.body.id;
+            const dataToSave = clearUnexpectedFields(req.body);
+
+            Note.findById(id, (err, data) => {
+                if (err) dispatch(res, next)(err, null);
+                else {
+                    if (data.userId !== user)
+                        dispatch(res, next)('User doesn\'t have permissions for update this note.');
+                    else {
+                        Note.findByIdAndUpdate(id, dataToSave, {new: true}, (err, doc) => {
+                            dispatch(res, next)(err, doc);
+                        })
+                    }
+                }
+            });
+        },
+
         create(req, res, next) {
             const files = req.files;
             const body = req.body;
@@ -139,16 +162,20 @@ let NoteActions = (function () {
             if (id) filters._id = id;
 
             count(req.body, id, (err, data) => {
-                const query = Note
-                    .find(filters)
-                    .sort(order)
-                    .skip((data.page - 1) * data.limit)
-                    .limit(data.limit);
-
-                query.exec((err, notes) => {
-                    data.result = notes;
+                if (err) {
                     dispatch(res, next)(err, data);
-                })
+                } else {
+                    const query = Note
+                        .find(filters)
+                        .sort(order)
+                        .skip((data.page - 1) * data.limit)
+                        .limit(data.limit);
+
+                    query.exec((err, notes) => {
+                        data.result = notes;
+                        dispatch(res, next)(err, data);
+                    })
+                }
             })
         }
     }

@@ -1,0 +1,87 @@
+*
+    box-sizing border-box
+    -moz-box-sizing border-box
+    font-family Roboto, sans-serif
+
+body
+    margin 0
+
+html, body
+    height 100%
+    width 100%
+
+#app
+    min-height 100%
+    max-width 100%
+    padding 64px 0 117px
+    position relative
+
+.header
+    position fixed
+    top 0
+    left 0
+    width 100%
+    z-index 50;
+
+.footer
+    width 100%
+
+a
+    color #00bcd4
+    text-decoration none
+    transition opacity ease-out .5s
+    &:hover
+        opacity .5
+
+.spinner
+    font-size 75px
+    width 100%
+    text-align: center;
+    .fa
+        margin 0 auto
+        padding 50px
+        color #00bcd4
+
+.feed-item-add
+    transition all ease-out .5s
+    cursor pointer
+    border 10px solid #00bcd4;
+
+    .feed-item-in
+        height 100%
+
+    .fa-plus
+        transition all ease-out .5s
+        width 80px
+        height 80px
+        line-height 80px
+        position absolute
+        top 50%
+        left 50%
+        font-size 100px
+        margin -40px 0 0 -40px
+        text-align: center
+        color: #00bcd4
+        display: block
+
+.feed-item-add:hover
+    .fa-plus
+        transform scale(1.2)
+
+
+.flat-block-item
+    padding 1px
+    display block
+    height 100%
+
+    img
+        transition: all ease-out .5s
+
+    &:hover img{
+        width 130% !important
+        height 130% !important
+        margin-top -15%
+    }
+
+.logo
+    cursor pointer
