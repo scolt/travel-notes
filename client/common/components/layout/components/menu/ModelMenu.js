@@ -16,7 +16,7 @@ const menu = {
         {
             name: 'landingPage',
             title: 'Main Page',
-            hash: '#/landingPage',
+            hash: '#/',
             icon: 'globe'
         },
         {

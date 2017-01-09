@@ -2,14 +2,15 @@ import React from 'react';
 import {Toggle} from 'material-ui';
 
 import withStore from 'common/components/withStore/withStore';
-import restApi from 'common/actions/restApi';
 
 const styles = {
     checkbox: {
         float: 'right',
         width: '190px',
         paddingRight: '25px',
-        margin: '33px 0 '
+        margin: '33px 0 ',
+        position: 'relative',
+        zIndex: '10'
     }
 };
 
@@ -23,10 +24,7 @@ const OrderFilter = React.createClass({
             }
         });
 
-        this.request = this.props.store.dispatch(restApi({
-            model: 'notes',
-            type: 'getNotes'
-        }));
+        this.props.onChange();
     },
 
     render() {

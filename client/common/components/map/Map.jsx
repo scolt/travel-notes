@@ -70,7 +70,7 @@ let Map = React.createClass({
         markers: React.PropTypes.array,
         center: React.PropTypes.object,
         type: React.PropTypes.string,
-        canSetMarker: React.PropTypes.func
+        canSetMarker: React.PropTypes.any
     },
 
     getDefaultProps() {

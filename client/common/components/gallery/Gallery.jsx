@@ -37,7 +37,8 @@ const Gallery = React.createClass({
     },
 
     render() {
-        return <div className="gallery-row">
+        const noSpace = this.props.noSpaces;
+        return <div className={`gallery-row ${noSpace ? 'no-space' : '' }`}>
             {this.props.images.map((tile, index) => (
                 tile.src ?
                     <div

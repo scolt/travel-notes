@@ -14,6 +14,7 @@ const notes = {
         title: ''
     },
 
+    images: [],
     markers: [],
     notes: [],
 
@@ -21,7 +22,8 @@ const notes = {
     filters: {
         page: 1,
         order: {},
-        filters: {}
+        filters: {},
+        fields: ''
     },
 
     addImageForm: {

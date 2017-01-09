@@ -1,7 +1,17 @@
 import React from 'react';
 import {Router as ReactRouter, Route, Redirect, useRouterHistory} from 'react-router';
-import {view as NoteView, list as NoteList, form as NoteForm} from 'containers/Note/index';
+
+import {
+    view as NoteView,
+    list as NoteList,
+    form as NoteForm,
+    map as Map,
+    gallery as Gallery
+} from 'containers/Note/index';
 import {login as loginView} from 'containers/User/index';
+import NotFound from 'containers/404/Container404';
+import LandingPage from 'containers/LandingPage/ContainerLandingPage';
+
 import Layout from 'common/components/layout/ContainerLayout';
 import {createHashHistory} from 'history';
 
@@ -14,8 +24,12 @@ const muiTheme = getMuiTheme(baseTheme);
 const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
 
 const views = {
+    '/': LandingPage,
+    '/404': NotFound,
     '/login': loginView,
     '/main': NoteList,
+    '/map': Map,
+    '/gallery': Gallery,
     '/note/create': NoteForm,
     '/note/:id': NoteView
 };

@@ -3,6 +3,7 @@ export default function (state, action) {
         let {filters, payload} = state;
         filters.filters = {};
         filters.order = {};
+        filters.fields = '';
         filters.page = 1;
         return {...state, payload: {...payload, ...filters}};
     }
@@ -15,6 +16,10 @@ export default function (state, action) {
             filters.page = 1;
             filters.order = {};
             filters.order[action.order] = 1;
+        }
+
+        if (action.fields) {
+            filters.fields = action.fields.join(' ');
         }
 
         if (action.filters) {
@@ -34,8 +39,9 @@ export default function (state, action) {
         if (action.reqData.type === 'deleteOneNote') {
             const {notes} = state;
             const index = notes.findIndex(note => note['_id'] === action.reqData.id);
-            if (index > -1) notes.splice(index, 1);
-            return {...state, notes};
+
+            if (index > -1) notes.splice(index, 1, action.resData.result[0]);
+            return {...state, notes, totalPages: action.resData.pages};
         }
 
         if (action.reqData.type === 'getNotes') {

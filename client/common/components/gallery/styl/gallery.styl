@@ -1,10 +1,6 @@
 .col-33-custom
     width 24%
 
-.gallery-row
-    display flex
-    flex-wrap wrap;
-
 .gallery-item
     overflow hidden
     position relative
@@ -29,6 +25,20 @@
     max-width 100%
     max-height 100%
     display block
+
+.gallery-row
+    display flex
+    flex-wrap wrap;
+
+    &.no-space
+        margin: 0 -.5rem
+
+        .gallery-item
+            width: 25% !important
+            margin: 0;
+
+        .col-33-custom
+            width 25%  !important
 
 @media screen and (max-width: 768px)
     .col-33-custom

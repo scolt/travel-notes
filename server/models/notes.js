@@ -77,6 +77,26 @@ let NoteActions = (function () {
     }
 
     return {
+        markers(req, res, next) {
+            const filters = Object.assign({
+                isDel: false,
+                isDraft: false
+            }, req.body.filters);
+
+            Note.find(filters)
+                .select('lat lng title subtitle')
+                .exec((err, notes) => {
+                    if (err) {
+                        dispatch(res, next)(err, notes);
+                        return;
+                    }
+                    const data = {
+                        result: notes
+                    };
+                    dispatch(res, next)(err, data);
+                })
+        },
+
         update(req, res, next) {
             const user = req.user && req.user.username;
             const id = req.body.id;
@@ -116,12 +136,41 @@ let NoteActions = (function () {
 
         delete(req, res, next) {
             const id = req.body.id || req.params.id;
+            const data = req.body;
+            const order = data.order;
+
+            const filters = Object.assign({
+                isDel: false,
+                isDraft: false
+            }, data.filters);
+
             if (!id) {
                 dispatch(res, next)('Id not provided')
             } else {
                 Note.update({
                     _id: id
-                }, {isDel: true}, dispatch(res, next))
+                }, {isDel: true}, function (err, data) {
+                    if (err) {
+                        dispatch(res, next)(err, data);
+                        return;
+                    }
+                    count(req.body, null, (err, data) => {
+                        if (err) {
+                            dispatch(res, next)(err, data);
+                            return;
+                        }
+                        const query = Note
+                            .find(filters)
+                            .sort(order)
+                            .skip(((data.page) * data.limit) - 1)
+                            .limit(1);
+
+                        query.exec((err, notes) => {
+                            data.result = notes;
+                            dispatch(res, next)(err, data);
+                        })
+                    })
+                });
             }
         },
 
@@ -153,6 +202,7 @@ let NoteActions = (function () {
 
         read(req, res, next) {
             const data = req.body;
+            const fields = data.fields;
             const id = req.body.id || req.params.id;
             const order = data.order;
             const filters = Object.assign({
@@ -167,6 +217,7 @@ let NoteActions = (function () {
                 } else {
                     const query = Note
                         .find(filters)
+                        .select(fields)
                         .sort(order)
                         .skip((data.page - 1) * data.limit)
                         .limit(data.limit);

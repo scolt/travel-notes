@@ -1,20 +1,16 @@
 import React from 'react';
 import withStore from 'common/components/withStore/withStore';
-import restApi from 'common/actions/restApi';
 
 import './pagination.styl';
 
 const NotePagination = React.createClass({
+
     openPage(page) {
         this.props.store.dispatch({
             type: 'updateFilter',
             page: page
         });
-
-        this.request = this.props.store.dispatch(restApi({
-            model: 'notes',
-            type: 'getNotes'
-        }));
+        this.props.onChange();
     },
 
     render() {
@@ -23,13 +19,15 @@ const NotePagination = React.createClass({
             pages.push(i);
         }
         const current = this.props.data.notes.filters.page;
-        return <ul className="pagination">
-            {pages.map((index) =>
-                <li key={index} className={index === current ? 'active' : ''} onClick={this.openPage.bind(this, index)}>
-                    {index}
-                </li>)
-            }
-        </ul>;
+        return <div>
+            {pages.length > 0 ? <ul className="pagination">
+                {pages.map((index) =>
+                    <li key={index} className={index === current ? 'active' : ''} onClick={this.openPage.bind(this, index)}>
+                        {index}
+                    </li>)
+                }
+            </ul> : null}
+        </div>;
     }
 });
 

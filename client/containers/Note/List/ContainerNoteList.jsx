@@ -10,31 +10,44 @@ import NoteOnlyMyFilter from './components/onlyMyFilter/ComponentOnlyMyFilter';
 import AddNewNoteButton from './components/addNewOne/ComponentAddNewOne';
 
 const NoteList = React.createClass({
-    reloadPage() {
-        this.props.store.dispatch({
-            type: 'resetNoteFilterPayload'
-        });
-
+    loadNotes() {
         this.request = this.props.store.dispatch(restApi({
             model: 'notes',
             type: 'getNotes'
         }));
     },
 
+    reloadPage() {
+        this.props.store.dispatch({
+            type: 'resetNoteFilterPayload'
+        });
+        this.loadNotes();
+    },
+
     componentWillMount() {
         this.reloadPage();
+    },
+
+    componentWillUnmount() {
+        this.props.store.dispatch({
+            type: 'resetNoteFilterPayload'
+        });
     },
 
     render() {
         const isLoading = this.props.data.notes.isProcessing;
         const card = <div>
             <NoteOrderFilter />
-            <NoteOnlyMyFilter />
+            <NoteOnlyMyFilter
+                onChange={this.loadNotes}
+            />
             <NoteGrid
                 reloadList={this.reloadPage}
                 appendBefore={<AddNewNoteButton/>}
             />
-            <NotePagination />
+            <NotePagination
+                onChange={this.loadNotes}
+            />
         </div>;
 
         return <div>
