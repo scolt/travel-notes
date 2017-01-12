@@ -1,12 +1,12 @@
 import userModel from './common/ModelUsers';
 
 import loginReducer from './Login/ReducerLogin';
-import commonReducer from './common/ReducerUsers';
+import profileReducer from './Profile/ReducerProfile';
 import formReducer from 'common/reducers/formReducer';
 
 const userReducers = [
-    commonReducer,
     loginReducer,
+    profileReducer,
     formReducer('users')
 ];
 

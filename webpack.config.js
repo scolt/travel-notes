@@ -101,12 +101,12 @@ const config = {
                 loader: ExtractTextPlugin.extract('style', 'css')
             },
             {
-                test: /\.(otf|eot|svg|ttf|woff|png|jpg)\??/,
+                test: /\.(png|jpg)\??/,
                 loader: 'url?limit=100&name=[path][name].[ext]'
             },
             {
-                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=image/svg+xml&name=[path][name].[ext]'
+                test: /\.(otf|eot|svg|ttf|woff|svg)\??/,
+                loader: 'url?limit=100&name=fonts/[name].[ext]'
             }
         ]
     },

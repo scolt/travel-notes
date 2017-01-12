@@ -40,7 +40,10 @@ export default function (state, action) {
             const {notes} = state;
             const index = notes.findIndex(note => note['_id'] === action.reqData.id);
 
-            if (index > -1) notes.splice(index, 1, action.resData.result[0]);
+            if (index > -1) {
+                notes.splice(index, 1);
+                action.resData.result[0] && notes.push(action.resData.result[0]);
+            }
             return {...state, notes, totalPages: action.resData.pages};
         }
 

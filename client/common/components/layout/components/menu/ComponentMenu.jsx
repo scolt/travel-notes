@@ -15,6 +15,12 @@ const buttonStyle = {
 
 
 const Menu = React.createClass({
+    componentWillMount() {
+        document.addEventListener('scroll', () => {
+            this.forceUpdate();
+        });
+    },
+
     setMenuStatus(status) {
         this.props.store.dispatch({
             type: 'updateMenuStatus',
@@ -32,9 +38,12 @@ const Menu = React.createClass({
     render() {
         const {menuItems, menuOpen: menuStatus } = this.props.data.menu;
         const {user} = this.props.data.users;
+        const flatRoutes = ['/', '/profile/:id'.replace(':id', this.props.route.params.id)];
+        const zDepth = flatRoutes.includes(this.props.route.path) && document.body.scrollTop === 0 ? 0 : 1;
 
         return (
             <AppBar
+                zDepth={zDepth}
                 title={
                     <a className="logo" onClick={this.openMenuItem.bind(this, '#/main')}>TravelNote</a>
                 }
@@ -50,7 +59,10 @@ const Menu = React.createClass({
                          onRequestChange={this.setMenuStatus}
                          docked={false}>
                     <div>
-                        {user.email ? <UserTile /> : <span></span>}
+                        {user.email ?
+                            <div onClick={this.openMenuItem.bind(this, `#/profile/${user.username}`)}>
+                                <UserTile />
+                            </div> : <span></span>}
                     </div>
                     <div>
                         {menuItems.map((menuItem, key) => (

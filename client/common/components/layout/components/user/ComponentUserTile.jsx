@@ -13,7 +13,7 @@ const UserTile = React.createClass({
 
     render() {
         const { user } = this.props.data.users;
-        return <a href={`#/profile/${user.username}`} title="Open Your Profile">
+        return <a title="Open Your Profile">
             <Paper className="image-developer clickable"
                    zDepth={1}
                    circle={true}

@@ -20,7 +20,7 @@ const NotePagination = React.createClass({
         }
         const current = this.props.data.notes.filters.page;
         return <div>
-            {pages.length > 0 ? <ul className="pagination">
+            {pages.length > 1 ? <ul className="pagination">
                 {pages.map((index) =>
                     <li key={index} className={index === current ? 'active' : ''} onClick={this.openPage.bind(this, index)}>
                         {index}

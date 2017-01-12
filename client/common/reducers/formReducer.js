@@ -38,7 +38,7 @@ export default function (modelName) {
                         }
                         error = true;
                     }
-                    item.errorText = !item.isValid && (item.isDirty || item.isTouch) ? item.validationMessage : null;
+                    item.errorText = !item.isValid && (item.isDirty || item.isTouch) ? item.validationMessage + item.value : null;
                 }
                 return item;
             });

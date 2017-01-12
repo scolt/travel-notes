@@ -25,7 +25,7 @@ const Login = React.createClass({
     onChange(e) {
         const {formName} = this;
         const {name, value} = e.target;
-        this.props.store.dispatch({type: 'onChangeFormField', name, value, formName});
+        this.props.store.dispatch({type: 'onChangeFormField', model: 'users', name, value, formName});
     },
 
     render() {

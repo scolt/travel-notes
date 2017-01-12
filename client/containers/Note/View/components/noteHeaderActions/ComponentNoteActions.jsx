@@ -37,6 +37,7 @@ const NoteActions = React.createClass({
 
     render() {
         const isEditMode = this.props.isEditMode;
+        const isValid = this.props.data.notes.noteForm.isValid;
         return <div className="actions">
             {!isEditMode ?
                 <div>
@@ -45,7 +46,7 @@ const NoteActions = React.createClass({
                     </FloatingActionButton>
                 </div> :
                 <div>
-                    <FloatingActionButton mini={true} secondary={true} style={{marginRight: '10px'}} onClick={this.saveNote}>
+                    <FloatingActionButton mini={true} secondary={true} disabled={!isValid} style={{marginRight: '10px'}} onClick={this.saveNote}>
                         <Icon name="floppy-o"/>
                     </FloatingActionButton>
                     <FloatingActionButton mini={true} primary={true} onClick={this.cancelEditNote}>

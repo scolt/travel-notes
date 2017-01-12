@@ -63,6 +63,7 @@ let NoteActions = (function () {
         data.userId = user;
         data.isDraft = false;
         data.isDel = false;
+        data.created = new Date().getTime();
         Note.create(data, (err, note) => {
             cb(err, note);
         })
@@ -120,7 +121,6 @@ let NoteActions = (function () {
             const files = req.files;
             const body = req.body;
             const user = req.user && req.user.username;
-
             if (!user) {
                 dispatch(res, next)('User doesn\'t have permissions for create new note')
             } else if (files.file && files.file.path) {

@@ -41,8 +41,8 @@ const GoogleMapConstructor = withScriptjs(
                                 key={ref}
                                 onClick={() => props.onMarkerClick(marker)}>
                                 {marker.showInfo ?
-                                    <InfoWindow key={`${ref}_info_window`} onCloseClick={() => props.onMarkerClose(marker)}>
-                                        <Card>
+                                    <InfoWindow key={`${ref}_info_window`} onCloseClick={() => props.onMarkerClose(marker)} className="map-info-window">
+                                        <Card className="map-info-card">
                                             <CardMedia
                                                 overlay={<CardTitle title={marker.window.title} subtitle={marker.window.subtitle} />}
                                             >

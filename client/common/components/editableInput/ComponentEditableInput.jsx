@@ -12,6 +12,7 @@ const editableField = React.createClass({
     render() {
         const inputProperties = this.props.field;
         const textField = <TextField
+            className="editable-text-field"
             hintText={inputProperties.label}
             floatingLabelText={inputProperties.label}
             name={inputProperties.name}
@@ -24,9 +25,9 @@ const editableField = React.createClass({
             errorText={inputProperties.errorText}/>;
 
         return (
-            <div className="input-box-wrapper">
+            <span className="input-box-wrapper">
                 {this.props.editMode ? textField : this.props.children}
-            </div>
+            </span>
         );
     }
 });

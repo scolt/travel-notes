@@ -8,7 +8,10 @@ import {
     map as Map,
     gallery as Gallery
 } from 'containers/Note/index';
-import {login as loginView} from 'containers/User/index';
+import {
+    login as LoginView,
+    profile as Profile
+} from 'containers/User/index';
 import NotFound from 'containers/404/Container404';
 import LandingPage from 'containers/LandingPage/ContainerLandingPage';
 
@@ -26,7 +29,8 @@ const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
 const views = {
     '/': LandingPage,
     '/404': NotFound,
-    '/login': loginView,
+    '/login': LoginView,
+    '/profile/:id': Profile,
     '/main': NoteList,
     '/map': Map,
     '/gallery': Gallery,
@@ -34,11 +38,12 @@ const views = {
     '/note/:id': NoteView
 };
 
-let AppContainer = React.createClass({
+const AppContainer = React.createClass({
     render() {
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
                 <ReactRouter history={appHistory}>
+
                     <Route component={Layout}>
                         {Object.keys(views).map(key => <Route key={key} path={key} component={views[key]}/>)}
                     </Route>

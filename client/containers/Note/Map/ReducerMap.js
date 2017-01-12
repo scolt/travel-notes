@@ -5,6 +5,7 @@ export default function (state, action) {
                 ({
                     window: {
                         title: item.title,
+                        subtitle: item.subtitle,
                         link: `#/note/${item._id}`,
                         photo: item.photo
                     },

@@ -23,7 +23,9 @@ export default function (state, action) {
         editMode = true;
         for (let field of noteForm.fields) {
             field.value = note[field.name] || field.value;
+            if (field.type === 'file') field.value = 'string-value';
         }
+        noteForm.isValid = true;
         return {...state, editMode};
     }
 

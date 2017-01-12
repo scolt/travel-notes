@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from 'react-fa';
 import {RaisedButton} from 'material-ui';
 import 'landing/alldevices.png';
+import 'landing/one.png';
 import './landing.styl';
 
 const NotFound = React.createClass({

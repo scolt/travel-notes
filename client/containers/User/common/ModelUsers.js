@@ -16,7 +16,13 @@ const users = {
         lastName: '',
         email: '',
         username: '',
-        avatar: ''
+        birthday: '',
+        gender: '',
+        skype: '',
+        website: '',
+        avatar: '',
+        background: '',
+        about: ''
     },
 
     loginForm: {
@@ -60,72 +66,6 @@ const users = {
         ]
     },
 
-    editForm: {
-        isValid: false,
-        enableEditMode: false,
-
-        props: {
-            title: 'Add/Edit tag',
-            modal: true,
-            open: false
-        },
-
-        fields: [
-            {
-                name: 'firstName',
-                label: 'First Name',
-                hintText: 'First Name',
-                type: 'text',
-                value: '',
-                isValid: false,
-                isDirty: false,
-                isTouch: false,
-                validate: /^\w{1,50}$/,
-                validationMessage: 'Enter valid value!',
-                errorText: null
-            },
-            {
-                name: 'lastName',
-                label: 'Last Name',
-                hintText: 'Last Name',
-                type: 'text',
-                value: '',
-                isValid: false,
-                isDirty: false,
-                isTouch: false,
-                validationMessage: 'Enter valid value!',
-                errorText: null
-            },
-            {
-                name: 'email',
-                label: 'Email',
-                hintText: 'Email',
-                type: 'text',
-                value: '',
-                isValid: false,
-                isDirty: false,
-                isTouch: false,
-                validate: /.+@.+\..+/i,
-                validationMessage: 'Enter valid value!',
-                errorText: null
-            },
-            {
-                name: 'username',
-                label: 'Username',
-                hintText: 'Username',
-                type: 'text',
-                value: '',
-                readOnly: true,
-                isValid: false,
-                isDirty: false,
-                isTouch: false,
-                validate: /^\w{1,20}$/,
-                validationMessage: 'Enter valid value!',
-                errorText: null
-            }
-        ]
-    },
-
     registerForm: {
         isValid: false,
 
@@ -136,6 +76,12 @@ const users = {
         },
 
         fields: [
+            {
+                name: '_id',
+                readOnly: true,
+                type: 'hidden',
+                value: ''
+            },
             {
                 name: 'firstName',
                 label: 'First Name',
@@ -200,10 +146,54 @@ const users = {
                 validationMessage: 'This is required field. ' +
                 'Password should contains at least 4 chars and max length is 20. Allowed letters, numbers, @ . - _',
                 errorText: null
-            },{
+            },
+            {
+                name: 'birthday',
+                label: 'Birthday',
+                hintText: 'Birthday',
+                type: 'text',
+                value: ''
+            },
+            {
+                name: 'gender',
+                label: 'Gender',
+                hintText: 'Gender',
+                type: 'radio',
+                values: ['Male', 'Female'],
+                value: ''
+            },
+            {
+                name: 'skype',
+                label: 'Skype',
+                hintText: 'Skype',
+                type: 'text',
+                value: ''
+            },
+            {
+                name: 'website',
+                label: 'Website',
+                hintText: 'Website',
+                type: 'text',
+                value: ''
+            },
+            {
+                name: 'about',
+                label: 'About Me',
+                hintText: 'About Me',
+                type: 'textarea',
+                value: ''
+            },
+            {
                 type: 'file',
-                name: 'file',
+                name: 'avatar',
                 label: 'Avatar',
+                dropzoneText: 'Try dropping some files here, or click to select files to upload.',
+                value: ''
+            },
+            {
+                type: 'file',
+                name: 'background',
+                label: 'BG',
                 dropzoneText: 'Try dropping some files here, or click to select files to upload.',
                 value: ''
             }
