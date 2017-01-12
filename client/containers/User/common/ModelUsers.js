@@ -151,7 +151,7 @@ const users = {
                 name: 'birthday',
                 label: 'Birthday',
                 hintText: 'Birthday',
-                type: 'text',
+                type: 'date',
                 value: ''
             },
             {
@@ -160,7 +160,7 @@ const users = {
                 hintText: 'Gender',
                 type: 'radio',
                 values: ['Male', 'Female'],
-                value: ''
+                value: 'Male'
             },
             {
                 name: 'skype',

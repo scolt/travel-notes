@@ -75,7 +75,7 @@ const Menu = React.createClass({
                         ))}
                     </div>
                     <div>
-                        {user.email ? <LogoutButton /> : <span></span>}
+                        {user.email ? <LogoutButton onClick={this.setMenuStatus.bind(this, false)}/> : <span></span>}
                     </div>
                 </Drawer>
             </AppBar>

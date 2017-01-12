@@ -63,7 +63,10 @@ const DetailsCard = React.createClass({
                                 hintText={birthdayField.label}
                                 container="inline"
                                 mode="landscape"
-                                value={new Date(profile.birthday)}
+                                defaultDate={
+                                    (birthdayField.value || profile.birthday) ?
+                                        new Date(birthdayField.value || profile.birthday) :
+                                        undefined}
                                 onChange={this.dateChange}
                     />
                 </div>

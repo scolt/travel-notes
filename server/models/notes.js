@@ -147,29 +147,37 @@ let NoteActions = (function () {
             if (!id) {
                 dispatch(res, next)('Id not provided')
             } else {
-                Note.update({
-                    _id: id
-                }, {isDel: true}, function (err, data) {
-                    if (err) {
-                        dispatch(res, next)(err, data);
-                        return;
-                    }
-                    count(req.body, null, (err, data) => {
-                        if (err) {
-                            dispatch(res, next)(err, data);
-                            return;
-                        }
-                        const query = Note
-                            .find(filters)
-                            .sort(order)
-                            .skip(((data.page) * data.limit) - 1)
-                            .limit(1);
+                const user = req.user && req.user.username;
+                Note.findById(id, (err, data) => {
+                    if (err) dispatch(res, next)(err, null);
+                    else {
+                        if (data.userId !== user)
+                            dispatch(res, next)('User doesn\'t have permissions for delete this note.');
+                        else {
+                            Note.findByIdAndUpdate(id, {isDel: true}, {new: true}, (err, data) => {
+                                if (err) {
+                                    dispatch(res, next)(err, data);
+                                    return;
+                                }
+                                count(req.body, null, (err, data) => {
+                                    if (err) {
+                                        dispatch(res, next)(err, data);
+                                        return;
+                                    }
+                                    const query = Note
+                                        .find(filters)
+                                        .sort(order)
+                                        .skip(((data.page) * data.limit) - 1)
+                                        .limit(1);
 
-                        query.exec((err, notes) => {
-                            data.result = notes;
-                            dispatch(res, next)(err, data);
-                        })
-                    })
+                                    query.exec((err, notes) => {
+                                        data.result = notes;
+                                        dispatch(res, next)(err, data);
+                                    })
+                                })
+                            })
+                        }
+                    }
                 });
             }
         },

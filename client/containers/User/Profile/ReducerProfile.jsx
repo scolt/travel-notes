@@ -39,7 +39,11 @@ export default function (state, action) {
         }
 
         if (action.reqData.type === 'updateUser') {
-            return {...state, profile: {...action.resData}, editMode: false};
+            let {registerForm} = state;
+            for (let field of registerForm.fields) {
+                if (field.type === 'file') field.value = '';
+            }
+            return {...state, profile: {...action.resData}, user: {...action.resData}, editMode: false, registerForm};
         }
     }
 }

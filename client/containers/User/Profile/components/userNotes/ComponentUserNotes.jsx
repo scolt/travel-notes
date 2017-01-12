@@ -44,13 +44,14 @@ const UserNotes = React.createClass({
 
     render() {
         const notes = this.props.data.notes.notes;
+        const owner = this.props.data.users.profile.owner;
         return <Paper>
             <Subheader>Notes</Subheader>
             <List>
                 {notes.map(item => <a href={`#/note/${item._id}`} key={item._id}><ListItem
                     leftAvatar={<Avatar src={item.photos[0]} />}
                     primaryText={item.title}
-                    rightIcon={<span className="fa fa-trash" onClick={e => this.deleteNote(e, item._id)}>&nbsp;</span>}
+                    rightIcon={owner ? <span className="fa fa-trash" onClick={e => this.deleteNote(e, item._id)}>&nbsp;</span> : null}
                     secondaryText={new Date(item.created).toString().split(' GMT')[0]}
                 /></a>)}
             </List>

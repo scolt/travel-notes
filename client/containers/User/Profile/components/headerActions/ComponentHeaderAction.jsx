@@ -30,8 +30,9 @@ const UsersActions = React.createClass({
 
     render() {
         const isEditMode = this.props.data.users.editMode;
+        const owner = this.props.data.users.profile.owner;
         const isValid = this.props.data.users.registerForm.isValid;
-        return <div className="actions">
+        const card = <div className="actions">
             {!isEditMode ?
                 <div>
                     <FloatingActionButton mini={true} primary={true} onClick={this.changeEditStatus.bind(this, true)}>
@@ -46,6 +47,10 @@ const UsersActions = React.createClass({
                         <Icon name="times"/>
                     </FloatingActionButton>
                 </div>}
+        </div>;
+
+        return <div>
+            {owner ? card : null}
         </div>;
     }
 });

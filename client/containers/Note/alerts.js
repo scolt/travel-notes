@@ -19,6 +19,14 @@ export default function (state, action) {
     }
 
     if (action.type === 'errProcessing' && action.reqData.model === 'notes') {
+        if (action.reqData.type === 'deleteOneNote') {
+            let {open, message, title, type} = state;
+            open = true;
+            message = `Sorry we are unable to delete this note.<br><small>Reason: ${action.resData}</small>`;
+            type = 'error';
+            return {...state, open, message, title, type};
+        }
+
         if (action.reqData.type === 'updateNote') {
             let {open, message, title, type} = state;
             open = true;

@@ -10,6 +10,7 @@ import {
 } from 'containers/Note/index';
 import {
     login as LoginView,
+    register as Register,
     profile as Profile
 } from 'containers/User/index';
 import NotFound from 'containers/404/Container404';
@@ -30,6 +31,7 @@ const views = {
     '/': LandingPage,
     '/404': NotFound,
     '/login': LoginView,
+    '/register': Register,
     '/profile/:id': Profile,
     '/main': NoteList,
     '/map': Map,
