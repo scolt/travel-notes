@@ -1,9 +1,11 @@
 import React from 'react';
 import {TextField, RaisedButton, Paper, RadioButtonGroup, RadioButton, DatePicker} from 'material-ui';
+import Dropzone from 'react-dropzone';
 
 import restApi from 'common/actions/restApi';
 import withStore from 'common/components/withStore/withStore';
 
+import './styl/register.styl';
 
 const Register = React.createClass({
     formName: 'registerForm',
@@ -27,6 +29,16 @@ const Register = React.createClass({
         this.props.store.dispatch({type: 'onChangeFormField', model: 'users', name, value, formName});
     },
 
+    onDrop(files, name) {
+        this.props.store.dispatch({
+            type: 'onChangeFormField',
+            model: 'users',
+            formName: 'registerForm',
+            name: name,
+            value: files[0]
+        });
+    },
+
     dateChange(e, date) {
         this.onChange({
             target: {
@@ -39,6 +51,7 @@ const Register = React.createClass({
     getEditField(field) {
         switch (field.type) {
         case 'hidden':  return null;
+        case 'file':  return this.getFileField(field);
         case 'radio':  return this.getRadioField(field);
         case 'date':  return this.getDateField(field);
         default: return this.getTextField(field);
@@ -51,6 +64,7 @@ const Register = React.createClass({
             fullWidth={true}
             name={field.name}
             disabled={field.readOnly}
+            multiLine={field.type === 'textarea'}
             type={field.type}
             hintText={field.hintText}
             errorText={field.errorText}
@@ -85,7 +99,12 @@ const Register = React.createClass({
     },
 
     getFileField(field) {
-
+        return <Dropzone key={field.name} onDrop={files => this.onDrop(files, field.name)}
+                         className="drop-zone register-field"
+                         activeClassName="active"
+                         accept="image/*">
+            {field.value.preview ? <img src={field.value.preview} alt={field.name}/> : <span>{field.dropzoneText}</span>}
+        </Dropzone>;
     },
 
     getButton(button) {

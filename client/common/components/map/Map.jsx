@@ -46,7 +46,7 @@ const GoogleMapConstructor = withScriptjs(
                                             <CardMedia
                                                 overlay={<CardTitle title={marker.window.title} subtitle={marker.window.subtitle} />}
                                             >
-                                                {<img src={marker.window.photo || 'client/assets/banner.jpg'}/>}
+                                                {<img src={marker.window.photo || 'images/banner.jpg'}/>}
                                             </CardMedia>
                                             <CardText>
                                                 {marker.window.descr}

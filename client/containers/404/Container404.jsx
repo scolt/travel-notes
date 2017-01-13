@@ -10,7 +10,7 @@ const NotFound = React.createClass({
             <Paper zDepth={1} className="not-found-message">
                 This page not exist. Try to return on main page and search again.
             </Paper>
-            <img src="client/assets/404-bg.jpg" alt=""/>
+            <img src="images/404-bg.jpg" alt=""/>
         </div>;
     }
 });

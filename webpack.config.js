@@ -102,7 +102,7 @@ const config = {
             },
             {
                 test: /\.(png|jpg)\??/,
-                loader: 'url?limit=100&name=[path][name].[ext]'
+                loader: 'url?limit=100&name=images/[name].[ext]'
             },
             {
                 test: /\.(otf|eot|svg|ttf|woff|svg)\??/,

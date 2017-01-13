@@ -40,6 +40,14 @@ export default function (state, action) {
             type = 'error';
             return {...state, open, message, title, type};
         }
+
+        if (action.reqData.type === 'login') {
+            let {open, message, title, type} = state;
+            open = true;
+            message = 'You provide wrong data. Maybe your email or username has already registered. Please try again.';
+            type = 'error';
+            return {...state, open, message, title, type};
+        }
     }
 
     return false;

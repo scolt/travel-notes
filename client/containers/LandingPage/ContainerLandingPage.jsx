@@ -12,14 +12,14 @@ const NotFound = React.createClass({
                 <header>
                     <h1>Travel Note</h1>
                     <p>Store your travel experience! Open new horizons!</p>
-                    <RaisedButton label="Get Started" primary={true} href="#/main"/>
+                    <RaisedButton label="Get Started" primary={true} href="#/register"/>
                 </header>
-                <img src="client/assets/landing/alldevices.png" alt="Travel Note - all platforms"/>
+                <img src="images/alldevices.png" alt="Travel Note - all platforms"/>
             </section>
             <section className="page">
                 <h2>We help to store your memories and impressions</h2>
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-sm-6 col-xs-12">
                         <div className="icon">
                             <Icon name="cloud"/>
                         </div>
@@ -27,7 +27,7 @@ const NotFound = React.createClass({
                             Store your memories about some places. Add photo and get access to your past trips anywhere.
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4  col-sm-6 col-xs-12">
                         <div className="icon">
                             <Icon name="comments-o"/>
                         </div>
@@ -35,7 +35,7 @@ const NotFound = React.createClass({
                             Send your own opinion about different cities, towns and places for interest.
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4  col-sm-6 col-xs-12">
                         <div className="icon">
                             <Icon name="map-marker"/>
                         </div>
@@ -47,12 +47,12 @@ const NotFound = React.createClass({
             </section>
             <section className="map-page">
                 <h2>Look all you travel experience on one map</h2>
-                <img src="client/assets/landing/one.png" alt="Travel Note - Map"/>
+                <img src="images/one.png" alt="Travel Note - Map"/>
             </section>
             <section className="page">
                 <h2>Read about new places and new details about you favorites places</h2>
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-sm-6 col-xs-12">
                         <div className="icon">
                             <Icon name="file-text-o"/>
                         </div>
@@ -60,7 +60,7 @@ const NotFound = React.createClass({
                             Read about new places.
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-sm-6 col-xs-12">
                         <div className="icon">
                             <Icon name="camera-retro"/>
                         </div>
@@ -68,7 +68,7 @@ const NotFound = React.createClass({
                             Look photos from places where you never been.
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-sm-6 col-xs-12">
                         <div className="icon">
                             <Icon name="smile-o"/>
                         </div>

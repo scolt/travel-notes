@@ -187,14 +187,14 @@ const users = {
                 type: 'file',
                 name: 'avatar',
                 label: 'Avatar',
-                dropzoneText: 'Try dropping some files here, or click to select files to upload.',
+                dropzoneText: 'Upload your avatar',
                 value: ''
             },
             {
                 type: 'file',
                 name: 'background',
                 label: 'BG',
-                dropzoneText: 'Try dropping some files here, or click to select files to upload.',
+                dropzoneText: 'Upload your profile background image.',
                 value: ''
             }
         ],

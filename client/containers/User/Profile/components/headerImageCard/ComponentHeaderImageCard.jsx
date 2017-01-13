@@ -1,5 +1,4 @@
 import React from 'react';
-import {Paper} from 'material-ui';
 import Dropzone from 'react-dropzone';
 
 import withStore from 'common/components/withStore/withStore';
@@ -34,7 +33,7 @@ const HeaderCard = React.createClass({
                       className="drop-zone"
                       activeClassName="active"
                       accept="image/*">
-                <div className="user-bg" style={{backgroundImage: `url(${bg.value.preview || profile.background || 'client/assets/user-bg.jpg'})`}} alt=""/>
+                <div className="user-bg" style={{backgroundImage: `url(${bg.value.preview || profile.background || 'images/user-bg.jpg'})`}} alt=""/>
             </Dropzone>
             <Dropzone onDrop={files => this.onDrop(files, 'avatar')}
                       disableClick={!isEditMode}
@@ -42,7 +41,7 @@ const HeaderCard = React.createClass({
                       activeClassName="active"
                       accept="image/*">
                 <div className="avatar">
-                    <img src={avatar.value.preview || profile.avatar || 'client/assets/avatar.jpg'} alt="User Avatara"/>
+                    <img src={avatar.value.preview || profile.avatar || 'images/avatar.jpg'} alt="User Avatara"/>
                 </div>
             </Dropzone>
         </div>;

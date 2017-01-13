@@ -18,7 +18,7 @@ const UserTile = React.createClass({
                    zDepth={1}
                    circle={true}
                    onTouchTap={this.openProfile}>
-                <img className="img-rounded" src={user.avatar || 'client/assets/avatar.jpg'}/>
+                <img className="img-rounded" src={user.avatar || 'images/avatar.jpg'}/>
                 <div className="edit">Edit Profile</div>
             </Paper>
             <p className="user-name">{user.email}</p>
