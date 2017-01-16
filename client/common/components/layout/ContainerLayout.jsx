@@ -21,14 +21,13 @@ const Layout = React.createClass({
     },
 
     render () {
-
         const routeParams = {
             path: this.props.location.pathname,
             params: this.props.params
         };
 
         return (
-            <div>
+            <div className={`page-${this.props.location.pathname.replace('/', '')}-route`}>
                 <div className="header">
                     <Menu menu={this.props.data.menu} route={routeParams}/>
                 </div>

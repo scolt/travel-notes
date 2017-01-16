@@ -51,7 +51,7 @@ const UserNotes = React.createClass({
                 {notes.map(item => <a href={`#/note/${item._id}`} key={item._id}><ListItem
                     leftAvatar={<Avatar src={item.photos[0]} />}
                     primaryText={item.title}
-                    rightIcon={owner ? <span className="fa fa-trash" onClick={e => this.deleteNote(e, item._id)}>&nbsp;</span> : null}
+                    rightIcon={owner ? <span className="fa fa-trash" onTouchTap={e => this.deleteNote(e, item._id)}>&nbsp;</span> : null}
                     secondaryText={new Date(item.created).toString().split(' GMT')[0]}
                 /></a>)}
             </List>

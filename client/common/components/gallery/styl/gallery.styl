@@ -29,6 +29,7 @@
 .gallery-row
     display flex
     flex-wrap wrap;
+    width 100%
 
     &.no-space
         margin: 0 -.5rem
@@ -37,19 +38,25 @@
             width: 25% !important
             margin: 0;
 
+            @media screen and (max-width: 768px)
+                width 33.3% !important
+
         .col-33-custom
             width 25%  !important
 
+            @media screen and (max-width: 768px)
+                width 33.3% !important
+
 @media screen and (max-width: 768px)
     .col-33-custom
-        width 32.3%
+        width 32.3% !important
 
     .gallery-item
         padding-bottom  32.3%
 
 @media screen and (max-width: 480px)
     .col-33-custom
-        width 49%
+        width 49% !important
 
     .gallery-item
         padding-bottom  49%

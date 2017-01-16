@@ -33,7 +33,7 @@ const AddImageButton = React.createClass({
             <div className="drop-zone-sq">
                 <strong>Add New Image</strong>
                 {addImageFormField.value ? <img src={addImageFormField.value.preview}/> : null}
-                {addImageFormField.value ? <div className="submit-drop" onClick={this.uploadImage}>Upload</div> : null}
+                {addImageFormField.value ? <div className="submit-drop" onTouchTap={this.uploadImage}>Upload</div> : null}
             </div>
         </Dropzone>;
     }

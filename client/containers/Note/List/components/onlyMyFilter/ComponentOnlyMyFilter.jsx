@@ -29,7 +29,7 @@ const OrderFilter = React.createClass({
 
     render() {
         const currentStatus = this.props.data.notes.filters.filters.userId === this.props.data.users.user.username;
-        return <div style={styles.checkbox}>
+        return <div style={this.props.data.users.user.email ? styles.checkbox : {}}>
             {this.props.data.users.user.email ? <Toggle
                 label="Only My Notes"
                 labelPosition="left"

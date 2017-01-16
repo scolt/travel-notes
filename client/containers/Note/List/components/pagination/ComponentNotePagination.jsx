@@ -22,7 +22,7 @@ const NotePagination = React.createClass({
         return <div>
             {pages.length > 1 ? <ul className="pagination">
                 {pages.map((index) =>
-                    <li key={index} className={index === current ? 'active' : ''} onClick={this.openPage.bind(this, index)}>
+                    <li key={index} className={index === current ? 'active' : ''} onTouchTap={this.openPage.bind(this, index)}>
                         {index}
                     </li>)
                 }

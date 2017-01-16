@@ -32,7 +32,7 @@ const NoteGrid = React.createClass({
             {notes.map((tile, i) =>
                 <a key={i} className="note-grid-item" href={`#/note/${tile._id}`}>
                     {tile.userId === currentUsername ?
-                        <i className="fa fa-trash" onClick={(e) => this.deleteNote(e, tile._id)}>&nbsp;</i> : null
+                        <i className="fa fa-trash" onTouchTap={(e) => this.deleteNote(e, tile._id)}>&nbsp;</i> : null
                     }
                     <img src={tile.photos && tile.photos[0]} />
                     <div className="note-grid-metadata">
@@ -49,7 +49,7 @@ const NoteGrid = React.createClass({
 
         const noResults = <div className="notes-grid">
             {this.props.appendBefore}
-            <a className="note-grid-item no-results" onClick={this.props.reloadList}>
+            <a className="note-grid-item no-results" onTouchTap={this.props.reloadList}>
                 <div className="text-wrapper">
                     <p>There are 0 results according to your filter. Please try update filter or change the page.</p>
                     <p>Press here for reset all filters and reload.</p>

@@ -35,15 +35,15 @@ const UsersActions = React.createClass({
         const card = <div className="actions">
             {!isEditMode ?
                 <div>
-                    <FloatingActionButton mini={true} primary={true} onClick={this.changeEditStatus.bind(this, true)}>
+                    <FloatingActionButton mini={true} primary={true} onTouchTap={this.changeEditStatus.bind(this, true)}>
                         <Icon name="pencil"/>
                     </FloatingActionButton>
                 </div> :
                 <div>
-                    <FloatingActionButton mini={true} secondary={true} disabled={!isValid} style={{marginBottom: '10px'}} onClick={this.saveProfile}>
+                    <FloatingActionButton mini={true} secondary={true} disabled={!isValid} style={{marginBottom: '10px'}} onTouchTap={this.saveProfile}>
                         <Icon name="floppy-o"/>
                     </FloatingActionButton>
-                    <FloatingActionButton mini={true} primary={true} onClick={this.changeEditStatus.bind(this, false)}>
+                    <FloatingActionButton mini={true} primary={true} onTouchTap={this.changeEditStatus.bind(this, false)}>
                         <Icon name="times"/>
                     </FloatingActionButton>
                 </div>}

@@ -45,7 +45,7 @@ const Gallery = React.createClass({
                         key={index}
                         title={tile.title}
                         className="col-33-custom gallery-item"
-                        onClick={(e) => { this.openLightbox(index, e); } }>
+                        onTouchTap={(e) => { this.openLightbox(index, e); } }>
                         <img src={tile.src} />
                     </div> : null
             ))}

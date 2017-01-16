@@ -41,15 +41,15 @@ const NoteActions = React.createClass({
         return <div className="actions">
             {!isEditMode ?
                 <div>
-                    <FloatingActionButton mini={true} primary={true} onClick={this.prepareEditNote}>
+                    <FloatingActionButton mini={true} primary={true} onTouchTap={this.prepareEditNote}>
                         <Icon name="pencil"/>
                     </FloatingActionButton>
                 </div> :
                 <div>
-                    <FloatingActionButton mini={true} secondary={true} disabled={!isValid} style={{marginRight: '10px'}} onClick={this.saveNote}>
+                    <FloatingActionButton mini={true} secondary={true} disabled={!isValid} style={{marginRight: '10px'}} onTouchTap={this.saveNote}>
                         <Icon name="floppy-o"/>
                     </FloatingActionButton>
-                    <FloatingActionButton mini={true} primary={true} onClick={this.cancelEditNote}>
+                    <FloatingActionButton mini={true} primary={true} onTouchTap={this.cancelEditNote}>
                         <Icon name="times"/>
                     </FloatingActionButton>
                 </div>}
