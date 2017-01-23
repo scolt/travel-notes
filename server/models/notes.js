@@ -130,6 +130,7 @@ let NoteActions = (function () {
                         saveNote(body, user, result.secure_url, dispatch(res, next));
                     }, {
                         width: 1000,
+                        crop: 'limit',
                         quality: 80
                     });
             } else {
