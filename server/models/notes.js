@@ -128,6 +128,9 @@ let NoteActions = (function () {
                     files.file.path,
                     function(result) {
                         saveNote(body, user, result.secure_url, dispatch(res, next));
+                    }, {
+                        width: 1000,
+                        quality: 80
                     });
             } else {
                 saveNote(body, user, '', dispatch(res, next));
