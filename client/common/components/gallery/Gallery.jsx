@@ -40,14 +40,14 @@ const Gallery = React.createClass({
         const noSpace = this.props.noSpaces;
         return <div className={`gallery-row ${noSpace ? 'no-space' : '' }`}>
             {this.props.images.map((tile, index) => (
-                tile.src ?
+                tile.src &&
                     <div
                         key={index}
                         title={tile.title}
                         className="col-33-custom gallery-item"
                         onTouchTap={(e) => { this.openLightbox(index, e); } }>
                         <img src={tile.src} />
-                    </div> : null
+                    </div>
             ))}
 
             {this.props.appendAfter}

@@ -5,7 +5,7 @@
   "description": "0.0.1",
   "main": "main.js",
   "devDependencies": {
-    "electron": "1.4.3"
+    "electron": "1.4.14"
   },
   "scripts": {
     "build": "electron-packager . Travel-Note"

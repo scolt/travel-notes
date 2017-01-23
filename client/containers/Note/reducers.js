@@ -27,7 +27,7 @@ function notes(state = notesModel, action) {
         }
     }
 
-    let candidate = noteReducers.filter(item => {
+    const candidate = noteReducers.filter(item => {
         return item(state, action);
     }).pop();
     return candidate ? candidate(state, action) : state;

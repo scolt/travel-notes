@@ -15,7 +15,7 @@ const userReducers = [
 ];
 
 function notes(state = userModel, action) {
-    let candidate = userReducers.filter(item => {
+    const candidate = userReducers.filter(item => {
         return item(state, action);
     }).pop();
     return candidate ? candidate(state, action) : state;

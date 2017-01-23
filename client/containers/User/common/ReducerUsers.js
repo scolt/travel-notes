@@ -15,7 +15,7 @@ export default function (state, action) {
 
         let error = false;
 
-        editForm.fields = editForm.fields.map(function (item) {
+        editForm.fields = editForm.fields.map(item => {
             if (item.validate) {
                 item.isValid = item.validate.test(item.value);
                 if (!item.isValid) error = true;

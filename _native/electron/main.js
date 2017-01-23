@@ -2,7 +2,7 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const windowProperties = {
-    width: 800,
+    width: 1000,
     height: 600,
     resizable: false,
     icon: __dirname + '/www/icon.png'

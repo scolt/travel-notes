@@ -8,7 +8,7 @@ const styles = {
     }
 };
 
-const editableField = React.createClass({
+const EditableField = React.createClass({
     render() {
         const inputProperties = this.props.field;
         const textField = <TextField
@@ -32,4 +32,4 @@ const editableField = React.createClass({
     }
 });
 
-export default editableField;
+export default EditableField;

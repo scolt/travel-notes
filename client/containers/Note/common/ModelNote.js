@@ -79,7 +79,7 @@ const notes = {
                 value: '',
                 isValid: false,
                 isDirty: false,
-                validate: /^[\w@.-_]{4,100}$/,
+                validate: /^[\wА-Яа-я@.-_\s]{4,100}$/u,
                 validationMessage: 'This is required field. ' +
                 'Title should contains at least 4 chars. Allowed letters, numbers, @ . - _',
                 errorText: null

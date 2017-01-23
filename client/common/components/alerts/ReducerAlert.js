@@ -40,7 +40,7 @@ function alert(state = alertModel, action) {
         return {...state, open, message};
     }
 
-    let candidate = alertReducers.filter(item => {
+    const candidate = alertReducers.filter(item => {
         return item(state, action);
     }).pop();
     return candidate ? candidate(state, action) : state;

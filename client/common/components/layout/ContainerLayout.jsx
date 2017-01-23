@@ -35,12 +35,6 @@ const Layout = React.createClass({
                     {this.props.children}
                 </div>
                 <Alert />
-                {/*<Snackbar*/}
-                {/*open={this.state.snackbar.open || false}*/}
-                {/*message={this.state.snackbar.message || ''}*/}
-                {/*autoHideDuration={2000}*/}
-                {/*onRequestClose={() => {this.store.dispatch({type: 'snackbarClose'});}}*/}
-                {/*/>*/}
                 <Footer />
             </div>
         );

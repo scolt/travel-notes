@@ -16,7 +16,7 @@ export default function (modelName) {
 
             const validationGroups = {};
 
-            editForm.fields = editForm.fields.map(function (item) {
+            editForm.fields = editForm.fields.map(item => {
                 if (item.validateObject) {
                     item.isValid = true;
                     item.requiredFields.forEach(key => {
