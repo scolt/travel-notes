@@ -18,7 +18,7 @@ const config = {
         api_secret: 'hbzZ2mzdbGJwg9gtW-qMcZpM9w8'
     },
     dateFormat: 'dd.mm.yyyy hh24:mi:ss',
-    limit: 10,
+    limit: 59,
     maxAge: 31557600000 // One year
 };
 
