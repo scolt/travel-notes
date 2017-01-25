@@ -1,0 +1,52 @@
+.col-33-custom
+    width 24%
+
+.gallery-item
+    overflow hidden
+    position relative
+    padding-bottom 99%
+    margin-right 1%
+    margin-bottom 1%
+    cursor pointer
+    opacity 1
+    transition: all ease-out .5s
+
+    &:hover
+        opacity .8
+
+    img
+        position absolute
+        height 100%
+        display block
+        min-width 100%
+
+.gallery-modal img
+    width: 100%
+    max-width 100%
+    max-height 100%
+    display block
+
+.gallery-row
+    display flex
+    flex-wrap wrap;
+    width 100%
+
+    &.no-space
+        margin: 0 -.5rem
+
+        .col-33-custom
+            width: 25% !important
+
+            @media screen and (max-width: 768px)
+                width 33.3% !important
+
+        .gallery-item
+            margin: 0;
+
+@media screen and (max-width: 768px)
+    .col-33-custom
+        width 32.3% !important
+
+@media screen and (max-width: 480px)
+    .col-33-custom
+        width 49% !important

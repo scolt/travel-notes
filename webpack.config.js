@@ -16,7 +16,7 @@ const isDev = JSON.parse(definitions.definitions['process.env.NODE_ENV']) == 'de
 const replacements = [
     {
         pattern: /\$\$REST_URL_HOST/ig,
-        replacement: () => process.env.remoteServer || (isDev ? 'http://localhost:1337' : '')
+        replacement: () => process.env.remoteServer || (isDev ? 'http://iwasthere.herokuapp.com' : '')
     }
 ];
 
@@ -40,7 +40,7 @@ const config = {
     entry: {
         app:
             (isDev ? [devServerConfig.getUrl()] : [])
-            .concat([path.resolve(__dirname, 'client/js/app.jsx')])
+            .concat([path.resolve(__dirname, 'client/app.jsx')])
     },
 
     output: {
@@ -55,7 +55,7 @@ const config = {
 
     resolve: {
         root: [
-            path.resolve(__dirname, 'client/js'),
+            path.resolve(__dirname, 'client'),
             path.resolve(__dirname, 'client/assets'),
             path.resolve(__dirname, 'node_modules')
         ],
@@ -75,6 +75,10 @@ const config = {
             }
         ],
         loaders: [
+            {
+                test: /\.json$/,
+                loader: 'json'
+            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
@@ -97,12 +101,12 @@ const config = {
                 loader: ExtractTextPlugin.extract('style', 'css')
             },
             {
-                test: /\.(otf|eot|svg|ttf|woff|png|jpg)\??/,
-                loader: 'url?limit=100&name=[path][name].[ext]'
+                test: /\.(png|jpg)\??/,
+                loader: 'url?limit=100&name=images/[name].[ext]'
             },
             {
-                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=image/svg+xml&name=[path][name].[ext]'
+                test: /\.(otf|eot|svg|ttf|woff|svg)\??/,
+                loader: 'url?limit=100&name=fonts/[name].[ext]'
             }
         ]
     },

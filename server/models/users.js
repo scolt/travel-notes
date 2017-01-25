@@ -16,230 +16,200 @@ let UserSchema = new Schema({
     email: {type: String, unique: true},
     password: String,
     username: {type: String, unique: true},
-    text: String,
+    about: String,
+    avatar: String,
+    background: String,
+    birthday: String,
+    gender: String,
+    skype: String,
+    website: String,
     salt: String
-});
-
-let ImageSchema = new Schema({
-    preview: String,
-    image: String,
-    isDel: Boolean,
-    alt: String,
-    lng: Number,
-    lat: Number
 });
 
 let cloudinary = require('cloudinary');
 
-function encrypt(text){
+function encrypt(text) {
     const cipher = crypto.createCipher(config.algorithm, config.password);
-    let crypted = cipher.update(text,'utf8','hex');
+    let crypted = cipher.update(text, 'utf8', 'hex');
     crypted += cipher.final('hex');
     return crypted;
 }
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', function (next) {
     this.salt = crypto.randomBytes(256).toString('hex');
     this.password = encrypt(this.password + this.salt);
     this.role = 'user';
     next();
 });
 
-UserSchema.methods.validPassword = function(password) {
-    return encrypt(password  + this.salt) == this.password;
+UserSchema.methods.validPassword = function (password) {
+    return encrypt(password + this.salt) == this.password;
 };
 
 let User = mongoose.model('users', UserSchema);
-let Image = mongoose.model('image', ImageSchema);
 
 /* Adding actions for user */
 let jwt = require('jsonwebtoken');
+
+function clearUnexpectedFields(data) {
+    for (let item in data) {
+        if (data.hasOwnProperty(item))
+            if (UserSchema.tree[item] === undefined) delete data[item];
+    }
+    return data;
+}
+
+/**
+ * files = {file: String, name: FieldName, config: CloudinaryConfig}
+ * */
+function uploadImages(files, callback) {
+    if (files.length === 0) {
+        callback({})
+    } else {
+        const results = {};
+        let totalFiles = files.length;
+
+        files.forEach(item => {
+            cloudinary.uploader.upload(
+                item.file,
+                (image) => {
+                    results[item.name] = image.secure_url;
+                    if (--totalFiles <= 0) callback(results);
+                }, item.config);
+        })
+    }
+}
+
 let UsersActions = {
-    login(req, res, next) {
-        User.findOne({email: req.body.email}, function (err, user) {
-            if (err) {
-                res.status(500);
-                res.send('Unexpected error');
-                return;
-            }
-            if (!user) {
-                res.status(401);
-                res.send('Incorrect login or password');
-                return;
-            }
-            if (!user.validPassword(req.body.password)) {
-                res.status(401);
-                res.send('Incorrect login or password');
-                return;
-            }
+        login(req, res, next) {
+            User.findOne({email: req.body.email}, function (err, user) {
+                res.header('tn-user-type', 'guest');
+                if (err) return next(err);
+                if (!user) return next('This user doesn\'t exist');
+                if (!user.validPassword(req.body.password)) return next('Incorrect login or password');
 
-            const data = user.toObject();
-            delete data.password;
-            delete data.salt;
-            data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 5});
-            if (data.imageId) {
-                Image.findOne({
-                    '_id': data.imageId
-                }, function (err, image) {
-                    if (image) {
-                        data.avatar = image.image;
-                    }
-                    res.json(data);
-                });
-            } else {
-                res.json(data);
-            }
-        });
-    },
-
-    read(req, res, next) {
-        User.findOne({username: req.body.userId}, function (err, user) {
-            if (err) {
-                res.status(500);
-                res.send('Unexpected error');
-                return;
-            }
-            if (!user) {
-                res.status(404);
-                res.send('This user doesn\'t exist');
-            } else {
                 const data = user.toObject();
                 delete data.password;
                 delete data.salt;
+                data.token = jwt.sign(data, config.secret, {expiresIn: config.sessionExpiration});
+                res.header('tn-user-type', 'logged');
+                res.json(data);
+            });
+        },
 
-                if (req.user && req.user.username === user.username) {
-                    data.owner = true;
-                }
+        read(req, res, next) {
+            const id = req.body.id || req.params.id;
+            User.findOne({username: id}, function (err, user) {
+                    if (err) return next(err);
+                    if (!user) return next('This user doesn\'t exist');
+                    const data = user.toObject();
+                    delete data.password;
+                    delete data.salt;
 
-                if (data.imageId) {
-                    Image.findOne({
-                        '_id': data.imageId
-                    }, function (err, image) {
-                        if (image) {
-                            data.avatar = image.image;
-                        }
-                        res.json(data);
-                    });
-                } else {
+                    if (req.user && req.user.username === user.username) data.owner = true;
                     res.json(data);
                 }
-            }
-        });
-    },
+            );
+        },
 
-    create(req, res, next) {
-        const cloudinaryConfig = {
-            width: 200,
-            height: 200,
-            crop: 'fill'
-        };
+        create(req, res, next) {
+            const images = [];
+            delete req.body._id;
 
-        const user = req.body;
-
-        function saveUser(avatarUrl) {
-            Image({
-                image: avatarUrl,
-                type: 'avatar'
-            }).save(function (err, image) {
-                if (err) {
-                    res.status('500');
-                    res.json({code: err.code.toString()});
-                } else {
-                    let dataImage = image.toObject();
-                    user.imageId = dataImage['_id'];
-                    User(user).save(function (err, user) {
-                        if (err) {
-                            res.status('500');
-                            res.json({code: err.code.toString()});
-                        } else {
-                            let data = user.toObject();
-                            data.token = jwt.sign(data, config.secret, {expiresIn: 60 * 60 * 24});
-                            data.avatar = dataImage.image;
-                            delete data.password;
-                            delete data.salt;
-                            res.json(data);
-                        }
-                    });
+            if (req.files.avatar && req.files.avatar.path) images.push({
+                name: 'avatar',
+                file: req.files.avatar.path,
+                config: {
+                    width: 200,
+                    height: 200,
+                    crop: 'fill'
                 }
             });
 
-        }
-
-        if (req.files.file && req.files.file.path) {
-            cloudinary.uploader.upload(
-                req.files.file.path,
-                function(result) {
-                    try {
-                        saveUser(result.secure_url);
-                    } catch(e) {
-                        res.json({code: err.code.toString()});
-                    }
-                }, cloudinaryConfig);
-        } else {
-            saveUser('');
-        }
-
-    },
-
-    update(req, res, next) {
-        if (req.user && req.body['_id'] === req.user['_id']) {
-            delete req.body.username;
-            User.update({
-                _id: req.body['_id']
-            }, req.body, {}, function (err, doc) {
-                if (!err && doc) {
-                    User.findOne({
-                        _id: req.body['_id']
-                    }, function (err, user) {
-                        let data = user.toObject();
-                        data.owner = true;
-                        delete data.password;
-                        delete data.salt;
-                        if (data.imageId) {
-                            Image.findOne({
-                                '_id': data.imageId
-                            }, function (err, image) {
-                                if (image) {
-                                    data.avatar = image.image;
-                                }
-                                res.json(data);
-                            });
-                        } else {
-                            res.json(data);
-                        }
-                    })
-                } else {
-                    res.status(500);
+            if (req.files.background && req.files.background.path) images.push({
+                name: 'background',
+                file: req.files.background.path,
+                config: {
+                    width: 800,
+                    height: 140,
+                    crop: 'crop'
                 }
-            })
-        } else {
-            res.status(401).end('Not authorized');
-        }
-    },
+            });
 
-    ping(req, res, next) {
-        if (req.user) {
-            let user = req.user;
-
-            delete user.password;
-            delete user.salt;
-            if (user.imageId) {
-                Image.findOne({
-                    '_id': user.imageId
-                }, function (err, image) {
-                    if (image) {
-                        user.avatar = image.image;
+            uploadImages(images, (imgUrls) => {
+                let dataToSave = Object.assign({}, req.body, imgUrls);
+                dataToSave = clearUnexpectedFields(dataToSave);
+                User(dataToSave).save((err, doc) => {
+                    if (err) {
+                        next(err);
+                        return;
                     }
-                    res.json(user);
+                    doc = doc.toObject();
+                    delete doc.password;
+                    delete doc.salt;
+                    doc.token = jwt.sign(doc, config.secret, {expiresIn: config.sessionExpiration});
+                    res.json(doc);
+                });
+            });
+        },
+
+        update(req, res, next) {
+            if (req.user && req.body['_id'] === req.user['_id']) {
+                const images = [];
+                if (req.files.avatar && req.files.avatar.path) images.push({
+                    name: 'avatar',
+                    file: req.files.avatar.path,
+                    config: {
+                        width: 200,
+                        height: 200,
+                        crop: 'fill'
+                    }
+                });
+
+                if (req.files.background && req.files.background.path) images.push({
+                    name: 'background',
+                    file: req.files.background.path,
+                    config: {
+                        width: 800,
+                        height: 140,
+                        crop: 'crop'
+                    }
+                });
+
+                uploadImages(images, (imgUrls) => {
+                    let dataToSave = Object.assign({}, req.body, imgUrls);
+                    dataToSave = clearUnexpectedFields(dataToSave);
+                    User.findByIdAndUpdate(req.body['_id'], dataToSave, {new: true}, (err, doc) => {
+                        if (err) {
+                            next(err);
+                            return;
+                        }
+                        doc = doc.toObject();
+                        doc.owner = true;
+                        delete doc.password;
+                        delete doc.salt;
+                        doc.token = jwt.sign(doc, config.secret, {expiresIn: config.sessionExpiration});
+
+                        res.json(doc);
+                    });
                 });
             } else {
-                res.json(user);
+                return next('User doesn\'t have permissions for change this profile');
             }
-        } else {
-            res.status(401).end('Not authorized');
-        }
+        },
 
+        ping(req, res, next) {
+            if (req.user) {
+                let user = req.user;
+                delete user.password;
+                delete user.salt;
+                res.json(user);
+            } else {
+                res.status(401).end('Not authorized');
+            }
+
+        }
     }
-};
+    ;
 
 module.exports = UsersActions;

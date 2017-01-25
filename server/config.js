@@ -9,6 +9,7 @@ const config = {
     },
     defaultDb: 'mongo',
     secret: 'this is my super secret key, tsss',
+    sessionExpiration: '2d',
     algorithm: 'aes-256-ctr',
     password: 'realStrangePassword',
     cloudinaryConfig: {
@@ -17,7 +18,7 @@ const config = {
         api_secret: 'hbzZ2mzdbGJwg9gtW-qMcZpM9w8'
     },
     dateFormat: 'dd.mm.yyyy hh24:mi:ss',
-    limit: 100,
+    limit: 59,
     maxAge: 31557600000 // One year
 };
 

@@ -1,0 +1,114 @@
+.note-background
+    position relative
+    overflow hidden
+    min-height 100%
+    width 100%
+    background rgba(0, 0, 0, 0.67)
+
+.note-header
+    background rgba(0, 0, 0, 0.54)
+    position relative
+    padding-right 100px !important
+    .actions
+        position absolute
+        top 10px
+        right 10px
+
+.note-background-image
+    -webkit-filter blur(4px)
+    filter blur(4px)
+    position absolute
+    top -10px
+    left -10px
+    min-width 110%
+    min-height 110%
+    z-index -1
+
+.note-container
+    margin 20px auto
+
+.note-text
+    font-size 16px
+    line-height 1.5
+    margin 15px 0 0
+
+.drop-zone-sq
+    position absolute
+    border 5px dotted #ccc
+    top 0
+    bottom 0
+    left 0
+    right 0
+    padding 10px 10px 35px
+
+.gallery-item .drop-zone-sq img
+    max-width 100%
+    position relative
+
+.submit-drop
+    position absolute
+    bottom 10px
+    left 10px
+    right 10px
+    background #00bcd4
+    color #fff
+    padding 5px
+    text-align center
+    border-radius 5px
+    cursor pointer
+
+.editNoteButton
+    position absolute !important
+    top 50%
+    right 10px
+    z-index 10
+
+.sign
+    text-align right
+    text-transform capitalize
+    font-style italic
+    color #ccc
+    margin-bottom 10px;
+
+.edit-enabled
+    .note-header
+        background rgb(232, 232, 232)
+
+    .map
+        border 5px dashed #ff4081
+        position relative
+        &:before
+            content 'You can change marker position.'
+            position absolute
+            top -15px
+            background-color #ff4081
+            color #fff
+            padding 5px
+            right 10px
+            z-index: 30;
+
+    .note-background
+        position relative
+        &:before
+            content ''
+            position absolute
+            top 0
+            left 0
+            bottom 0
+            right 0
+            background #000
+            opacity .5
+            z-index 2
+    .note-container
+        position relative
+        z-index 5
+    .gallery-row
+        opacity .2
+        position relative
+        &:after
+            content ''
+            position absolute
+            top 0
+            left 0
+            right 0
+            bottom 0
