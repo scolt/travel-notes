@@ -12,15 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/emp2016/emp.git"
+    "url": "git+ssh:/git@github.com:scolt/travel-notes.git"
   },
   "keywords": [
-    "Training",
     "React.js"
   ],
-  "author": "EPAM",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/emp2016/emp#readme",
   "dependencies": {
     "async": "2.0.0-rc.3",
     "body-parser": "1.15.0",

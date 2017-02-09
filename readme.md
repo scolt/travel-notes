@@ -1,4 +1,7 @@
-Steps to start:
+Demo
+------------------------
+[Live Demo](http://iwasthere.herokuapp.com/)
+
 
 1.Set up environment.
 ------------------------
@@ -16,24 +19,19 @@ Install:
 
  - eslint - `npm i eslint`
  - react - `npm i react`
- - karma - `npm i karma`
 
 for command line interface:
 
- - karma - `npm i -g karma-cli`
  - webpack - `npm i webpack`
 
 If you have trouble with karma or webpack(may be when using windows), then run
 
-    npm i -g karma-cli
     npm i -g webpack
     npm i -g webpack-dev-server
 
-1.3.Clone project repository(git clone git@bitbucket.org:emp2016/emp.git). If it is necessary, create a public SSH key
-([how](https://confluence.atlassian.com/bitbucket/add-an-ssh-key-to-an-account-302811853.html) [to](https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key)). After that run npm i, if you haven't required packages or
-if package.json file changed.
+1.3.Clone project repository.
 
-1.4.Go to the branch "trunk". To get the latest changes, use git fetch and git rebase origin/trunk.
+1.4.Get the latest changes, use git fetch and git rebase origin/trunk.
 Now you should have current version of project. To run it, write `webpack-dev-server` in command line. Open this link
 in browser to see: `http://localhost:8080`
 
@@ -77,7 +75,7 @@ If you using cloud9 just run:
 
 4.5 Add heroku repository to remote repositories:
 
-    git remote add heroku https://git.heroku.com/travelnote.git
+    git remote add heroku YOUR_HEROKU_URL
 
 4.6 Set `NODE_ENV=production` and `NPM_CONFIG_PRODUCTION=false` using web interface or by running:
 
@@ -218,17 +216,6 @@ or
         isDel: boolean
     }
 
-6.4 Images
-
-    Images {
-        type: String,
-        preview: String,
-        image: String,
-        isDel: boolean,
-        alt: String
-        lng: Number,
-        lat: Number,
-    }
  
 7. Phonegap configuration
 -------------------------
