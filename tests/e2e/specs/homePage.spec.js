@@ -1,17 +1,25 @@
 import {HomePage} from '../pageObjects/homePage.js';
+import {MasterPage} from "../pageObjects/masterPage";
 import {expect} from 'chai';
 
-describe('I was there first test', function() {
+describe('When I visit Home Page', function() {
     const home = new HomePage();
+    const master = new MasterPage();
 
     before(() => {
         browser.url("/");
     });
 
-    it('Click register button', function() {
+    it('Global Toolbar should be visible', function() {
+        browser.isVisible(master.toolbar);
+    });
 
-        browser.click(home.getStartedButton);
+    it('Global Footer should be visible', function() {
+        browser.isVisible(master.footer);
+    });
 
+    it('Get Started Button should be visible', function() {
+        browser.isVisible(home.getStartedButton);
     });
 
 });
