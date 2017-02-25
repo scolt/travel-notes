@@ -1,6 +1,6 @@
 import {config} from "../wdio.conf";
 
-const confing = config;
+const config = config;
 
 export class MainPage {
 
