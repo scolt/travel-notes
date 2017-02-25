@@ -271,3 +271,10 @@ Oh, we are ashamed and want to fix it asap!
 But before fixing a bug we need to reproduce and confirm it. 
 
 In order to reproduce bugs we will systematically ask you to provide a minimal reproduce scenario (step by step).
+
+9. E2e testing
+---------------
+Testing is organized using Webdriver.io
+To execute test cases you need:
+1. npm run selenium-server
+2. npm run e2e (wdio tests/e2e/wdio.conf.js)
