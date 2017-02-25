@@ -1,6 +1,6 @@
-import {Config} from "../wdio.conf";
+import {config} from "../wdio.conf";
 
-const config = Config;
+const confing = config;
 
 export class MainPage {
 

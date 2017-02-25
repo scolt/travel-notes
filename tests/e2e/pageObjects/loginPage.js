@@ -16,12 +16,18 @@ export class LoginPage {
         return browser.getText(this.welcomeText);
     }
 
-    enterEmail(text) {
-        browser.setValue(this.emailField, text);
+    enterEmail(email) {
+        browser.setValue(this.emailField, email);
     }
 
-    enterPassword(text) {
-        browser.setValue(this.passwordField, text);
+    enterPassword(password) {
+        browser.setValue(this.passwordField, password);
+    }
+
+    login(login, password) {
+        this.enterEmail(login);
+        this.enterPassword(password);
+        browser.click(this.loginButton);
     }
 }
 

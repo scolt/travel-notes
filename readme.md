@@ -276,5 +276,6 @@ In order to reproduce bugs we will systematically ask you to provide a minimal r
 ---------------
 Testing is organized using Webdriver.io
 To execute test cases you need:
+
 1. npm run selenium-server
 2. npm run e2e (wdio tests/e2e/wdio.conf.js)
