@@ -1,7 +1,4 @@
 import {config} from "../wdio.conf";
-
-const config = config;
-
 export class MainPage {
 
     //Elements
