@@ -10,9 +10,8 @@ export class MainPage {
     }
 
     waitForPageisLoaded() {
-        browser.waitUntil(function () {
+        browser.waitUntil(() => {
             return browser.getUrl() === (config.baseUrl + "/main")
         }, 5000);
     }
-
 }
