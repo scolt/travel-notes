@@ -50,7 +50,7 @@ describe('Accessing Login Page', function() {
             login.navigateTo();
         });
 
-        it('And I enter valid credentials', function () {
+        it('When I enter valid credentials', function () {
             login.enterEmail("test@test.ru");
             login.enterPassword("password");
             browser.click(login.loginButton);
@@ -68,7 +68,7 @@ describe('Accessing Login Page', function() {
         before(() => {
             login.navigateTo();
         });
-        it('And I enter non valid  credentials', function () {
+        it('When I enter non valid  credentials', function () {
             login.enterEmail("test@test.ru");
             login.enterPassword("abc");
             browser.click(login.loginButton);
