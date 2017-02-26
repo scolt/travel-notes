@@ -68,7 +68,6 @@ describe('Accessing Login Page', function() {
         before(() => {
             login.navigateTo();
         });
-
         it('And I enter non valid  credentials', function () {
             login.enterEmail("test@test.ru");
             login.enterPassword("abc");
