@@ -9,7 +9,7 @@ exports.config = {
     sync: true,
     coloredLogs: true,
     screenshotPath: './tests/e2e/screenshots',
-    baseUrl: 'http://iwasthere.herokuapp.com',
+    baseUrl: 'http://iwasthere.herokuapp.com/#',
     waitforTimeout: 10000,
     framework: 'mocha',
     mochaOpts: {
