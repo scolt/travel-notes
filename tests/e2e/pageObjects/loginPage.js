@@ -5,7 +5,7 @@ export class LoginPage {
     emailField = "input[name='email']";
     passwordField = "input[name='password']";
     loginButton = "button[name='login']";
-    signUpButton = "div[data-reactid='.0.1.0.2.1']";
+    signUpButton = "div.login-footer";
 
     //Methods
     navigateTo() {
