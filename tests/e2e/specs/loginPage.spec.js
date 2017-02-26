@@ -2,6 +2,8 @@ import {HomePage} from '../pageObjects/homePage.js';
 import {Toolbar} from "../pageObjects/common/toolbar";
 import {LoginPage} from "../pageObjects/loginPage";
 import {MainPage} from "../pageObjects/mainPage";
+import {MasterPage} from "../pageObjects/masterPage";
+import {PopUp} from "../pageObjects/common/alertPopUp";
 import {expect} from 'chai';
 
 describe('Accessing Login Page', function() {
@@ -9,6 +11,8 @@ describe('Accessing Login Page', function() {
     const toolbar = new Toolbar();
     const login = new LoginPage();
     const main = new MainPage();
+    const master = new MasterPage();
+    const popup = new PopUp();
 
 
     describe('When I click Login Button', function() {
@@ -40,7 +44,7 @@ describe('Accessing Login Page', function() {
         });
     });
 
-    describe('When I open Login Page', function() {
+    describe('Entering Valid Credentials', function() {
 
         before(() => {
             login.navigateTo();
@@ -56,6 +60,25 @@ describe('Accessing Login Page', function() {
         });
         it('I should be on Main Page', function () {
             expect(browser.getUrl()).to.contain('main');
+        });
+    });
+
+    describe('Entering Non Valid Credentials', function() {
+
+        before(() => {
+            login.navigateTo();
+        });
+
+        it('And I enter non valid  credentials', function () {
+            login.enterEmail("test@test.ru");
+            login.enterPassword("abc");
+            browser.click(login.loginButton);
+        });
+        it('Then Alert Pop Up Should be visible', function () {
+            browser.isVisible(master.alertPopUp);
+        });
+        it('And Text of Popup should be visible', function () {
+            expect(popup.getAlertText()).to.equal("You provide wrong email or password. Please try again.");
         });
     });
 });
