@@ -1,3 +1,4 @@
+import {config} from "../../wdio.conf";
 export class PopUp {
 
     //Elements
@@ -5,7 +6,7 @@ export class PopUp {
 
 
     getAlertText() {
-        browser.waitForText(this.text, 5000);
+        browser.waitForText(this.text, config.waitforTimeout);
         return browser.getText(this.text);
     }
 }
