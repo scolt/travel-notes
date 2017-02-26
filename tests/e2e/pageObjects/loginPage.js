@@ -4,7 +4,7 @@ export class LoginPage {
     welcomeText = "div.login-header";
     emailField = "input[name='email']";
     passwordField = "input[name='password']";
-    loginButton = "span[data-reactid='.0.1.0.1.2:$0.0.0.1.0']";
+    loginButton = "button[name='login']";
     signUpButton = "div[data-reactid='.0.1.0.2.1']";
 
     //Methods
