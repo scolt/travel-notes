@@ -19,4 +19,12 @@ export class MainPage {
             return browser.getUrl() === (config.baseUrl + "/main")
         }, config.waitforTimeout);
     }
+
+    getNotes() {
+        return browser.elements(this.notes);
+    }
+
+    openNote(number) {
+        browser.elementIdClick(this.getNotes().value[number].ELEMENT);
+    }
 }

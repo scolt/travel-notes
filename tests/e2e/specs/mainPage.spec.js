@@ -20,10 +20,8 @@ describe('Accessing Main Page', function() {
         it('Add a note button should be visible', function () {
             browser.isVisible(main.addNoteButton);
         });
-
-        it('user option should be visible', function () {
-            browser.click(main.sorting);
-            browser.isVisible(main.userSortingOption);
+        it('List of notes should be visible', function () {
+            browser.isVisible(main.notes);
         });
     });
 });
