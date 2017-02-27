@@ -46,37 +46,17 @@ describe('Accessing Login Page', function() {
 
     describe('Entering Valid Credentials', function() {
 
-        before(() => {
+        beforeEach(() => {
             login.navigateTo();
         });
-
-        it('When I enter valid credentials', function () {
-            login.enterEmail("test@test.ru");
-            login.enterPassword("password");
-            browser.click(login.loginButton);
-        });
-        it('And Wait until page is loaded', function () {
+        it('Should allow access with valid credentials', function () {
+            login.login("test@test.ru", "password");
             main.waitForPageisLoaded();
-        });
-        it('I should be on Main Page', function () {
             expect(browser.getUrl()).to.contain('main');
         });
-    });
-
-    describe('Entering Non Valid Credentials', function() {
-
-        before(() => {
-            login.navigateTo();
-        });
-        it('When I enter non valid  credentials', function () {
-            login.enterEmail("test@test.ru");
-            login.enterPassword("abc");
-            browser.click(login.loginButton);
-        });
-        it('Then Alert Pop Up Should be visible', function () {
+        it('Should deny access with wrong credentials', function () {
+            login.login("test@test.ru", "abc");
             browser.isVisible(master.alertPopUp);
-        });
-        it('And Text of Popup should be visible', function () {
             expect(popup.getAlertText()).to.equal("You provide wrong email or password. Please try again.");
         });
     });
