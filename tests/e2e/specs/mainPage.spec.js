@@ -22,6 +22,8 @@ describe('Accessing Main Page', function() {
         });
         it('List of notes should be visible', function () {
             browser.isVisible(main.notes);
+            main.openNote(1);
+
         });
     });
 });
