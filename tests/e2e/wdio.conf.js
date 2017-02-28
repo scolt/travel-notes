@@ -12,6 +12,7 @@ exports.config = {
     baseUrl: 'http://iwasthere.herokuapp.com/#',
     waitforTimeout: 10000,
     framework: 'mocha',
+    services: ['selenium-standalone'],
     mochaOpts: {
         ui: 'bdd',
         compilers: ['js:babel-register'],
@@ -19,6 +20,12 @@ exports.config = {
     },
     logLevel: 'silent',
     reporters: ['spec'],
+    before: function () {
+        browser.setViewportSize({
+            width: 500,
+            height: 500
+        });
+    },
     onPrepare: function () {
         console.log('Starting end2end tests');
     },
