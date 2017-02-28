@@ -8,6 +8,7 @@ export class MainPage {
     titleSortingOption = "";
     userSortingOption = "div[data-reactid='.f.0.0.$2/=1$2']";
     dateSortingOption = "";
+    toggle = "input[type='checkbox']";
 
     //Methods
     navigateTo() {

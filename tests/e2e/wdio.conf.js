@@ -22,8 +22,8 @@ exports.config = {
     reporters: ['spec'],
     before: function () {
         browser.setViewportSize({
-            width: 500,
-            height: 500
+            width: 1080,
+            height: 920
         });
     },
     onPrepare: function () {
