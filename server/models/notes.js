@@ -43,7 +43,7 @@ let NoteActions = (function () {
             if (err) {
                 cb(err);
             } else {
-                pages = Math.ceil(total/limit);
+                pages = Math.ceil(total / limit);
                 page = page > pages || page < 0 ? 1 : page;
                 result = Object.assign({}, result, {page, pages, total});
                 cb(null, result);
@@ -72,7 +72,7 @@ let NoteActions = (function () {
     function clearUnexpectedFields(data) {
         for (let item in data) {
             if (data.hasOwnProperty(item))
-            if (NoteSchema.tree[item] === undefined) delete data[item];
+                if (NoteSchema.tree[item] === undefined) delete data[item];
         }
         return data;
     }
@@ -126,7 +126,7 @@ let NoteActions = (function () {
             } else if (files.file && files.file.path) {
                 cloudinary.uploader.upload(
                     files.file.path,
-                    function(result) {
+                    function (result) {
                         saveNote(body, user, result.secure_url, dispatch(res, next));
                     }, {
                         width: 1000,
@@ -195,7 +195,7 @@ let NoteActions = (function () {
                     Note.update({
                         "_id": id
                     }, {
-                        "$push": {photos : result.secure_url}
+                        "$push": {photos: result.secure_url}
                     }, (err) => {
                         if (err) {
                             dispatch(res, next)(err, null);
@@ -209,7 +209,11 @@ let NoteActions = (function () {
                         }
 
                     })
-            });
+                }, {
+                    width: 1000,
+                    crop: 'limit',
+                    quality: 80
+                });
         },
 
         read(req, res, next) {
