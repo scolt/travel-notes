@@ -8,36 +8,41 @@ describe('Accessing Main Page', function() {
     const main = new MainPage();
     const login = new LoginPage();
 
-    describe('When I check elements on the Main Page for Unauthorized user', function() {
+    describe('When I check elements on the Main Page for Unauthorized user', () => {
 
         before(() => {
             main.navigateTo();
         });
-        it('Header should be visible', function () {
-            browser.isVisible(master.toolbar)
+        it('Header should be visible', () => {
+            expect(browser.isVisible(master.toolbar)).to.be.true;
         });
-        it('Footer should be visible', function () {
-            browser.isVisible(master.footer);
+        it('Footer should be visible', () => {
+            expect(browser.isVisible(master.footer)).to.be.true;
         });
-        it('Add a note button should be visible', function () {
-            browser.isVisible(main.addNoteButton);
+        it('Add a note button should be visible', () => {
+            expect(browser.isVisible(main.addNoteButton)).to.be.true;
         });
-        it('List of notes should be visible', function () {
-            browser.isVisible(main.notes)
+        it('List of notes should be visible', () => {
+            console.log(browser.elements((main.notes).toString()));
+            expect(browser.isVisible(main.notes)).to.be.true;
         });
-        it('Sorting Button should be visible', function () {
-            browser.isVisible(main.sorting)
+        it('Sorting Button should be visible', () => {
+            expect(browser.isVisible(main.sorting)).to.be.true;
+        });
+        it('Toogle for All/Only my notes should not be visible', () => {
+            expect(browser.isExisting(main.toggle)).to.be.false;
         });
     });
 
-    describe('When I check elements on the Main Page for Authorized user', function() {
+    describe('When I check elements on the Main Page for Authorized user', () => {
 
         before(() => {
             login.navigateTo();
         });
-        it('Toogle for All/Only my notes should be visible', function () {
+        it('Toogle for All/Only my notes should be visible', () => {
             login.login("test@test.ru", "password");
-            browser.isVisible(main.toggle);
+            main.waitForPageisLoaded();
+            expect(browser.isExisting(main.toggle)).to.be.true;
         });
     });
 });
