@@ -23,7 +23,6 @@ describe('Accessing Main Page', () => {
             expect(browser.isVisible(main.addNoteButton)).to.be.true;
         });
         it('List of notes should be visible', () => {
-            console.log(main.getNote(1));
             expect(browser.isVisible(main.getNote(1))).to.be.true;
         });
         it('Sorting Button should be visible', () => {
