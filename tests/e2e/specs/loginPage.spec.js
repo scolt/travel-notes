@@ -5,6 +5,7 @@ import {MainPage} from "../pageObjects/mainPage";
 import {MasterPage} from "../pageObjects/masterPage";
 import {PopUp} from "../pageObjects/common/alertPopUp";
 import {expect} from 'chai';
+import {config} from "../wdio.conf";
 
 describe('Accessing Login Page', () => {
     const home = new HomePage();
@@ -56,7 +57,7 @@ describe('Accessing Login Page', () => {
         });
         it('Should deny access with wrong credentials', () => {
             login.login("test@test.ru", "abc");
-            browser.waitForVisible(master.alertPopUp);
+            browser.waitForVisible(master.alertPopUp, config.waitforTimeout);
             expect(browser.isVisible(master.alertPopUp)).to.be.true;
             expect(popup.getAlertText()).to.equal("You provide wrong email or password. Please try again.");
         });
