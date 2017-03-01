@@ -9,6 +9,7 @@
     "webpack": "webpack",
     "test": "eslint -c .eslintrc.js --ext .js --ext .jsx client/js",
     "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then webpack --progress --colors ; fi",
+    "selenium-server": "node node_modules/selenium-standalone/bin/selenium-standalone start",
     "e2e-setup": "node node_modules/selenium-standalone/bin/selenium-standalone install",
     "e2e": "node_modules/.bin/wdio tests/e2e/wdio.conf.js"
   },
@@ -95,7 +96,6 @@
     "stylus-loader": "1.5.1",
     "url-loader": "0.5.7",
     "wdio-mocha-framework": "0.5.8",
-    "wdio-selenium-standalone-service": "0.0.8",
     "wdio-spec-reporter": "0.0.5",
     "webdriverio": "4.6.2",
     "webpack": "1.13.1",
