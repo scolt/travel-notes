@@ -5,7 +5,7 @@ import {MainPage} from "../pageObjects/mainPage";
 import {MasterPage} from "../pageObjects/masterPage";
 import {PopUp} from "../pageObjects/common/alertPopUp";
 import {expect} from 'chai';
-import {config} from "../wdio.conf";
+import {consts} from "../consts";
 
 describe('Accessing Login Page', () => {
     const home = new HomePage();
@@ -51,15 +51,15 @@ describe('Accessing Login Page', () => {
             login.navigateTo();
         });
         it('Should allow access with valid credentials', () => {
-            login.login("test@test.ru", "password");
+            login.login(consts.username, consts.password);
             main.waitForPageisLoaded();
             expect(browser.getUrl()).to.contain('main');
         });
         it('Should deny access with wrong credentials', () => {
-            login.login("test@test.ru", "abc");
-            browser.waitForVisible(master.alertPopUp, config.waitforTimeout);
+            login.login(consts.username, "abc");
+            browser.waitForVisible(master.alertPopUp, consts.timeoutForAnimation);
             expect(browser.isVisible(master.alertPopUp)).to.be.true;
-            expect(popup.getAlertText()).to.equal("You provide wrong email or password. Please try again.");
+            expect(popup.getAlertText()).to.equal(consts.nonValidCredentialsMessage);
         });
     });
 });
