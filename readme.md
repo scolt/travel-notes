@@ -272,7 +272,7 @@ But before fixing a bug we need to reproduce and confirm it.
 
 In order to reproduce bugs we will systematically ask you to provide a minimal reproduce scenario (step by step).
 
-9. E2e testing
+10. E2e testing
 ---------------
 Testing is organized using Webdriver.io
 To execute test cases you need:
