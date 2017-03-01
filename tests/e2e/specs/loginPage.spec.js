@@ -5,8 +5,9 @@ import {MainPage} from "../pageObjects/mainPage";
 import {MasterPage} from "../pageObjects/masterPage";
 import {PopUp} from "../pageObjects/common/alertPopUp";
 import {expect} from 'chai';
+import {config} from "../wdio.conf";
 
-describe('Accessing Login Page', function() {
+describe('Accessing Login Page', () => {
     const home = new HomePage();
     const toolbar = new Toolbar();
     const login = new LoginPage();
@@ -15,68 +16,49 @@ describe('Accessing Login Page', function() {
     const popup = new PopUp();
 
 
-    describe('When I click Login Button', function() {
+    describe('When I click Login Button', () => {
 
         before(() => {
             home.navigateTo();
         });
-        it('I should be on Login page', function () {
+        it('I should be on Login page', () => {
             browser.click(toolbar.logInButton);
             expect(browser.getUrl()).to.contain('login');
         });
-        it('Welcome Text should be visible', function () {
-           browser.isVisible(login.welcomeText);
+        it('Welcome Text should be visible', () => {
+           expect(browser.isVisible(login.welcomeText)).to.be.true;
         });
-        it('Welcome text Should be equal to Welcome Back', function () {
+        it('Welcome text Should be equal to Welcome Back', () => {
             expect(login.getWelcomeText()).to.equal("Welcome Back");
         });
-        it('Email field should be visible', function () {
-            browser.isVisible(login.emailField);
+        it('Email field should be visible', () => {
+            expect(browser.isVisible(login.emailField)).to.be.true;
         });
-        it('Password field should be visible', function () {
-            browser.isVisible(login.passwordField);
+        it('Password field should be visible', () => {
+            expect(browser.isVisible(login.passwordField)).to.be.true;
         });
-        it('Login button should be visible', function () {
-            browser.isVisible(login.loginButton);
+        it('Login button should be visible', () => {
+            expect(browser.isVisible(login.loginButton)).to.be.true;
         });
-        it('Sign Up button should be visible', function () {
-            browser.isVisible(login.signUpButton);
+        it('Sign Up button should be visible', () => {
+             expect(browser.isVisible(login.signUpButton)).to.be.true;
         });
     });
 
-    describe('Entering Valid Credentials', function() {
+    describe('Entering Valid Credentials', () => {
 
-        before(() => {
+        beforeEach(() => {
             login.navigateTo();
         });
-
-        it('When I enter valid credentials', function () {
-            login.enterEmail("test@test.ru");
-            login.enterPassword("password");
-            browser.click(login.loginButton);
-        });
-        it('And Wait until page is loaded', function () {
+        it('Should allow access with valid credentials', () => {
+            login.login("test@test.ru", "password");
             main.waitForPageisLoaded();
-        });
-        it('I should be on Main Page', function () {
             expect(browser.getUrl()).to.contain('main');
         });
-    });
-
-    describe('Entering Non Valid Credentials', function() {
-
-        before(() => {
-            login.navigateTo();
-        });
-        it('When I enter non valid  credentials', function () {
-            login.enterEmail("test@test.ru");
-            login.enterPassword("abc");
-            browser.click(login.loginButton);
-        });
-        it('Then Alert Pop Up Should be visible', function () {
-            browser.isVisible(master.alertPopUp);
-        });
-        it('And Text of Popup should be visible', function () {
+        it('Should deny access with wrong credentials', () => {
+            login.login("test@test.ru", "abc");
+            browser.waitForVisible(master.alertPopUp, config.waitforTimeout);
+            expect(browser.isVisible(master.alertPopUp)).to.be.true;
             expect(popup.getAlertText()).to.equal("You provide wrong email or password. Please try again.");
         });
     });
