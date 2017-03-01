@@ -3,7 +3,7 @@ import {MainPage} from "../pageObjects/mainPage";
 import {LoginPage} from "../pageObjects/loginPage";
 import {expect} from 'chai';
 
-describe('Accessing Main Page', function() {
+describe('Accessing Main Page', () => {
     const master = new MasterPage();
     const main = new MainPage();
     const login = new LoginPage();
@@ -23,8 +23,8 @@ describe('Accessing Main Page', function() {
             expect(browser.isVisible(main.addNoteButton)).to.be.true;
         });
         it('List of notes should be visible', () => {
-            console.log(browser.elements((main.notes).toString()));
-            expect(browser.isVisible(main.notes)).to.be.true;
+            console.log(main.getNote(1));
+            expect(browser.isVisible(main.getNote(1))).to.be.true;
         });
         it('Sorting Button should be visible', () => {
             expect(browser.isVisible(main.sorting)).to.be.true;

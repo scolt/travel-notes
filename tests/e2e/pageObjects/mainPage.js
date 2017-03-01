@@ -21,6 +21,10 @@ export class MainPage {
         }, config.waitforTimeout);
     }
 
+    getNote(index) {
+        return `${this.notes}:nth-child(${index+1})`;
+    }
+
     getNotes() {
         return browser.elements(this.notes);
     }
