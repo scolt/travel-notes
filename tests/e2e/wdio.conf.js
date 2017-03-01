@@ -12,17 +12,17 @@ exports.config = {
     baseUrl: 'http://iwasthere.herokuapp.com/#',
     waitforTimeout: 10000,
     framework: 'mocha',
-    services: ['selenium-standalone'],
     mochaOpts: {
         ui: 'bdd',
-        compilers: ['js:babel-register']
+        compilers: ['js:babel-register'],
+        timeout: 20000
     },
     logLevel: 'silent',
     reporters: ['spec'],
     before: function () {
         browser.setViewportSize({
-            width: 500,
-            height: 500
+            width: 1024,
+            height: 768
         });
     },
     onPrepare: function () {
