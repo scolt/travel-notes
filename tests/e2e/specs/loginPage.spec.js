@@ -25,19 +25,19 @@ describe('Accessing Login Page', () => {
             expect(browser.getUrl()).to.contain('login');
         });
         it('Welcome Text should be visible', () => {
-           browser.isVisible(login.welcomeText);
+           expect(browser.isVisible(login.welcomeText)).to.be.true;
         });
         it('Welcome text Should be equal to Welcome Back', () => {
             expect(login.getWelcomeText()).to.equal("Welcome Back");
         });
         it('Email field should be visible', () => {
-            browser.isVisible(login.emailField);
+            expect(browser.isVisible(login.emailField)).to.be.true;
         });
         it('Password field should be visible', () => {
-            browser.isVisible(login.passwordField);
+            expect(browser.isVisible(login.passwordField)).to.be.true;
         });
         it('Login button should be visible', () => {
-            browser.isVisible(login.loginButton);
+            expect(browser.isVisible(login.loginButton)).to.be.true;
         });
         it('Sign Up button should be visible', () => {
              expect(browser.isVisible(login.signUpButton)).to.be.true;
@@ -56,7 +56,8 @@ describe('Accessing Login Page', () => {
         });
         it('Should deny access with wrong credentials', () => {
             login.login("test@test.ru", "abc");
-            browser.isVisible(master.alertPopUp);
+            browser.waitForVisible(master.alertPopUp);
+            expect(browser.isVisible(master.alertPopUp)).to.be.true;
             expect(popup.getAlertText()).to.equal("You provide wrong email or password. Please try again.");
         });
     });
