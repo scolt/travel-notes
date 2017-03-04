@@ -9,17 +9,14 @@ export class MainPage {
     userSortingOption = "span#orderByUsername";
     dateSortingOption = "span#orderByDate";
     toggle = "input[type='checkbox']";
+    url = "/main";
 
     //Methods
     navigateTo() {
         return browser.url('/main');
     }
 
-    waitForPageisLoaded() {
-        browser.waitUntil(() => {
-            return browser.getUrl() === (config.baseUrl + "/main")
-        }, config.waitforTimeout);
-    }
+    
 
     getNote(index) {
         return `${this.notes}:nth-child(${index+1})`;

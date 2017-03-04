@@ -3,16 +3,18 @@ import {MainPage} from "../pageObjects/mainPage";
 import {LoginPage} from "../pageObjects/loginPage";
 import {expect} from 'chai';
 import {consts} from '../consts';
+import {Steps} from "../Steps/actionSteps"
 
 describe('Accessing Main Page', () => {
     const master = new MasterPage();
     const main = new MainPage();
     const login = new LoginPage();
+    const steps = new Steps();
 
     describe('When I check elements on the Main Page for Unauthorized user', () => {
 
         before(() => {
-            main.navigateTo();
+            steps.navigateTo(main.url);
         });
         it('Header should be visible', () => {
             expect(browser.isVisible(master.toolbar)).to.be.true;
@@ -37,11 +39,11 @@ describe('Accessing Main Page', () => {
     describe('When I check elements on the Main Page for Authorized user', () => {
 
         before(() => {
-            login.navigateTo();
+            steps.navigateTo(login.url);
         });
         it('Toogle for All/Only my notes should be visible', () => {
             login.login("test@test.ru", "password");
-            main.waitForPageisLoaded();
+            steps.waitForPageisLoaded(main.url);
             expect(browser.isExisting(main.toggle)).to.be.true;
         });
     });
@@ -49,7 +51,7 @@ describe('Accessing Main Page', () => {
      describe('When I expand filter', () => {
 
         before(() => {
-            main.navigateTo();
+            steps.navigateTo(main.url);
         });
         it('All needed elements should be visible', () => {
            browser.click(main.sorting);

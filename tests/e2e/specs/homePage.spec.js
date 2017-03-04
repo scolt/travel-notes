@@ -2,16 +2,18 @@ import {HomePage} from '../pageObjects/homePage.js';
 import {MasterPage} from "../pageObjects/masterPage";
 import {Toolbar} from "../pageObjects/common/toolbar";
 import {expect} from 'chai';
+import {Steps} from '../Steps/actionSteps'
 
 describe('Accessing Home Page', () =>  {
     const home = new HomePage();
     const master = new MasterPage();
     const toolbar = new Toolbar();
+    const steps = new Steps();
 
     describe('When I visit Home Page', () => {
 
         before(() => {
-            home.navigateTo();
+            steps.navigateTo(home.url);
         });
         it('Global Toolbar should be visible', () => {
             expect(browser.isVisible(master.toolbar)).to.be.true;
@@ -27,7 +29,7 @@ describe('Accessing Home Page', () =>  {
     describe('When I observe Global Toolbar', () => {
 
         before(() => {
-            home.navigateTo();
+            steps.navigateTo(home.url);
         });
         it('Menu button should be visible', () => {
             expect(browser.isVisible(toolbar.menuButton)).to.be.true;

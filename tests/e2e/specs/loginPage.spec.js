@@ -6,6 +6,7 @@ import {MasterPage} from "../pageObjects/masterPage";
 import {PopUp} from "../pageObjects/common/alertPopUp";
 import {expect} from 'chai';
 import {consts} from "../consts";
+import {Steps} from "../Steps/actionSteps"
 
 describe('Accessing Login Page', () => {
     const home = new HomePage();
@@ -14,16 +15,16 @@ describe('Accessing Login Page', () => {
     const main = new MainPage();
     const master = new MasterPage();
     const popup = new PopUp();
-
+    const steps = new Steps();
 
     describe('When I click Login Button', () => {
 
         before(() => {
-            home.navigateTo();
+            steps.navigateTo(home.url);
         });
         it('I should be on Login page', () => {
             browser.click(toolbar.logInButton);
-            expect(browser.getUrl()).to.contain('login');
+            expect(browser.getUrl()).to.contain(login.url);
         });
         it('Welcome Text should be visible', () => {
            expect(browser.isVisible(login.welcomeText)).to.be.true;
@@ -48,11 +49,11 @@ describe('Accessing Login Page', () => {
     describe('Entering Valid Credentials', () => {
 
         beforeEach(() => {
-            login.navigateTo();
+            steps.navigateTo(login.url);
         });
         it('Should allow access with valid credentials', () => {
             login.login(consts.username, consts.password);
-            main.waitForPageisLoaded();
+            steps.waitForPageisLoaded(main.url);
             expect(browser.getUrl()).to.contain('main');
         });
         it('Should deny access with wrong credentials', () => {
