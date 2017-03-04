@@ -1,3 +1,4 @@
+import {config} from "../wdio.conf";
 export class Steps {
 
     navigateTo(url) {
