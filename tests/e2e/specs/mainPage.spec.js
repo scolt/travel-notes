@@ -2,6 +2,7 @@ import {MasterPage} from "../pageObjects/masterPage";
 import {MainPage} from "../pageObjects/mainPage";
 import {LoginPage} from "../pageObjects/loginPage";
 import {expect} from 'chai';
+import {consts} from '../consts';
 
 describe('Accessing Main Page', () => {
     const master = new MasterPage();
@@ -42,6 +43,20 @@ describe('Accessing Main Page', () => {
             login.login("test@test.ru", "password");
             main.waitForPageisLoaded();
             expect(browser.isExisting(main.toggle)).to.be.true;
+        });
+    });
+
+     describe('When I expand filter', () => {
+
+        before(() => {
+            main.navigateTo();
+        });
+        it('All needed elements should be visible', () => {
+           browser.click(main.sorting);
+           browser.waitForVisible(main.userSortingOption, consts.timeoutForAnimation);
+           expect(browser.isExisting(main.titleSortingOption)).to.be.true;
+           expect(browser.isExisting(main.dateSortingOption)).to.be.true;
+           expect(browser.isExisting(main.userSortingOption)).to.be.true;
         });
     });
 });
