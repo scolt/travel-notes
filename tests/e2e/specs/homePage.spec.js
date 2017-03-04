@@ -1,4 +1,5 @@
 import {HomePage} from '../pageObjects/homePage.js';
+<<<<<<< HEAD
 import {MasterPage} from "../pageObjects/masterPage";
 import {Toolbar} from "../pageObjects/common/toolbar";
 import {expect} from 'chai';
@@ -39,4 +40,28 @@ describe('Accessing Home Page', () =>  {
             expect(browser.isVisible(toolbar.signUpButton)).to.be.true;
         });
     });
+=======
+import {expect} from 'chai';
+
+describe('I was there first test', function() {
+    const home = new HomePage();
+
+    before(() => {
+        browser.url("/");
+    });
+
+    it('Click register button', function() {
+
+        browser.click(home.getStartedButton);
+
+    });
+
+    it('Check', function() {
+
+        browser.click(home.getStartedButton);
+
+    });
+
+
+>>>>>>> master
 });
