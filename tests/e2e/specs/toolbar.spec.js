@@ -14,12 +14,15 @@ import steps from '../steps/actionSteps'
         before(() => {
             steps.navigateTo(home.url);
         });
+        
         it('Should contain all menu button', () => {
             expect(browser.isVisible(toolbar.menuButton)).to.be.true;
         });
+        
         it('Should contain login button', () => {
             expect(browser.isVisible(toolbar.logInButton)).to.be.true;    
         });
+        
         it('Should contain Sign In button', () => {
             expect(browser.isVisible(toolbar.signUpButton)).to.be.true;
         });
