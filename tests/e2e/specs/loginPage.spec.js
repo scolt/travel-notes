@@ -6,7 +6,7 @@ import {MasterPage} from "../pageObjects/masterPage";
 import {PopUp} from "../pageObjects/common/alertPopUp";
 import {expect} from 'chai';
 import {consts} from "../consts";
-import {Steps} from "../Steps/actionSteps"
+import {steps} from "../Steps/actionSteps"
 
 describe('Accessing Login Page', () => {
     const home = new HomePage();
@@ -15,7 +15,6 @@ describe('Accessing Login Page', () => {
     const main = new MainPage();
     const master = new MasterPage();
     const popup = new PopUp();
-    const steps = new Steps();
 
     describe('When I click Login Button', () => {
 

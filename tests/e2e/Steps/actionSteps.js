@@ -1,13 +1,14 @@
 import {config} from "../wdio.conf";
-export class Steps {
+export default {
 
     navigateTo(url) {
         return browser.url(url);
-    }
+    },
 
     waitForPageisLoaded(url) {
-        browser.waitUntil(() => {
-            return browser.getUrl() === (config.baseUrl + url)
-        }, config.waitforTimeout);
+        browser.waitUntil(
+            () => browser.getUrl() === (config.baseUrl + url),
+            config.waitforTimeout
+        );
     }
 }
