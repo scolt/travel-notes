@@ -1,23 +1,17 @@
-import {config} from "../wdio.conf";
 export class MainPage {
 
     //Elements
     addNoteButton = "a.add";
     notes = "a[class='note-grid-item']";
     sorting = "svg[data-reactid='.0.1.0.1.0.0.2.0.1:1']";
-    titleSortingOption = "span#orderByTitle";
-    userSortingOption = "span#orderByUsername";
-    dateSortingOption = "span#orderByDate";
+    titleSortingOption = "#orderByTitle";
+    userSortingOption = "#orderByUsername";
+    dateSortingOption = "#orderByDate";
     toggle = "input[type='checkbox']";
     url = "/main";
 
     //Methods
-    navigateTo() {
-        return browser.url('/main');
-    }
-
     
-
     getNote(index) {
         return `${this.notes}:nth-child(${index+1})`;
     }

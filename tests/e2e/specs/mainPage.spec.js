@@ -3,13 +3,12 @@ import {MainPage} from "../pageObjects/mainPage";
 import {LoginPage} from "../pageObjects/loginPage";
 import {expect} from 'chai';
 import {consts} from '../consts';
-import {Steps} from "../Steps/actionSteps"
+import {steps} from "../Steps/actionSteps"
 
 describe('Accessing Main Page', () => {
     const master = new MasterPage();
     const main = new MainPage();
     const login = new LoginPage();
-    const steps = new Steps();
 
     describe('When I check elements on the Main Page for Unauthorized user', () => {
 
