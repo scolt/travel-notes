@@ -17,3 +17,5 @@ _native/electron/Travel-Note*
 tests/e2e/screenshots
 
 *.log
+
+.vscode

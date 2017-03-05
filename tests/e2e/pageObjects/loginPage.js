@@ -6,12 +6,9 @@ export class LoginPage {
     passwordField = "input[name='password']";
     loginButton = "button[name='login']";
     signUpButton = "div.login-footer";
+    url = "/login";
 
     //Methods
-    navigateTo() {
-        return browser.url('/login');
-    }
-
     getWelcomeText() {
         return browser.getText(this.welcomeText);
     }
