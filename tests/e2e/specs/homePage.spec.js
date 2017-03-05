@@ -2,7 +2,7 @@ import {HomePage} from '../pageObjects/homePage.js';
 import {MasterPage} from "../pageObjects/masterPage";
 import {Toolbar} from "../pageObjects/common/toolbar";
 import {expect} from 'chai';
-import steps from '../Steps/actionSteps'
+import steps from '../steps/actionSteps'
 
 describe('Accessing Home Page', () =>  {
     const home = new HomePage();

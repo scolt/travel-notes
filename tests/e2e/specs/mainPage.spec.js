@@ -3,7 +3,7 @@ import {MainPage} from "../pageObjects/mainPage";
 import {LoginPage} from "../pageObjects/loginPage";
 import {expect} from 'chai';
 import {consts} from '../consts';
-import steps from "../Steps/actionSteps"
+import steps from "../steps/actionSteps"
 
 describe('Accessing Main Page', () => {
     const master = new MasterPage();
