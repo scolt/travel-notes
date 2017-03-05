@@ -1,5 +1,3 @@
-import {HomePage} from '../pageObjects/homePage.js';
-import {Toolbar} from "../pageObjects/common/toolbar";
 import {LoginPage} from "../pageObjects/loginPage";
 import {MainPage} from "../pageObjects/mainPage";
 import {MasterPage} from "../pageObjects/masterPage";
@@ -9,8 +7,6 @@ import {consts} from "../consts";
 import steps from "../steps/actionSteps"
 
 describe('Login Page', () => {
-    const home = new HomePage();
-    const toolbar = new Toolbar();
     const login = new LoginPage();
     const main = new MainPage();
     const master = new MasterPage();

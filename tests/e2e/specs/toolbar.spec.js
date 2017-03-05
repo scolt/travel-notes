@@ -1,6 +1,5 @@
 import {Toolbar} from "../pageObjects/common/toolbar";
 import {HomePage} from '../pageObjects/homePage.js';
-import {MasterPage} from "../pageObjects/masterPage";
 import {expect} from 'chai';
 import steps from '../steps/actionSteps'
  
@@ -8,7 +7,6 @@ import steps from '../steps/actionSteps'
  describe('Global Toolbar', () => {
 
     const home = new HomePage();
-    const master = new MasterPage();
     const toolbar = new Toolbar();
 
         before(() => {
