@@ -48,10 +48,11 @@ const Menu = React.createClass({
                     <a className="logo" onTouchTap={this.openMenuItem.bind(this, '#/main')}>TravelNote</a>
                 }
                 onLeftIconButtonTouchTap={this.setMenuStatus.bind(this, true)}
+                iconClassNameLeft="fa fa-bars menu-button"
                 iconElementRight={ !user.email ?
                     <div>
-                        <FlatButton label="Log In" style={buttonStyle} onTouchTap={this.openMenuItem.bind(this, '#/login')}/>
-                        <FlatButton label="Sign Up" style={buttonStyle} onTouchTap={this.openMenuItem.bind(this, '#/register')}/>
+                        <FlatButton label="Log In" id="loginMenuButton" style={buttonStyle} onTouchTap={this.openMenuItem.bind(this, '#/login')}/>
+                        <FlatButton label="Sign Up" id="registerMenuButton" style={buttonStyle} onTouchTap={this.openMenuItem.bind(this, '#/register')}/>
                     </div> : <span></span>
 
                 }>
@@ -67,6 +68,7 @@ const Menu = React.createClass({
                     <div>
                         {menuItems.map((menuItem, key) => (
                         <MenuItem
+                            id={`${menuItem.title.toLowerCase().replace(/\s/, '')}MenuItem`}
                             key={key}
                             primaryText={menuItem.title}
                             leftIcon={<Icon name={menuItem.icon} />}
@@ -75,7 +77,7 @@ const Menu = React.createClass({
                         ))}
                     </div>
                     <div>
-                        {user.email ? <LogoutButton onTouchTap={this.setMenuStatus.bind(this, false)}/> : <span></span>}
+                        {user.email ? <LogoutButton id="logoutMenuButton" onTouchTap={this.setMenuStatus.bind(this, false)}/> : <span></span>}
                     </div>
                 </Drawer>
             </AppBar>

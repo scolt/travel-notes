@@ -29,6 +29,13 @@ export default function (state, action) {
             const {loginForm} = state;
             window.sessionStorage.setItem('token',  action.resData.token);
             location.href = loginForm.prevState ? loginForm.prevState : '#/main';
+            loginForm.isValid = false;
+            loginForm.fields.forEach(function (item) {
+                item.value = '';
+                item.isValid = false;
+                item.isDirty = false;
+                item.isTouch = false;
+            });
             return {...state, user: {...action.resData}, loginForm: {...loginForm, prevState: null}};
         }
 

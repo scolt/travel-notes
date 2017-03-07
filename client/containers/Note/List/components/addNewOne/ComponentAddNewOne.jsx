@@ -7,11 +7,13 @@ import './addNewNoteButton.styl';
 
 const addNewNoteButton = React.createClass({
     render() {
-        return <a key="add" className="note-grid-item add" href={`#/note/create`}>
-            <span className="add-wrapper">
-                <Icon name="plus"/>
-            </span>
-        </a>;
+        const template = this.props.data.users.user.email ?
+            <a key="add" className="note-grid-item add" href={`#/note/create`}>
+                <span className="add-wrapper">
+                    <Icon name="plus"/>
+                </span>
+            </a> : null;
+        return template;
     }
 });
 
