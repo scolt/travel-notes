@@ -25,9 +25,9 @@ const OrderFilter = React.createClass({
             floatingLabelText="Order By"
             className="filter-item"
         >
-            <MenuItem key={1} value={'title'} primaryText="Title" />
-            <MenuItem key={2} value={'username'} primaryText="User" />
-            <MenuItem key={3} value={'_id'} primaryText="Date" />
+            <MenuItem id="orderByTitle" key={1} value={'title'} primaryText="Title" />
+            <MenuItem id="orderByUsername" key={2} value={'username'} primaryText="User" />
+            <MenuItem id="orderByDate" key={3} value={'created'} primaryText="Date" />
         </SelectField>;
     }
 });
