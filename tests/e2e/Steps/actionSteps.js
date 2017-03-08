@@ -10,5 +10,9 @@ export default {
             () => browser.getUrl() === (config.baseUrl + url),
             config.waitforTimeout
         );
+    },
+
+    getElementsText(element) {
+        return browser.getText(element);
     }
 }

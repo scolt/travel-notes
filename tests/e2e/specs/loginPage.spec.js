@@ -18,7 +18,7 @@ describe('Login Page', () => {
 
     it('Should contain Welcome Text', () => {
         expect(browser.isVisible(login.welcomeText)).to.be.true;
-        expect(login.getWelcomeText()).to.equal("Welcome Back");
+        expect(steps.getElementsText(login.welcomeText)).to.equal("Welcome Back");
     });
 
     it('Should contain Email Field', () => {
