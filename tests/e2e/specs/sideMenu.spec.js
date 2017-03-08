@@ -38,9 +38,8 @@ import steps from '../steps/actionSteps'
         });
 
         it('Should contain Logout button for Non Authorized users', () => {
-            steps.navigateTo(login.url);
             login.login(consts.username, consts.password);
             browser.click(toolbar.menuButton);
-            expect(browser.isVisible(sideMenu.logoutButton)).to.be.true;
+            expect(browser.isExisting(sideMenu.logoutButton)).to.be.true;
         });
 });

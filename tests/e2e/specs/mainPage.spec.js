@@ -30,8 +30,8 @@ describe('Main Page', () => {
             expect(browser.isVisible(main.getNote(1))).to.be.true;
         });
 
-        it('Sorting Button should be visible', () => {
-            expect(browser.isVisible(main.sorting)).to.be.true;
+        it('Sorting Button should not be visible for Non Authorized users', () => {
+            expect(browser.isExisting(main.sorting)).to.be.false;
         });
 
         it('Toogle for All/Only my notes should not be visible for Non Authorized users', () => {
