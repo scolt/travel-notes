@@ -1,3 +1,5 @@
+import steps from "../steps/actionSteps"
+
 export class LoginPage {
 
     //Elements
@@ -9,10 +11,6 @@ export class LoginPage {
     url = "/login";
 
     //Methods
-    getWelcomeText() {
-        return browser.getText(this.welcomeText);
-    }
-
     enterEmail(email) {
         browser.setValue(this.emailField, email);
     }
@@ -22,6 +20,7 @@ export class LoginPage {
     }
 
     login(login, password) {
+        steps.navigateTo(this.url);
         this.enterEmail(login);
         this.enterPassword(password);
         browser.click(this.loginButton);

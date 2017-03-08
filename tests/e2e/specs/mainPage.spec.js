@@ -39,8 +39,7 @@ describe('Main Page', () => {
         });
 
         it('Toogle for All/Only my notes should be visible for Authorized users', () => {
-            steps.navigateTo(login.url);
-            login.login("test@test.ru", "password");
+            login.login(consts.username, consts.password);
             steps.waitForPageisLoaded(main.url);
             expect(browser.isExisting(main.toggle)).to.be.true;
         });

@@ -2,7 +2,11 @@ import {config} from "../wdio.conf";
 export default {
 
     navigateTo(url) {
-        return browser.url(url);
+        if (url) {
+            return browser.url(url);
+        } else {
+            return browser.url(config.baseUrl);
+        }
     },
 
     waitForPageisLoaded(url) {
