@@ -44,7 +44,6 @@ describe('Login Page', () => {
     });
 
     it('Should deny access with wrong credentials', () => {
-        steps.navigateTo(login.url);
         login.login(consts.username, "abc");
         browser.waitForVisible(master.alertPopUp, consts.timeoutForAnimation);
         expect(browser.isVisible(master.alertPopUp)).to.be.true;

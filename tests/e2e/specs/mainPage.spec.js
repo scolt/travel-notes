@@ -27,11 +27,10 @@ describe('Main Page', () => {
         });
 
         it('List of notes should be visible', () => {
-            console.log(main.getNote(1));
-            expect(browser.isVisible(main.getNote(2))).to.be.true;
+            expect(browser.isVisible(main.getNote(1))).to.be.true;
         });
 
-        it('Sorting Button shouldbe visible', () => {
+        it('Sorting Button should be visible', () => {
             expect(browser.isExisting(main.sorting)).to.be.true;
         });
 
