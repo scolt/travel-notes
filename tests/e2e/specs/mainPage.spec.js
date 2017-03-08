@@ -22,8 +22,8 @@ describe('Main Page', () => {
             expect(browser.isVisible(master.footer)).to.be.true;
         });
 
-        it('Add a note button should be visible', () => {
-            expect(browser.isVisible(main.addNoteButton)).to.be.true;
+        it('Add a note button should not be visible for non authorized users', () => {
+            expect(browser.isVisible(main.addNoteButton)).to.be.false;
         });
 
         it('List of notes should be visible', () => {
