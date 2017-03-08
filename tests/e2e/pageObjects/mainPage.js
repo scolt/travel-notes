@@ -11,7 +11,7 @@ export class MainPage {
     url = "/main";
 
     //Methods
-    
+
     getNote(index) {
         return `${this.notes}:nth-child(${index+1})`;
     }
