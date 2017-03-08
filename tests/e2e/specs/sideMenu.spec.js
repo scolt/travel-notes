@@ -13,7 +13,7 @@ import steps from '../steps/actionSteps'
     const login = new LoginPage();
 
         before(() => {
-            steps.navigateTo();
+            login.login(consts.username, consts.password);
             browser.click(toolbar.menuButton);
         });
         
@@ -33,13 +33,7 @@ import steps from '../steps/actionSteps'
             expect(browser.isVisible(sideMenu.map)).to.be.true;
         });
 
-        it('Should not contain Logout button for Non Authorized users', () => {
-            expect(browser.isVisible(sideMenu.logoutButton)).to.be.false;
-        });
-
-        it('Should contain Logout button for Non Authorized users', () => {
-            login.login(consts.username, consts.password);
-            browser.click(toolbar.menuButton);
-            expect(browser.isExisting(sideMenu.logoutButton)).to.be.true;
+        it('Should contain Logout button', () => {
+            expect(browser.isVisible(sideMenu.logoutButton)).to.be.true;
         });
 });
