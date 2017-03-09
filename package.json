@@ -97,6 +97,7 @@
     "stylus-loader": "1.5.1",
     "url-loader": "0.5.7",
     "wdio-mocha-framework": "0.5.8",
+    "wdio-screenshot": "0.5.2",
     "wdio-spec-reporter": "0.0.5",
     "webdriverio": "4.6.2",
     "webpack": "1.13.1",

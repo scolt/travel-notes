@@ -2,7 +2,7 @@ exports.consts = {
 
     username: "test@test.ru",
     password: "password",
-    timeoutForAnimation: 2000,
+    timeoutForAnimation: 4000,
 
     /*
     Messages will be stored here
