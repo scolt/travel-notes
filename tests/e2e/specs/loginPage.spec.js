@@ -47,6 +47,6 @@ describe('Login Page', () => {
         login.login(consts.username, "abc");
         browser.waitForVisible(master.alertPopUp, consts.timeoutForAnimation);
         expect(browser.isVisible(master.alertPopUp)).to.be.true;
-        expect(popup.getAlertText()).to.equal(consts.nonValidCredentialsMessage);
+        expect(steps.getElementsText(popup.text)).to.equal(consts.nonValidCredentialsMessage);
     });
 });

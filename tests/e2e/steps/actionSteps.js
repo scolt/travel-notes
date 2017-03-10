@@ -17,6 +17,7 @@ export default {
     },
 
     getElementsText(element) {
+        browser.waitForText(element, config.waitforTimeout);
         return browser.getText(element);
     }
 }
