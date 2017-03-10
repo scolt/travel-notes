@@ -27,6 +27,7 @@ describe('Main Page', () => {
         });
 
         it('List of notes should be visible', () => {
+            browser.waitForVisible(main.getNote(1), consts.timeoutForAnimation);
             expect(browser.isVisible(main.getNote(1))).to.be.true;
         });
 
