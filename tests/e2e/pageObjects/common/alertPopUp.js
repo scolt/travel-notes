@@ -3,4 +3,5 @@ export class PopUp {
 
     //Elements
     text = "p[style='display: block;']";
+    okButton = "button.confirm"
 }

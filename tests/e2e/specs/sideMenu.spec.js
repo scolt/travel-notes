@@ -47,5 +47,8 @@ import steps from '../steps/actionSteps'
             browser.click(sideMenu.logoutButton);
             expect(browser.isVisible(master.alertPopUp)).to.be.true;
             expect(steps.getElementsText(popup.text)).to.equal(consts.logoutMessage);
+            browser.click(popup.okButton);
+            expect(browser.isVisible(toolbar.logInButton)).to.be.true;
+            expect(browser.isVisible(toolbar.signUpButton)).to.be.true;
         });
 });
