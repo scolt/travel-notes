@@ -45,7 +45,7 @@ describe('Login Page', () => {
 
     it('Should deny access with wrong credentials', () => {
         login.login(consts.username, "abc");
-        browser.waitForVisible(master.alertPopUp, consts.timeoutForAnimation);
+        browser.waitForExist(master.alertPopUp);
         expect(browser.isVisible(master.alertPopUp)).to.be.true;
         expect(steps.getElementsText(popup.text)).to.equal(consts.nonValidCredentialsMessage);
     });
