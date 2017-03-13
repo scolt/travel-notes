@@ -9,7 +9,7 @@ export default function (state, action) {
         const open = true,
             type = 'success',
             beforeConfirm = () => location.href = `#/`,
-            message = 'You was successful logout.';
+            message = 'You\'ve been successfully logged out.';
         return {...state, open, message, type, beforeConfirm};
     }
 
@@ -36,7 +36,7 @@ export default function (state, action) {
         if (action.reqData.type === 'login') {
             let {open, message, title, type} = state;
             open = true;
-            message = 'You provide wrong email or password. Please try again.';
+            message = 'Incorrect username or password.';
             type = 'error';
             return {...state, open, message, title, type};
         }
@@ -44,7 +44,7 @@ export default function (state, action) {
         if (action.reqData.type === 'login') {
             let {open, message, title, type} = state;
             open = true;
-            message = 'You provide wrong data. Maybe your email or username has already registered. Please try again.';
+            message = 'You provided wrong data. Maybe your email or username has already registered. Please try again.';
             type = 'error';
             return {...state, open, message, title, type};
         }
