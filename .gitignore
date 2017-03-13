@@ -14,7 +14,7 @@ _native/electron/www/*
 !_native/electron/www/icon.png
 _native/electron/Travel-Note*
 
-tests/e2e/screenshots
+tests/e2e/.reports
 
 *.log
 

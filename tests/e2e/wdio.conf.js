@@ -8,7 +8,7 @@ exports.config = {
     ],
     sync: true,
     coloredLogs: true,
-    screenshotPath: './tests/e2e/screenshots',
+    screenshotPath: './tests/e2e/.reports/screenshots',
     baseUrl: 'http://iwasthere.herokuapp.com/#',
     waitforTimeout: 10000,
     framework: 'mocha',
@@ -18,7 +18,12 @@ exports.config = {
         timeout: 20000
     },
     logLevel: 'silent',
-    reporters: ['spec'],
+    reporters: ['dot', 'spec', 'allure'],
+    reporterOptions: {
+        allure: {
+            outputDir: './tests/e2e/.reports/allure/xml'
+        }
+    },
     before: function () {
         browser.setViewportSize({
             width: 1024,
