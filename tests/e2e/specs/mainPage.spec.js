@@ -27,6 +27,7 @@ describe('Main Page', () => {
         });
 
         it('List of notes should be visible', () => {
+            browser.waitForExist(main.getNote(1));
             expect(browser.isVisible(main.getNote(1))).to.be.true;
         });
 
@@ -46,7 +47,7 @@ describe('Main Page', () => {
 
         it('Filter should contain needed values', () => {
            browser.click(main.sorting);
-           browser.waitForVisible(main.userSortingOption, consts.timeoutForAnimation);
+           browser.waitForExist(main.userSortingOption);
            expect(browser.isExisting(main.titleSortingOption)).to.be.true;
            expect(browser.isExisting(main.dateSortingOption)).to.be.true;
            expect(browser.isExisting(main.userSortingOption)).to.be.true;
