@@ -18,22 +18,16 @@ import steps from '../steps/actionSteps'
             steps.navigateTo(home.url);
         });
         
-        it('Should contain all menu button', () => {
-            expect(browser.isVisible(toolbar.menuButton)).to.be.true;
-        });
-        
-        it('Should contain login button for non Authorized users', () => {
-            expect(browser.isVisible(toolbar.logInButton)).to.be.true;    
-        });
-        
-        it('Should contain Sign In button for Non Authorized users', () => {
-            expect(browser.isVisible(toolbar.signUpButton)).to.be.true;
+        it('Should contain all needed links', () => {
+            expect(browser.isVisible(toolbar.menuButton), "Menu button is presented").to.be.true;
+            expect(browser.isVisible(toolbar.logInButton), "Login button is presented").to.be.true;
+            expect(browser.isVisible(toolbar.signUpButton), "Sign Up button is presented").to.be.true;
         });
 
         it('Should not contain Sign In and Login buttons for Authorized users', () => {
             login.login(consts.username, consts.password);
             steps.waitForPageisLoaded(main.url);
-            expect(browser.isVisible(toolbar.logInButton)).to.be.false;
-            expect(browser.isVisible(toolbar.signUpButton)).to.be.false;
+            expect(browser.isVisible(toolbar.logInButton), "Login button is not presented").to.be.false;
+            expect(browser.isVisible(toolbar.signUpButton), "Sign up button is not presented").to.be.false;
         });
 });

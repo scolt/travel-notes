@@ -16,25 +16,13 @@ describe('Login Page', () => {
             steps.navigateTo(login.url);
         });
 
-    it('Should contain Welcome Text', () => {
-        expect(browser.isVisible(login.welcomeText)).to.be.true;
+    it('Should contain all needed values', () => {
+        expect(browser.isVisible(login.welcomeText), "Welcome text is presented").to.be.true;
         expect(steps.getElementsText(login.welcomeText)).to.equal("Welcome Back");
-    });
-
-    it('Should contain Email Field', () => {
-        expect(browser.isVisible(login.emailField)).to.be.true;
-    });
-
-    it('Should contain Password Field', () => {
-        expect(browser.isVisible(login.passwordField)).to.be.true;
-    });
-
-    it('Should contain Login Buttom', () => {
-        expect(browser.isVisible(login.loginButton)).to.be.true;
-    });
-
-    it('Should contain Sign Up Button', () => {
-        expect(browser.isVisible(login.signUpButton)).to.be.true;
+        expect(browser.isVisible(login.emailField), "Email field is presented").to.be.true;
+        expect(browser.isVisible(login.passwordField), "Password field is presented").to.be.true;
+        expect(browser.isVisible(login.loginButton), "Login button is presented").to.be.true;
+        expect(browser.isVisible(login.signUpButton), "Sign Up button is presented").to.be.true;
     });
 
     it('Should allow access with valid credentials', () => {
@@ -46,7 +34,7 @@ describe('Login Page', () => {
     it('Should deny access with wrong credentials', () => {
         login.login(consts.username, "abc");
         browser.waitForExist(master.alertPopUp);
-        expect(browser.isVisible(master.alertPopUp)).to.be.true;
+        expect(browser.isVisible(master.alertPopUp), "Alert Popup is presented").to.be.true;
         expect(steps.getElementsText(popup.text)).to.equal(consts.nonValidCredentialsMessage);
     });
 });
