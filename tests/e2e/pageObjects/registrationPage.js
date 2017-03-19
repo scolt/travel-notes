@@ -3,12 +3,12 @@ export class RegistrationPage {
     //Elements
     url = "/register";
     welcomeText = "div.login-header";
-    firstNameField = "input[data-reactid='.0.1.0.1.1:$firstName.2']";
-    lastNameField = "input[data-reactid='.0.1.0.1.1:$lastName.2']";
-    emailField = "input[data-reactid='.0.1.0.1.1:$lastName.2']";
-    userNameField = "input[data-reactid='.0.1.0.1.1:$username.2']";
-    passwordField = "input[data-reactid='.0.1.0.1.1:$password.2']";
-    birthdayField = "#undefined-Birthday-undefined-8592";
+    firstNameField = "input[name='firstName']";
+    lastNameField = "input[name='lastName']";
+    emailField = "input[name='email']";
+    userNameField = "input[name='username']";
+    passwordField = "input[name='password']";
+    birthdayField = "input[data-reactid='.0.1.0.1.1:$birthday.0.0.2']";
     maleRadioButton = "input[value='Male']";
     femaleRadioButton = "input[value='Female']";
     skypeField = "#skype-Skype-undefined-63056";
