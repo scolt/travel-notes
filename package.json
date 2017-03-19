@@ -13,6 +13,7 @@
         "e2e-setup": "node node_modules/selenium-standalone/bin/selenium-standalone install",
         "e2e": "node_modules/.bin/wdio tests/e2e/wdio.conf.js",
         "e2e-full": "npm run clean-report & npm run e2e & npm run generate-report & npm run open-report",
+        "e2e-full-mac": "npm run clean-report; npm run e2e; npm run generate-report; npm run open-report",
         "generate-report": "node node_modules/allure-commandline/bin/allure generate ./tests/e2e/.reports/allure/xml/ -o ./tests/e2e/.reports/allure/html",
         "open-report": "node node_modules/allure-commandline/bin/allure report open --report-dir ./tests/e2e/.reports/allure/html",
         "clean-report": "node node_modules/allure-commandline/bin/allure report clean --report-dir ./tests/e2e/.reports/allure/xml & node node_modules/allure-commandline/bin/allure report clean --report-dir ./tests/e2e/.reports/allure/html"

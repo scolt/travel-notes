@@ -14,42 +14,27 @@ describe('Main Page', () => {
             steps.navigateTo(main.url);
         });
 
-        it('Header should be visible', () => {
-            expect(browser.isVisible(master.toolbar)).to.be.true;
-        });
-
-        it('Footer should be visible', () => {
-            expect(browser.isVisible(master.footer)).to.be.true;
-        });
-
-        it('Add a note button should not be visible for non authorized users', () => {
-            expect(browser.isVisible(main.addNoteButton)).to.be.false;
-        });
-
-        it('List of notes should be visible', () => {
+        it('All needed controls should be displayed', () => {
+            expect(browser.isVisible(master.toolbar), "Header is presented").to.be.true;
+            expect(browser.isVisible(master.footer), "Footer is presented").to.be.true;
+            expect(browser.isVisible(main.addNoteButton), "Add a note button is not presented").to.be.false;
             browser.waitForExist(main.getNote(1));
-            expect(browser.isVisible(main.getNote(1))).to.be.true;
-        });
-
-        it('Sorting Button should be visible', () => {
-            expect(browser.isExisting(main.sorting)).to.be.true;
-        });
-
-        it('Toogle for All/Only my notes should not be visible for Non Authorized users', () => {
-            expect(browser.isExisting(main.toggle)).to.be.false;
+            expect(browser.isVisible(main.getNote(1)), "Notes are presented").to.be.true;
+            expect(browser.isExisting(main.sorting), "Sorting is presented").to.be.true;
+            expect(browser.isExisting(main.toggle), "Toggle for My notes is not presented").to.be.false;
         });
 
         it('Toogle for All/Only my notes should be visible for Authorized users', () => {
             login.login(consts.username, consts.password);
             steps.waitForPageisLoaded(main.url);
-            expect(browser.isExisting(main.toggle)).to.be.true;
+            expect(browser.isExisting(main.toggle), "Toggle for my notes is presented").to.be.true;
         });
 
         it('Filter should contain needed values', () => {
            browser.click(main.sorting);
            browser.waitForExist(main.userSortingOption);
-           expect(browser.isExisting(main.titleSortingOption)).to.be.true;
-           expect(browser.isExisting(main.dateSortingOption)).to.be.true;
-           expect(browser.isExisting(main.userSortingOption)).to.be.true;
+           expect(browser.isExisting(main.titleSortingOption), "Title sorting is presented").to.be.true;
+           expect(browser.isExisting(main.dateSortingOption), "Date sorting is presented").to.be.true;
+           expect(browser.isExisting(main.userSortingOption), "User sorting is presented").to.be.true;
         });
 });
