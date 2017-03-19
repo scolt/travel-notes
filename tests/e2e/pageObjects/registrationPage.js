@@ -8,7 +8,7 @@ export class RegistrationPage {
     emailField = "input[name='email']";
     userNameField = "input[name='username']";
     passwordField = "input[name='password']";
-    birthdayField = "input[data-reactid='.0.1.0.1.1:$birthday.0.0.2']";
+    birthdayField = "#date-picker-birthday";
     maleRadioButton = "input[value='Male']";
     femaleRadioButton = "input[value='Female']";
     skypeField = "input[name='skype']";

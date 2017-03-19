@@ -3,7 +3,7 @@ import {LoginPage} from '../pageObjects/loginPage';
 import {expect} from 'chai';
 import steps from '../steps/actionSteps'
 
-describe('Global Toolbar', () => {
+describe('Registration Page', () => {
 
     const register = new RegistrationPage();
     const login = new LoginPage();
