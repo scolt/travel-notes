@@ -1,6 +1,7 @@
 import {LoginPage} from "../pageObjects/loginPage";
 import {MainPage} from "../pageObjects/mainPage";
 import {MasterPage} from "../pageObjects/masterPage";
+import {RegistrationPage} from "../pageObjects/registrationPage";
 import {PopUp} from "../pageObjects/common/alertPopUp";
 import {expect} from 'chai';
 import {consts} from "../consts";
@@ -11,8 +12,9 @@ describe('Login Page', () => {
     const main = new MainPage();
     const master = new MasterPage();
     const popup = new PopUp();
+    const register = new RegistrationPage();
 
-    before(() => {
+    beforeEach(() => {
             steps.navigateTo(login.url);
         });
 
@@ -36,5 +38,11 @@ describe('Login Page', () => {
         browser.waitForExist(master.alertPopUp);
         expect(browser.isVisible(master.alertPopUp), "Alert Popup is presented").to.be.true;
         expect(steps.getElementsText(popup.text)).to.equal(consts.nonValidCredentialsMessage);
+    });
+
+    it('Clicking Sign up button should open Register Page', () => {
+        browser.click(login.signUpButton);
+        steps.waitForPageisLoaded(register.url);
+        expect(browser.getUrl()).to.contain('register');
     });
 });
