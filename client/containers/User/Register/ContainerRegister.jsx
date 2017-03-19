@@ -62,6 +62,7 @@ const Register = React.createClass({
         return <TextField
             key={field.name}
             fullWidth={true}
+            id={`form-${field.name}`}
             name={field.name}
             disabled={field.readOnly}
             multiLine={field.type === 'textarea'}
@@ -80,6 +81,7 @@ const Register = React.createClass({
                                  onChange={this.onFieldChange}>
             {field.values.map(item => <RadioButton
                 key={item}
+                id={`radio-item-${field.name}-${item.toLowerCase()}`}
                 value={item}
                 label={item}/>)
             }
@@ -89,6 +91,7 @@ const Register = React.createClass({
     getDateField(field) {
         return <div key={field.name}>
             <DatePicker className="control-wrapper"
+                        id={`date-picker-${field.name}`}
                         hintText={field.label}
                         fullWidth={true}
                         container="inline"
@@ -131,7 +134,7 @@ const Register = React.createClass({
                 {editForm.buttons.map((button, i) => this.getButton(button))}
             </form>
             <div className="login-footer">
-                Already have an account? <a href="#/register">Sign In</a>
+                Already have an account? <a href="#/login">Sign In</a>
             </div>
         </Paper>;
     }
