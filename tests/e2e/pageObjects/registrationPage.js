@@ -17,7 +17,7 @@ export class RegistrationPage {
     avatar = "div[data-reactid='.0.1.0.1.1:$avatar']";
     backgroundPicture = "div[data-reactid='.0.1.0.1.1:$background']";
     registerButton = "button[name='register']";
-    signInButton = "div.login-footer";
+    signInButton = "a[data-reactid='.0.1.0.2.1]";
     //Methods
 }
 
