@@ -21,8 +21,8 @@ describe('Global Toolbar', () => {
             expect(browser.isVisible(register.userNameField), "User Name is presented").to.be.true;
             expect(browser.isVisible(register.passwordField), "Password is presented").to.be.true;
             expect(browser.isVisible(register.birthdayField), "Birthday is presented").to.be.true;
-            expect(browser.isVisible(register.maleRadioButton), "Male Option is presented").to.be.true;
-            expect(browser.isVisible(register.femaleRadioButton), "Female option is presented").to.be.true;
+            expect(browser.isExisting(register.maleRadioButton), "Male Option is presented").to.be.true;
+            expect(browser.isExisting(register.femaleRadioButton), "Female option is presented").to.be.true;
             expect(browser.isVisible(register.skypeField), "Skype is presented").to.be.true;
             expect(browser.isVisible(register.websiteFieled), "Web site is presented").to.be.true;
             expect(browser.isVisible(register.aboutMeField), "About Me is presented").to.be.true;

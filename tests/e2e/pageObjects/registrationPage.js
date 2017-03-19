@@ -11,13 +11,13 @@ export class RegistrationPage {
     birthdayField = "input[data-reactid='.0.1.0.1.1:$birthday.0.0.2']";
     maleRadioButton = "input[value='Male']";
     femaleRadioButton = "input[value='Female']";
-    skypeField = "#skype-Skype-undefined-63056";
-    websiteFieled = "#website-Website-undefined-25520";
-    aboutMeField = "#about-AboutMe-undefined-6119";
+    skypeField = "input[name='skype']";
+    websiteFieled = "input[name='website']";
+    aboutMeField = "textarea[name='about']";
     avatar = "div[data-reactid='.0.1.0.1.1:$avatar']";
     backgroundPicture = "div[data-reactid='.0.1.0.1.1:$background']";
     registerButton = "button[name='register']";
-    signInButton = "a[data-reactid='.0.1.0.2.1]";
+    signInButton = "a[data-reactid='.0.1.0.2.1']";
     //Methods
 }
 
