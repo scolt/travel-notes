@@ -14,7 +14,7 @@ export class RegistrationPage {
     skypeField = "input[name='skype']";
     websiteFieled = "input[name='website']";
     aboutMeField = "textarea[name='about']";
-    avatar = "span[data-reactid='.0.1.0.1.1:$avatar.0']";
+    avatar = "input[data-reactid='.0.1.0.1.1:$avatar.1']";
     backgroundPicture = "div[data-reactid='.0.1.0.1.1:$background']";
     registerButton = "button[name='register']";
     signInButton = "a[data-reactid='.0.1.0.2.1']";

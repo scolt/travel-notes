@@ -22,7 +22,6 @@ export default {
     },
 
     uploadImage(element) {
-        browser.setValue(element, 'tests/e2e/testImages/test.png');
-        console.log(element.getValue())
+        browser.chooseFile(element, 'tests/e2e/testImages/test.png');
     }
 }
