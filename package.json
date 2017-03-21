@@ -4,7 +4,7 @@
     "description": "EPAM Mentoring Project",
     "main": "app.js",
     "scripts": {
-        "start": "webpack --env.prod production",
+        "start": "node node_modules/webpack/bin/webpack --env.prod production",
         "node": "node app",
         "webpack": "webpack",
         "test": "eslint -c .eslintrc.js --ext .js --ext .jsx client/js",
