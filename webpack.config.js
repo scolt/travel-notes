@@ -30,9 +30,9 @@ let plugins = [
 if (!isDev) plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
 
 const webpackInitialization = function (env) {
-    const isDev = !env || (env && !env.prod);
+    const isProd = env && env.prod === 'production';
     const definitions = new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production')
+        'process.env.NODE_ENV': JSON.stringify(isProd ? 'production' : 'development')
     });
 
     const plugins = [
@@ -45,7 +45,7 @@ const webpackInitialization = function (env) {
 
     return {
         entry: {
-            app: (isDev ? [`webpack-dev-server/client?http://${devServerConfig.host}:${devServerConfig.port}/`] : [])
+            app: (!isProd ? [`webpack-dev-server/client?http://${devServerConfig.host}:${devServerConfig.port}/`] : [])
                 .concat([path.resolve(__dirname, 'client/app.jsx')])
         },
 
@@ -54,9 +54,9 @@ const webpackInitialization = function (env) {
             path: path.resolve(__dirname, 'public')
         },
 
-        cache: isDev,
-        devtool: isDev ? 'eval-source-map' : false,
-        watch: isDev,
+        cache: !isProd,
+        devtool: !isProd ? 'eval-source-map' : false,
+        watch: !isProd,
 
         resolve: {
             modules: [

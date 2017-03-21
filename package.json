@@ -4,7 +4,7 @@
     "description": "EPAM Mentoring Project",
     "main": "app.js",
     "scripts": {
-        "start": "webpack --env.prod && node app",
+        "start": "webpack --env.prod production && node app",
         "node": "node app",
         "webpack": "webpack",
         "test": "eslint -c .eslintrc.js --ext .js --ext .jsx client/js",
@@ -112,7 +112,7 @@
     },
     "engines": {
         "node": "6.10.0",
-        "npm": "3.6.0"
+        "npm": "3.10.10"
     },
     "config": {
         "ghooks": {
