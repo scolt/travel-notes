@@ -13,15 +13,9 @@ describe('Home Page', () =>  {
             steps.navigateTo(home.url);
         });
         
-        it('Should contain Header', () => {
-            expect(browser.isVisible(master.toolbar)).to.be.true;
-        });
-        
-        it('Should contain Footer', () => {
-            expect(browser.isVisible(master.footer)).to.be.true;
-        });
-        
-        it('Should contain Get Started button', () => {
-            expect(browser.isVisible(home.getStartedButton)).to.be.true;
+        it('Should contain all needed fields', () => {
+            expect(browser.isVisible(master.toolbar), "Header is presented").to.be.true;
+            expect(browser.isVisible(master.footer), "Footer is presented").to.be.true;
+            expect(browser.isVisible(home.getStartedButton), "Get started button is presented").to.be.true;
         });
 });

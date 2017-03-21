@@ -23,32 +23,20 @@ import steps from '../steps/actionSteps'
             browser.click(toolbar.menuButton);
         });
         
-        it('Should contain News button', () => {
-            expect(browser.isVisible(sideMenu.news)).to.be.true;
-        });
-
-        it('Should contain Gallery button', () => {
-            expect(browser.isVisible(sideMenu.gallery)).to.be.true;
-        });
-
-        it('Should contain Main Page button', () => {
-            expect(browser.isVisible(sideMenu.mainPage)).to.be.true;
-        });
-
-        it('Should contain Map button', () => {
-            expect(browser.isVisible(sideMenu.map)).to.be.true;
-        });
-
-        it('Should contain Logout button', () => {
-            expect(browser.isVisible(sideMenu.logoutButton)).to.be.true;
+        it('Should contain all needed links', () => {
+            expect(browser.isVisible(sideMenu.news), "News link is presented").to.be.true;
+            expect(browser.isVisible(sideMenu.gallery), " Gallery link is presented").to.be.true;
+            expect(browser.isVisible(sideMenu.mainPage), "Main page link is presented").to.be.true;
+            expect(browser.isVisible(sideMenu.map), "Map link is presented").to.be.true;
+            expect(browser.isVisible(sideMenu.logoutButton), "Logout button is presented for logged in user").to.be.true;
         });
 
         it('User should be logged out from the app', () => {
             browser.click(sideMenu.logoutButton);
-            expect(browser.isVisible(master.alertPopUp)).to.be.true;
+            expect(browser.isVisible(master.alertPopUp), "Alert popup is displayed").to.be.true;
             expect(steps.getElementsText(popup.text)).to.equal(consts.logoutMessage);
             browser.click(popup.okButton);
-            expect(browser.isVisible(toolbar.logInButton)).to.be.true;
-            expect(browser.isVisible(toolbar.signUpButton)).to.be.true;
+            expect(browser.isVisible(toolbar.logInButton), "Login button is presented").to.be.true;
+            expect(browser.isVisible(toolbar.signUpButton), "Sign up button is presented").to.be.true;
         });
 });

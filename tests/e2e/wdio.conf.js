@@ -35,5 +35,8 @@ exports.config = {
     },
     onComplete: function () {
         console.log('All done!');
+    },
+    onError: function () {
+        console.log('something wrong');
     }
 };
