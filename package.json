@@ -4,11 +4,10 @@
     "description": "EPAM Mentoring Project",
     "main": "app.js",
     "scripts": {
-        "start": "node node_modules/webpack/bin/webpack --env.prod production",
         "node": "node app",
         "webpack": "webpack",
         "test": "eslint -c .eslintrc.js --ext .js --ext .jsx client/js",
-        "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then webpack --progress --colors ; fi",
+        "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then webpack --env.prod production --progress --colors ; fi",
         "selenium-server": "node node_modules/selenium-standalone/bin/selenium-standalone start",
         "e2e-setup": "node node_modules/selenium-standalone/bin/selenium-standalone install",
         "e2e": "node_modules/.bin/wdio tests/e2e/wdio.conf.js",
