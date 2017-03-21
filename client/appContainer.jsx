@@ -25,7 +25,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 const muiTheme = getMuiTheme(baseTheme);
 
-const appHistory = useRouterHistory(createHashHistory)({queryKey: false});
+const appHistory = useRouterHistory(createHashHistory)();
 
 const views = {
     '/': LandingPage,
