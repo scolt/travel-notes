@@ -7,7 +7,7 @@ export class MainPage {
     titleSortingOption = "#orderByTitle";
     userSortingOption = "#orderByUsername";
     dateSortingOption = "#orderByDate";
-    toggle = "input[type='checkbox']";
+    toggle = "#onlyMyButton";
     url = "/main";
 
     //Methods
