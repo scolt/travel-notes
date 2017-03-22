@@ -7,7 +7,7 @@ export class LoginPage {
     emailField = "input[name='email']";
     passwordField = "input[name='password']";
     loginButton = "button[name='login']";
-    signUpButton = "a[data-reactid='.0.1.0.2.1']";
+    signUpButton = ".login-footer a";
     url = "/login";
 
     //Methods
