@@ -26,15 +26,23 @@ describe('Registration Page', () => {
             expect(browser.isVisible(register.skypeField), "Skype is presented").to.be.true;
             expect(browser.isVisible(register.websiteFieled), "Web site is presented").to.be.true;
             expect(browser.isVisible(register.aboutMeField), "About Me is presented").to.be.true;
-            expect(browser.isVisible(register.avatar), "Avatar is presented").to.be.true;
-            expect(browser.isVisible(register.backgroundPicture), "Backround is presented").to.be.true;
+            expect(browser.isExisting(register.avatar), "Avatar is presented").to.be.true;
+            expect(browser.isExisting(register.backgroundPicture), "Backround is presented").to.be.true;
             expect(browser.isVisible(register.registerButton), "Register Button is presented").to.be.true;
             expect(browser.isVisible(register.signInButton), "Sign In is presented").to.be.true;
         });
+
+        it('Add an image to Avatar field', () => {
+            browser.pause(5000);
+            steps.uploadImage(register.avatar);
+            browser.pause(5000);
+        }); 
 
         it('Clicking Sign In button should open Login page', () => {
             browser.click(register.signInButton);
             steps.waitForPageisLoaded(login.url);
             expect(browser.getUrl()).to.contain('login');
-        });      
+        }); 
+
+
 });

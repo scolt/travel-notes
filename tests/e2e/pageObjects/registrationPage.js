@@ -14,10 +14,10 @@ export class RegistrationPage {
     skypeField = "input[name='skype']";
     websiteFieled = "input[name='website']";
     aboutMeField = "textarea[name='about']";
-    avatar = "div[data-reactid='.0.1.0.1.1:$avatar']";
-    backgroundPicture = "div[data-reactid='.0.1.0.1.1:$background']";
+    avatar = "#avatarDropzoneContainer input";
+    backgroundPicture = "#backgroundDropzoneContainer input";
     registerButton = "button[name='register']";
-    signInButton = "a[data-reactid='.0.1.0.2.1']";
+    signInButton = ".logout-footer a";
     //Methods
 }
 

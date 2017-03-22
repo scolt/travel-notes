@@ -19,5 +19,9 @@ export default {
     getElementsText(element) {
         browser.waitForText(element, config.waitforTimeout);
         return browser.getText(element);
+    },
+
+    uploadImage(element) {
+        browser.chooseFile(element, 'tests/e2e/testImages/test.png');
     }
 }

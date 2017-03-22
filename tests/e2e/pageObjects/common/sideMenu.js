@@ -5,6 +5,6 @@ export class SideMenu {
     gallery = "#galleryMenuItem";
     mainPage = "#mainpageMenuItem";
     map = "#mapMenuItem";
-    logoutButton = "span[data-reactid='.0.0.0.3.2.2.0.0.0.0.1.0']";
+    logoutButton = "#logoutMenuButton";
     profile = "div.image-developer.clickable"
 }
