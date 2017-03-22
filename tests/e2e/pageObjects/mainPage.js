@@ -3,7 +3,7 @@ export class MainPage {
     //Elements
     addNoteButton = "a.add";
     notes = "a[class='note-grid-item']";
-    sorting = "#onlyMyButton";
+    sorting = "div.filter-item";
     titleSortingOption = "#orderByTitle";
     userSortingOption = "#orderByUsername";
     dateSortingOption = "#orderByDate";
