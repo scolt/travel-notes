@@ -115,7 +115,7 @@ const Register = React.createClass({
         const editForm = this.props.data.users[this.formName];
         return <RaisedButton
             key={button.name}
-
+            primary={true}
             fullWidth={true}
             name={button.name}
             label={button.label}

@@ -72,7 +72,7 @@ const ImageStep = React.createClass({
                 <RaisedButton
                     disabled={!isStepValid}
                     label="Finish and save!"
-
+                    primary={true}
                     onTouchTap={this.saveNote}
                 />
             </div>
