@@ -102,7 +102,8 @@ const Register = React.createClass({
     },
 
     getFileField(field) {
-        return <Dropzone key={field.name} onDrop={files => this.onDrop(files, field.name)}
+        return <Dropzone id={`${field.name}DropzoneContainer`}
+                         key={field.name} onDrop={files => this.onDrop(files, field.name)}
                          className="drop-zone register-field"
                          activeClassName="active"
                          accept="image/*">
@@ -133,7 +134,7 @@ const Register = React.createClass({
                 {editForm.fields.map((field, i) => this.getEditField(field))}
                 {editForm.buttons.map((button, i) => this.getButton(button))}
             </form>
-            <div className="login-footer">
+            <div className="logout-footer">
                 Already have an account? <a href="#/login">Sign In</a>
             </div>
         </Paper>;

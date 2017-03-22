@@ -13,7 +13,6 @@ const buttonStyle = {
     marginTop: '7px'
 };
 
-
 const Menu = React.createClass({
     componentWillMount() {
         document.addEventListener('scroll', () => {
@@ -77,7 +76,7 @@ const Menu = React.createClass({
                         ))}
                     </div>
                     <div>
-                        {user.email ? <LogoutButton id="logoutMenuButton" onTouchTap={this.setMenuStatus.bind(this, false)}/> : <span></span>}
+                        {user.email ? <LogoutButton onTouchTap={this.setMenuStatus.bind(this, false)}/> : <span></span>}
                     </div>
                 </Drawer>
             </AppBar>

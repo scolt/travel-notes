@@ -9,12 +9,7 @@ const StringReplacePlugin = require('string-replace-webpack-plugin');
 
 const isDev = false;
 
-const replacements = [
-    {
-        pattern: /\$\$REST_URL_HOST/ig,
-        replacement: () => process.env.remoteServer || (isDev ? 'http://iwasthere.herokuapp.com' : '')
-    }
-];
+
 
 const devServerConfig = {
     host: process.env.IP || 'localhost',
@@ -34,6 +29,13 @@ const webpackInitialization = function (env) {
     const definitions = new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(isProd ? 'production' : 'development')
     });
+
+    const replacements = [
+        {
+            pattern: /\$\$REST_URL_HOST/ig,
+            replacement: () => process.env.remoteServer || (!isProd ? 'http://iwasthere.herokuapp.com' : '')
+        }
+    ];
 
     const plugins = [
         new ExtractTextPlugin('styles.css'),
