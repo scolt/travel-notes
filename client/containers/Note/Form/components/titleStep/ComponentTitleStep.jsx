@@ -44,7 +44,7 @@ const TitleStep = React.createClass({
             <div className="step-actions">
                 <RaisedButton
                     label="Next"
-                    primary={true}
+
                     disabled={!isStepValid}
                     onTouchTap={this.props.handleStepClick.bind(this, nextStep)}
                 />

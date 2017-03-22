@@ -51,7 +51,7 @@ const Login = React.createClass({
                 {editForm.buttons.map((button, i) =>
                     <RaisedButton
                         key={i}
-                        primary={true}
+
                         fullWidth={true}
                         name={button.name}
                         label={button.label}

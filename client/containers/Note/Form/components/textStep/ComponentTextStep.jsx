@@ -53,7 +53,7 @@ const TextStep = React.createClass({
                 />
                 <RaisedButton
                     label="Next"
-                    primary={true}
+
                     disabled={!isStepValid}
                     onTouchTap={this.props.handleStepClick.bind(this, nextStep)}
                 />

@@ -17,7 +17,7 @@ const LogoutButton = React.createClass({
             <RaisedButton
                 id="logoutMenuButton"
                 label="Logout"
-                primary={true}
+
                 style={{width: '100%'}}
                 onTouchTap={() => {
                     this.logout();
