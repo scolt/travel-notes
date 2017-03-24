@@ -17,6 +17,11 @@ describe('Create Note Page', () =>  {
         });
 
         it('Next Button should be disabled when Title is empty', () => {
-            expect(browser.getAttribute(createNote.nextButton, 'tabIndex')).to.equal('-1');
+            expect(browser.getAttribute(createNote.nextButton, 'tabIndex'), "Next Button is disabled").to.equal('-1');
+        });
+
+        it('Next Button should be enabled when Title is filled', () => {
+            createNote.enterTitle("test");
+            expect(browser.getAttribute(createNote.nextButton, 'tabIndex'), "Next button is enabled").to.equal('0');
         });
 });
