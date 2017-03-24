@@ -15,7 +15,6 @@ describe('Note Page', () => {
            });
 
         it('All needed controls should be displayed', () => {
-            browser.waitForExist(main.getNote(1));
             main.openNote(1);
             browser.waitForExist(note.map);
             expect(browser.isVisible(note.gallery), "Gallery is presented").to.be.true;

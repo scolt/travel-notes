@@ -21,6 +21,7 @@ export class MainPage {
     }
 
     openNote(index) {
+        browser.waitForExist(this.getNote(index-1));
         browser.elementIdClick(this.getNotes().value[index-1].ELEMENT);
     }
 }
