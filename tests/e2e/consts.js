@@ -8,5 +8,6 @@ exports.consts = {
     Messages will be stored here
      */
     nonValidCredentialsMessage: "Incorrect username or password.",
-    logoutMessage: "You've been successfully logged out."
+    logoutMessage: "You've been successfully logged out.",
+    firstStepMessage: "Provide title of your note. It can be name of city or place."
 };

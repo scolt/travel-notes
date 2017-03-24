@@ -49,5 +49,4 @@ describe('Main Page', () => {
            browser.click(main.addNoteButton)
            steps.waitForPageisLoaded("/note/create");
         });
- 
-});
+ });
