@@ -43,5 +43,11 @@ describe('Main Page', () => {
            main.openNote(2);
            expect(browser.getUrl(), "Url does not contain needed value").to.contain(note.url);
         });
+
+        it('Create a Note page can be opened', () => {
+           browser.waitForExist(main.addNoteButton);
+           browser.click(main.addNoteButton)
+           steps.waitForPageisLoaded("/note/create");
+        });
  
 });

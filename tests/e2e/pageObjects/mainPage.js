@@ -1,7 +1,7 @@
 export class MainPage {
 
     //Elements
-    addNoteButton = "a.add";
+    addNoteButton = ".add";
     notes = "a[class='note-grid-item']";
     sorting = "div.filter-item";
     titleSortingOption = "#orderByTitle";
