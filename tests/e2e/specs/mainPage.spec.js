@@ -19,7 +19,6 @@ describe('Main Page', () => {
             expect(browser.isVisible(master.footer), "Footer is presented").to.be.true;
             expect(browser.isVisible(main.addNoteButton), "Add a note button is not presented").to.be.false;
             browser.waitForExist(main.getNote(1));
-            expect(browser.isVisible(main.getNote(1)), "Notes are presented").to.be.true;
             expect(browser.isExisting(main.sorting), "Sorting is presented").to.be.true;
             expect(browser.isExisting(main.toggle), "Toggle for My notes is not presented").to.be.false;
         });

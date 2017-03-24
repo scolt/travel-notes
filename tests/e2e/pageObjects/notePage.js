@@ -1,14 +1,11 @@
 export class NotePage {
 
     //Elements
-
-
-
-
+    url = "/note";
+    
+    map = ".map";
+    gallery = ".gallery-row";
+    signature = ".sign";
+    
     //Methods
-    navigateTo() {
-        return browser.url('/note/create');
-    }
-
-
 }
