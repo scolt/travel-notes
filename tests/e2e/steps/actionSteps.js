@@ -8,7 +8,7 @@ export default {
             return browser.url(config.baseUrl);
         }
     },
-
+    
     waitForPageisLoaded(url) {
         browser.waitUntil(
             () => browser.getUrl() === (config.baseUrl + url),

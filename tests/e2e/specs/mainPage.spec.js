@@ -2,6 +2,7 @@ import {MasterPage} from "../pageObjects/masterPage";
 import {MainPage} from "../pageObjects/mainPage";
 import {LoginPage} from "../pageObjects/loginPage";
 import {NotePage} from "../pageObjects/notePage";
+import {CreateNotePage} from "../pageObjects/createNotePage";
 import {expect} from 'chai';
 import {consts} from '../consts';
 import steps from "../steps/actionSteps"
@@ -11,6 +12,7 @@ describe('Main Page', () => {
     const main = new MainPage();
     const login = new LoginPage();
     const note = new NotePage();
+    const createNote = new CreateNotePage();
 
         beforeEach(() => {
             steps.navigateTo(main.url);
@@ -47,6 +49,6 @@ describe('Main Page', () => {
         it('Create a Note page can be opened', () => {
            browser.waitForExist(main.addNoteButton);
            browser.click(main.addNoteButton)
-           steps.waitForPageisLoaded("/note/create");
+           steps.waitForPageisLoaded(createNote.url);
         });
  });
