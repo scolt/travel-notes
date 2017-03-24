@@ -1,11 +1,8 @@
 export class NotePage {
 
     //Elements
-    url = "/note";
-    
+    url = "/note"; 
     map = ".map";
     gallery = ".gallery-row";
     signature = ".sign";
-    
-    //Methods
 }

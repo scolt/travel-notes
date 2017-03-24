@@ -15,7 +15,7 @@ exports.config = {
     mochaOpts: {
         ui: 'bdd',
         compilers: ['js:babel-register'],
-        timeout: 20000
+        timeout: 10000
     },
     logLevel: 'silent',
     reporters: ['dot', 'spec', 'allure'],
