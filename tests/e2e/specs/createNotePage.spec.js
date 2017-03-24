@@ -15,4 +15,8 @@ describe('Create Note Page', () =>  {
             expect(browser.isVisible(createNote.subtitle), "Subtitle Field is presented").to.be.true;
             expect(browser.isVisible(createNote.nextButton), "Next Button is presented").to.be.true;
         });
+
+        it('Next Button should be disabled when Title is empty', () => {
+            expect(browser.getAttribute(createNote.nextButton, 'tabIndex')).to.equal('-1');
+        });
 });
