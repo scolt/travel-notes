@@ -12,7 +12,7 @@ const NotFound = React.createClass({
                 <header>
                     <h1>Travel Note</h1>
                     <p>Store your travel experience! Open new horizons!</p>
-                    <RaisedButton label="Get Started" primary={true} href="#/register"/>
+                    <RaisedButton id="getStarted" label="Get Started" primary={true} href="#/register"/>
                 </header>
                 <img src="images/alldevices.png" alt="Travel Note - all platforms"/>
             </section>
