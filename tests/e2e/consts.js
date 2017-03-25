@@ -3,6 +3,7 @@ exports.consts = {
     username: "test@test.ru",
     password: "password",
     timeoutForAnimation: 4000,
+    imagePath: "tests/e2e/testImages/test.png",
 
     /*
     Messages will be stored here

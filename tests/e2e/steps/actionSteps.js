@@ -1,4 +1,5 @@
 import {config} from "../wdio.conf";
+import {consts} from "../consts";
 export default {
 
     navigateTo(url) {
@@ -22,6 +23,10 @@ export default {
     },
 
     uploadImage(element) {
-        browser.chooseFile(element, 'tests/e2e/testImages/test.png');
+        browser.chooseFile(element, consts.imagePath);
+    },
+
+    enterText(selector, text) {
+        browser.setValue(selector, text);
     }
 }

@@ -5,7 +5,7 @@ import steps from '../steps/actionSteps'
 describe('Create Note Page', () =>  {
     const createNote = new CreateNotePage();
     
-    before(() => {
+    beforeEach(() => {
             steps.navigateTo(createNote.url);
         });
         
@@ -21,7 +21,16 @@ describe('Create Note Page', () =>  {
         });
 
         it('Next Button should be enabled when Title is filled', () => {
-            createNote.enterTitle("test");
+            steps.enterText(createNote.title, "test");
             expect(browser.getAttribute(createNote.nextButton, 'tabIndex'), "Next button is enabled").to.equal('0');
         });
+
+        it('2nd step should be available', () => {
+            steps.enterText(createNote.title, "test");
+            steps.enterText(createNote.subtitle, "test");
+            browser.click(createNote.nextButton);
+            browser.waitForExist(createNote.content);
+        });
+
+
 });

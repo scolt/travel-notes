@@ -11,18 +11,11 @@ export class LoginPage {
     url = "/login";
 
     //Methods
-    enterEmail(email) {
-        browser.setValue(this.emailField, email);
-    }
-
-    enterPassword(password) {
-        browser.setValue(this.passwordField, password);
-    }
 
     login(login, password) {
         steps.navigateTo(this.url);
-        this.enterEmail(login);
-        this.enterPassword(password);
+        steps.enterText(this.emailField, login);
+        steps.enterText(this.passwordField, password);
         browser.click(this.loginButton);
     }
 }
