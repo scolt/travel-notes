@@ -18,7 +18,6 @@ export class RegistrationPage {
     backgroundPicture = "#backgroundDropzoneContainer input";
     registerButton = "button[name='register']";
     signInButton = ".logout-footer a";
-    //Methods
 }
 
 

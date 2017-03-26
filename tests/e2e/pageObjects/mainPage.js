@@ -1,7 +1,7 @@
 export class MainPage {
 
     //Elements
-    addNoteButton = "a.add";
+    addNoteButton = ".add";
     notes = "a[class='note-grid-item']";
     sorting = "div.filter-item";
     titleSortingOption = "#orderByTitle";
@@ -21,6 +21,7 @@ export class MainPage {
     }
 
     openNote(index) {
+        browser.waitForExist(this.getNote(index-1));
         browser.elementIdClick(this.getNotes().value[index-1].ELEMENT);
     }
 }

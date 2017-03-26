@@ -10,7 +10,7 @@ exports.config = {
     coloredLogs: true,
     screenshotPath: './tests/e2e/.reports/screenshots',
     baseUrl: 'http://iwasthere.herokuapp.com/#',
-    waitforTimeout: 10000,
+    waitforTimeout: 20000,
     framework: 'mocha',
     mochaOpts: {
         ui: 'bdd',

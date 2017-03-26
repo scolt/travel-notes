@@ -1,4 +1,5 @@
 import {config} from "../wdio.conf";
+import {consts} from "../consts";
 export default {
 
     navigateTo(url) {
@@ -8,7 +9,7 @@ export default {
             return browser.url(config.baseUrl);
         }
     },
-
+    
     waitForPageisLoaded(url) {
         browser.waitUntil(
             () => browser.getUrl() === (config.baseUrl + url),
@@ -22,6 +23,10 @@ export default {
     },
 
     uploadImage(element) {
-        browser.chooseFile(element, 'tests/e2e/testImages/test.png');
+        browser.chooseFile(element, consts.testImagePath);
+    },
+
+    enterText(selector, text) {
+        browser.setValue(selector, text);
     }
 }
