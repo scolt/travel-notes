@@ -23,7 +23,7 @@ export default {
     },
 
     uploadImage(element) {
-        browser.chooseFile(element, consts.imagePath);
+        browser.chooseFile(element, consts.testImagePath);
     },
 
     enterText(selector, text) {
