@@ -7,112 +7,105 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StringReplacePlugin = require('string-replace-webpack-plugin');
 
-const definitions = new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-});
+const isDev = false;
 
-const isDev = JSON.parse(definitions.definitions['process.env.NODE_ENV']) == 'development';
 
-const replacements = [
-    {
-        pattern: /\$\$REST_URL_HOST/ig,
-        replacement: () => process.env.remoteServer || (isDev ? 'http://iwasthere.herokuapp.com' : '')
-    }
-];
 
 const devServerConfig = {
     host: process.env.IP || 'localhost',
     port: process.env.PORT || 8080,
-    contentBase: path.resolve(__dirname, 'public'),
-    getUrl: function () {
-        return `webpack-dev-server/client?http://${this.host}:${this.port}/`;
-    }
+    contentBase: path.resolve(__dirname, 'public')
 };
 
 let plugins = [
     new ExtractTextPlugin('styles.css'),
-    new StringReplacePlugin(),
-    definitions
+    new StringReplacePlugin()
 ];
+
 if (!isDev) plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
 
-const config = {
-    entry: {
-        app:
-            (isDev ? [devServerConfig.getUrl()] : [])
-            .concat([path.resolve(__dirname, 'client/app.jsx')])
-    },
+const webpackInitialization = function (env) {
+    const isProd = env && env.prod === 'production';
+    const definitions = new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(isProd ? 'production' : 'development')
+    });
 
-    output: {
-        filename: 'app.js',
-        path: path.resolve(__dirname, 'public')
-    },
+    const replacements = [
+        {
+            pattern: /\$\$REST_URL_HOST/ig,
+            replacement: () => process.env.remoteServer || (!isProd ? 'http://iwasthere.herokuapp.com' : '')
+        }
+    ];
 
-    debug: isDev,
-    cache: isDev,
-    devtool: isDev ? 'eval-source-map' : null,
-    watch: isDev,
+    const plugins = [
+        new ExtractTextPlugin('styles.css'),
+        new StringReplacePlugin(),
+        definitions
+    ];
 
-    resolve: {
-        root: [
-            path.resolve(__dirname, 'client'),
-            path.resolve(__dirname, 'client/assets'),
-            path.resolve(__dirname, 'node_modules')
-        ],
-        extensions: ['', '.js', '.jsx', '.styl']
-    },
+    if (!isDev) plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
 
-    eslint: {
-        configFile: '.eslintrc.js'
-    },
+    return {
+        entry: {
+            app: (!isProd ? [`webpack-dev-server/client?http://${devServerConfig.host}:${devServerConfig.port}/`] : [])
+                .concat([path.resolve(__dirname, 'client/app.jsx')])
+        },
 
-    module: {
-        preLoaders: [
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loader: 'eslint'
-            }
-        ],
-        loaders: [
-            {
-                test: /\.json$/,
-                loader: 'json'
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: StringReplacePlugin.replace({
-                    replacements: replacements
-                })
-            },
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loader: 'babel'
-            },
-            {
-                test: /\.styl$/,
-                exclude: /node_modules/,
-                loader: ExtractTextPlugin.extract('style', 'css!stylus')
-            },
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style', 'css')
-            },
-            {
-                test: /\.(png|jpg)\??/,
-                loader: 'url?limit=100&name=images/[name].[ext]'
-            },
-            {
-                test: /\.(otf|eot|svg|ttf|woff|svg)\??/,
-                loader: 'url?limit=100&name=fonts/[name].[ext]'
-            }
-        ]
-    },
+        output: {
+            filename: 'app.js',
+            path: path.resolve(__dirname, 'public')
+        },
 
-    plugins: plugins,
-    devServer: devServerConfig
+        cache: !isProd,
+        devtool: !isProd ? 'eval-source-map' : false,
+        watch: !isProd,
+
+        resolve: {
+            modules: [
+                path.resolve(__dirname, 'client'),
+                path.resolve(__dirname, 'client/assets'),
+                path.resolve(__dirname, 'node_modules')
+            ],
+            extensions: ['.js', '.jsx', '.styl']
+        },
+
+        module: {
+            loaders: [
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    loader: StringReplacePlugin.replace({
+                        replacements: replacements
+                    })
+                },
+                {
+                    test: /\.jsx?$/,
+                    exclude: /node_modules/,
+                    loader: 'babel-loader'
+                },
+                {
+                    test: /\.styl$/,
+                    exclude: /node_modules/,
+                    loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader!stylus-loader'})
+                },
+                {
+                    test: /\.css$/,
+                    loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader'})
+                },
+                {
+                    test: /\.(png|jpg)\??/,
+                    loader: 'url-loader?limit=100&name=images/[name].[ext]'
+                },
+                {
+                    test: /\.(otf|eot|svg|ttf|woff|svg)\??/,
+                    loader: 'url-loader?limit=100&name=fonts/[name].[ext]'
+                }
+            ]
+        },
+
+        plugins: plugins,
+        devServer: devServerConfig
+    }
 };
 
-module.exports = config;
+module.exports = webpackInitialization;

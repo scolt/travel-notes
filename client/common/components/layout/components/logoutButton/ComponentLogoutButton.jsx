@@ -15,6 +15,7 @@ const LogoutButton = React.createClass({
     render() {
         return <div className="col-md-12">
             <RaisedButton
+                id="logoutMenuButton"
                 label="Logout"
                 primary={true}
                 style={{width: '100%'}}
