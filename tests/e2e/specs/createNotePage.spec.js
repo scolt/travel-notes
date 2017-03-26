@@ -31,6 +31,4 @@ describe('Create Note Page', () =>  {
             browser.click(createNote.nextButton);
             browser.waitForExist(createNote.content);
         });
-
-
 });
