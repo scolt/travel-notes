@@ -33,11 +33,13 @@ const MapStep = React.createClass({
 
             <div className="step-actions">
                 <FlatButton
+                    id="backButton"
                     label="Back"
                     onTouchTap={this.props.handleStepClick.bind(this, prevStep)}
                     style={{marginRight: 12}}
                 />
                 <RaisedButton
+                    id="nextButton"
                     label="Next"
                     primary={true}
                     disabled={!isStepValid}

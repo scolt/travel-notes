@@ -65,11 +65,14 @@ const ImageStep = React.createClass({
 
             <div className="step-actions">
                 <FlatButton
+                    id="backButton"
                     label="Back"
                     onTouchTap={this.props.handleStepClick.bind(this, previousStep)}
                     style={{marginRight: 12}}
                 />
                 <RaisedButton
+                    id="nextButton"
+                    className="finish-button"
                     disabled={!isStepValid}
                     label="Finish and save!"
                     primary={true}

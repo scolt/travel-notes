@@ -47,11 +47,13 @@ const TextStep = React.createClass({
 
             <div className="step-actions">
                 <FlatButton
-                label="Back"
-                onTouchTap={this.props.handleStepClick.bind(this, prevStep)}
-                style={{marginRight: 12}}
+                    id="backButton"
+                    label="Back"
+                    onTouchTap={this.props.handleStepClick.bind(this, prevStep)}
+                    style={{marginRight: 12}}
                 />
                 <RaisedButton
+                    id="nextButton"
                     label="Next"
                     primary={true}
                     disabled={!isStepValid}

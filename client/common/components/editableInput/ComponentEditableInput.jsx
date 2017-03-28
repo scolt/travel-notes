@@ -25,7 +25,7 @@ const EditableField = React.createClass({
             errorText={inputProperties.errorText}/>;
 
         return (
-            <span className="input-box-wrapper">
+            <span className="input-box-wrapper" id={`${inputProperties.name.replace(' ', '').toLowerCase()}Input`}>
                 {this.props.editMode ? textField : this.props.children}
             </span>
         );

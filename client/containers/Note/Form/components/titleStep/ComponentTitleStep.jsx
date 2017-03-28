@@ -43,6 +43,7 @@ const TitleStep = React.createClass({
 
             <div className="step-actions">
                 <RaisedButton
+                    id="nextButton"
                     label="Next"
                     primary={true}
                     disabled={!isStepValid}

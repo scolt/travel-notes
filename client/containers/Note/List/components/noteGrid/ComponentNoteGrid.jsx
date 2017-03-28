@@ -30,7 +30,7 @@ const NoteGrid = React.createClass({
         const list = <div className="notes-grid">
             {this.props.appendBefore}
             {notes.map((tile, i) =>
-                <a key={i} className="note-grid-item" href={`#/note/${tile._id}`}>
+                <a key={i} className="note-grid-item" data-index={`note-index-${i}`} href={`#/note/${tile._id}`}>
                     {tile.userId === currentUsername ?
                         <i className="fa fa-trash" onTouchTap={(e) => this.deleteNote(e, tile._id)}>&nbsp;</i> : null
                     }
