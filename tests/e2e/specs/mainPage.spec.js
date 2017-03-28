@@ -1,6 +1,8 @@
 import {MasterPage} from "../pageObjects/masterPage";
 import {MainPage} from "../pageObjects/mainPage";
 import {LoginPage} from "../pageObjects/loginPage";
+import {NotePage} from "../pageObjects/notePage";
+import {CreateNotePage} from "../pageObjects/createNotePage";
 import {expect} from 'chai';
 import {consts} from '../consts';
 import steps from "../steps/actionSteps"
@@ -9,8 +11,10 @@ describe('Main Page', () => {
     const master = new MasterPage();
     const main = new MainPage();
     const login = new LoginPage();
+    const note = new NotePage();
+    const createNote = new CreateNotePage();
 
-        before(() => {
+        beforeEach(() => {
             steps.navigateTo(main.url);
         });
 
@@ -19,7 +23,6 @@ describe('Main Page', () => {
             expect(browser.isVisible(master.footer), "Footer is presented").to.be.true;
             expect(browser.isVisible(main.addNoteButton), "Add a note button is not presented").to.be.false;
             browser.waitForExist(main.getNote(1));
-            expect(browser.isVisible(main.getNote(1)), "Notes are presented").to.be.true;
             expect(browser.isExisting(main.sorting), "Sorting is presented").to.be.true;
             expect(browser.isExisting(main.toggle), "Toggle for My notes is not presented").to.be.false;
         });
@@ -36,5 +39,16 @@ describe('Main Page', () => {
            expect(browser.isExisting(main.titleSortingOption), "Title sorting is presented").to.be.true;
            expect(browser.isExisting(main.dateSortingOption), "Date sorting is presented").to.be.true;
            expect(browser.isExisting(main.userSortingOption), "User sorting is presented").to.be.true;
+        });     
+
+        it('Note can be opened', () => {
+           main.openNote(2);
+           expect(browser.getUrl(), "Url does not contain needed value").to.contain(note.url);
         });
-});
+
+        it('Create a Note page can be opened', () => {
+           browser.waitForExist(main.addNoteButton);
+           browser.click(main.addNoteButton)
+           steps.waitForPageisLoaded(createNote.url);
+        });
+ });

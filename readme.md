@@ -91,7 +91,8 @@ or
 
     git push heroku be/#15_add_integration_with_heroku:master
 
-5. Documentation
+
+5.Documentation
 ------------------------
 
 5.1 Create (/restApi/notes.json/create)
@@ -159,7 +160,7 @@ or
             id: String
         }
 
-6. Data schemes
+6.Data schemes
 ------------------------
 
 6.1 Notes
@@ -182,11 +183,6 @@ or
         userId: String,
         noteId: String,
         rate: Number
-    }
-
-    (deprecated) Notes2Images {
-        imageId: String,
-        noteId: String
     }
 
 6.2 Users
@@ -217,7 +213,7 @@ or
     }
 
  
-7. Phonegap configuration
+7.Phonegap configuration
 -------------------------
 
 7.1 Install android SDK
@@ -246,7 +242,7 @@ or
     
     Second point use Virtual Box and works fastly.
     
-8. Electron build
+8.Electron build
 -----------------
 
 8.1 Install electron
@@ -264,7 +260,7 @@ or
     3. Run `npm install`
     4. Run `npm run build`
     
-9. Bug tracking
+9.Bug tracking
 ---------------
 Oh, we are ashamed and want to fix it asap! 
 
@@ -272,7 +268,7 @@ But before fixing a bug we need to reproduce and confirm it.
 
 In order to reproduce bugs we will systematically ask you to provide a minimal reproduce scenario (step by step).
 
-10. E2e testing
+10.E2e testing
 ---------------
 Testing is organized using Webdriver.io
 To execute test cases you need:

@@ -1,13 +1,13 @@
 export class MainPage {
 
     //Elements
-    addNoteButton = "a.add";
+    addNoteButton = ".add";
     notes = "a[class='note-grid-item']";
-    sorting = "svg[data-reactid='.0.1.0.1.0.0.2.0.1:1']";
+    sorting = "div.filter-item";
     titleSortingOption = "#orderByTitle";
     userSortingOption = "#orderByUsername";
     dateSortingOption = "#orderByDate";
-    toggle = "input[type='checkbox']";
+    toggle = "#onlyMyButton";
     url = "/main";
 
     //Methods
@@ -21,6 +21,7 @@ export class MainPage {
     }
 
     openNote(index) {
+        browser.waitForExist(this.getNote(index-1));
         browser.elementIdClick(this.getNotes().value[index-1].ELEMENT);
     }
 }
