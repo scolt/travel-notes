@@ -8,7 +8,7 @@ describe('Registration Page', () => {
     const register = new RegistrationPage();
     const login = new LoginPage();
 
-        before(() => {
+        beforeEach(() => {
             steps.navigateTo(register.url);
         });
 
@@ -36,5 +36,14 @@ describe('Registration Page', () => {
             browser.click(register.signInButton);
             steps.waitForPageisLoaded(login.url);
             expect(browser.getUrl()).to.contain('login');
+        }); 
+
+        it('Registration button should be active when all obligatory fields are filled', () => {
+            steps.enterText(register.firstNameField, "test");
+            steps.enterText(register.lastNameField, "test");
+            steps.enterText(register.emailField, "test@test.ru");
+            steps.enterText(register.userNameField, "test");
+            steps.enterText(register.passwordField, "test");
+            expect(browser.getAttribute(register.registerButton, 'tabIndex'), "Register button is enabled").to.equal('0');
         }); 
 });
