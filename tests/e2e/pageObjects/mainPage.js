@@ -1,8 +1,8 @@
 export class MainPage {
 
     //Elements
-    addNoteButton = ".add";
-    notes = "a[class='note-grid-item']";
+    addNoteButton = ".note-grid-item.add";
+    notes = ".note-grid-item:not(.add)";
     sorting = "div.filter-item";
     titleSortingOption = "#orderByTitle";
     userSortingOption = "#orderByUsername";
@@ -11,9 +11,8 @@ export class MainPage {
     url = "/main";
 
     //Methods
-
     getNote(index) {
-        return `${this.notes}:nth-child(${index+1})`;
+        return `${this.notes}[data-index='note-index-${index-1}']`;
     }
 
     getNotes() {
@@ -21,7 +20,7 @@ export class MainPage {
     }
 
     openNote(index) {
-        browser.waitForExist(this.getNote(index-1));
+        browser.waitForExist(this.getNote(index));
         browser.elementIdClick(this.getNotes().value[index-1].ELEMENT);
     }
 }

@@ -17,6 +17,9 @@ describe('Note Page', () => {
         it('All needed controls should be displayed', () => {
             main.openNote(1);
             browser.waitForExist(note.map);
+            expect(browser.isVisible(note.title), "Title is presented").to.be.true;
+            expect(browser.isVisible(note.subtitle), "Sub Title is presented").to.be.true;
+            expect(browser.isVisible(note.text), "Text Description is presented").to.be.true;
             expect(browser.isVisible(note.gallery), "Gallery is presented").to.be.true;
             expect(browser.isVisible(note.signature), "signature is presented").to.be.true;
         });
