@@ -6,5 +6,5 @@ export class SideMenu {
     mainPage = "#mainpageMenuItem";
     map = "#mapMenuItem";
     logoutButton = "#logoutMenuButton";
-    profile = "div.image-developer.clickable"
+    profile = ".edit"
 }

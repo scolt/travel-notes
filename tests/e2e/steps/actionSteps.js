@@ -13,7 +13,7 @@ export default {
     waitForPageisLoaded(url) {
         browser.waitUntil(
             () => browser.getUrl() === (config.baseUrl + url),
-            config.waitforTimeout
+            consts.timeoutForAnimation
         );
     },
 
