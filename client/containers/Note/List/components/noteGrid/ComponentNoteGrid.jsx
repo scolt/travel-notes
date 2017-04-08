@@ -32,7 +32,7 @@ const NoteGrid = React.createClass({
             {notes.map((tile, i) =>
                 <a key={i} className="note-grid-item" data-index={`note-index-${i}`} href={`#/note/${tile._id}`}>
                     {tile.userId === currentUsername ?
-                        <i className="fa fa-trash" onTouchTap={(e) => this.deleteNote(e, tile._id)}>&nbsp;</i> : null
+                        <i className="fa fa-trash" onClick={e => e.preventDefault()} onTouchTap={(e) => this.deleteNote(e, tile._id)}>&nbsp;</i> : null
                     }
                     <img src={tile.photos && tile.photos[0]} />
                     <div className="note-grid-metadata">

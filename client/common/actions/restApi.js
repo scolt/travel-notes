@@ -13,7 +13,7 @@ function restApi({model, ext = 'json', action = 'read', id = '', type} = {}) {
         return request
             .post(`${config.restURL}/restApi/${model}.${ext}/${action}/${id}`)
             .set('Accept', 'application/json')
-            .set('Authorization', window.sessionStorage.token ? `Bearer ${window.sessionStorage.token}` : '')
+            .set('Authorization', window.localStorage.token ? `Bearer ${window.localStorage.token}` : '')
             .send(payload)
             .end((err, res) => {
                 if (res && res.headers['tn-user-type'] === 'expired') {

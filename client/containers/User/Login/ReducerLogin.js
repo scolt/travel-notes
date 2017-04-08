@@ -20,14 +20,20 @@ export default function (state, action) {
             avatar: '',
             owner: true
         };
-        window.sessionStorage.removeItem('token');
+        window.localStorage.removeItem('token');
         return {...state, user};
+    }
+
+    if (action.type === 'createNoteDenied') {
+        const {loginForm} = state;
+        setTimeout(() => window.location.hash = 'login');
+        return {...state, user: {...action.resData}, loginForm: {...loginForm, prevState: action.path}};
     }
 
     if (action.type === 'endProcessing' && action.reqData.model === 'users') {
         if (action.reqData.type === 'login') {
             const {loginForm} = state;
-            window.sessionStorage.setItem('token',  action.resData.token);
+            window.localStorage.setItem('token',  action.resData.token);
             location.href = loginForm.prevState ? loginForm.prevState : '#/main';
             loginForm.isValid = false;
             loginForm.fields.forEach(function (item) {

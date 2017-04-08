@@ -12,6 +12,16 @@ import deviceDetector from 'common/services/deviceDetector';
 
 import './styl/noteForm.styl';
 const NoteAdd = React.createClass({
+    componentWillMount() {
+        const isAuthorized = !!this.props.data.users.user.username;
+        if (!isAuthorized) {
+            this.props.store.dispatch({
+                type: 'createNoteDenied',
+                path: '#/note/create'
+            });
+        }
+    },
+
     renderStepContent(stepIndex) {
         switch (stepIndex) {
         case 0:
