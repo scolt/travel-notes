@@ -6,6 +6,10 @@ export class CreateNotePage {
     
     title = "input[name='title']";
     subtitle = "input[name='subtitle']";
-    nextButton = ".step-actions button[type='button']";
+    nextButton = "#nextButton";
+    backButton = "#backButton";
     content = "textarea[name='text']";
+    map = ".map.embedded";
+    dropZone = ".drop-zone input";
+    finishButton = ".finish-button > #nextButton";
 }

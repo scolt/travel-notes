@@ -34,6 +34,7 @@ describe('Main Page', () => {
         });
 
         it('Filter should contain needed values', () => {
+           browser.waitForVisible(main.sorting);
            browser.click(main.sorting);
            browser.waitForExist(main.userSortingOption);
            expect(browser.isExisting(main.titleSortingOption), "Title sorting is presented").to.be.true;
@@ -42,12 +43,12 @@ describe('Main Page', () => {
         });     
 
         it('Note can be opened', () => {
-           main.openNote(2);
+           main.openNote(1);
            expect(browser.getUrl(), "Url does not contain needed value").to.contain(note.url);
         });
 
         it('Create a Note page can be opened', () => {
-           browser.waitForExist(main.addNoteButton);
+           browser.waitForVisible(main.addNoteButton);
            browser.click(main.addNoteButton)
            steps.waitForPageisLoaded(createNote.url);
         });
