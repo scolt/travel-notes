@@ -2,14 +2,26 @@ import {CreateNotePage} from '../pageObjects/createNotePage.js';
 import {LoginPage} from '../pageObjects/loginPage';
 import {MainPage} from '../pageObjects/mainPage';
 import {consts} from "../consts";
-import {expect} from 'chai';
 import steps from '../steps/actionSteps'
+import validationSteps from '../steps/validationSteps'
 
 describe('Create Note Page: ', () =>  {
     const createNote = new CreateNotePage();
     const login = new LoginPage();
     const main = new MainPage();
-    
+
+    describe('Create a Note as a non-logged in user', () =>  {
+
+            it('Should display loggin page for Non Logged in users', () => {
+                steps.navigateTo(createNote.url);
+                steps.waitForPageisLoaded(login.url);
+                steps.enterText(login.emailField, consts.username);
+                steps.enterText(login.passwordField, consts.password);
+                browser.click(login.loginButton);
+                steps.waitForPageisLoaded(createNote.url);
+            });
+    });
+
     describe('Create a Note as a logged in user', () =>  {
 
         before(() => {
@@ -19,26 +31,26 @@ describe('Create Note Page: ', () =>  {
             });
             
             it('Should contain all needed fields', () => {
-                expect(browser.isVisible(createNote.stepper), "Stepper is presented").to.be.true;
-                expect(browser.isVisible(createNote.title), "Title Field is presented").to.be.true;
-                expect(browser.isVisible(createNote.subtitle), "Subtitle Field is presented").to.be.true;
-                expect(browser.isVisible(createNote.nextButton), "Next Button is presented").to.be.true;
+                validationSteps.isElementVisible(createNote.stepper);
+                validationSteps.isElementVisible(createNote.title);
+                validationSteps.isElementVisible(createNote.subtitle);
+                validationSteps.isElementVisible(createNote.nextButton);
             });
 
             it('Next Button should be disabled when Title is empty', () => {
-                expect(browser.getAttribute(createNote.nextButton, 'tabIndex'), "Next Button is disabled").to.equal('-1');
+                validationSteps.isAttributeEqual(createNote.nextButton, 'tabIndex', '-1');
             });
 
             it('Next Button should be enabled when Title is filled', () => {
                 steps.enterText(createNote.title, "test");
-                expect(browser.getAttribute(createNote.nextButton, 'tabIndex'), "Next button is enabled").to.equal('0');
+                validationSteps.isAttributeEqual(createNote.nextButton, 'tabIndex', '0');
             });
 
             it('2nd step should be available', () => {
                 steps.enterText(createNote.subtitle, "test");
                 browser.click(createNote.nextButton);
-                browser.waitForVisible(createNote.content);
-                expect(browser.isVisible(createNote.backButton), "Back button is displayed").to.be.true;
+                validationSteps.isElementVisible(createNote.content);
+                validationSteps.isElementVisible(createNote.backButton);
             });
 
             it('3d step should be available', () => {
@@ -55,7 +67,7 @@ describe('Create Note Page: ', () =>  {
 
             it('Finish button should be active', () => {
                 steps.uploadImage(createNote.dropZone);
-                expect(browser.getAttribute(createNote.finishButton, 'tabIndex'), "Finish button is enabled").to.equal('0');
+                validationSteps.isAttributeEqual(createNote.finishButton, 'tabIndex', '0');
             });
     });
 });

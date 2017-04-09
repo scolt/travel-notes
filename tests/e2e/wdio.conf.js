@@ -10,12 +10,12 @@ exports.config = {
     coloredLogs: true,
     screenshotPath: './tests/e2e/.reports/screenshots',
     baseUrl: 'http://iwasthere.herokuapp.com/#',
-    waitforTimeout: 30000,
+    waitforTimeout: 20000,
     framework: 'mocha',
     mochaOpts: {
         ui: 'bdd',
         compilers: ['js:babel-register'],
-        timeout: 30000
+        timeout: 20000
     },
     logLevel: 'silent',
     reporters: ['dot', 'spec', 'allure'],
@@ -25,11 +25,8 @@ exports.config = {
         }
     },
     before: function () {
-        browser.setViewportSize({
-            width: 1024,
-            height: 768
-        });
-    },
+        
+  },
     onPrepare: function () {
         console.log('Starting end2end tests');
     },

@@ -1,26 +1,35 @@
 import {NotePage} from '../pageObjects/notePage';
 import {MainPage} from '../pageObjects/mainPage';
 import {LoginPage} from "../pageObjects/loginPage";
-import {expect} from 'chai';
+import {Toolbar} from "../pageObjects/common/toolbar";
 import {consts} from "../consts";
 import steps from "../steps/actionSteps"
+import validationSteps from "../steps/validationSteps"
 
 describe('Note Page', () => {
     const note = new NotePage();
     const main = new MainPage();
     const login = new LoginPage();
+    const toolbar = new Toolbar();
     
-        before(() => {
+        beforeEach(() => {
             steps.navigateTo(main.url);
            });
 
         it('All needed controls should be displayed', () => {
             main.openNote(1);
             browser.waitForExist(note.map);
-            expect(browser.isVisible(note.title), "Title is presented").to.be.true;
-            expect(browser.isVisible(note.subtitle), "Sub Title is presented").to.be.true;
-            expect(browser.isVisible(note.text), "Text Description is presented").to.be.true;
-            expect(browser.isVisible(note.gallery), "Gallery is presented").to.be.true;
-            expect(browser.isVisible(note.signature), "signature is presented").to.be.true;
+            validationSteps.isElementVisible(note.title);
+            validationSteps.isElementVisible(note.subtitle);
+            validationSteps.isElementVisible(note.text);
+            validationSteps.isElementVisible(note.gallery);
+            validationSteps.isElementVisible(note.signature);
+        });
+
+        it('It should be possible to close a Note', () => {
+            main.openNote(1);
+            browser.waitForExist(note.map);
+            browser.click(toolbar.logo);
+            steps.waitForPageisLoaded(main.url);
         });
 }); 

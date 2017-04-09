@@ -2,8 +2,8 @@ import {HomePage} from '../pageObjects/homePage.js';
 import {MasterPage} from "../pageObjects/masterPage";
 import {RegistrationPage} from "../pageObjects/registrationPage";
 import {Toolbar} from "../pageObjects/common/toolbar";
-import {expect} from 'chai';
-import steps from '../steps/actionSteps'
+import steps from '../steps/actionSteps';
+import validationSteps from '../steps/validationSteps';
 
 describe('Home Page', () =>  {
     const home = new HomePage();
@@ -16,9 +16,9 @@ describe('Home Page', () =>  {
         });
         
         it('Should contain all needed fields', () => {
-            expect(browser.isVisible(master.toolbar), "Header is presented").to.be.true;
-            expect(browser.isVisible(master.footer), "Footer is presented").to.be.true;
-            expect(browser.isVisible(home.getStartedButton), "Get started button is presented").to.be.true;
+            validationSteps.isElementVisible(master.toolbar);
+            validationSteps.isElementVisible(master.footer);
+            validationSteps.isElementVisible(home.getStartedButton);
         });
 
         it('Clicking Get Started button Should open Registration page', () => {
