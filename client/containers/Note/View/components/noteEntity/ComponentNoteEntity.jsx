@@ -1,10 +1,12 @@
 import React from 'react';
 import Markdown from 'react-markdown';
-import {Card, CardTitle, CardText} from 'material-ui';
+import {Card, CardTitle, CardText, IconButton} from 'material-ui';
+import Icon from 'react-fa';
 
 import Map from 'common/components/map/Map';
 import EditableInput from 'common/components/editableInput/ComponentEditableInput';
 import withStore from 'common/components/withStore/withStore';
+import backAction from 'common/actions/backAction';
 
 import HeaderAction from '../noteHeaderActions/ComponentNoteActions';
 
@@ -23,6 +25,10 @@ const NoteEntity = React.createClass({
         title: React.PropTypes.string,
         subtitle: React.PropTypes.string,
         isOwner: React.PropTypes.bool
+    },
+
+    backButton() {
+        this.props.store.dispatch(backAction);
     },
 
     onFieldChange(e) {
@@ -70,11 +76,24 @@ const NoteEntity = React.createClass({
                             subtitleStyle={styles.headerSubtitle}
                             titleStyle={styles.headerTitle}
                             title={<EditableInput field={titleField} editMode={isEditMode}
+                                                  fullWidth={true}
                                                   onChange={this.onFieldChange}>{this.props.title}</EditableInput>}
                             subtitle={<EditableInput field={subtitleField} editMode={isEditMode}
+                                                     fullWidth={true}
                                                      onChange={this.onFieldChange}>{this.props.subtitle}</EditableInput>}
                         >
                             {this.props.isOwner ? <HeaderAction isEditMode={isEditMode}/> : null}
+                            <IconButton onTouchTap={this.backButton}
+                                        className="back-icon"
+                                        iconStyle={{
+                                            width: 40,
+                                            height: 40,
+                                            fontSize: '40px',
+                                            color: '#fff'
+                                        }}
+                                        style={{padding: 0}}>
+                                <Icon name="times"/>
+                            </IconButton>
                         </CardTitle>
                         <CardText style={{background: '#fff'}}>
                             <Map className="map-in-card"

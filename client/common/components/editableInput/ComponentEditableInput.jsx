@@ -19,7 +19,7 @@ const EditableField = React.createClass({
             disabled={inputProperties.disabled || false}
             value={inputProperties.value}
             multiLine={inputProperties.type === 'textarea'}
-            fullWidth={inputProperties.type === 'textarea'}
+            fullWidth={inputProperties.type === 'textarea' || this.props.fullWidth}
             onChange={this.props.onChange}
             underlineStyle={styles.underlineStyle}
             errorText={inputProperties.errorText}/>;
