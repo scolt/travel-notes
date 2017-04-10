@@ -8,4 +8,5 @@ export class NotePage {
     text = "#textInput";
     gallery = ".gallery-row";
     signature = ".sign";
+    closeButton = ".back-icon";
 }
