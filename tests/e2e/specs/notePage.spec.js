@@ -6,7 +6,7 @@ import {consts} from "../consts";
 import steps from "../steps/actionSteps"
 import validationSteps from "../steps/validationSteps"
 
-describe('Note Page', () => {
+describe('Note Page:', () => {
     const note = new NotePage();
     const main = new MainPage();
     const login = new LoginPage();
