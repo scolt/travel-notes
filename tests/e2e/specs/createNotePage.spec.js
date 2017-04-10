@@ -49,7 +49,7 @@ describe('Create Note Page: ', () =>  {
             it('2nd step should be available', () => {
                 steps.enterText(createNote.subtitle, "test");
                 browser.click(createNote.nextButton);
-                validationSteps.isElementVisible(createNote.content);
+                browser.waitForVisible(createNote.content);
                 validationSteps.isElementVisible(createNote.backButton);
             });
 

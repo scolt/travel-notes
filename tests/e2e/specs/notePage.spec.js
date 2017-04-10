@@ -6,7 +6,7 @@ import {consts} from "../consts";
 import steps from "../steps/actionSteps"
 import validationSteps from "../steps/validationSteps"
 
-describe('Note Page', () => {
+describe('Note Page:', () => {
     const note = new NotePage();
     const main = new MainPage();
     const login = new LoginPage();
@@ -27,9 +27,10 @@ describe('Note Page', () => {
         });
 
         it('It should be possible to close a Note', () => {
+            browser.waitForVisible(main.getNote(1));
             main.openNote(1);
             browser.waitForExist(note.map);
-            browser.click(toolbar.logo);
+            browser.click(note.closeButton);
             steps.waitForPageisLoaded(main.url);
         });
 }); 
