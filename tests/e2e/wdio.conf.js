@@ -25,8 +25,11 @@ exports.config = {
         }
     },
     before: function () {
-        
-  },
+        browser.setViewportSize({
+            width: 1024,
+            height: 768
+        });
+    },
     onPrepare: function () {
         console.log('Starting end2end tests');
     },
