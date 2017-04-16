@@ -4,8 +4,8 @@ import {LoginPage} from '../pageObjects/loginPage';
 import {RegistrationPage} from '../pageObjects/registrationPage';
 import {MainPage} from "../pageObjects/mainPage";
 import {consts} from '../consts';
-import {expect} from 'chai';
-import steps from '../steps/actionSteps'
+import steps from '../steps/actionSteps';
+import validationSteps from '../steps/validationSteps'
  
  
  describe('Global Toolbar', () => {
@@ -21,10 +21,10 @@ import steps from '../steps/actionSteps'
         });
         
         it('Should contain all needed links', () => {
-            expect(browser.isVisible(toolbar.menuButton), "Menu button is presented").to.be.true;
-            expect(browser.isVisible(toolbar.logInButton), "Login button is presented").to.be.true;
-            expect(browser.isVisible(toolbar.signUpButton), "Sign Up button is presented").to.be.true;
-            expect(browser.isVisible(toolbar.logo), "Logo is presented").to.be.true;
+            validationSteps.isElementVisible(toolbar.menuButton);
+            validationSteps.isElementVisible(toolbar.logInButton);
+            validationSteps.isElementVisible(toolbar.signUpButton);
+            validationSteps.isElementVisible(toolbar.logo);
         });
 
         it('Clicking Log In button should open Login page', () => {
@@ -40,7 +40,7 @@ import steps from '../steps/actionSteps'
         it('Should not contain Sign In and Login buttons for Authorized users', () => {
             login.login(consts.username, consts.password);
             steps.waitForPageisLoaded(main.url);
-            expect(browser.isVisible(toolbar.logInButton), "Login button is not presented").to.be.false;
-            expect(browser.isVisible(toolbar.signUpButton), "Sign up button is not presented").to.be.false;
+            validationSteps.isElementNotVisible(toolbar.logInButton);
+            validationSteps.isElementNotVisible(toolbar.signUpButton);
         });
 });
