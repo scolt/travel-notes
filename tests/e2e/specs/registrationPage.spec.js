@@ -1,6 +1,7 @@
 import {RegistrationPage} from '../pageObjects/registrationPage';
 import {LoginPage} from '../pageObjects/loginPage';
 import steps from '../steps/actionSteps';
+import {consts} from "../consts";
 import validationSteps from '../steps/validationSteps'
 
 describe('Registration Page', () => {
@@ -14,7 +15,7 @@ describe('Registration Page', () => {
 
         it('Should contain All needed fields', () => {
             validationSteps.isElementVisible(register.welcomeText);
-            validationSteps.isTextEqual(register.welcomeText, "Welcome Back");
+            validationSteps.isTextEqual(register.welcomeText, consts.welcomeText);
             validationSteps.isElementVisible(register.firstNameField);
             validationSteps.isElementVisible(register.lastNameField);
             validationSteps.isElementVisible(register.emailField);

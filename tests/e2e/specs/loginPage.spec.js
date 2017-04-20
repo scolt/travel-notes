@@ -20,7 +20,7 @@ describe('Login Page', () => {
 
     it('Should contain all needed values', () => {
         validationSteps.isElementVisible(login.welcomeText);
-        validationSteps.isTextEqual(login.welcomeText, "Welcome Back");
+        validationSteps.isTextEqual(login.welcomeText, consts.welcomeText);
         validationSteps.isElementVisible(login.emailField);
         validationSteps.isElementVisible(login.passwordField);
         validationSteps.isElementVisible(login.loginButton);
