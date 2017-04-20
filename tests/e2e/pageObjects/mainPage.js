@@ -9,6 +9,7 @@ export class MainPage {
     dateSortingOption = "#orderByDate";
     toggle = "#onlyMyButton";
     url = "/main";
+    noResultsControl = ".no-results";
 
     //Methods
     getNote(index) {

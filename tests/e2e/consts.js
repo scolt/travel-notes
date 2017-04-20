@@ -10,5 +10,6 @@ exports.consts = {
      */
     nonValidCredentialsMessage: "Incorrect username or password.",
     logoutMessage: "You've been successfully logged out.",
-    firstStepMessage: "Provide title of your note. It can be name of city or place."
+    firstStepMessage: "Provide title of your note. It can be name of city or place.",
+    welcomeText: "Welcome Back"
 };

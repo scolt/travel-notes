@@ -3,11 +3,11 @@ import {MainPage} from "../pageObjects/mainPage";
 import {LoginPage} from "../pageObjects/loginPage";
 import {NotePage} from "../pageObjects/notePage";
 import {CreateNotePage} from "../pageObjects/createNotePage";
-import {expect} from 'chai';
 import {consts} from '../consts';
-import steps from "../steps/actionSteps"
+import steps from "../steps/actionSteps";
+import validationSteps from '../steps/validationSteps';
 
-describe('Main Page', () => {
+describe('Main Page:', () => {
     const master = new MasterPage();
     const main = new MainPage();
     const login = new LoginPage();
@@ -19,37 +19,43 @@ describe('Main Page', () => {
         });
 
         it('All needed controls should be displayed', () => {
-            expect(browser.isVisible(master.toolbar), "Header is presented").to.be.true;
-            expect(browser.isVisible(master.footer), "Footer is presented").to.be.true;
-            expect(browser.isVisible(main.addNoteButton), "Add a note button is not presented").to.be.false;
+            validationSteps.isElementVisible(master.toolbar);
+            validationSteps.isElementVisible(master.footer);
+            validationSteps.isElementNotVisible(main.addNoteButton);
             browser.waitForExist(main.getNote(1));
-            expect(browser.isExisting(main.sorting), "Sorting is presented").to.be.true;
-            expect(browser.isExisting(main.toggle), "Toggle for My notes is not presented").to.be.false;
+            validationSteps.isElementExisting(main.sorting);
+            validationSteps.isElementNotExisting(main.toggle);
         });
 
         it('Toogle for All/Only my notes should be visible for Authorized users', () => {
             login.login(consts.username, consts.password);
             steps.waitForPageisLoaded(main.url);
-            expect(browser.isExisting(main.toggle), "Toggle for my notes is presented").to.be.true;
+            validationSteps.isElementExisting(main.toggle);
         });
 
         it('Filter should contain needed values', () => {
            browser.waitForVisible(main.sorting);
            browser.click(main.sorting);
            browser.waitForExist(main.userSortingOption);
-           expect(browser.isExisting(main.titleSortingOption), "Title sorting is presented").to.be.true;
-           expect(browser.isExisting(main.dateSortingOption), "Date sorting is presented").to.be.true;
-           expect(browser.isExisting(main.userSortingOption), "User sorting is presented").to.be.true;
+           validationSteps.isElementExisting(main.titleSortingOption);
+           validationSteps.isElementExisting(main.dateSortingOption);
+           validationSteps.isElementExisting(main.userSortingOption);
         });     
 
         it('Note can be opened', () => {
            main.openNote(1);
-           expect(browser.getUrl(), "Url does not contain needed value").to.contain(note.url);
+           validationSteps.isURLContaining(note.url);
         });
 
         it('Create a Note page can be opened', () => {
            browser.waitForVisible(main.addNoteButton);
            browser.click(main.addNoteButton)
            steps.waitForPageisLoaded(createNote.url);
+        });
+
+        it('Toggle should filter user\'s notes', () => {
+           browser.waitForVisible(main.addNoteButton);
+           browser.click(main.toggle);
+           browser.waitForVisible(main.noResultsControl);
         });
  });
