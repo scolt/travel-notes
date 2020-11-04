@@ -47,7 +47,7 @@
         "jsonwebtoken": "5.7.0",
         "material-ui": "0.17.1",
         "mongodb": "2.1.10",
-        "mongoose": "4.4.8",
+        "mongoose": "5.10.11",
         "pg": "4.5.3",
         "react": "15.4.2",
         "react-dom": "15.4.2",
