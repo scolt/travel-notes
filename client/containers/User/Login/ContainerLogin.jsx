@@ -1,8 +1,8 @@
 import React from 'react';
 import {TextField, RaisedButton, Paper} from 'material-ui';
 
-import restApi from 'common/actions/restApi';
-import withStore from 'common/components/withStore/withStore';
+import restApi from '../../../common/actions/restApi';
+import withStore from '../../../common/components/withStore/withStore';
 
 import './styl/login.styl';
 

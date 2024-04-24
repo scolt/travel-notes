@@ -1,8 +1,8 @@
 import React from 'react';
 import {Paper, Subheader, ListItem, List, Avatar, ActionInfo} from 'material-ui';
 
-import restApi from 'common/actions/restApi';
-import withStore from 'common/components/withStore/withStore';
+import restApi from '../../../../../common/actions/restApi';
+import withStore from '../../../../../common/components/withStore/withStore';
 import Pagination from '../../../../Note/List/components/pagination/ComponentNotePagination';
 
 const UserNotes = React.createClass({

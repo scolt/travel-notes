@@ -1,8 +1,9 @@
 import React from 'react';
-import Icon from 'react-fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClock, faAddressBook, faMap, faMoon, faFile, faImage } from '@fortawesome/free-regular-svg-icons';
 import {RaisedButton} from 'material-ui';
-import 'landing/alldevices.png';
-import 'landing/one.png';
+import ad from '../../assets/landing/alldevices.png';
+import one from '../../assets/landing/one.png';
 import './landing.styl';
 
 const NotFound = React.createClass({
@@ -14,14 +15,14 @@ const NotFound = React.createClass({
                     <p>Store your travel experience! Open new horizons!</p>
                     <RaisedButton id="getStarted" label="Get Started" primary={true} href="#/register"/>
                 </header>
-                <img src="images/alldevices.png" alt="Travel Note - all platforms"/>
+                <img src={ad} alt="Travel Note - all platforms"/>
             </section>
             <section className="page">
                 <h2>We help to store your memories and impressions</h2>
                 <div className="row">
                     <div className="col-md-4 col-sm-6 col-xs-12">
                         <div className="icon">
-                            <Icon name="cloud"/>
+                            <FontAwesomeIcon icon={faMoon}/>
                         </div>
                         <div className="text">
                             Store your memories about some places. Add photo and get access to your past trips anywhere.
@@ -29,7 +30,7 @@ const NotFound = React.createClass({
                     </div>
                     <div className="col-md-4  col-sm-6 col-xs-12">
                         <div className="icon">
-                            <Icon name="comments-o"/>
+                            <FontAwesomeIcon icon={faClock} />
                         </div>
                         <div className="text">
                             Send your own opinion about different cities, towns and places for interest.
@@ -37,7 +38,7 @@ const NotFound = React.createClass({
                     </div>
                     <div className="col-md-4  col-sm-6 col-xs-12">
                         <div className="icon">
-                            <Icon name="map-marker"/>
+                            <FontAwesomeIcon icon={faMap} />
                         </div>
                         <div className="text">
                             See map with your achievements and plan your next steps.
@@ -47,14 +48,14 @@ const NotFound = React.createClass({
             </section>
             <section className="map-page">
                 <h2>Look all you travel experience on one map</h2>
-                <img src="images/one.png" alt="Travel Note - Map"/>
+                <img src={one} alt="Travel Note - Map"/>
             </section>
             <section className="page">
                 <h2>Read about new places and new details about you favorites places</h2>
                 <div className="row">
                     <div className="col-md-4 col-sm-6 col-xs-12">
                         <div className="icon">
-                            <Icon name="file-text-o"/>
+                            <FontAwesomeIcon icon={faFile}/>
                         </div>
                         <div className="text">
                             Read about new places.
@@ -62,7 +63,7 @@ const NotFound = React.createClass({
                     </div>
                     <div className="col-md-4 col-sm-6 col-xs-12">
                         <div className="icon">
-                            <Icon name="camera-retro"/>
+                            <FontAwesomeIcon icon={faImage}/>
                         </div>
                         <div className="text">
                             Look photos from places where you never been.
@@ -70,7 +71,7 @@ const NotFound = React.createClass({
                     </div>
                     <div className="col-md-4 col-sm-6 col-xs-12">
                         <div className="icon">
-                            <Icon name="smile-o"/>
+                            <FontAwesomeIcon icon={faAddressBook} />
                         </div>
                         <div className="text">
                             Use best practice from other peoples.

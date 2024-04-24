@@ -7,16 +7,16 @@ import {
     form as NoteForm,
     map as Map,
     gallery as Gallery
-} from 'containers/Note/index';
+} from './containers/Note/index';
 import {
     login as LoginView,
     register as Register,
     profile as Profile
-} from 'containers/User/index';
-import NotFound from 'containers/404/Container404';
-import LandingPage from 'containers/LandingPage/ContainerLandingPage';
+} from './containers/User/index';
+import NotFound from './containers/404/Container404';
+import LandingPage from './containers/LandingPage/ContainerLandingPage';
 
-import Layout from 'common/components/layout/ContainerLayout';
+import Layout from './common/components/layout/ContainerLayout';
 import {createHashHistory} from 'history';
 
 

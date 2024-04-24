@@ -1,8 +1,8 @@
 import React from 'react';
-import Icon from 'react-fa';
-
-import withStore from 'common/components/withStore/withStore';
-import restApi from 'common/actions/restApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSmile } from '@fortawesome/free-regular-svg-icons';
+import withStore from '../../../common/components/withStore/withStore';
+import restApi from '../../../common/actions/restApi';
 import NoteGrid from './components/noteGrid/ComponentNoteGrid';
 import NotePagination from './components/pagination/ComponentNotePagination';
 import NoteOrderFilter from './components/orderFilter/ComponentOrderFilter';
@@ -51,7 +51,7 @@ const NoteList = React.createClass({
         </div>;
 
         return <div>
-            <div className="spinner" style={{display: isLoading ? 'block' : 'none'}}><Icon name="circle-o-notch" spin/></div>
+            <div className="spinner" style={{display: isLoading ? 'block' : 'none'}}><FontAwesomeIcon icon={faSmile} spin/></div>
             <div style={{display: isLoading ? 'none' : 'block'}}>{card}</div>
         </div>;
     }

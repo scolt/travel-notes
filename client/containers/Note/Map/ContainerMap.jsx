@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Map from 'common/components/map/Map';
-import withStore from 'common/components/withStore/withStore';
-import restApi from 'common/actions/restApi';
+import Map from '../../../common/components/map/Map';
+import withStore from '../../../common/components/withStore/withStore';
+import restApi from '../../../common/actions/restApi';
 import MyFilter from '../List/components/onlyMyFilter/ComponentOnlyMyFilter';
 
 const MapPage = React.createClass({

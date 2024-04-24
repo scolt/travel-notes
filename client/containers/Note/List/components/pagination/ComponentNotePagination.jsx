@@ -1,5 +1,5 @@
 import React from 'react';
-import withStore from 'common/components/withStore/withStore';
+import withStore from '../../../../../common/components/withStore/withStore';
 
 import './pagination.styl';
 

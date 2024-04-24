@@ -16,6 +16,8 @@ _native/electron/Travel-Note*
 
 tests/e2e/.reports
 
+dist
+
 *.log
 
 .vscode

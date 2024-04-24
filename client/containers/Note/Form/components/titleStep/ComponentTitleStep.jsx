@@ -1,7 +1,7 @@
 import React from 'react';
 import {RaisedButton, TextField} from 'material-ui';
 
-import withStore from 'common/components/withStore/withStore';
+import withStore from '../../../../../common/components/withStore/withStore';
 
 import withSteps from '../withSteps';
 

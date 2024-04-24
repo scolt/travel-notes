@@ -1,8 +1,8 @@
 import React from 'react';
 import {RaisedButton, FlatButton} from 'material-ui';
 
-import Map from 'common/components/map/Map';
-import withStore from 'common/components/withStore/withStore';
+import Map from '../../../../../common/components/map/Map';
+import withStore from '../../../../../common/components/withStore/withStore';
 import withSteps from '../withSteps';
 
 const MapStep = React.createClass({

@@ -1,8 +1,8 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 
-import withStore from 'common/components/withStore/withStore';
-import 'user-bg.jpg';
+import withStore from '../../../../../common/components/withStore/withStore';
+import '../../../../../assets/user-bg.jpg';
 
 const HeaderCard = React.createClass({
     getFormFieldByName(name) {

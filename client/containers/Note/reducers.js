@@ -5,7 +5,7 @@ import formReduce from './Form/ReducerNoteForm';
 import listReduce from './List/ReducerNoteList';
 import mapReduce from './Map/ReducerMap';
 import galleryReduce from './Gallery/ReducerGallery';
-import formReducer from 'common/reducers/formReducer';
+import formReducer from '../../common/reducers/formReducer';
 
 const noteReducers = [
     addImageReduce,

@@ -1,6 +1,6 @@
 import React from 'react';
-import withStore from 'common/components/withStore/withStore';
-import restApi from 'common/actions/restApi';
+import withStore from '../../../../../common/components/withStore/withStore';
+import restApi from '../../../../../common/actions/restApi';
 
 import './noteGrid.styl';
 

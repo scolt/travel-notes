@@ -1,7 +1,7 @@
 import alertModel from './ModelAlert';
 
-import noteAlerts from 'containers/Note/alerts';
-import userAlerts from 'containers/User/alerts';
+import noteAlerts from '../../../containers/Note/alerts';
+import userAlerts from '../../../containers/User/alerts';
 
 const alertReducers = [
     noteAlerts,

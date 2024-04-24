@@ -1,11 +1,12 @@
 import React from 'react';
-import Icon from 'react-fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSmile } from '@fortawesome/free-regular-svg-icons';
 
 import AddImageButton from './components/addImage/ComponentAddImage';
 import NoteEntity from './components/noteEntity/ComponentNoteEntity';
-import Gallery from 'common/components/gallery/Gallery';
-import restApi from 'common/actions/restApi';
-import withStore from 'common/components/withStore/withStore';
+import Gallery from '../../../common/components/gallery/Gallery';
+import restApi from '../../../common/actions/restApi';
+import withStore from '../../../common/components/withStore/withStore';
 
 import './styl/noteView.styl';
 
@@ -40,7 +41,7 @@ const Note = React.createClass({
 
         return (
             <div>
-                {isLoading ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : card}
+                {isLoading ? <div className="spinner"><FontAwesomeIcon icon={faSmile} spin/></div> : card}
             </div>
         );
     }

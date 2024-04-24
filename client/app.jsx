@@ -1,9 +1,10 @@
-import 'common/styl/global.styl';
+import './common/styl/global.styl';
 
 import React from 'react';
-import AppContainer from 'appContainer';
 import {render} from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import AppContainer from './appContainer';
 
 injectTapEventPlugin();
 

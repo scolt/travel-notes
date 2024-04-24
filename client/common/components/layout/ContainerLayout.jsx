@@ -1,15 +1,15 @@
 import 'flexboxgrid/dist/flexboxgrid.min.css';
 
-import 'favicon.png';
+import '../../../assets/favicon.png';
 
 import React from 'react';
 
 import Menu from './components/menu/ComponentMenu';
 import Footer from './components/footer/Footer';
 
-import Alert from 'common/components/alerts/ComponentAlert';
-import withStore from 'common/components/withStore/withStore';
-import restApi from 'common/actions/restApi';
+import Alert from '../alerts/ComponentAlert';
+import withStore from '../withStore/withStore';
+import restApi from '../../actions/restApi';
 
 const Layout = React.createClass({
     componentWillMount() {

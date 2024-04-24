@@ -1,5 +1,5 @@
 import React from 'react';
-import store from 'store';
+import store from '../../../store';
 export default function (WrappedComponent) {
     return React.createClass({
         getInitialState() {

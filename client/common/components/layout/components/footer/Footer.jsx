@@ -1,6 +1,6 @@
 import React from 'react';
 
-import withStore from 'common/components/withStore/withStore';
+import withStore from '../../../withStore/withStore';
 import './styl/foot.styl';
 
 const Footer = React.createClass({

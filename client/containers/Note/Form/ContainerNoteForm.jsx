@@ -1,14 +1,16 @@
 import React from 'react';
-import Icon from 'react-fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSmile } from '@fortawesome/free-regular-svg-icons';
+
 import {Stepper, Step, StepLabel, StepContent} from 'material-ui';
 
-import withStore from 'common/components/withStore/withStore';
+import withStore from '../../../common/components/withStore/withStore';
 
 import TitleStep from './components/titleStep/ComponentTitleStep';
 import TextStep from './components/textStep/ComponentTextStep';
 import MapStep from './components/mapStep/ComponentMapStep';
 import ImageStep from './components/imageStep/ComponentImageStep.jsx';
-import deviceDetector from 'common/services/deviceDetector';
+import deviceDetector from '../../../common/services/deviceDetector';
 
 import './styl/noteForm.styl';
 const NoteAdd = React.createClass({
@@ -87,7 +89,7 @@ const NoteAdd = React.createClass({
         </div>;
 
         return <div>
-            {isLoading ? <div className="spinner"><Icon name="circle-o-notch" spin/></div> : card}
+            {isLoading ? <div className="spinner"><FontAwesomeIcon icon={faSmile} spin/></div> : card}
         </div>;
     }
 });

@@ -1,3 +1,5 @@
+import { faHospital, faImage, faEye, faMap } from '@fortawesome/free-regular-svg-icons';
+
 const menu = {
     menuOpen: false,
     menuItems: [
@@ -5,25 +7,25 @@ const menu = {
             name: 'main',
             title: 'News',
             hash: '#/main',
-            icon: 'home'
+            icon: faHospital
         },
         {
             name: 'gallery',
             title: 'Gallery',
             hash: '#/gallery',
-            icon: 'camera-retro'
+            icon: faImage
         },
         {
             name: 'landingPage',
             title: 'Main Page',
             hash: '#/',
-            icon: 'globe'
+            icon: faEye
         },
         {
             name: 'map',
             title: 'Map',
             hash: '#/map',
-            icon: 'map-marker'
+            icon: faMap
         }
     ],
     footerMenu: {

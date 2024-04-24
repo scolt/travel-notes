@@ -14,14 +14,15 @@ import MarkerClusterer from  'react-google-maps/lib/addons/MarkerClusterer';
 
 import {Card, CardActions, CardTitle, CardMedia, RaisedButton, CardText} from 'material-ui';
 import config from '../../config/config';
-import Icon from 'react-fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSmile } from '@fortawesome/free-regular-svg-icons';
 
-import m1 from 'm1.png';
-import m2 from 'm2.png';
-import m3 from 'm3.png';
-import m4 from 'm4.png';
-import m5 from 'm5.png';
-import 'banner.jpg';
+import m1 from '../../../assets/m1.png';
+import m2 from '../../../assets/m2.png';
+import m3 from '../../../assets/m3.png';
+import m4 from '../../../assets/m4.png';
+import m5 from '../../../assets/m5.png';
+import '../../../assets/banner.jpg';
 
 const GoogleMapConstructor = withScriptjs(
     withGoogleMap(
@@ -139,7 +140,7 @@ let Map = React.createClass({
             <GoogleMapConstructor
                 googleMapURL={this.generateUrl()}
                 loadingElement = {
-                    <div className="spinner"><Icon name="circle-o-notch" spin/></div>
+                    <div className="spinner"><FontAwesomeIcon icon={faSmile} spin /></div>
                 }
                 containerElement={
                     <div className={'map ' + this.props.type}></div>

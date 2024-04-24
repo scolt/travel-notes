@@ -1,7 +1,7 @@
 import React from 'react';
 import {Paper, Subheader, ListItem, List, RadioButtonGroup, RadioButton, DatePicker} from 'material-ui';
 
-import withStore from 'common/components/withStore/withStore';
+import withStore from '../../../../../common/components/withStore/withStore';
 
 const DetailsCard = React.createClass({
     getFormFieldByName(name) {

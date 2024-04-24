@@ -6,15 +6,6 @@ const app = express();
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const RedisStore = require('connect-redis')(session);
-const expressSession = session({
-    store: new RedisStore({url: config.db.redis}),
-    secret: config.secret,
-    cookie: { maxAge: config.maxAge },
-    resave: false,
-    saveUninitialized: true
-});
 const multipart = require('connect-multiparty');
 const http = require('http');
 const server = http.createServer(app);
@@ -33,11 +24,10 @@ app
     .use ( compression() )
     .use ( bodyParser.json() )
     .use ( cookieParser() )
-    .use ( expressSession )
     .use ( multipart() )
     .set ( 'views', `${__dirname}/server/views`)
     .set ( 'view engine', 'jade')
-    .use ( express.static(__dirname + '/public'))
+    .use ( express.static(__dirname + '/dist'))
     .use ( '/restApi', expressJwt({secret: config.secret, credentialsRequired: false}))
     .all ( '/restApi/:model.:ext/:action/:id?', restApi)
     .get ( '*.html', (req, res) => {

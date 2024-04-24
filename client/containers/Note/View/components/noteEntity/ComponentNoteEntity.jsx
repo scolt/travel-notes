@@ -1,12 +1,13 @@
 import React from 'react';
 import Markdown from 'react-markdown';
 import {Card, CardTitle, CardText, IconButton} from 'material-ui';
-import Icon from 'react-fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWindowClose } from '@fortawesome/free-regular-svg-icons';
 
-import Map from 'common/components/map/Map';
-import EditableInput from 'common/components/editableInput/ComponentEditableInput';
-import withStore from 'common/components/withStore/withStore';
-import backAction from 'common/actions/backAction';
+import Map from '../../../../../common/components/map/Map';
+import EditableInput from '../../../../../common/components/editableInput/ComponentEditableInput';
+import withStore from '../../../../../common/components/withStore/withStore';
+import backAction from '../../../../../common/actions/backAction';
 
 import HeaderAction from '../noteHeaderActions/ComponentNoteActions';
 
@@ -92,7 +93,7 @@ const NoteEntity = React.createClass({
                                             color: '#fff'
                                         }}
                                         style={{padding: 0}}>
-                                <Icon name="times"/>
+                                <FontAwesomeIcon icon={faWindowClose} />
                             </IconButton>
                         </CardTitle>
                         <CardText style={{background: '#fff'}}>

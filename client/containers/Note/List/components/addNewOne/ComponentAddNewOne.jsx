@@ -1,7 +1,7 @@
 import React from 'react';
-import Icon from 'react-fa';
-
-import withStore from 'common/components/withStore/withStore';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import withStore from '../../../../../common/components/withStore/withStore';
 
 import './addNewNoteButton.styl';
 
@@ -10,7 +10,7 @@ const addNewNoteButton = React.createClass({
         const template = this.props.data.users.user.email ?
             <a key="add" className="note-grid-item add" href={`#/note/create`}>
                 <span className="add-wrapper">
-                    <Icon name="plus"/>
+                    <FontAwesomeIcon icon={faPlusSquare} />
                 </span>
             </a> : null;
         return template;

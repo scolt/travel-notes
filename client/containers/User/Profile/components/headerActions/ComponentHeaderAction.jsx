@@ -1,9 +1,10 @@
 import React from 'react';
-import Icon from 'react-fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faEdit, faSave, faSmile, faWindowClose} from '@fortawesome/free-regular-svg-icons';
 import {FloatingActionButton} from 'material-ui';
 
-import restApi from 'common/actions/restApi';
-import withStore from 'common/components/withStore/withStore';
+import restApi from '../../../../../common/actions/restApi';
+import withStore from '../../../../../common/components/withStore/withStore';
 
 const UsersActions = React.createClass({
     changeEditStatus(val) {
@@ -36,15 +37,15 @@ const UsersActions = React.createClass({
             {!isEditMode ?
                 <div>
                     <FloatingActionButton mini={true} onTouchTap={this.changeEditStatus.bind(this, true)}>
-                        <Icon name="pencil"/>
+                        <FontAwesomeIcon icon={faEdit}/>
                     </FloatingActionButton>
                 </div> :
                 <div>
                     <FloatingActionButton mini={true} secondary={true} disabled={!isValid} style={{marginBottom: '10px'}} onTouchTap={this.saveProfile}>
-                        <Icon name="floppy-o"/>
+                        <FontAwesomeIcon icon={faSave}/>
                     </FloatingActionButton>
                     <FloatingActionButton mini={true} onTouchTap={this.changeEditStatus.bind(this, false)}>
-                        <Icon name="times"/>
+                        <FontAwesomeIcon icon={faWindowClose}/>
                     </FloatingActionButton>
                 </div>}
         </div>;

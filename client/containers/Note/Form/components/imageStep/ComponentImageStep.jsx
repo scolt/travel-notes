@@ -2,8 +2,8 @@ import React from 'react';
 import {RaisedButton, FlatButton} from 'material-ui';
 import Dropzone from 'react-dropzone';
 
-import restApi from 'common/actions/restApi';
-import withStore from 'common/components/withStore/withStore';
+import restApi from '../../../../../common/actions/restApi';
+import withStore from '../../../../../common/components/withStore/withStore';
 import withSteps from '../withSteps';
 
 import './add-image-step.styl';

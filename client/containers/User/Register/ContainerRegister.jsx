@@ -2,8 +2,8 @@ import React from 'react';
 import {TextField, RaisedButton, Paper, RadioButtonGroup, RadioButton, DatePicker} from 'material-ui';
 import Dropzone from 'react-dropzone';
 
-import restApi from 'common/actions/restApi';
-import withStore from 'common/components/withStore/withStore';
+import restApi from '../../../common/actions/restApi';
+import withStore from '../../../common/components/withStore/withStore';
 
 import './styl/register.styl';
 

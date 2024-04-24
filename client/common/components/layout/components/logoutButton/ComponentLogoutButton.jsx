@@ -1,8 +1,7 @@
-import 'avatar.jpg';
 import React from 'react';
 import {RaisedButton} from 'material-ui';
 
-import withStore from 'common/components/withStore/withStore';
+import withStore from '../../../withStore/withStore';
 
 
 const LogoutButton = React.createClass({

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Toggle} from 'material-ui';
 
-import withStore from 'common/components/withStore/withStore';
+import withStore from '../../../../../common/components/withStore/withStore';
 
 const styles = {
     checkbox: {

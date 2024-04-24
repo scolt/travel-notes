@@ -1,8 +1,8 @@
 import React from 'react';
 import {Paper} from 'material-ui';
 
-import EditableInput from 'common/components/editableInput/ComponentEditableInput';
-import withStore from 'common/components/withStore/withStore';
+import EditableInput from '../../../../../common/components/editableInput/ComponentEditableInput';
+import withStore from '../../../../../common/components/withStore/withStore';
 import UserImages from '../headerImageCard/ComponentHeaderImageCard';
 import ProfileActions from '../headerActions/ComponentHeaderAction';
 

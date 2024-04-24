@@ -1,9 +1,10 @@
 import React from 'react';
-import Icon from 'react-fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faSave, faWindowClose } from '@fortawesome/free-regular-svg-icons';
 import {FloatingActionButton} from 'material-ui';
 
-import restApi from 'common/actions/restApi';
-import withStore from 'common/components/withStore/withStore';
+import restApi from '../../../../../common/actions/restApi';
+import withStore from '../../../../../common/components/withStore/withStore';
 
 const NoteActions = React.createClass({
     cancelEditNote() {
@@ -42,15 +43,15 @@ const NoteActions = React.createClass({
             {!isEditMode ?
                 <div>
                     <FloatingActionButton onTouchTap={this.prepareEditNote}>
-                        <Icon name="pencil"/>
+                        <FontAwesomeIcon icon={faEdit}/>
                     </FloatingActionButton>
                 </div> :
                 <div>
                     <FloatingActionButton secondary={true} disabled={!isValid} style={{marginRight: '10px'}} onTouchTap={this.saveNote}>
-                        <Icon name="floppy-o"/>
+                        <FontAwesomeIcon icon={faSave}/>
                     </FloatingActionButton>
                     <FloatingActionButton onTouchTap={this.cancelEditNote}>
-                        <Icon name="times"/>
+                        <FontAwesomeIcon icon={faWindowClose}/>
                     </FloatingActionButton>
                 </div>}
         </div>;

@@ -1,10 +1,11 @@
 import React from 'react';
-import Icon from 'react-fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFolderOpen } from '@fortawesome/free-regular-svg-icons'
 import {AppBar, MenuItem, Drawer, RaisedButton, FlatButton, Paper} from 'material-ui';
 
 import UserTile from '../user/ComponentUserTile';
 import LogoutButton from '../logoutButton/ComponentLogoutButton';
-import withStore from 'common/components/withStore/withStore';
+import withStore from '../../../withStore/withStore';
 
 import './styl/menu.styl';
 
@@ -47,7 +48,7 @@ const Menu = React.createClass({
                     <a className="logo" onTouchTap={this.openMenuItem.bind(this, '#/main')}>TravelNote</a>
                 }
                 onLeftIconButtonTouchTap={this.setMenuStatus.bind(this, true)}
-                iconClassNameLeft="fa fa-bars menu-button"
+                iconElementLeft={<FontAwesomeIcon icon={faFolderOpen}/>}
                 iconElementRight={ !user.email ?
                     <div>
                         <FlatButton label="Log In" id="loginMenuButton" style={buttonStyle} onTouchTap={this.openMenuItem.bind(this, '#/login')}/>
@@ -70,7 +71,7 @@ const Menu = React.createClass({
                             id={`${menuItem.title.toLowerCase().replace(/\s/, '')}MenuItem`}
                             key={key}
                             primaryText={menuItem.title}
-                            leftIcon={<Icon name={menuItem.icon} />}
+                            leftIcon={<FontAwesomeIcon icon={menuItem.icon} />}
                             onTouchTap={this.openMenuItem.bind(this, menuItem.hash)}
                         />
                         ))}

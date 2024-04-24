@@ -4,7 +4,7 @@ import loginReducer from './Login/ReducerLogin';
 import registerReducer from './Register/ReducerRegister';
 import logoutReducer from './Logout/ReducerLogout';
 import profileReducer from './Profile/ReducerProfile';
-import formReducer from 'common/reducers/formReducer';
+import formReducer from '../../common/reducers/formReducer';
 
 const userReducers = [
     loginReducer,
